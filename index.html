@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B3A5C">
+<title>Montgomery OS — Sistema Pessoal de Saúde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#1B3A5C; --azul-claro:#2A5A8C; --azul-escuro:#0D1B2A;
+  --bege:#F5F3EE; --dourado:#C9A84C; --dourado-claro:#E2C878;
+  --branco:#FFFFFF; --texto:#2B2B2B; --cinza:#8A8578;
+  --verde:#4A7C59; --amarelo:#C9922A; --vermelho:#A54242;
+  /* Fibonacci: 8 13 21 34 55 */
+  --f1:8px; --f2:13px; --f3:21px; --f4:34px; --f5:55px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bege);color:var(--texto);min-height:100vh}
+h1,h2,h3,.serif{font-family:'Lora',serif}
+
+/* ===== LOGIN ===== */
+#loginOverlay{position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#0d1b2a 0%,#1B3A5C 50%,#0d1b2a 100%);display:flex;align-items:center;justify-content:center;flex-direction:column}
+#loginOverlay::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 50% 40%,rgba(201,168,76,0.06) 0%,transparent 60%);pointer-events:none}
+#loginBox{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.25);border-radius:20px;padding:48px 40px 40px;max-width:380px;width:90%;text-align:center;backdrop-filter:blur(20px);box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+#loginBox .login-logo{width:89px;height:89px;margin:0 auto 20px}
+#loginBox h2{color:var(--dourado-claro);font-size:1.4rem;margin:0 0 4px}
+#loginBox p{color:rgba(255,255,255,0.5);font-size:0.8rem;margin:0 0 32px}
+.login-btn{width:100%;padding:14px 20px;border-radius:12px;border:none;cursor:pointer;font-size:0.9rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;margin-bottom:12px;font-family:'Inter',sans-serif}
+.login-btn-google{background:#fff;color:#333}
+.login-btn-google:hover{background:#f5f5f5;transform:translateY(-1px);box-shadow:0 4px 20px rgba(255,255,255,0.2)}
+.login-btn-bio{background:linear-gradient(135deg,#1a3a5c,#2a5a8c);color:#fff;border:1px solid rgba(201,168,76,0.3)}
+.login-btn-bio:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(100,150,255,0.3)}
+.hidden{display:none!important}
+.login-divider{color:rgba(255,255,255,0.25);font-size:0.75rem;margin:4px 0 12px}
+#loginMsg{color:rgba(226,200,120,0.9);font-size:0.8rem;min-height:20px;margin-top:8px}
+.login-footer{color:rgba(255,255,255,0.25);font-size:0.7rem;margin-top:20px}
+
+/* ===== LAYOUT ===== */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:233px;background:var(--azul);color:var(--bege);padding:var(--f3) 0;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:100;transition:transform .25s}
+.logo{display:flex;align-items:center;gap:var(--f2);padding:0 var(--f3) var(--f3);border-bottom:1px solid rgba(201,168,76,0.25)}
+.logo svg{width:44px;height:44px;flex-shrink:0}
+.logo-txt h2{font-size:1.05rem;color:var(--dourado-claro);line-height:1.2}
+.logo-txt small{font-size:0.65rem;color:rgba(245,243,238,0.55);letter-spacing:0.5px}
+nav{margin-top:var(--f3);flex:1}
+nav a{display:flex;align-items:center;gap:var(--f2);padding:var(--f2) var(--f3);color:rgba(245,243,238,0.75);text-decoration:none;cursor:pointer;font-size:0.88rem;border-left:3px solid transparent;transition:all .15s}
+nav a:hover{background:rgba(201,168,76,0.08);color:var(--bege)}
+nav a.active{background:rgba(201,168,76,0.12);color:var(--dourado-claro);border-left-color:var(--dourado)}
+nav a .icon{width:20px;height:20px;display:inline-flex}
+nav a .icon svg{width:100%;height:100%}
+.side-footer{padding:var(--f2) var(--f3);font-size:0.65rem;color:rgba(245,243,238,0.35);border-top:1px solid rgba(201,168,76,0.15)}
+.side-footer .frase{font-family:'Lora',serif;font-style:italic;color:rgba(226,200,120,0.55);margin-bottom:6px;font-size:0.7rem}
+
+.main{flex:1;margin-left:233px;padding:var(--f4);max-width:1100px}
+.menu-btn{display:none;position:fixed;top:14px;left:14px;z-index:200;background:var(--azul);color:var(--dourado-claro);border:1px solid rgba(201,168,76,0.4);border-radius:10px;width:42px;height:42px;cursor:pointer;align-items:center;justify-content:center}
+.menu-btn svg{width:22px;height:22px}
+.sid-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:90}
+
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .sid-ov.on{display:block}
+  .menu-btn{display:flex}
+  .main{margin-left:0;padding:76px var(--f2) var(--f3)}
+}
+
+/* ===== COMPONENTES ===== */
+.sec{display:none}
+.sec.on{display:block}
+.sec-head{margin-bottom:var(--f3)}
+.sec-head h1{font-size:1.6rem;color:var(--azul)}
+.sec-head p{color:var(--cinza);font-size:0.85rem;margin-top:4px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(233px,1fr));gap:var(--f2);margin-bottom:var(--f3)}
+.card{background:var(--branco);border:1px solid rgba(27,58,92,0.08);border-radius:13px;padding:var(--f3);box-shadow:0 2px 8px rgba(27,58,92,0.05)}
+.card h3{font-size:0.95rem;color:var(--azul);margin-bottom:var(--f1);display:flex;align-items:center;gap:8px}
+.card h3 svg{width:18px;height:18px;color:var(--dourado)}
+.card .big{font-size:1.9rem;font-family:'Lora',serif;color:var(--azul)}
+.card .sub{font-size:0.75rem;color:var(--cinza);margin-top:4px}
+.card.click{cursor:pointer;transition:transform .15s,box-shadow .15s}
+.card.click:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(27,58,92,0.12)}
+
+.alerta-critico{background:#FBEAEA;border:1px solid var(--vermelho);border-left:5px solid var(--vermelho);border-radius:10px;padding:var(--f2) var(--f3);margin-bottom:var(--f2);color:#6E2323;font-size:0.85rem;line-height:1.55}
+.alerta-critico strong{color:var(--vermelho)}
+
+.bloco{background:var(--branco);border:1px solid rgba(27,58,92,0.08);border-radius:13px;padding:var(--f3);margin-bottom:var(--f3);box-shadow:0 2px 8px rgba(27,58,92,0.05)}
+.bloco h2{font-size:1.1rem;color:var(--azul);margin-bottom:var(--f2);display:flex;align-items:center;gap:8px}
+.bloco h2 svg{width:20px;height:20px;color:var(--dourado)}
+
+.fg{margin-bottom:var(--f2)}
+.fg label{display:block;font-size:0.75rem;font-weight:600;color:var(--cinza);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.4px}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 12px;border:1px solid rgba(27,58,92,0.18);border-radius:8px;font-size:0.9rem;font-family:'Inter',sans-serif;background:var(--bege);color:var(--texto)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--dourado)}
+.linha{display:flex;gap:var(--f2);flex-wrap:wrap}
+.linha>.fg{flex:1;min-width:120px}
+
+.btn{padding:11px 22px;border-radius:9px;border:none;cursor:pointer;font-size:0.85rem;font-weight:600;font-family:'Inter',sans-serif;transition:all .15s;display:inline-flex;align-items:center;gap:8px}
+.btn-p{background:var(--azul);color:var(--bege)}
+.btn-p:hover{background:var(--azul-claro)}
+.btn-d{background:var(--dourado);color:var(--azul-escuro)}
+.btn-d:hover{background:var(--dourado-claro)}
+.btn-sec{background:transparent;color:var(--azul);border:1px solid rgba(27,58,92,0.3)}
+.btn-sec:hover{background:rgba(27,58,92,0.05)}
+.btn-mini{padding:5px 10px;font-size:0.72rem;border-radius:6px}
+.btn-red{background:transparent;color:var(--vermelho);border:1px solid rgba(165,66,66,0.4)}
+.btn-red:hover{background:#FBEAEA}
+
+table{width:100%;border-collapse:collapse;font-size:0.82rem}
+th{text-align:left;padding:9px 10px;color:var(--cinza);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.4px;border-bottom:2px solid rgba(27,58,92,0.1)}
+td{padding:9px 10px;border-bottom:1px solid rgba(27,58,92,0.06);vertical-align:middle}
+tr:hover td{background:rgba(201,168,76,0.05)}
+.tbl-wrap{overflow-x:auto}
+
+.semaforo{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.s-verde{background:var(--verde)} .s-amarelo{background:var(--amarelo)} .s-vermelho{background:var(--vermelho)} .s-neutro{background:#C5C0B2}
+
+.tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.68rem;font-weight:600}
+.tag-azul{background:rgba(27,58,92,0.1);color:var(--azul)}
+.tag-dourado{background:rgba(201,168,76,0.18);color:#8A6D1F}
+.tag-verde{background:rgba(74,124,89,0.15);color:var(--verde)}
+.tag-cinza{background:rgba(138,133,120,0.15);color:var(--cinza)}
+.tag-vermelho{background:rgba(165,66,66,0.12);color:var(--vermelho)}
+
+.perfil-card{display:flex;align-items:flex-start;gap:var(--f2)}
+.perfil-avatar{width:55px;height:55px;border-radius:50%;background:var(--azul);color:var(--dourado-claro);display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:1.4rem;flex-shrink:0;border:2px solid var(--dourado)}
+.lista-simples{list-style:none}
+.lista-simples li{padding:6px 0;border-bottom:1px solid rgba(27,58,92,0.06);font-size:0.85rem}
+.lista-simples li:last-child{border-bottom:none}
+
+.spark{width:100%;height:55px}
+.filtros{display:flex;gap:var(--f1);flex-wrap:wrap;margin-bottom:var(--f2);align-items:center}
+.filtros select{padding:8px 12px;border:1px solid rgba(27,58,92,0.18);border-radius:8px;font-size:0.82rem;background:var(--branco);font-family:'Inter',sans-serif}
+.vazio{text-align:center;color:var(--cinza);padding:var(--f4);font-size:0.85rem;font-style:italic}
+.msg-ok{color:var(--verde);font-size:0.8rem;margin-top:8px;min-height:18px}
+.fio{height:2px;background:linear-gradient(90deg,transparent,var(--dourado),transparent);margin:var(--f3) 0;opacity:0.5}
+@media print{.sidebar,.menu-btn,.no-print{display:none!important}.main{margin:0}}
+</style>
+</head>
+<body>
+
+<!-- ===== TELA DE LOGIN ===== -->
+<div id="loginOverlay">
+  <div id="loginBox">
+    <div class="login-logo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="22" fill="#1B3A5C"/>
+        <!-- Flor da Vida: 7 círculos -->
+        <g stroke="#C9A84C" stroke-width="0.8" fill="none" opacity="0.45">
+          <circle cx="50" cy="50" r="16"/>
+          <circle cx="50" cy="34" r="16"/><circle cx="50" cy="66" r="16"/>
+          <circle cx="36.1" cy="42" r="16"/><circle cx="63.9" cy="42" r="16"/>
+          <circle cx="36.1" cy="58" r="16"/><circle cx="63.9" cy="58" r="16"/>
+        </g>
+        <!-- Árvore da Vida: 10 Sefirot -->
+        <g stroke="#E2C878" stroke-width="0.7" opacity="0.9">
+          <line x1="50" y1="18" x2="38" y2="30"/><line x1="50" y1="18" x2="62" y2="30"/>
+          <line x1="38" y1="30" x2="62" y2="30"/><line x1="38" y1="30" x2="38" y2="46"/>
+          <line x1="62" y1="30" x2="62" y2="46"/><line x1="38" y1="46" x2="62" y2="46"/>
+          <line x1="38" y1="46" x2="50" y2="55"/><line x1="62" y1="46" x2="50" y2="55"/>
+          <line x1="50" y1="18" x2="50" y2="55"/><line x1="38" y1="46" x2="38" y2="66"/>
+          <line x1="62" y1="46" x2="62" y2="66"/><line x1="38" y1="66" x2="62" y2="66"/>
+          <line x1="38" y1="66" x2="50" y2="74"/><line x1="62" y1="66" x2="50" y2="74"/>
+          <line x1="50" y1="55" x2="50" y2="82"/>
+        </g>
+        <g fill="#E2C878">
+          <circle cx="50" cy="18" r="2.6"/><circle cx="38" cy="30" r="2.3"/><circle cx="62" cy="30" r="2.3"/>
+          <circle cx="38" cy="46" r="2.3"/><circle cx="62" cy="46" r="2.3"/><circle cx="50" cy="55" r="2.8"/>
+          <circle cx="38" cy="66" r="2.3"/><circle cx="62" cy="66" r="2.3"/><circle cx="50" cy="74" r="2.3"/>
+          <circle cx="50" cy="82" r="2.6"/>
+        </g>
+        <text x="50" y="97" font-family="Georgia,serif" font-size="9" text-anchor="middle" fill="#F5F3EE" letter-spacing="3">MOS</text>
+      </svg>
+    </div>
+    <h2>Montgomery OS</h2>
+    <p>Sistema operacional pessoal de saúde — acesso restrito</p>
+    <button class="login-btn login-btn-bio hidden" id="btnBio" onclick="loginBiometria()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2"/><path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4c0 1.5-.8 2.8-2 3.4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+      Entrar com Biometria / Face
+    </button>
+    <div class="login-divider hidden" id="dividerBio">— ou —</div>
+    <button class="login-btn login-btn-google" onclick="loginGoogle()">
+      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Entrar com Google
+    </button>
+    <div id="loginMsg"></div>
+    <div style="margin-top:10px"><a onclick="loginSenha()" style="color:rgba(255,255,255,0.4);font-size:0.75rem;cursor:pointer;text-decoration:underline">Entrar com senha local (offline)</a></div>
+    <div class="login-footer">Montgomery Magalhães · Tudo é padrão, tudo é proporção, tudo é luz</div>
+  </div>
+</div>
+
+<button class="menu-btn no-print" onclick="toggleSB()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<div class="sid-ov" id="sidOv" onclick="toggleSB()"></div>
+
+<div class="layout">
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="22" fill="#142c47"/>
+      <g stroke="#C9A84C" stroke-width="0.8" fill="none" opacity="0.4">
+        <circle cx="50" cy="50" r="16"/><circle cx="50" cy="34" r="16"/><circle cx="50" cy="66" r="16"/>
+        <circle cx="36.1" cy="42" r="16"/><circle cx="63.9" cy="42" r="16"/>
+        <circle cx="36.1" cy="58" r="16"/><circle cx="63.9" cy="58" r="16"/>
+      </g>
+      <g fill="#E2C878">
+        <circle cx="50" cy="18" r="3"/><circle cx="38" cy="30" r="2.5"/><circle cx="62" cy="30" r="2.5"/>
+        <circle cx="38" cy="46" r="2.5"/><circle cx="62" cy="46" r="2.5"/><circle cx="50" cy="55" r="3.2"/>
+        <circle cx="38" cy="66" r="2.5"/><circle cx="62" cy="66" r="2.5"/><circle cx="50" cy="74" r="2.5"/>
+        <circle cx="50" cy="84" r="3"/>
+      </g>
+    </svg>
+    <div class="logo-txt">
+      <h2>Montgomery OS</h2>
+      <small>SAÚDE · FAMÍLIA · LONGEVIDADE</small>
+    </div>
+  </div>
+  <nav>
+    <a class="active" data-sec="inicio" onclick="go('inicio',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span>Início</a>
+    <a data-sec="perfis" onclick="go('perfis',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.5c2.8.3 5 2.3 5 5.5"/></svg></span>Perfis da Família</a>
+    <a data-sec="vitais" onclick="go('vitais',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span>Sinais Vitais</a>
+    <a data-sec="protocolos" onclick="go('protocolos',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 3.5 3.5 10.5a4.95 4.95 0 1 0 7 7l7-7a4.95 4.95 0 1 0-7-7Z"/><path d="m7 7 7 7"/></svg></span>Protocolos</a>
+    <a data-sec="exames" onclick="go('exames',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v5l4.5 8.5a2 2 0 0 1-1.8 3H6.3a2 2 0 0 1-1.8-3L9 8Z"/><path d="M7.5 13h9"/></svg></span>Exames</a>
+    <a data-sec="mapa" onclick="go('mapa',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>Mapa do Sistema</a>
+    <a data-sec="config" onclick="go('config',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></span>Backup &amp; Configurações</a>
+  </nav>
+  <div class="side-footer">
+    <div class="frase">"Tudo é padrão. Tudo é proporção. Tudo é luz."</div>
+    Montgomery OS · Fase 1 — Fundação<br>
+    <a onclick="fazerLogout()" style="color:rgba(226,200,120,0.6);cursor:pointer;padding:4px 0;border:none">Sair</a>
+  </div>
+</aside>
+
+<!-- ===== CONTEÚDO ===== -->
+<main class="main">
+
+<!-- INÍCIO -->
+<section class="sec on" id="sec-inicio">
+  <div class="sec-head">
+    <h1 id="saudacao">Shalom, Montgomery</h1>
+    <p>O organismo central do Montgomery Universe — visão do dia.</p>
+  </div>
+  <div id="alertasInicio"></div>
+  <div class="cards" id="cardsInicio"></div>
+  <div class="fio"></div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>Últimos registros</h2>
+    <div id="ultimosRegistros"></div>
+  </div>
+</section>
+
+<!-- PERFIS -->
+<section class="sec" id="sec-perfis">
+  <div class="sec-head">
+    <h1>Perfis da Família</h1>
+    <p>Identidade, histórico, alergias e predisposições de cada membro.</p>
+  </div>
+  <div class="cards" id="listaPerfis"></div>
+  <div id="perfilDetalhe"></div>
+  <div class="bloco" id="formPerfilBloco" style="display:none">
+    <h2 id="formPerfilTitulo">Novo perfil</h2>
+    <input type="hidden" id="pfId">
+    <div class="linha">
+      <div class="fg"><label>Nome</label><input id="pfNome" placeholder="Nome completo"></div>
+      <div class="fg"><label>Nascimento</label><input id="pfNasc" type="date"></div>
+      <div class="fg"><label>Papel na família</label><input id="pfPapel" placeholder="Titular, Esposa, Irmão..."></div>
+    </div>
+    <div class="fg"><label>⚠ Alerta crítico (alergias graves, riscos — aparece em vermelho sempre)</label><textarea id="pfAlerta" rows="2" placeholder="Ex.: alergia grave a medicamento X"></textarea></div>
+    <div class="fg"><label>Condições ativas (uma por linha)</label><textarea id="pfCondicoes" rows="3"></textarea></div>
+    <div class="fg"><label>Histórico cirúrgico (uma por linha)</label><textarea id="pfCirurgias" rows="3"></textarea></div>
+    <div class="fg"><label>Histórico familiar / predisposições</label><textarea id="pfHistFam" rows="3"></textarea></div>
+    <div class="fg"><label>Notas integrativas (MTC, Sefirot, observações)</label><textarea id="pfNotas" rows="2"></textarea></div>
+    <button class="btn btn-p" onclick="salvarPerfil()">Salvar perfil</button>
+    <button class="btn btn-sec" onclick="fecharFormPerfil()">Cancelar</button>
+    <div class="msg-ok" id="pfMsg"></div>
+  </div>
+  <button class="btn btn-d" onclick="abrirFormPerfil()">+ Novo perfil</button>
+</section>
+
+<!-- SINAIS VITAIS -->
+<section class="sec" id="sec-vitais">
+  <div class="sec-head">
+    <h1>Sinais Vitais &amp; Biométricos</h1>
+    <p>Pressão, glicemia, oxigenação, peso — o pulso diário do organismo.</p>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 21s-7-4.6-9.3-9A5.6 5.6 0 0 1 12 6.3 5.6 5.6 0 0 1 21.3 12c-2.3 4.4-9.3 9-9.3 9Z"/></svg>Novo registro</h2>
+    <div class="linha">
+      <div class="fg"><label>Perfil</label><select id="vtPerfil"></select></div>
+      <div class="fg"><label>Data e hora</label><input id="vtData" type="datetime-local"></div>
+    </div>
+    <div class="linha">
+      <div class="fg"><label>PA sistólica</label><input id="vtSist" type="number" placeholder="120"></div>
+      <div class="fg"><label>PA diastólica</label><input id="vtDiast" type="number" placeholder="80"></div>
+      <div class="fg"><label>Freq. cardíaca</label><input id="vtFC" type="number" placeholder="bpm"></div>
+      <div class="fg"><label>Glicemia (mg/dL)</label><input id="vtGlic" type="number" placeholder="jejum"></div>
+    </div>
+    <div class="linha">
+      <div class="fg"><label>SpO₂ (%)</label><input id="vtSpo2" type="number" placeholder="98"></div>
+      <div class="fg"><label>Peso (kg)</label><input id="vtPeso" type="number" step="0.1"></div>
+      <div class="fg"><label>Temperatura (°C)</label><input id="vtTemp" type="number" step="0.1"></div>
+    </div>
+    <div class="fg"><label>Notas (contexto: jejum, pós-treino, estresse...)</label><input id="vtNotas"></div>
+    <button class="btn btn-p" onclick="salvarVital()">Registrar</button>
+    <div class="msg-ok" id="vtMsg"></div>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 3v18h18"/><path d="m7 14 4-5 3 3 5-7"/></svg>Evolução</h2>
+    <div class="filtros">
+      <select id="vtFiltroPerfil" onchange="renderVitais()"></select>
+    </div>
+    <div id="vtSparks" class="cards"></div>
+    <div class="tbl-wrap"><table id="vtTabela"></table></div>
+  </div>
+</section>
+
+<!-- PROTOCOLOS -->
+<section class="sec" id="sec-protocolos">
+  <div class="sec-head">
+    <h1>Protocolos</h1>
+    <p>Medicamentos, suplementos, cogumelos, fitoterápicos e florais — dose, ciclo e eficácia.</p>
+  </div>
+  <div class="bloco">
+    <h2 id="formProtoTitulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10.5 3.5 3.5 10.5a4.95 4.95 0 1 0 7 7l7-7a4.95 4.95 0 1 0-7-7Z"/><path d="m7 7 7 7"/></svg>Novo protocolo</h2>
+    <input type="hidden" id="prId">
+    <div class="linha">
+      <div class="fg"><label>Perfil</label><select id="prPerfil"></select></div>
+      <div class="fg"><label>Nome</label><input id="prNome" placeholder="Lion's Mane, Magnésio, Losartana..."></div>
+      <div class="fg"><label>Categoria</label><select id="prCat">
+        <option>Cogumelo</option><option>Suplemento</option><option>Medicamento</option>
+        <option>Fitoterápico</option><option>Floral</option><option>Cosmético artesanal</option>
+      </select></div>
+    </div>
+    <div class="linha">
+      <div class="fg"><label>Dose</label><input id="prDose" placeholder="500mg, 20 gotas..."></div>
+      <div class="fg"><label>Frequência</label><input id="prFreq" placeholder="2x ao dia, jejum..."></div>
+      <div class="fg"><label>Ciclo</label><input id="prCiclo" placeholder="contínuo, 3 meses on / 1 off..."></div>
+      <div class="fg"><label>Custo mensal (R$)</label><input id="prCusto" type="number" step="0.01"></div>
+    </div>
+    <div class="linha">
+      <div class="fg"><label>Eficácia subjetiva</label><select id="prEfic">
+        <option value="">— ainda avaliando —</option>
+        <option value="1">★ 1 — não senti nada</option><option value="2">★★ 2</option>
+        <option value="3">★★★ 3 — percebo efeito</option><option value="4">★★★★ 4</option>
+        <option value="5">★★★★★ 5 — essencial</option>
+      </select></div>
+      <div class="fg"><label>Status</label><select id="prStatus"><option value="ativo">Ativo</option><option value="pausado">Pausado</option></select></div>
+    </div>
+    <div class="fg"><label>Notas (interações, por que usa, fornecedor)</label><input id="prNotas"></div>
+    <button class="btn btn-p" onclick="salvarProtocolo()">Salvar</button>
+    <button class="btn btn-sec hidden" id="prCancelar" onclick="limparFormProtocolo()">Cancelar edição</button>
+    <div class="msg-ok" id="prMsg"></div>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Protocolos registrados <span id="prTotalCusto" style="margin-left:auto;font-size:0.75rem;color:var(--cinza);font-family:'Inter',sans-serif"></span></h2>
+    <div class="filtros">
+      <select id="prFiltroPerfil" onchange="renderProtocolos()"></select>
+      <select id="prFiltroCat" onchange="renderProtocolos()">
+        <option value="">Todas as categorias</option>
+        <option>Cogumelo</option><option>Suplemento</option><option>Medicamento</option>
+        <option>Fitoterápico</option><option>Floral</option><option>Cosmético artesanal</option>
+      </select>
+      <select id="prFiltroStatus" onchange="renderProtocolos()">
+        <option value="">Todos</option><option value="ativo">Ativos</option><option value="pausado">Pausados</option>
+      </select>
+    </div>
+    <div class="tbl-wrap"><table id="prTabela"></table></div>
+  </div>
+</section>
+
+<!-- EXAMES -->
+<section class="sec" id="sec-exames">
+  <div class="sec-head">
+    <h1>Exames Laboratoriais</h1>
+    <p>Marcadores ao longo do tempo — a base da inteligência preventiva.</p>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 3h6v5l4.5 8.5a2 2 0 0 1-1.8 3H6.3a2 2 0 0 1-1.8-3L9 8Z"/><path d="M7.5 13h9"/></svg>Novo exame</h2>
+    <input type="hidden" id="exId">
+    <div class="linha">
+      <div class="fg"><label>Perfil</label><select id="exPerfil"></select></div>
+      <div class="fg"><label>Exame / marcador</label><input id="exNome" placeholder="Creatinina, TFG, PCR, Homocisteína..." list="exSugestoes">
+        <datalist id="exSugestoes">
+          <option>Pressão arterial (MAPA)</option><option>Creatinina</option><option>TFG (eGFR)</option>
+          <option>Cistatina C</option><option>Microalbuminúria</option><option>Homocisteína</option>
+          <option>PCR ultrassensível</option><option>Escore de cálcio coronário</option><option>Glicemia de jejum</option>
+          <option>Hemoglobina glicada (HbA1c)</option><option>Insulina de jejum</option><option>Cortisol</option>
+          <option>Vitamina D (25-OH)</option><option>Vitamina B12</option><option>Ferritina</option>
+          <option>TSH</option><option>T4 livre</option><option>Testosterona total</option>
+          <option>Colesterol total</option><option>HDL</option><option>LDL</option><option>Triglicérides</option>
+          <option>Pressão intraocular (PIO)</option>
+        </datalist>
+      </div>
+    </div>
+    <div class="linha">
+      <div class="fg"><label>Valor</label><input id="exValor"></div>
+      <div class="fg"><label>Unidade</label><input id="exUnidade" placeholder="mg/dL, ng/mL..."></div>
+      <div class="fg"><label>Referência</label><input id="exRef" placeholder="ex.: 70–99"></div>
+      <div class="fg"><label>Data</label><input id="exData" type="date"></div>
+    </div>
+    <div class="fg"><label>Notas (laboratório, contexto, leitura funcional)</label><input id="exNotas"></div>
+    <button class="btn btn-p" onclick="salvarExame()">Salvar exame</button>
+    <button class="btn btn-sec hidden" id="exCancelar" onclick="limparFormExame()">Cancelar edição</button>
+    <div class="msg-ok" id="exMsg"></div>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 3v18h18"/><path d="m7 14 4-5 3 3 5-7"/></svg>Histórico de exames</h2>
+    <div class="filtros">
+      <select id="exFiltroPerfil" onchange="renderExames()"></select>
+      <input id="exBusca" placeholder="Buscar marcador..." oninput="renderExames()" style="padding:8px 12px;border:1px solid rgba(27,58,92,0.18);border-radius:8px;font-size:0.82rem;font-family:'Inter',sans-serif">
+    </div>
+    <div class="tbl-wrap"><table id="exTabela"></table></div>
+  </div>
+</section>
+
+<!-- MAPA DO SISTEMA -->
+<section class="sec" id="sec-mapa">
+  <div class="sec-head">
+    <h1>Mapa do Sistema</h1>
+    <p>O organismo completo do Montgomery OS — o que já vive e o que ainda é semente. Tudo cresce em fases, como Fibonacci.</p>
+  </div>
+  <div id="mapaModulos"></div>
+</section>
+
+<!-- CONFIG / BACKUP -->
+<section class="sec" id="sec-config">
+  <div class="sec-head">
+    <h1>Backup &amp; Configurações</h1>
+    <p>Seus dados vivem neste aparelho (localStorage). Exporte com frequência.</p>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v12m0 0 -4-4m4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Backup dos dados</h2>
+    <p style="font-size:0.85rem;color:var(--cinza);margin-bottom:14px">Gera um arquivo JSON com tudo: perfis, sinais vitais, protocolos e exames. Guarde no Drive ou Dropbox.</p>
+    <button class="btn btn-p" onclick="exportarBackup()">Exportar backup (.json)</button>
+    <label class="btn btn-sec" style="cursor:pointer">Importar backup
+      <input type="file" accept=".json" style="display:none" onchange="importarBackup(event)">
+    </label>
+    <div class="msg-ok" id="bkMsg"></div>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2"/><path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4c0 1.5-.8 2.8-2 3.4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>Segurança</h2>
+    <button class="btn btn-d" id="btnAtivarBio" onclick="ativarBiometria()">Ativar Biometria / Face neste aparelho</button>
+    <p style="font-size:0.75rem;color:var(--cinza);margin-top:10px">Login: Google (montlondon@gmail.com) · Biometria WebAuthn · Fallback offline por senha local.</p>
+  </div>
+  <div class="bloco" style="border-color:rgba(165,66,66,0.3)">
+    <h2 style="color:var(--vermelho)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6"/></svg>Zona de perigo</h2>
+    <button class="btn btn-red" onclick="limparTudo()">Apagar todos os dados deste aparelho</button>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ============================================================
+   MONTGOMERY OS — Fase 1: Fundação
+   HTML/JS standalone · localStorage · offline-first
+   ============================================================ */
+
+// ===== ARMAZENAMENTO =====
+const K = {perfis:'mos_perfis', vitais:'mos_vitais', protocolos:'mos_protocolos', exames:'mos_exames'};
+function ler(k){try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]}}
+function gravar(k,v){localStorage.setItem(k,JSON.stringify(v))}
+function uid(){return 'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function hoje(){const d=new Date();return d.toISOString().slice(0,10)}
+function agora(){const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16)}
+function fmtData(s){if(!s)return'—';const [d,h]=s.split('T');const [a,m,dia]=d.split('-');return dia+'/'+m+'/'+a+(h?' '+h.slice(0,5):'')}
+function idade(nasc){if(!nasc)return'';const n=new Date(nasc),h=new Date();let i=h.getFullYear()-n.getFullYear();const m=h.getMonth()-n.getMonth();if(m<0||(m===0&&h.getDate()<n.getDate()))i--;return i}
+function esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+// ===== SEMENTE INICIAL (só na primeira abertura) =====
+// Nenhum dado pessoal/médico vive no código — o site é público.
+// Os dados da família entram via Backup → Importar (arquivo privado, só no aparelho).
+function semear(){
+  if(localStorage.getItem(K.perfis))return;
+  gravar(K.perfis,[{id:'montgomery',nome:'Montgomery Magalhães',nasc:'',papel:'Titular',
+    alerta:'',condicoes:[],cirurgias:[],histFam:'',
+    notas:'Perfil inicial — importe seu backup privado em Backup & Configurações, ou preencha por aqui.'}]);
+  gravar(K.protocolos,[]);gravar(K.vitais,[]);gravar(K.exames,[]);
+}
+
+// ===== NAVEGAÇÃO =====
+function go(sec,el){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.getElementById('sec-'+sec).classList.add('on');
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  if(el)el.classList.add('active');
+  else{const a=document.querySelector('nav a[data-sec="'+sec+'"]');if(a)a.classList.add('active');}
+  if(window.innerWidth<=900)fecharSB();
+  renderTudo();
+}
+function toggleSB(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidOv').classList.toggle('on')}
+function fecharSB(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidOv').classList.remove('on')}
+
+// ===== INÍCIO =====
+function renderInicio(){
+  const perfis=ler(K.perfis),vitais=ler(K.vitais),protos=ler(K.protocolos),exames=ler(K.exames);
+  const h=new Date().getHours();
+  const cumpr=h<12?'Boker tov':(h<18?'Shalom':'Erev tov');
+  document.getElementById('saudacao').textContent=cumpr+', Montgomery';
+  // Alertas críticos sempre visíveis
+  const alertas=perfis.filter(p=>p.alerta).map(p=>
+    '<div class="alerta-critico"><strong>⚠ '+esc(p.nome)+':</strong> '+esc(p.alerta)+'</div>').join('');
+  document.getElementById('alertasInicio').innerHTML=alertas;
+  // Cards
+  const ativos=protos.filter(p=>p.status==='ativo');
+  const custoTotal=ativos.reduce((s,p)=>s+(parseFloat(p.custo)||0),0);
+  const ultimoVital=vitais.slice().sort((a,b)=>(b.data||'').localeCompare(a.data||''))[0];
+  document.getElementById('cardsInicio').innerHTML=
+    card('Perfis da família',perfis.length,perfis.map(p=>p.nome.split(' ')[0]).join(' · '),'perfis')+
+    card('Protocolos ativos',ativos.length,custoTotal?('R$ '+custoTotal.toFixed(2)+'/mês'):'custo a preencher','protocolos')+
+    card('Registros vitais',vitais.length,ultimoVital?('último: '+fmtData(ultimoVital.data)):'nenhum ainda — registre o primeiro','vitais')+
+    card('Exames guardados',exames.length,exames.length?'evolução no tempo':'comece pelos marcadores da família','exames');
+  // Últimos registros
+  const ult=[];
+  vitais.forEach(v=>ult.push({data:v.data,txt:nomePerfil(v.perfilId)+' — sinais vitais'+(v.sist?(' PA '+v.sist+'/'+v.diast):'')}));
+  exames.forEach(e=>ult.push({data:e.data,txt:nomePerfil(e.perfilId)+' — '+e.nome+': '+e.valor+' '+(e.unidade||'')}));
+  ult.sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  document.getElementById('ultimosRegistros').innerHTML=ult.length?
+    '<ul class="lista-simples">'+ult.slice(0,8).map(u=>'<li><span style="color:var(--cinza);font-size:0.75rem">'+fmtData(u.data)+'</span> · '+esc(u.txt)+'</li>').join('')+'</ul>':
+    '<div class="vazio">O organismo ainda está em silêncio — registre o primeiro sinal vital ou exame.</div>';
+}
+function card(t,n,sub,sec){
+  return '<div class="card click" onclick="go(\''+sec+'\')"><h3>'+t+'</h3><div class="big">'+n+'</div><div class="sub">'+esc(sub)+'</div></div>';
+}
+function nomePerfil(id){const p=ler(K.perfis).find(x=>x.id===id);return p?p.nome:'—'}
+
+// ===== PERFIS =====
+function renderPerfis(){
+  const perfis=ler(K.perfis);
+  document.getElementById('listaPerfis').innerHTML=perfis.map(p=>{
+    const ini=p.nome.trim().split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();
+    return '<div class="card click" onclick="verPerfil(\''+p.id+'\')"><div class="perfil-card">'+
+      '<div class="perfil-avatar">'+ini+'</div><div>'+
+      '<h3 style="margin-bottom:2px">'+esc(p.nome)+'</h3>'+
+      '<div class="sub">'+esc(p.papel||'')+(p.nasc?' · '+idade(p.nasc)+' anos':'')+'</div>'+
+      (p.alerta?'<div style="margin-top:6px"><span class="tag tag-vermelho">⚠ alerta crítico</span></div>':'')+
+      '</div></div></div>';
+  }).join('');
+  // selects de perfil em todos os formulários
+  const opts=perfis.map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('');
+  ['vtPerfil','prPerfil','exPerfil'].forEach(id=>{const s=document.getElementById(id);const v=s.value;s.innerHTML=opts;if(v)s.value=v;});
+  const optsTodos='<option value="">Todos os perfis</option>'+opts;
+  ['vtFiltroPerfil','prFiltroPerfil','exFiltroPerfil'].forEach(id=>{const s=document.getElementById(id);const v=s.value;s.innerHTML=optsTodos;if(v)s.value=v;});
+}
+function verPerfil(id){
+  const p=ler(K.perfis).find(x=>x.id===id);if(!p)return;
+  const li=arr=>arr&&arr.length?'<ul class="lista-simples">'+arr.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>':'<div class="vazio" style="padding:8px">nada registrado</div>';
+  document.getElementById('perfilDetalhe').innerHTML=
+    '<div class="bloco">'+
+    '<h2>'+esc(p.nome)+' <span class="tag tag-dourado" style="margin-left:8px">'+esc(p.papel||'')+'</span></h2>'+
+    (p.nasc?'<p style="font-size:0.8rem;color:var(--cinza);margin-bottom:12px">Nascimento: '+fmtData(p.nasc)+' · '+idade(p.nasc)+' anos</p>':'')+
+    (p.alerta?'<div class="alerta-critico"><strong>⚠ ALERTA CRÍTICO:</strong> '+esc(p.alerta)+'</div>':'')+
+    '<h3 style="font-size:0.85rem;color:var(--azul);margin:12px 0 6px">Condições ativas</h3>'+li(p.condicoes)+
+    '<h3 style="font-size:0.85rem;color:var(--azul);margin:12px 0 6px">Histórico cirúrgico</h3>'+li(p.cirurgias)+
+    (p.histFam?'<h3 style="font-size:0.85rem;color:var(--azul);margin:12px 0 6px">Histórico familiar / predisposições</h3><p style="font-size:0.83rem;line-height:1.6;white-space:pre-line">'+esc(p.histFam)+'</p>':'')+
+    (p.notas?'<h3 style="font-size:0.85rem;color:var(--azul);margin:12px 0 6px">Notas integrativas</h3><p style="font-size:0.83rem;line-height:1.6;white-space:pre-line">'+esc(p.notas)+'</p>':'')+
+    '<div style="margin-top:16px"><button class="btn btn-sec btn-mini" onclick="editarPerfil(\''+p.id+'\')">Editar</button> '+
+    '<button class="btn btn-red btn-mini" onclick="excluirPerfil(\''+p.id+'\')">Excluir</button> '+
+    '<button class="btn btn-sec btn-mini" onclick="document.getElementById(\'perfilDetalhe\').innerHTML=\'\'">Fechar</button></div>'+
+    '</div>';
+  document.getElementById('perfilDetalhe').scrollIntoView({behavior:'smooth'});
+}
+function abrirFormPerfil(){document.getElementById('formPerfilBloco').style.display='block';document.getElementById('formPerfilTitulo').textContent='Novo perfil';document.getElementById('pfId').value='';['pfNome','pfNasc','pfPapel','pfAlerta','pfCondicoes','pfCirurgias','pfHistFam','pfNotas'].forEach(i=>document.getElementById(i).value='');}
+function fecharFormPerfil(){document.getElementById('formPerfilBloco').style.display='none'}
+function editarPerfil(id){
+  const p=ler(K.perfis).find(x=>x.id===id);if(!p)return;
+  abrirFormPerfil();
+  document.getElementById('formPerfilTitulo').textContent='Editar — '+p.nome;
+  document.getElementById('pfId').value=p.id;
+  document.getElementById('pfNome').value=p.nome;document.getElementById('pfNasc').value=p.nasc||'';
+  document.getElementById('pfPapel').value=p.papel||'';document.getElementById('pfAlerta').value=p.alerta||'';
+  document.getElementById('pfCondicoes').value=(p.condicoes||[]).join('\n');
+  document.getElementById('pfCirurgias').value=(p.cirurgias||[]).join('\n');
+  document.getElementById('pfHistFam').value=p.histFam||'';document.getElementById('pfNotas').value=p.notas||'';
+  document.getElementById('formPerfilBloco').scrollIntoView({behavior:'smooth'});
+}
+function salvarPerfil(){
+  const nome=document.getElementById('pfNome').value.trim();
+  if(!nome){document.getElementById('pfMsg').textContent='Informe o nome.';return;}
+  const perfis=ler(K.perfis);
+  const id=document.getElementById('pfId').value||uid();
+  const linhas=v=>document.getElementById(v).value.split('\n').map(s=>s.trim()).filter(Boolean);
+  const novo={id,nome,nasc:document.getElementById('pfNasc').value,papel:document.getElementById('pfPapel').value.trim(),
+    alerta:document.getElementById('pfAlerta').value.trim(),condicoes:linhas('pfCondicoes'),cirurgias:linhas('pfCirurgias'),
+    histFam:document.getElementById('pfHistFam').value.trim(),notas:document.getElementById('pfNotas').value.trim()};
+  const ix=perfis.findIndex(p=>p.id===id);
+  if(ix>=0)perfis[ix]=novo;else perfis.push(novo);
+  gravar(K.perfis,perfis);
+  document.getElementById('pfMsg').textContent='✓ Perfil salvo.';
+  setTimeout(()=>{document.getElementById('pfMsg').textContent='';fecharFormPerfil();},900);
+  document.getElementById('perfilDetalhe').innerHTML='';
+  renderTudo();
+}
+function excluirPerfil(id){
+  const p=ler(K.perfis).find(x=>x.id===id);
+  if(!confirm('Excluir o perfil "'+p.nome+'"? Os registros de vitais/protocolos/exames dele continuam guardados, mas ficam órfãos.'))return;
+  gravar(K.perfis,ler(K.perfis).filter(x=>x.id!==id));
+  document.getElementById('perfilDetalhe').innerHTML='';
+  renderTudo();
+}
+
+// ===== SINAIS VITAIS =====
+function semaforoPA(s,d){if(!s)return's-neutro';if(s>=140||d>=90)return's-vermelho';if(s>=120||d>=80)return's-amarelo';return's-verde'}
+function semaforoGlic(g){if(!g)return's-neutro';if(g>=126)return's-vermelho';if(g>=100)return's-amarelo';if(g>=70)return's-verde';return's-vermelho'}
+function semaforoSpo2(o){if(!o)return's-neutro';if(o<90)return's-vermelho';if(o<95)return's-amarelo';return's-verde'}
+function salvarVital(){
+  const perfilId=document.getElementById('vtPerfil').value;
+  const data=document.getElementById('vtData').value||agora();
+  const g=id=>{const v=document.getElementById(id).value;return v===''?'':parseFloat(v)};
+  const reg={id:uid(),perfilId,data,sist:g('vtSist'),diast:g('vtDiast'),fc:g('vtFC'),glic:g('vtGlic'),
+    spo2:g('vtSpo2'),peso:g('vtPeso'),temp:g('vtTemp'),notas:document.getElementById('vtNotas').value.trim()};
+  if(reg.sist===''&&reg.glic===''&&reg.peso===''&&reg.spo2===''&&reg.fc===''&&reg.temp===''){
+    document.getElementById('vtMsg').textContent='Preencha pelo menos uma medida.';return;}
+  const vitais=ler(K.vitais);vitais.push(reg);gravar(K.vitais,vitais);
+  ['vtSist','vtDiast','vtFC','vtGlic','vtSpo2','vtPeso','vtTemp','vtNotas'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('vtData').value=agora();
+  document.getElementById('vtMsg').textContent='✓ Registrado.';
+  setTimeout(()=>document.getElementById('vtMsg').textContent='',1500);
+  renderVitais();renderInicio();
+}
+function excluirVital(id){if(!confirm('Excluir este registro?'))return;gravar(K.vitais,ler(K.vitais).filter(v=>v.id!==id));renderVitais();renderInicio();}
+function sparkline(vals,cor){
+  if(vals.length<2)return'<div class="vazio" style="padding:10px">poucos dados</div>';
+  const w=200,h=55,min=Math.min(...vals),max=Math.max(...vals),range=(max-min)||1;
+  const pts=vals.map((v,i)=>((i/(vals.length-1))*w).toFixed(1)+','+((h-6)-((v-min)/range)*(h-14)+4).toFixed(1)).join(' ');
+  return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><polyline points="'+pts+'" fill="none" stroke="'+cor+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+}
+function renderVitais(){
+  const filtro=document.getElementById('vtFiltroPerfil').value;
+  let vitais=ler(K.vitais);
+  if(filtro)vitais=vitais.filter(v=>v.perfilId===filtro);
+  vitais.sort((a,b)=>(a.data||'').localeCompare(b.data||''));
+  // sparklines
+  const serie=campo=>vitais.filter(v=>v[campo]!==''&&v[campo]!=null).map(v=>v[campo]);
+  const sp=(t,campo,cor,ult)=>{const s=serie(campo);return '<div class="card"><h3>'+t+'</h3>'+sparkline(s,cor)+
+    '<div class="sub">'+(s.length?('último: <b>'+s[s.length-1]+ult+'</b> · '+s.length+' registros'):'sem dados')+'</div></div>';};
+  document.getElementById('vtSparks').innerHTML=
+    sp('PA sistólica','sist','#A54242',' mmHg')+sp('Glicemia','glic','#C9922A',' mg/dL')+
+    sp('Peso','peso','#1B3A5C',' kg')+sp('SpO₂','spo2','#4A7C59','%');
+  // tabela (mais recentes primeiro, últimas 34)
+  const rev=vitais.slice().reverse().slice(0,34);
+  document.getElementById('vtTabela').innerHTML=rev.length?
+    '<tr><th>Data</th><th>Perfil</th><th>PA</th><th>FC</th><th>Glicemia</th><th>SpO₂</th><th>Peso</th><th>Temp</th><th>Notas</th><th></th></tr>'+
+    rev.map(v=>'<tr><td>'+fmtData(v.data)+'</td><td>'+esc(nomePerfil(v.perfilId).split(' ')[0])+'</td>'+
+      '<td>'+(v.sist!==''?'<span class="semaforo '+semaforoPA(v.sist,v.diast)+'"></span>'+v.sist+'/'+(v.diast||'—'):'—')+'</td>'+
+      '<td>'+(v.fc!==''?v.fc:'—')+'</td>'+
+      '<td>'+(v.glic!==''?'<span class="semaforo '+semaforoGlic(v.glic)+'"></span>'+v.glic:'—')+'</td>'+
+      '<td>'+(v.spo2!==''?'<span class="semaforo '+semaforoSpo2(v.spo2)+'"></span>'+v.spo2+'%':'—')+'</td>'+
+      '<td>'+(v.peso!==''?v.peso+' kg':'—')+'</td><td>'+(v.temp!==''?v.temp+'°':'—')+'</td>'+
+      '<td style="max-width:180px">'+esc(v.notas||'')+'</td>'+
+      '<td><button class="btn btn-red btn-mini" onclick="excluirVital(\''+v.id+'\')">×</button></td></tr>').join(''):
+    '<tr><td><div class="vazio">Nenhum registro ainda.</div></td></tr>';
+}
+
+// ===== PROTOCOLOS =====
+function salvarProtocolo(){
+  const nome=document.getElementById('prNome').value.trim();
+  if(!nome){document.getElementById('prMsg').textContent='Informe o nome.';return;}
+  const protos=ler(K.protocolos);
+  const id=document.getElementById('prId').value||uid();
+  const novo={id,perfilId:document.getElementById('prPerfil').value,nome,
+    cat:document.getElementById('prCat').value,dose:document.getElementById('prDose').value.trim(),
+    freq:document.getElementById('prFreq').value.trim(),ciclo:document.getElementById('prCiclo').value.trim(),
+    custo:document.getElementById('prCusto').value,efic:document.getElementById('prEfic').value,
+    status:document.getElementById('prStatus').value,notas:document.getElementById('prNotas').value.trim()};
+  const ix=protos.findIndex(p=>p.id===id);
+  if(ix>=0)protos[ix]=novo;else protos.push(novo);
+  gravar(K.protocolos,protos);
+  limparFormProtocolo();
+  document.getElementById('prMsg').textContent='✓ Protocolo salvo.';
+  setTimeout(()=>document.getElementById('prMsg').textContent='',1500);
+  renderProtocolos();renderInicio();
+}
+function limparFormProtocolo(){
+  document.getElementById('prId').value='';
+  ['prNome','prDose','prFreq','prCiclo','prCusto','prNotas'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('prEfic').value='';document.getElementById('prStatus').value='ativo';
+  document.getElementById('prCancelar').classList.add('hidden');
+  document.getElementById('formProtoTitulo').lastChild.textContent='Novo protocolo';
+}
+function editarProtocolo(id){
+  const p=ler(K.protocolos).find(x=>x.id===id);if(!p)return;
+  document.getElementById('prId').value=p.id;
+  document.getElementById('prPerfil').value=p.perfilId;document.getElementById('prNome').value=p.nome;
+  document.getElementById('prCat').value=p.cat;document.getElementById('prDose').value=p.dose||'';
+  document.getElementById('prFreq').value=p.freq||'';document.getElementById('prCiclo').value=p.ciclo||'';
+  document.getElementById('prCusto').value=p.custo||'';document.getElementById('prEfic').value=p.efic||'';
+  document.getElementById('prStatus').value=p.status;document.getElementById('prNotas').value=p.notas||'';
+  document.getElementById('prCancelar').classList.remove('hidden');
+  document.getElementById('formProtoTitulo').lastChild.textContent='Editando — '+p.nome;
+  document.getElementById('formProtoTitulo').scrollIntoView({behavior:'smooth'});
+}
+function alternarStatusProtocolo(id){
+  const protos=ler(K.protocolos);const p=protos.find(x=>x.id===id);if(!p)return;
+  p.status=p.status==='ativo'?'pausado':'ativo';gravar(K.protocolos,protos);renderProtocolos();renderInicio();
+}
+function excluirProtocolo(id){if(!confirm('Excluir este protocolo?'))return;gravar(K.protocolos,ler(K.protocolos).filter(p=>p.id!==id));renderProtocolos();renderInicio();}
+const CAT_TAG={'Cogumelo':'tag-dourado','Suplemento':'tag-verde','Medicamento':'tag-vermelho','Fitoterápico':'tag-verde','Floral':'tag-azul','Cosmético artesanal':'tag-cinza'};
+function renderProtocolos(){
+  const fp=document.getElementById('prFiltroPerfil').value,fc=document.getElementById('prFiltroCat').value,fs=document.getElementById('prFiltroStatus').value;
+  let protos=ler(K.protocolos);
+  if(fp)protos=protos.filter(p=>p.perfilId===fp);
+  if(fc)protos=protos.filter(p=>p.cat===fc);
+  if(fs)protos=protos.filter(p=>p.status===fs);
+  protos.sort((a,b)=>a.status.localeCompare(b.status)||a.cat.localeCompare(b.cat)||a.nome.localeCompare(b.nome));
+  const custoAtivo=protos.filter(p=>p.status==='ativo').reduce((s,p)=>s+(parseFloat(p.custo)||0),0);
+  document.getElementById('prTotalCusto').textContent=custoAtivo?('ativos: R$ '+custoAtivo.toFixed(2)+'/mês'):'';
+  document.getElementById('prTabela').innerHTML=protos.length?
+    '<tr><th>Nome</th><th>Perfil</th><th>Categoria</th><th>Dose · Frequência</th><th>Ciclo</th><th>R$/mês</th><th>Eficácia</th><th>Status</th><th></th></tr>'+
+    protos.map(p=>'<tr'+(p.status==='pausado'?' style="opacity:0.5"':'')+'><td><b>'+esc(p.nome)+'</b>'+(p.notas?'<br><span style="font-size:0.7rem;color:var(--cinza)">'+esc(p.notas)+'</span>':'')+'</td>'+
+      '<td>'+esc(nomePerfil(p.perfilId).split(' ')[0])+'</td>'+
+      '<td><span class="tag '+(CAT_TAG[p.cat]||'tag-cinza')+'">'+esc(p.cat)+'</span></td>'+
+      '<td>'+esc(p.dose||'—')+(p.freq?' · '+esc(p.freq):'')+'</td><td>'+esc(p.ciclo||'—')+'</td>'+
+      '<td>'+(p.custo?parseFloat(p.custo).toFixed(2):'—')+'</td>'+
+      '<td>'+(p.efic?'★'.repeat(+p.efic):'—')+'</td>'+
+      '<td><button class="btn btn-mini '+(p.status==='ativo'?'btn-d':'btn-sec')+'" onclick="alternarStatusProtocolo(\''+p.id+'\')">'+p.status+'</button></td>'+
+      '<td style="white-space:nowrap"><button class="btn btn-sec btn-mini" onclick="editarProtocolo(\''+p.id+'\')">✎</button> <button class="btn btn-red btn-mini" onclick="excluirProtocolo(\''+p.id+'\')">×</button></td></tr>').join(''):
+    '<tr><td><div class="vazio">Nenhum protocolo neste filtro.</div></td></tr>';
+}
+
+// ===== EXAMES =====
+function salvarExame(){
+  const nome=document.getElementById('exNome').value.trim();
+  const valor=document.getElementById('exValor').value.trim();
+  if(!nome||!valor){document.getElementById('exMsg').textContent='Informe exame e valor.';return;}
+  const exames=ler(K.exames);
+  const id=document.getElementById('exId').value||uid();
+  const novo={id,perfilId:document.getElementById('exPerfil').value,nome,valor,
+    unidade:document.getElementById('exUnidade').value.trim(),ref:document.getElementById('exRef').value.trim(),
+    data:document.getElementById('exData').value||hoje(),notas:document.getElementById('exNotas').value.trim()};
+  const ix=exames.findIndex(e=>e.id===id);
+  if(ix>=0)exames[ix]=novo;else exames.push(novo);
+  gravar(K.exames,exames);
+  limparFormExame();
+  document.getElementById('exMsg').textContent='✓ Exame salvo.';
+  setTimeout(()=>document.getElementById('exMsg').textContent='',1500);
+  renderExames();renderInicio();
+}
+function limparFormExame(){
+  document.getElementById('exId').value='';
+  ['exNome','exValor','exUnidade','exRef','exNotas'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('exData').value=hoje();
+  document.getElementById('exCancelar').classList.add('hidden');
+}
+function editarExame(id){
+  const e=ler(K.exames).find(x=>x.id===id);if(!e)return;
+  document.getElementById('exId').value=e.id;document.getElementById('exPerfil').value=e.perfilId;
+  document.getElementById('exNome').value=e.nome;document.getElementById('exValor').value=e.valor;
+  document.getElementById('exUnidade').value=e.unidade||'';document.getElementById('exRef').value=e.ref||'';
+  document.getElementById('exData').value=e.data||'';document.getElementById('exNotas').value=e.notas||'';
+  document.getElementById('exCancelar').classList.remove('hidden');
+  document.getElementById('sec-exames').scrollIntoView({behavior:'smooth'});
+}
+function excluirExame(id){if(!confirm('Excluir este exame?'))return;gravar(K.exames,ler(K.exames).filter(e=>e.id!==id));renderExames();renderInicio();}
+function renderExames(){
+  const fp=document.getElementById('exFiltroPerfil').value;
+  const busca=document.getElementById('exBusca').value.trim().toLowerCase();
+  let exames=ler(K.exames);
+  if(fp)exames=exames.filter(e=>e.perfilId===fp);
+  if(busca)exames=exames.filter(e=>e.nome.toLowerCase().includes(busca));
+  exames.sort((a,b)=>a.nome.localeCompare(b.nome)||(b.data||'').localeCompare(a.data||''));
+  document.getElementById('exTabela').innerHTML=exames.length?
+    '<tr><th>Exame</th><th>Perfil</th><th>Valor</th><th>Referência</th><th>Data</th><th>Notas</th><th></th></tr>'+
+    exames.map(e=>'<tr><td><b>'+esc(e.nome)+'</b></td><td>'+esc(nomePerfil(e.perfilId).split(' ')[0])+'</td>'+
+      '<td>'+esc(e.valor)+' '+esc(e.unidade||'')+'</td><td>'+esc(e.ref||'—')+'</td><td>'+fmtData(e.data)+'</td>'+
+      '<td style="max-width:200px">'+esc(e.notas||'')+'</td>'+
+      '<td style="white-space:nowrap"><button class="btn btn-sec btn-mini" onclick="editarExame(\''+e.id+'\')">✎</button> <button class="btn btn-red btn-mini" onclick="excluirExame(\''+e.id+'\')">×</button></td></tr>').join(''):
+    '<tr><td><div class="vazio">Nenhum exame neste filtro.</div></td></tr>';
+}
+
+// ===== BACKUP =====
+function exportarBackup(){
+  const dados={app:'Montgomery OS',versao:'Fase 1',exportadoEm:new Date().toISOString(),
+    perfis:ler(K.perfis),vitais:ler(K.vitais),protocolos:ler(K.protocolos),exames:ler(K.exames)};
+  const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='montgomery_os_backup_'+hoje()+'.json';
+  a.click();
+  document.getElementById('bkMsg').textContent='✓ Backup exportado.';
+  setTimeout(()=>document.getElementById('bkMsg').textContent='',2500);
+}
+function importarBackup(ev){
+  const file=ev.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const d=JSON.parse(e.target.result);
+      if(!d.perfis)throw new Error('Arquivo não parece um backup do Montgomery OS.');
+      if(!confirm('Importar backup de '+(d.exportadoEm?fmtData(d.exportadoEm.slice(0,16)):'data desconhecida')+'?\nIsto SUBSTITUI os dados atuais deste aparelho.'))return;
+      gravar(K.perfis,d.perfis||[]);gravar(K.vitais,d.vitais||[]);
+      gravar(K.protocolos,d.protocolos||[]);gravar(K.exames,d.exames||[]);
+      document.getElementById('bkMsg').textContent='✓ Backup importado.';
+      renderTudo();
+    }catch(err){document.getElementById('bkMsg').textContent='Erro: '+err.message;}
+  };
+  reader.readAsText(file);
+  ev.target.value='';
+}
+function limparTudo(){
+  if(!confirm('Apagar TODOS os dados do Montgomery OS neste aparelho? Esta ação não tem volta.'))return;
+  if(!confirm('Tem certeza absoluta? Exportou um backup antes?'))return;
+  Object.values(K).forEach(k=>localStorage.removeItem(k));
+  semear();renderTudo();
+  document.getElementById('bkMsg').textContent='Dados apagados — semente inicial restaurada.';
+}
+
+// ===== MAPA DO SISTEMA =====
+const MODULOS=[
+  {fase:'Fase 1 — Fundação (viva ✅)',itens:[
+    ['🧬','Identidade & Genética','Perfis da família, histórico, alergias, predisposições','vivo','perfis'],
+    ['🫀','Sinais Vitais & Biométricos','Pressão, glicemia, SpO₂, peso, semáforo e evolução','vivo','vitais'],
+    ['💊','Protocolos','Medicamentos, suplementos, cogumelos, fitoterápicos, florais','vivo','protocolos'],
+    ['🔬','Exames Laboratoriais','Marcadores no tempo, guiados pelo histórico familiar','vivo','exames'],
+    ['💾','Backup','Exportar/importar todos os dados em JSON','vivo','config']]},
+  {fase:'Fase 2 — Expansão Clínica',itens:[
+    ['⚡','Hormônios','Painel masculino e feminino, correlações cruzadas','f2'],
+    ['👁️','Oftalmologia Integrativa','Olho único, DGM, triquíase, PIO — prioridade da esposa','f2'],
+    ['🦴','Osteoarticular, Coluna & Músculos','Quiropraxia, ajustes, postura, miologia real (origem, inserção, inervação — apostilas já localizadas no Dropbox)','f2'],
+    ['❤️','Cardiovascular','ECG, eco, escore de cálcio, HRV — legado do seu pai','f2'],
+    ['🫁','Respiratório','Espirometria, sono, apneia','f2'],
+    ['🩺','Gastro & Microbioma','Endoscopia, permeabilidade, intolerâncias','f2'],
+    ['🧠','Saúde Mental & Neurológica','Humor, sono, foco, diário psicanalítico privado','f2'],
+    ['🌳','Mapa Energético','Árvore da Vida: Sefirot → Elemento → Órgão → Sintoma → Tratamento (protótipo já vivo na Clínica)','f2']]},
+  {fase:'Fase 3 — Conhecimento',itens:[
+    ['🍄','Fitoterapia & Fungoterapia','Plantas brasileiras + chinesas, cogumelos, florais (fitoterapia-data.js já preparado)','f3'],
+    ['🌿','Medicina Integrativa','Acupuntura, MTC (língua/pulso), Ayurveda, homeopatia, ozonioterapia','f3'],
+    ['🦷','Odontologia Integrativa','Mapa dental, conexão dente-meridiano-órgão','f3'],
+    ['📚','Base de Conhecimento','CID-11, anatomia (ossos e músculos por sistema), tabela de tradução convencional ↔ integrativa','f3'],
+    ['🧬','Epigenética & Ambiente','Toxinas, água, ar, EMF, ritmo circadiano','f3']]},
+  {fase:'Fase 4 — Inteligência',itens:[
+    ['📖','Diário Clínico','Sintomas, consultas, insights, correlações no tempo','f4'],
+    ['🏃','Desempenho & Longevidade','Jejum, exercício, idade biológica','f4'],
+    ['🔔','Inteligência Preventiva','Alertas, padrões, score de saúde, Claude API','f4']]},
+  {fase:'Fase 5 — Rede Familiar',itens:[
+    ['👨‍👩‍👧','Múltiplos perfis & Compartilhamento','Relatórios para médicos, acesso seletivo','f5'],
+    ['🐕','Dra. Vera (Maly)','Saúde da Maly integrada ao OS','f5']]}
+];
+const FASE_TAG={vivo:'<span class="tag tag-verde">✓ vivo</span>',f2:'<span class="tag tag-dourado">Fase 2</span>',f3:'<span class="tag tag-azul">Fase 3</span>',f4:'<span class="tag tag-cinza">Fase 4</span>',f5:'<span class="tag tag-cinza">Fase 5</span>'};
+function renderMapa(){
+  document.getElementById('mapaModulos').innerHTML=MODULOS.map(g=>
+    '<h2 style="font-family:Lora,serif;font-size:1.05rem;color:var(--azul);margin:21px 0 13px">'+g.fase+'</h2>'+
+    '<div class="cards">'+g.itens.map(m=>
+      '<div class="card'+(m[4]?' click" onclick="go(\''+m[4]+'\')"':'"')+' '+(m[3]!=='vivo'?'style="opacity:0.75"':'')+'>'+
+      '<h3>'+m[0]+' '+esc(m[1])+'</h3><div class="sub" style="margin-bottom:8px">'+esc(m[2])+'</div>'+FASE_TAG[m[3]]+'</div>').join('')+'</div>').join('');
+}
+
+// ===== RENDER GERAL =====
+function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderExames();renderMapa();}
+
+// ============================================================
+// SISTEMA DE LOGIN — padrão universal Montgomery
+// Google OAuth (Supabase) + Biometria WebAuthn + senha offline
+// ============================================================
+const _ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVsdGpocmhydHV5bWVqb2p4eWhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NDUxODcsImV4cCI6MjA5NjAyMTE4N30.cEgQrQ-Svr61s2O9JTLytqHEL8BpPYZWjS6ZCrAop58';
+const ALLOWED_EMAILS=['montlondon@gmail.com','salavioleta@gmail.com'];
+const BIO_KEY='mos_passkey_id';
+let _supaClient=null;
+
+async function carregarSupabaseSDK(){
+  return new Promise((resolve,reject)=>{
+    if(window.supabase){resolve(window.supabase);return;}
+    const s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+    s.onload=()=>resolve(window.supabase);
+    s.onerror=reject;
+    document.head.appendChild(s);
+  });
+}
+async function initAuth(){
+  const lib=await carregarSupabaseSDK();
+  _supaClient=lib.createClient('https://eltjhrhrtuymejojxyhe.supabase.co',_ANON,
+    {auth:{redirectTo:location.origin+location.pathname,persistSession:true,autoRefreshToken:true}});
+  const {data:{session}}=await _supaClient.auth.getSession();
+  if(session&&ALLOWED_EMAILS.includes(session.user.email)){await entrarNaPlataforma(session.user);return;}
+  verificarBiometriaDisponivel();
+}
+async function loginGoogle(){
+  setMsg('Redirecionando para o Google...');
+  if(!_supaClient)await initAuth();
+  const {error}=await _supaClient.auth.signInWithOAuth({provider:'google',
+    options:{redirectTo:location.origin+location.pathname,queryParams:{prompt:'select_account'}}});
+  if(error)setMsg('Erro: '+error.message);
+}
+async function verificarBiometriaDisponivel(){
+  try{
+    if(!window.PublicKeyCredential)return;
+    const ok=await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+    if(ok&&localStorage.getItem(BIO_KEY)){
+      document.getElementById('btnBio').classList.remove('hidden');
+      document.getElementById('dividerBio').classList.remove('hidden');
+    }
+  }catch(e){}
+}
+async function loginBiometria(){
+  setMsg('Verificando biometria...');
+  try{
+    const rawId=localStorage.getItem(BIO_KEY);
+    if(!rawId){setMsg('Biometria não cadastrada ainda.');return;}
+    const credId=Uint8Array.from(atob(rawId),c=>c.charCodeAt(0));
+    const challenge=crypto.getRandomValues(new Uint8Array(32));
+    const assertion=await navigator.credentials.get({publicKey:{
+      challenge,timeout:60000,
+      allowCredentials:[{type:'public-key',id:credId,transports:['internal']}],
+      userVerification:'required'}});
+    if(assertion)await entrarNaPlataforma({email:ALLOWED_EMAILS[0],id:'montgomery',bio:true});
+  }catch(e){
+    if(e.name==='NotAllowedError')setMsg('Biometria cancelada ou não reconhecida.');
+    else setMsg('Erro na biometria: '+e.message);
+  }
+}
+async function cadastrarBiometria(){
+  try{
+    const challenge=crypto.getRandomValues(new Uint8Array(32));
+    const userId=crypto.getRandomValues(new Uint8Array(16));
+    const cred=await navigator.credentials.create({publicKey:{
+      challenge,rp:{name:'Montgomery OS',id:location.hostname},
+      user:{id:userId,name:ALLOWED_EMAILS[0],displayName:'Montgomery Magalhães'},
+      pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
+      authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required',residentKey:'preferred'},
+      timeout:60000}});
+    if(cred){
+      localStorage.setItem(BIO_KEY,btoa(String.fromCharCode(...new Uint8Array(cred.rawId))));
+      return true;
+    }
+  }catch(e){console.warn('Biometria:',e.message);}
+  return false;
+}
+async function entrarNaPlataforma(user){
+  if(!user.bio&&!ALLOWED_EMAILS.includes(user.email)){
+    setMsg('❌ E-mail não autorizado: '+user.email);
+    if(_supaClient)await _supaClient.auth.signOut();
+    return;
+  }
+  document.getElementById('loginOverlay').style.display='none';
+  iniciarApp();
+  if(!user.bio&&window.PublicKeyCredential){
+    const ok=await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+    if(ok&&!localStorage.getItem(BIO_KEY)){
+      setTimeout(async()=>{
+        if(confirm('Deseja ativar login por biometria / reconhecimento facial para entrar mais rápido na próxima vez?'))
+          await cadastrarBiometria();
+      },2000);
+    }
+  }
+}
+function setMsg(m){document.getElementById('loginMsg').textContent=m;}
+function loginSenha(){
+  const s=prompt('Senha de acesso:');
+  if(s==='montgomery2026'||s==='Montgomery2026'){
+    document.getElementById('loginOverlay').style.display='none';
+    iniciarApp();
+  }else if(s!==null){setMsg('Acesso negado.');}
+}
+async function fazerLogout(){
+  if(!confirm('Sair do Montgomery OS?'))return;
+  if(_supaClient)await _supaClient.auth.signOut();
+  location.reload();
+}
+async function ativarBiometria(){
+  if(!window.PublicKeyCredential){alert('Seu dispositivo não suporta biometria via navegador.');return;}
+  const ok=await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+  if(!ok){alert('Nenhum sensor biométrico encontrado neste dispositivo.');return;}
+  const btn=document.getElementById('btnAtivarBio');
+  btn.textContent='Aguarde...';
+  const sucesso=await cadastrarBiometria();
+  btn.textContent=sucesso?'✓ Biometria ativada com sucesso!':'Falhou — tente novamente';
+  setTimeout(()=>btn.textContent='Ativar Biometria / Face neste aparelho',3000);
+}
+
+// ===== INICIALIZAÇÃO =====
+let _appIniciado=false;
+function iniciarApp(){
+  if(_appIniciado)return;_appIniciado=true;
+  semear();
+  document.getElementById('vtData').value=agora();
+  document.getElementById('exData').value=hoje();
+  renderTudo();
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  initAuth().catch(e=>{
+    console.warn('Auth SDK falhou (offline?):',e);
+    const s=prompt('Senha de acesso:');
+    if(s==='montgomery2026'||s==='Montgomery2026'){
+      document.getElementById('loginOverlay').style.display='none';
+      iniciarApp();
+    }else{
+      document.getElementById('loginMsg').textContent='Acesso negado.';
+    }
+  });
+});
+</script>
+</body>
+</html>
