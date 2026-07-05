@@ -228,6 +228,7 @@ tr:hover td{background:rgba(201,168,76,0.05)}
     <a data-sec="protocolos" onclick="go('protocolos',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 3.5 3.5 10.5a4.95 4.95 0 1 0 7 7l7-7a4.95 4.95 0 1 0-7-7Z"/><path d="m7 7 7 7"/></svg></span>Protocolos</a>
     <a data-sec="exames" onclick="go('exames',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v5l4.5 8.5a2 2 0 0 1-1.8 3H6.3a2 2 0 0 1-1.8-3L9 8Z"/><path d="M7.5 13h9"/></svg></span>Exames</a>
     <a data-sec="coluna" onclick="go('coluna',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M9 5h6M8.5 8.5h7M8 12h8M8.5 15.5h7M9 19h6"/></svg></span>Coluna &amp; Osteo</a>
+    <a data-sec="arvore" onclick="go('arvore',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="1.6"/><circle cx="6" cy="9" r="1.6"/><circle cx="18" cy="9" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="20" r="1.6"/><path d="M12 5.6v4.8M12 13.6v4.8M7.3 9.8 10.7 11M16.7 9.8 13.3 11M7 10.4l4 8M17 10.4l-5 8"/></svg></span>Árvore da Vida</a>
     <a data-sec="mapa" onclick="go('mapa',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>Mapa do Sistema</a>
     <a data-sec="config" onclick="go('config',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></span>Backup &amp; Configurações</a>
   </nav>
@@ -465,6 +466,32 @@ tr:hover td{background:rgba(201,168,76,0.05)}
   </div>
 </section>
 
+<!-- ÁRVORE DA VIDA / MAPA ENERGÉTICO -->
+<section class="sec" id="sec-arvore">
+  <div class="sec-head">
+    <h1>Árvore da Vida — Mapa Energético</h1>
+    <p>As 10 Sefirot sobre Adam Kadmon. Clique numa esfera para ver suas correspondências (Cabala + MTC) e registrar o que você observa.</p>
+  </div>
+  <div class="bloco" style="display:flex;gap:var(--f4);flex-wrap:wrap;align-items:flex-start">
+    <div style="flex:0 0 300px;max-width:100%;margin:0 auto">
+      <svg viewBox="0 0 300 500" id="arvoreSVG" style="width:100%;max-width:300px"></svg>
+      <div style="display:flex;justify-content:center;gap:var(--f2);margin-top:8px;font-size:0.68rem;color:var(--cinza)">
+        <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#C9A84C;vertical-align:middle"></span> Pilar do Equilíbrio</span>
+        <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#3A6FA5;vertical-align:middle"></span> Misericórdia</span>
+        <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#A54242;vertical-align:middle"></span> Severidade</span>
+      </div>
+    </div>
+    <div style="flex:1;min-width:280px" id="sefiraPainel">
+      <div class="vazio">Clique numa Sefirá na árvore ao lado.<br><br>Do topo (Kether, a Coroa) à base (Malkuth, o Reino) — o raio que desce da unidade à manifestação no corpo.</div>
+    </div>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg>Observações energéticas registradas</h2>
+    <div class="filtros"><select id="arvFiltroPerfil" onchange="renderArvoreTabela()"></select></div>
+    <div class="tbl-wrap"><table id="arvTabela"></table></div>
+  </div>
+</section>
+
 <!-- MAPA DO SISTEMA -->
 <section class="sec" id="sec-mapa">
   <div class="sec-head">
@@ -510,7 +537,7 @@ tr:hover td{background:rgba(201,168,76,0.05)}
    ============================================================ */
 
 // ===== ARMAZENAMENTO =====
-const K = {perfis:'mos_perfis', vitais:'mos_vitais', protocolos:'mos_protocolos', exames:'mos_exames', coluna:'mos_coluna'};
+const K = {perfis:'mos_perfis', vitais:'mos_vitais', protocolos:'mos_protocolos', exames:'mos_exames', coluna:'mos_coluna', arvore:'mos_arvore'};
 function ler(k){try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]}}
 function gravar(k,v){localStorage.setItem(k,JSON.stringify(v))}
 function uid(){return 'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
@@ -568,6 +595,7 @@ function renderInicio(){
   vitais.forEach(v=>ult.push({data:v.data,txt:nomePerfil(v.perfilId)+' — sinais vitais'+(v.sist?(' PA '+v.sist+'/'+v.diast):'')}));
   exames.forEach(e=>ult.push({data:e.data,txt:nomePerfil(e.perfilId)+' — '+e.nome+': '+e.valor+' '+(e.unidade||'')}));
   ler('mos_coluna').forEach(r=>ult.push({data:r.data,txt:nomePerfil(r.perfilId)+' — coluna/'+r.regiao+' ('+r.tipo+')'}));
+  ler('mos_arvore').forEach(r=>ult.push({data:r.data,txt:nomePerfil(r.perfilId)+' — '+r.sefira+': '+r.desc}));
   ult.sort((a,b)=>(b.data||'').localeCompare(a.data||''));
   document.getElementById('ultimosRegistros').innerHTML=ult.length?
     '<ul class="lista-simples">'+ult.slice(0,8).map(u=>'<li><span style="color:var(--cinza);font-size:0.75rem">'+fmtData(u.data)+'</span> · '+esc(u.txt)+'</li>').join('')+'</ul>':
@@ -825,7 +853,7 @@ function renderExames(){
 // ===== BACKUP =====
 function exportarBackup(){
   const dados={app:'Montgomery OS',versao:'Fase 1',exportadoEm:new Date().toISOString(),
-    perfis:ler(K.perfis),vitais:ler(K.vitais),protocolos:ler(K.protocolos),exames:ler(K.exames),coluna:ler(K.coluna)};
+    perfis:ler(K.perfis),vitais:ler(K.vitais),protocolos:ler(K.protocolos),exames:ler(K.exames),coluna:ler(K.coluna),arvore:ler(K.arvore)};
   const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
@@ -844,7 +872,7 @@ function importarBackup(ev){
       if(!confirm('Importar backup de '+(d.exportadoEm?fmtData(d.exportadoEm.slice(0,16)):'data desconhecida')+'?\nIsto SUBSTITUI os dados atuais deste aparelho.'))return;
       gravar(K.perfis,d.perfis||[]);gravar(K.vitais,d.vitais||[]);
       gravar(K.protocolos,d.protocolos||[]);gravar(K.exames,d.exames||[]);
-      gravar(K.coluna,d.coluna||[]);
+      gravar(K.coluna,d.coluna||[]);gravar(K.arvore,d.arvore||[]);
       document.getElementById('bkMsg').textContent='✓ Backup importado.';
       renderTudo();
     }catch(err){document.getElementById('bkMsg').textContent='Erro: '+err.message;}
@@ -936,6 +964,127 @@ document.addEventListener('click',e=>{
   if(g)selColRegiao(g.dataset.reg);
 });
 
+// ===== ÁRVORE DA VIDA / MAPA ENERGÉTICO =====
+// Fonte: arvore_vida_correspondencias.md (Cabala Hermética, verificado 01/07).
+// Pontes MTC marcadas (sugestão) exceto Tiphereth (convergência total, confirmada).
+const PILAR={C:'#C9A84C',D:'#3A6FA5',E:'#A54242'}; // Central/Direito(Misericórdia)/Esquerdo(Severidade)
+const SEFIROT=[
+  {id:'kether',n:'Kether',pt:'Coroa',num:1,pilar:'C',x:150,y:40,
+    corpo:'Crânio / topo da cabeça · glândula pineal',planeta:'Além do zodíaco — Impulso Primordial',
+    virtude:'Realização / a Grande Obra',vicio:'Nenhum — unidade pura',cor:'Branco brilhante',
+    mtc:'Shen / Espírito · Du Mai · DU20 Baihui (ponte)',sind:[]},
+  {id:'chokmah',n:'Chokmah',pt:'Sabedoria',num:2,pilar:'D',x:232,y:105,
+    corpo:'Hemisfério direito do cérebro',planeta:'Zodíaco / estrelas fixas',
+    virtude:'Sabedoria primordial',vicio:'—',cor:'Cinza pérola · azul iridescente',
+    mtc:'Yang do Rim · Ming Men · Du Mai (ponte)',sind:[]},
+  {id:'binah',n:'Binah',pt:'Entendimento',num:3,pilar:'E',x:68,y:105,
+    corpo:'Hemisfério esquerdo do cérebro',planeta:'Saturno ♄',
+    virtude:'Silêncio',vicio:'Avareza · contração excessiva',cor:'Preto · índigo profundo',
+    mtc:'Rim / Água · Yin do Rim · Essência (ponte)',sind:[]},
+  {id:'chesed',n:'Chesed',pt:'Misericórdia',num:4,pilar:'D',x:232,y:210,
+    corpo:'Braço direito · deltoide/bíceps direito',planeta:'Júpiter ♃',
+    virtude:'Amor incondicional · humildade · obediência',vicio:'Tirania · hipocrisia · gula',cor:'Azul royal',
+    mtc:'Fígado / Madeira · Hun, a alma etérea (ponte)',sind:[]},
+  {id:'geburah',n:'Geburah',pt:'Rigor / Força',num:5,pilar:'E',x:68,y:210,
+    corpo:'Braço esquerdo · deltoide/tríceps esquerdo',planeta:'Marte ♂',
+    virtude:'Coragem · energia · discernimento',vicio:'Crueldade · excesso de rigor · destruição',cor:'Vermelho escarlate',
+    mtc:'Coração / Fogo · Yang do Coração · Vesícula (ponte)',sind:[]},
+  {id:'tiphereth',n:'Tiphereth',pt:'Beleza ☀',num:6,pilar:'C',x:150,y:255,
+    corpo:'Coração · tronco superior · diafragma · pericárdio',planeta:'Sol ☀',
+    virtude:'Devoção à Grande Obra',vicio:'Orgulho · falso orgulho',cor:'Amarelo dourado · ouro solar',
+    mtc:'Coração (Xin) · Fogo · Shen · governa Sangue e Vasos — convergência total',
+    sind:['Deficiência de Sangue (palpitações, insônia)','Calor Vazio (rubor malar, suores noturnos)','Fogo do Coração (agitação, aftas, urina escura)','Estagnação de Sangue (dor precordial fixa)','Perturbação do Shen (ansiedade, mente inquieta)']},
+  {id:'netzach',n:'Netzach',pt:'Vitória',num:7,pilar:'D',x:232,y:325,
+    corpo:'Perna direita · quadril · quadríceps/glúteo direito',planeta:'Vênus ♀',
+    virtude:'Amor puro · altruísmo',vicio:'Luxúria · desejo compulsivo',cor:'Verde esmeralda',
+    mtc:'Fígado / Madeira · Hun, a alma dos desejos (ponte)',sind:[]},
+  {id:'hod',n:'Hod',pt:'Esplendor',num:8,pilar:'E',x:68,y:325,
+    corpo:'Perna esquerda · quadril · quadríceps/glúteo esquerdo',planeta:'Mercúrio ☿',
+    virtude:'Veracidade · honestidade',vicio:'Falsidade · desonestidade',cor:'Laranja · âmbar claro',
+    mtc:'Pulmão / Metal · Po (alma corpórea) · Qi defensivo (ponte)',sind:[]},
+  {id:'yesod',n:'Yesod',pt:'Fundação',num:9,pilar:'C',x:150,y:390,
+    corpo:'Sacro · pelve · psoas · assoalho pélvico · órgãos reprodutores',planeta:'Lua ☽',
+    virtude:'Independência · pureza',vicio:'Ociosidade · preguiça',cor:'Púrpura · violeta prateado',
+    mtc:'Rim / Água · Jing (Essência pré-natal) · Zhi, a Vontade (ponte)',sind:[]},
+  {id:'malkuth',n:'Malkuth',pt:'Reino',num:10,pilar:'C',x:150,y:458,
+    corpo:'Pés · tornozelos · arco plantar · boca (manifestação)',planeta:'Terra ⊕ (síntese dos 4 elementos)',
+    virtude:'Enraizamento · discernimento',vicio:'Inércia · avareza material',cor:'Terra: russet, oliva, preto, citrino',
+    mtc:'Baço / Terra · Yi (Intenção) · centro digestivo (ponte)',sind:[]}
+];
+const CAMINHOS=[['kether','chokmah'],['kether','binah'],['kether','tiphereth'],['chokmah','binah'],['chokmah','tiphereth'],['chokmah','chesed'],['binah','tiphereth'],['binah','geburah'],['chesed','geburah'],['chesed','tiphereth'],['chesed','netzach'],['geburah','tiphereth'],['geburah','hod'],['tiphereth','netzach'],['tiphereth','hod'],['tiphereth','yesod'],['netzach','hod'],['netzach','yesod'],['netzach','malkuth'],['hod','yesod'],['hod','malkuth'],['yesod','malkuth']];
+function renderArvoreSVG(){
+  const pos=id=>SEFIROT.find(s=>s.id===id);
+  const linhas=CAMINHOS.map(([a,b])=>{const p=pos(a),q=pos(b);return '<line x1="'+p.x+'" y1="'+p.y+'" x2="'+q.x+'" y2="'+q.y+'" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>';}).join('');
+  const nos=SEFIROT.map(s=>
+    '<g class="sefira-no" data-id="'+s.id+'" style="cursor:pointer">'+
+    '<title>'+s.n+' — '+s.pt+'</title>'+
+    '<circle cx="'+s.x+'" cy="'+s.y+'" r="19" fill="'+PILAR[s.pilar]+'" stroke="#F5F3EE" stroke-width="1.5" opacity="0.92"/>'+
+    '<text x="'+s.x+'" y="'+(s.y-1)+'" text-anchor="middle" font-family="Lora,serif" font-size="10" fill="#fff" font-weight="600">'+s.n+'</text>'+
+    '<text x="'+s.x+'" y="'+(s.y+9)+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" fill="rgba(255,255,255,0.85)">'+s.num+' · '+s.pt.replace(' ☀','')+'</text>'+
+    '</g>').join('');
+  document.getElementById('arvoreSVG').innerHTML=linhas+nos;
+}
+let _sefiraSel='';
+function selSefira(id){
+  _sefiraSel=id;
+  const s=SEFIROT.find(x=>x.id===id);if(!s)return;
+  document.querySelectorAll('#arvoreSVG .sefira-no circle').forEach(c=>c.setAttribute('stroke','#F5F3EE'));
+  const sel=document.querySelector('#arvoreSVG .sefira-no[data-id="'+id+'"] circle');
+  if(sel){sel.setAttribute('stroke','#1B3A5C');sel.setAttribute('stroke-width','3');}
+  const perfis=ler(K.perfis);
+  const linha=(rot,val)=>'<div style="margin-bottom:7px"><span style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.4px;color:var(--cinza)">'+rot+'</span><br><span style="font-size:0.85rem">'+esc(val)+'</span></div>';
+  const chips=s.sind.length?
+    '<p style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.4px;color:var(--cinza);margin:10px 0 6px">Desequilíbrios (clique para registrar)</p>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:6px">'+s.sind.map((sd,i)=>'<button class="btn btn-sec btn-mini" onclick="registrarSefira(\''+s.id+'\','+i+')">'+esc(sd)+'</button>').join('')+'</div>':
+    '<p style="font-size:0.78rem;color:var(--cinza);font-style:italic;margin-top:10px">Os desequilíbrios clínicos desta Sefirá ainda serão preenchidos por você, a partir da sua prática. Por ora, registre uma observação livre abaixo.</p>';
+  document.getElementById('sefiraPainel').innerHTML=
+    '<div style="border-left:4px solid '+PILAR[s.pilar]+';padding-left:var(--f2)">'+
+    '<h2 style="font-family:Lora,serif;color:var(--azul);font-size:1.25rem">'+s.n+' <span style="color:var(--cinza);font-size:0.9rem">— '+esc(s.pt.replace(' ☀',''))+' ('+s.num+'ª)</span></h2>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;margin-top:12px">'+
+    linha('Corpo (Adam Kadmon)',s.corpo)+linha('Planeta',s.planeta)+
+    linha('Virtude',s.virtude)+linha('Vício',s.vicio)+
+    linha('Cor',s.cor)+linha('MTC',s.mtc)+
+    '</div>'+chips+
+    '<div class="fio"></div>'+
+    '<div class="linha"><div class="fg"><label>Perfil</label><select id="sefPerfil">'+perfis.map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('')+'</select></div></div>'+
+    '<div class="fg"><label>Observação energética livre</label><input id="sefObs" placeholder="o que você percebe nesta Sefirá para este perfil"></div>'+
+    '<button class="btn btn-d" onclick="registrarSefira(\''+s.id+'\',-1)">Registrar observação</button>'+
+    '<div class="msg-ok" id="sefMsg"></div></div>';
+}
+function registrarSefira(id,sindIx){
+  const s=SEFIROT.find(x=>x.id===id);
+  const perfilSel=document.getElementById('sefPerfil');
+  const perfilId=perfilSel?perfilSel.value:(ler(K.perfis)[0]||{}).id;
+  let desc;
+  if(sindIx>=0)desc=s.sind[sindIx];
+  else{const o=document.getElementById('sefObs');desc=o?o.value.trim():'';if(!desc){document.getElementById('sefMsg').textContent='Escreva uma observação ou clique num desequilíbrio.';return;}}
+  const regs=ler('mos_arvore');
+  regs.push({id:uid(),perfilId,sefira:s.n,sefiraPt:s.pt.replace(' ☀',''),desc,data:agora()});
+  gravar('mos_arvore',regs);
+  const m=document.getElementById('sefMsg');if(m){m.textContent='✓ Registrado em '+s.n+'.';setTimeout(()=>{if(document.getElementById('sefMsg'))document.getElementById('sefMsg').textContent='';},1500);}
+  const o=document.getElementById('sefObs');if(o)o.value='';
+  renderArvoreTabela();renderInicio();
+}
+function excluirArvore(id){if(!confirm('Excluir este registro?'))return;gravar('mos_arvore',ler('mos_arvore').filter(r=>r.id!==id));renderArvoreTabela();renderInicio();}
+function renderArvoreTabela(){
+  const s=document.getElementById('arvFiltroPerfil');const v=s.value;
+  s.innerHTML='<option value="">Todos os perfis</option>'+ler(K.perfis).map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('');
+  if(v)s.value=v;
+  let regs=ler('mos_arvore');
+  if(s.value)regs=regs.filter(r=>r.perfilId===s.value);
+  regs.sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  document.getElementById('arvTabela').innerHTML=regs.length?
+    '<tr><th>Data</th><th>Perfil</th><th>Sefirá</th><th>Desequilíbrio / observação</th><th></th></tr>'+
+    regs.slice(0,34).map(r=>'<tr><td>'+fmtData(r.data)+'</td><td>'+esc(nomePerfil(r.perfilId).split(' ')[0])+'</td>'+
+      '<td><span class="tag tag-dourado">'+esc(r.sefira)+'</span></td><td>'+esc(r.desc)+'</td>'+
+      '<td><button class="btn btn-red btn-mini" onclick="excluirArvore(\''+r.id+'\')">×</button></td></tr>').join(''):
+    '<tr><td><div class="vazio">Nenhuma observação ainda — clique numa Sefirá e registre a primeira.</div></td></tr>';
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('#arvoreSVG .sefira-no');
+  if(g)selSefira(g.dataset.id);
+});
+
 // ===== MAPA DO SISTEMA =====
 const MODULOS=[
   {fase:'Fase 1 — Fundação (viva ✅)',itens:[
@@ -952,7 +1101,7 @@ const MODULOS=[
     ['🫁','Respiratório','Espirometria, sono, apneia','f2'],
     ['🩺','Gastro & Microbioma','Endoscopia, permeabilidade, intolerâncias','f2'],
     ['🧠','Saúde Mental & Neurológica','Humor, sono, foco, diário psicanalítico privado','f2'],
-    ['🌳','Mapa Energético','Árvore da Vida: Sefirot → Elemento → Órgão → Sintoma → Tratamento (protótipo já vivo na Clínica)','f2']]},
+    ['🌳','Mapa Energético — Árvore da Vida','10 Sefirot sobre Adam Kadmon, clicáveis, com correspondências Cabala + MTC e registro por perfil','vivo','arvore']]},
   {fase:'Fase 3 — Conhecimento',itens:[
     ['🍄','Fitoterapia & Fungoterapia','Plantas brasileiras + chinesas, cogumelos, florais (fitoterapia-data.js já preparado)','f3'],
     ['🌿','Medicina Integrativa','Acupuntura, MTC (língua/pulso), Ayurveda, homeopatia, ozonioterapia','f3'],
@@ -977,7 +1126,7 @@ function renderMapa(){
 }
 
 // ===== RENDER GERAL =====
-function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderExames();renderColuna();renderMapa();}
+function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderExames();renderColuna();renderArvoreSVG();renderArvoreTabela();renderMapa();}
 
 // ============================================================
 // SISTEMA DE LOGIN — padrão universal Montgomery
