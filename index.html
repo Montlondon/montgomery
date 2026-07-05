@@ -330,8 +330,14 @@ tr:hover td{background:rgba(201,168,76,0.05)}
 <!-- PROTOCOLOS -->
 <section class="sec" id="sec-protocolos">
   <div class="sec-head">
-    <h1>Protocolos</h1>
-    <p>Medicamentos, suplementos, cogumelos, fitoterápicos e florais — dose, ciclo e eficácia.</p>
+    <h1>Protocolos &amp; Cronofarmacologia</h1>
+    <p>Medicamentos, suplementos, cogumelos, fitoterápicos e florais — dose, ciclo, eficácia e o horário certo de cada um.</p>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Cronofarmacologia — o dia
+      <select id="cronoPerfil" onchange="renderCrono()" style="margin-left:auto;padding:6px 10px;border:1px solid rgba(27,58,92,0.18);border-radius:8px;font-size:0.8rem;font-family:Inter,sans-serif"></select>
+    </h2>
+    <div id="cronoTimeline"></div>
   </div>
   <div class="bloco">
     <h2 id="formProtoTitulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10.5 3.5 3.5 10.5a4.95 4.95 0 1 0 7 7l7-7a4.95 4.95 0 1 0-7-7Z"/><path d="m7 7 7 7"/></svg>Novo protocolo</h2>
@@ -341,12 +347,18 @@ tr:hover td{background:rgba(201,168,76,0.05)}
       <div class="fg"><label>Nome</label><input id="prNome" placeholder="Lion's Mane, Magnésio, Losartana..."></div>
       <div class="fg"><label>Categoria</label><select id="prCat">
         <option>Cogumelo</option><option>Suplemento</option><option>Medicamento</option>
-        <option>Fitoterápico</option><option>Floral</option><option>Cosmético artesanal</option>
+        <option>Fitoterápico</option><option>Floral</option><option>Alimento funcional</option><option>Cosmético artesanal</option>
       </select></div>
     </div>
     <div class="linha">
+      <div class="fg"><label>Horário (cronofarmacologia)</label><select id="prHorario">
+        <option value="">— sem horário fixo —</option>
+        <option>Manhã (08:00)</option><option>Almoço (12:00)</option><option>Tarde (16:00)</option><option>Noite (20:00)</option><option>Se necessário</option>
+      </select></div>
       <div class="fg"><label>Dose</label><input id="prDose" placeholder="500mg, 20 gotas..."></div>
       <div class="fg"><label>Frequência</label><input id="prFreq" placeholder="2x ao dia, jejum..."></div>
+    </div>
+    <div class="linha">
       <div class="fg"><label>Ciclo</label><input id="prCiclo" placeholder="contínuo, 3 meses on / 1 off..."></div>
       <div class="fg"><label>Custo mensal (R$)</label><input id="prCusto" type="number" step="0.01"></div>
     </div>
@@ -784,7 +796,8 @@ function salvarProtocolo(){
   const protos=ler(K.protocolos);
   const id=document.getElementById('prId').value||uid();
   const novo={id,perfilId:document.getElementById('prPerfil').value,nome,
-    cat:document.getElementById('prCat').value,dose:document.getElementById('prDose').value.trim(),
+    cat:document.getElementById('prCat').value,horario:document.getElementById('prHorario').value,
+    dose:document.getElementById('prDose').value.trim(),
     freq:document.getElementById('prFreq').value.trim(),ciclo:document.getElementById('prCiclo').value.trim(),
     custo:document.getElementById('prCusto').value,efic:document.getElementById('prEfic').value,
     status:document.getElementById('prStatus').value,notas:document.getElementById('prNotas').value.trim()};
@@ -799,7 +812,7 @@ function salvarProtocolo(){
 function limparFormProtocolo(){
   document.getElementById('prId').value='';
   ['prNome','prDose','prFreq','prCiclo','prCusto','prNotas'].forEach(i=>document.getElementById(i).value='');
-  document.getElementById('prEfic').value='';document.getElementById('prStatus').value='ativo';
+  document.getElementById('prEfic').value='';document.getElementById('prStatus').value='ativo';document.getElementById('prHorario').value='';
   document.getElementById('prCancelar').classList.add('hidden');
   document.getElementById('formProtoTitulo').lastChild.textContent='Novo protocolo';
 }
@@ -807,7 +820,7 @@ function editarProtocolo(id){
   const p=ler(K.protocolos).find(x=>x.id===id);if(!p)return;
   document.getElementById('prId').value=p.id;
   document.getElementById('prPerfil').value=p.perfilId;document.getElementById('prNome').value=p.nome;
-  document.getElementById('prCat').value=p.cat;document.getElementById('prDose').value=p.dose||'';
+  document.getElementById('prCat').value=p.cat;document.getElementById('prHorario').value=p.horario||'';document.getElementById('prDose').value=p.dose||'';
   document.getElementById('prFreq').value=p.freq||'';document.getElementById('prCiclo').value=p.ciclo||'';
   document.getElementById('prCusto').value=p.custo||'';document.getElementById('prEfic').value=p.efic||'';
   document.getElementById('prStatus').value=p.status;document.getElementById('prNotas').value=p.notas||'';
@@ -820,7 +833,39 @@ function alternarStatusProtocolo(id){
   p.status=p.status==='ativo'?'pausado':'ativo';gravar(K.protocolos,protos);renderProtocolos();renderInicio();
 }
 function excluirProtocolo(id){if(!confirm('Excluir este protocolo?'))return;gravar(K.protocolos,ler(K.protocolos).filter(p=>p.id!==id));renderProtocolos();renderInicio();}
-const CAT_TAG={'Cogumelo':'tag-dourado','Suplemento':'tag-verde','Medicamento':'tag-vermelho','Fitoterápico':'tag-verde','Floral':'tag-azul','Cosmético artesanal':'tag-cinza'};
+const CAT_TAG={'Cogumelo':'tag-dourado','Suplemento':'tag-verde','Medicamento':'tag-vermelho','Fitoterápico':'tag-verde','Floral':'tag-azul','Alimento funcional':'tag-dourado','Cosmético artesanal':'tag-cinza'};
+// Períodos da cronofarmacologia — ícones SVG linha fina (sol nascente, sol alto, poente, lua)
+const CRONO_PERIODOS=[
+  {nome:'Manhã (08:00)',cor:'#C9922A',ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v2M5 11H3M21 11h-2M6.3 6.3 4.9 4.9M17.7 6.3l1.4-1.4M2 18h20M6 18a6 6 0 0 1 12 0"/></svg>'},
+  {nome:'Almoço (12:00)',cor:'#C9A84C',ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>'},
+  {nome:'Tarde (16:00)',cor:'#B5793A',ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10V3M8.5 6.5 12 10l3.5-3.5M2 18h20M4 14h2M18 14h2M6 18a6 6 0 0 1 12 0"/></svg>'},
+  {nome:'Noite (20:00)',cor:'#3A6FA5',ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 6.5 6.5 0 1 0 20 14.5Z"/></svg>'},
+  {nome:'Se necessário',cor:'#8A8578',ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2ZM9 21h6M10 17v4M14 17v4"/></svg>'}
+];
+function renderCrono(){
+  const sel=document.getElementById('cronoPerfil');const v=sel.value;
+  sel.innerHTML=ler(K.perfis).map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('');
+  if(v)sel.value=v;else if(ler(K.perfis)[0])sel.value=ler(K.perfis)[0].id;
+  const pid=sel.value;
+  const protos=ler(K.protocolos).filter(p=>p.perfilId===pid&&p.status==='ativo');
+  const semHorario=protos.filter(p=>!p.horario);
+  let html='<div style="display:flex;flex-direction:column;gap:10px">';
+  let algum=false;
+  CRONO_PERIODOS.forEach(per=>{
+    const itens=protos.filter(p=>p.horario===per.nome);
+    if(!itens.length)return;algum=true;
+    html+='<div style="display:flex;gap:12px;align-items:flex-start">'+
+      '<div style="flex:0 0 34px;height:34px;border-radius:50%;background:'+per.cor+';color:#fff;display:flex;align-items:center;justify-content:center">'+
+      '<span style="width:19px;height:19px;display:inline-flex">'+per.ic+'</span></div>'+
+      '<div style="flex:1;padding-top:2px"><div style="font-family:Lora,serif;font-size:0.92rem;color:var(--azul);margin-bottom:4px">'+esc(per.nome)+'</div>'+
+      '<div style="display:flex;flex-wrap:wrap;gap:6px">'+itens.map(p=>
+        '<span style="background:var(--bege);border:1px solid rgba(27,58,92,0.1);border-radius:8px;padding:5px 10px;font-size:0.8rem"><b>'+esc(p.nome)+'</b>'+(p.dose?' <span style="color:var(--cinza)">'+esc(p.dose)+'</span>':'')+'</span>').join('')+
+      '</div></div></div>';
+  });
+  html+='</div>';
+  if(semHorario.length)html+='<p style="font-size:0.75rem;color:var(--cinza);margin-top:12px;font-style:italic">Sem horário fixo: '+semHorario.map(p=>esc(p.nome)).join(', ')+'</p>';
+  document.getElementById('cronoTimeline').innerHTML=algum?html:'<div class="vazio">Nenhum protocolo ativo com horário definido para este perfil. Adicione o horário ao cadastrar/editar um protocolo.</div>';
+}
 function renderProtocolos(){
   const fp=document.getElementById('prFiltroPerfil').value,fc=document.getElementById('prFiltroCat').value,fs=document.getElementById('prFiltroStatus').value;
   let protos=ler(K.protocolos);
@@ -830,11 +875,13 @@ function renderProtocolos(){
   protos.sort((a,b)=>a.status.localeCompare(b.status)||a.cat.localeCompare(b.cat)||a.nome.localeCompare(b.nome));
   const custoAtivo=protos.filter(p=>p.status==='ativo').reduce((s,p)=>s+(parseFloat(p.custo)||0),0);
   document.getElementById('prTotalCusto').textContent=custoAtivo?('ativos: R$ '+custoAtivo.toFixed(2)+'/mês'):'';
+  renderCrono();
   document.getElementById('prTabela').innerHTML=protos.length?
-    '<tr><th>Nome</th><th>Perfil</th><th>Categoria</th><th>Dose · Frequência</th><th>Ciclo</th><th>R$/mês</th><th>Eficácia</th><th>Status</th><th></th></tr>'+
+    '<tr><th>Nome</th><th>Perfil</th><th>Categoria</th><th>Horário</th><th>Dose · Frequência</th><th>Ciclo</th><th>R$/mês</th><th>Eficácia</th><th>Status</th><th></th></tr>'+
     protos.map(p=>'<tr'+(p.status==='pausado'?' style="opacity:0.5"':'')+'><td><b>'+esc(p.nome)+'</b>'+(p.notas?'<br><span style="font-size:0.7rem;color:var(--cinza)">'+esc(p.notas)+'</span>':'')+'</td>'+
       '<td>'+esc(nomePerfil(p.perfilId).split(' ')[0])+'</td>'+
       '<td><span class="tag '+(CAT_TAG[p.cat]||'tag-cinza')+'">'+esc(p.cat)+'</span></td>'+
+      '<td>'+(p.horario?'<span class="tag tag-azul">'+esc(p.horario.replace(/ \(.*\)/,''))+'</span>':'—')+'</td>'+
       '<td>'+esc(p.dose||'—')+(p.freq?' · '+esc(p.freq):'')+'</td><td>'+esc(p.ciclo||'—')+'</td>'+
       '<td>'+(p.custo?parseFloat(p.custo).toFixed(2):'—')+'</td>'+
       '<td>'+(p.efic?'★'.repeat(+p.efic):'—')+'</td>'+
@@ -1240,7 +1287,7 @@ function renderMapa(){
 }
 
 // ===== RENDER GERAL =====
-function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderExames();renderNutricao();renderColuna();renderArvoreSVG();renderArvoreTabela();renderMapa();}
+function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderCrono();renderExames();renderNutricao();renderColuna();renderArvoreSVG();renderArvoreTabela();renderMapa();}
 
 // ============================================================
 // SISTEMA DE LOGIN — padrão universal Montgomery
