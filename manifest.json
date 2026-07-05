@@ -1,0 +1,15 @@
+{
+  "name": "Montgomery OS",
+  "short_name": "MOS",
+  "description": "Sistema operacional pessoal de saúde — Montgomery Magalhães e família",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#1B3A5C",
+  "theme_color": "#1B3A5C",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

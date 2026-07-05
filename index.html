@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1B3A5C">
 <title>Montgomery OS — Sistema Pessoal de Saúde</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Montgomery OS">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -221,6 +227,7 @@ tr:hover td{background:rgba(201,168,76,0.05)}
     <a data-sec="vitais" onclick="go('vitais',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span>Sinais Vitais</a>
     <a data-sec="protocolos" onclick="go('protocolos',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 3.5 3.5 10.5a4.95 4.95 0 1 0 7 7l7-7a4.95 4.95 0 1 0-7-7Z"/><path d="m7 7 7 7"/></svg></span>Protocolos</a>
     <a data-sec="exames" onclick="go('exames',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v5l4.5 8.5a2 2 0 0 1-1.8 3H6.3a2 2 0 0 1-1.8-3L9 8Z"/><path d="M7.5 13h9"/></svg></span>Exames</a>
+    <a data-sec="coluna" onclick="go('coluna',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M9 5h6M8.5 8.5h7M8 12h8M8.5 15.5h7M9 19h6"/></svg></span>Coluna &amp; Osteo</a>
     <a data-sec="mapa" onclick="go('mapa',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>Mapa do Sistema</a>
     <a data-sec="config" onclick="go('config',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></span>Backup &amp; Configurações</a>
   </nav>
@@ -413,6 +420,51 @@ tr:hover td{background:rgba(201,168,76,0.05)}
   </div>
 </section>
 
+<!-- COLUNA & OSTEOARTICULAR -->
+<section class="sec" id="sec-coluna">
+  <div class="sec-head">
+    <h1>Coluna &amp; Osteoarticular</h1>
+    <p>O eixo do corpo — regiões clicáveis, sinais das raízes nervosas (apostila de Quiropraxia) e registro de dor/ajustes.</p>
+  </div>
+  <div class="bloco" style="display:flex;gap:var(--f3);flex-wrap:wrap">
+    <div style="flex:0 0 150px;text-align:center">
+      <svg viewBox="0 0 120 350" style="width:130px" id="colunaSVG">
+        <circle cx="60" cy="18" r="14" fill="none" stroke="#8A8578" stroke-width="1.5"/>
+        <g class="col-reg" data-reg="Cervical" style="cursor:pointer">
+          <title>Cervical (C1–C7)</title>
+          <g id="reg-Cervical"><rect x="52" y="36" width="16" height="7" rx="3" fill="#C9A84C" opacity="0.55"/><rect x="52" y="45" width="16" height="7" rx="3" fill="#C9A84C" opacity="0.55"/><rect x="52" y="54" width="16" height="7" rx="3" fill="#C9A84C" opacity="0.55"/><rect x="52" y="63" width="16" height="7" rx="3" fill="#C9A84C" opacity="0.55"/><rect x="52" y="72" width="16" height="7" rx="3" fill="#C9A84C" opacity="0.55"/><rect x="52" y="81" width="16" height="7" rx="3" fill="#C9A84C" opacity="0.55"/><rect x="52" y="90" width="16" height="7" rx="3" fill="#C9A84C" opacity="0.55"/></g>
+          <text x="88" y="68" font-size="9" fill="#8A8578">C1–C7</text>
+        </g>
+        <g class="col-reg" data-reg="Torácica" style="cursor:pointer">
+          <title>Torácica (T1–T12)</title>
+          <g id="reg-Torácica"><rect x="50" y="100" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="109.5" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="119" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="128.5" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="138" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="147.5" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="157" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="166.5" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="176" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="185.5" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="195" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/><rect x="50" y="204.5" width="20" height="7.5" rx="3" fill="#1B3A5C" opacity="0.5"/></g>
+          <text x="90" y="158" font-size="9" fill="#8A8578">T1–T12</text>
+        </g>
+        <g class="col-reg" data-reg="Lombar" style="cursor:pointer">
+          <title>Lombar (L1–L5)</title>
+          <g id="reg-Lombar"><rect x="48" y="216" width="24" height="9" rx="3.5" fill="#A54242" opacity="0.5"/><rect x="48" y="227" width="24" height="9" rx="3.5" fill="#A54242" opacity="0.5"/><rect x="48" y="238" width="24" height="9" rx="3.5" fill="#A54242" opacity="0.5"/><rect x="48" y="249" width="24" height="9" rx="3.5" fill="#A54242" opacity="0.5"/><rect x="48" y="260" width="24" height="9" rx="3.5" fill="#A54242" opacity="0.5"/></g>
+          <text x="92" y="243" font-size="9" fill="#8A8578">L1–L5</text>
+        </g>
+        <g class="col-reg" data-reg="Sacroilíaca" style="cursor:pointer">
+          <title>Sacro / Sacroilíaca</title>
+          <g id="reg-Sacroilíaca"><path d="M46 273 L74 273 L66 300 L60 308 L54 300 Z" fill="#4A7C59" opacity="0.55"/></g>
+          <text x="88" y="290" font-size="9" fill="#8A8578">Sacro</text>
+        </g>
+      </svg>
+    </div>
+    <div style="flex:1;min-width:250px">
+      <h2 style="font-family:Lora,serif;font-size:1rem;color:var(--azul);margin-bottom:10px">Articulações</h2>
+      <div class="filtros" id="colArticulacoes"></div>
+      <div id="colPainel"><div class="vazio">Clique numa região da coluna ou numa articulação para ver os sinais relacionados e registrar.</div></div>
+    </div>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 3v18h18"/><path d="m7 14 4-5 3 3 5-7"/></svg>Histórico de dor &amp; ajustes</h2>
+    <div class="filtros"><select id="colFiltroPerfil" onchange="renderColuna()"></select></div>
+    <div class="tbl-wrap"><table id="colTabela"></table></div>
+  </div>
+</section>
+
 <!-- MAPA DO SISTEMA -->
 <section class="sec" id="sec-mapa">
   <div class="sec-head">
@@ -458,7 +510,7 @@ tr:hover td{background:rgba(201,168,76,0.05)}
    ============================================================ */
 
 // ===== ARMAZENAMENTO =====
-const K = {perfis:'mos_perfis', vitais:'mos_vitais', protocolos:'mos_protocolos', exames:'mos_exames'};
+const K = {perfis:'mos_perfis', vitais:'mos_vitais', protocolos:'mos_protocolos', exames:'mos_exames', coluna:'mos_coluna'};
 function ler(k){try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]}}
 function gravar(k,v){localStorage.setItem(k,JSON.stringify(v))}
 function uid(){return 'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
@@ -515,6 +567,7 @@ function renderInicio(){
   const ult=[];
   vitais.forEach(v=>ult.push({data:v.data,txt:nomePerfil(v.perfilId)+' — sinais vitais'+(v.sist?(' PA '+v.sist+'/'+v.diast):'')}));
   exames.forEach(e=>ult.push({data:e.data,txt:nomePerfil(e.perfilId)+' — '+e.nome+': '+e.valor+' '+(e.unidade||'')}));
+  ler('mos_coluna').forEach(r=>ult.push({data:r.data,txt:nomePerfil(r.perfilId)+' — coluna/'+r.regiao+' ('+r.tipo+')'}));
   ult.sort((a,b)=>(b.data||'').localeCompare(a.data||''));
   document.getElementById('ultimosRegistros').innerHTML=ult.length?
     '<ul class="lista-simples">'+ult.slice(0,8).map(u=>'<li><span style="color:var(--cinza);font-size:0.75rem">'+fmtData(u.data)+'</span> · '+esc(u.txt)+'</li>').join('')+'</ul>':
@@ -772,7 +825,7 @@ function renderExames(){
 // ===== BACKUP =====
 function exportarBackup(){
   const dados={app:'Montgomery OS',versao:'Fase 1',exportadoEm:new Date().toISOString(),
-    perfis:ler(K.perfis),vitais:ler(K.vitais),protocolos:ler(K.protocolos),exames:ler(K.exames)};
+    perfis:ler(K.perfis),vitais:ler(K.vitais),protocolos:ler(K.protocolos),exames:ler(K.exames),coluna:ler(K.coluna)};
   const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
@@ -791,6 +844,7 @@ function importarBackup(ev){
       if(!confirm('Importar backup de '+(d.exportadoEm?fmtData(d.exportadoEm.slice(0,16)):'data desconhecida')+'?\nIsto SUBSTITUI os dados atuais deste aparelho.'))return;
       gravar(K.perfis,d.perfis||[]);gravar(K.vitais,d.vitais||[]);
       gravar(K.protocolos,d.protocolos||[]);gravar(K.exames,d.exames||[]);
+      gravar(K.coluna,d.coluna||[]);
       document.getElementById('bkMsg').textContent='✓ Backup importado.';
       renderTudo();
     }catch(err){document.getElementById('bkMsg').textContent='Erro: '+err.message;}
@@ -806,6 +860,82 @@ function limparTudo(){
   document.getElementById('bkMsg').textContent='Dados apagados — semente inicial restaurada.';
 }
 
+// ===== COLUNA & OSTEOARTICULAR =====
+// Sinais por região extraídos da APOSTILA DE QUIRO ATUALIZADA (mesma fonte da Clínica)
+const COLUNA_DATA={
+  'Cervical':{faixa:'C1–C7',quiro:'Ajuste Occipito-Atlantal (C0-C1) para cefaleias e C5-C6.',musculo:'m. Trapézio Superior e m. Escalenos',
+    sinais:['dor de cabeça / cefaleia','nervosismo, insônia','resfriados frequentes','hipertensão arterial','enxaqueca','esgotamento nervoso, cansaço crônico','vertigem','problemas sinusais','perda repentina de audição ou visão sem motivo aparente','nevralgia, neurite','laringite, faringite, rouquidão','dor de garganta, amigdalite','rigidez no pescoço','dor no braço superior externo','bursite no ombro','problemas de tireoide']},
+  'Torácica':{faixa:'T1–T12',quiro:'Ajuste costovertebral/costotransverso e mobilização da cifose torácica.',musculo:'m. Eretores da Espinha e m. Intercostais',
+    sinais:['asma, dificuldade respiratória','dor no antebraço/mãos','alterações cardíacas, dor na região superior das costas','bronquite, pleurite, pneumonia','problemas de vesícula biliar, icterícia','problemas hepáticos, anemia, circulação deficiente','problemas gástricos, indigestão, pirose','úlcera, gastrite','baixa resistência, soluço','alergias, urticária','problemas renais, cansaço crônico','problemas de pele, acne, eczema','reumatismo, flatulência']},
+  'Lombar':{faixa:'L1–L5',quiro:'Correção de báscula de bacia e subluxação L5-S1.',musculo:'m. Quadrado Lombar e m. Piriforme',
+    sinais:['ciática','lombalgia','constipação, colite, disenteria','diarreia','hérnia inguinal','dor/queixa em órgãos sexuais, útero ou bexiga','cãibra, dificuldade circulatória, veias varicosas','problemas menstruais (dor ou irregularidade)','dor nos joelhos','problemas urinários','inchaço e fragilidade nas pernas/tornozelos']},
+  'Sacroilíaca':{faixa:'Sacro / SI',quiro:'Ajuste sacroilíaco e correção de báscula de bacia (ilíaca anteriorizada/posteriorizada).',musculo:'m. Piriforme e m. Glúteo Máximo',
+    sinais:['dor sacroilíaca que piora pela manhã e melhora com a atividade','dor unilateral','sensação de fisgada após torção/levantamento de peso','dor irradiada pra nádega, coxa posterior (até o joelho) e virilha do mesmo lado','escoliose de adaptação (compensação torácica/cervical)','tensão/dor no quadril (bursite, artrose)','tensão crônica no joelho ou tornozelo do mesmo lado']},
+  'Pelve':{faixa:'Bacia',quiro:'Correção de báscula pélvica e nivelamento de crista ilíaca.',musculo:'m. Glúteo Médio e m. Iliopsoas',
+    sinais:['báscula pélvica','crista ilíaca desnivelada','tensão no iliopsoas','sensação de "perna mais curta"','tensão excessiva no quadril (bursite, artrose)']},
+  'Joelho':{faixa:'Patelar/Lateral',quiro:'Ajuste L4-L5, mobilidade fêmoro-patelar.',musculo:'m. Quadríceps e m. Bíceps Femoral',
+    sinais:['dor patelar','dor lateral do joelho','estalos/crepitação ao mover','instabilidade fêmoro-patelar','derrame articular (joelho inchado)','bloqueio ao estender totalmente']},
+  'Cotovelo':{faixa:'Articulação',quiro:'Restrição da cabeça do rádio e umeroulnar.',musculo:'m. Supinador e m. Braquiorradial',
+    sinais:['dor lateral do cotovelo (tipo epicondilite)','dor medial do cotovelo','restrição de rotação do antebraço (supinação/pronação)','formigamento até a mão']},
+  'Tornozelo':{faixa:'Talo-crural',quiro:'Mobilização talo-crural e correção de entorse.',musculo:'m. Fibulares e m. Tibial Anterior',
+    sinais:['entorse de tornozelo (histórico ou recente)','dor no tendão de Aquiles','instabilidade talo-crural ("tornozelo fraco")','inchaço recorrente']}
+};
+let _colRegiao='';
+function selColRegiao(reg){
+  _colRegiao=reg;
+  const d=COLUNA_DATA[reg];if(!d)return;
+  const perfis=ler(K.perfis);
+  document.getElementById('colPainel').innerHTML=
+    '<div style="border:1px solid rgba(201,168,76,0.4);border-radius:10px;padding:var(--f2) var(--f3);background:rgba(201,168,76,0.05)">'+
+    '<h3 style="font-family:Lora,serif;color:var(--azul);margin-bottom:4px">'+reg+' <span class="tag tag-dourado">'+d.faixa+'</span></h3>'+
+    '<p style="font-size:0.75rem;color:var(--cinza);margin-bottom:8px"><b>Músculos-chave:</b> '+esc(d.musculo)+' · <b>Quiro:</b> '+esc(d.quiro)+'</p>'+
+    '<p style="font-size:0.72rem;color:var(--cinza);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px">Sinais relacionados (apostila)</p>'+
+    '<div style="font-size:0.8rem;line-height:1.7">'+d.sinais.map(s=>'· '+esc(s)).join('<br>')+'</div>'+
+    '<div class="fio"></div>'+
+    '<div class="linha">'+
+    '<div class="fg"><label>Perfil</label><select id="colPerfil">'+perfis.map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('')+'</select></div>'+
+    '<div class="fg"><label>Tipo</label><select id="colTipo"><option>Dor / queixa</option><option>Ajuste realizado</option><option>Observação</option></select></div>'+
+    '<div class="fg"><label>Dor (0–10)</label><input id="colDor" type="number" min="0" max="10"></div>'+
+    '</div>'+
+    '<div class="fg"><label>Notas (vértebra específica, lado, contexto)</label><input id="colNotas"></div>'+
+    '<button class="btn btn-p" onclick="salvarColuna()">Registrar em '+reg+'</button>'+
+    '<div class="msg-ok" id="colMsg"></div></div>';
+}
+function salvarColuna(){
+  const regs=ler('mos_coluna');
+  regs.push({id:uid(),perfilId:document.getElementById('colPerfil').value,regiao:_colRegiao,
+    tipo:document.getElementById('colTipo').value,dor:document.getElementById('colDor').value,
+    notas:document.getElementById('colNotas').value.trim(),data:agora()});
+  gravar('mos_coluna',regs);
+  document.getElementById('colMsg').textContent='✓ Registrado.';
+  setTimeout(()=>{const m=document.getElementById('colMsg');if(m)m.textContent='';},1500);
+  renderColuna();renderInicio();
+}
+function excluirColuna(id){if(!confirm('Excluir este registro?'))return;gravar('mos_coluna',ler('mos_coluna').filter(r=>r.id!==id));renderColuna();renderInicio();}
+function renderColuna(){
+  // chips de articulações
+  document.getElementById('colArticulacoes').innerHTML=['Pelve','Joelho','Cotovelo','Tornozelo'].map(a=>
+    '<button class="btn btn-sec btn-mini" onclick="selColRegiao(\''+a+'\')">'+a+'</button>').join('');
+  // filtro
+  const s=document.getElementById('colFiltroPerfil');const v=s.value;
+  s.innerHTML='<option value="">Todos os perfis</option>'+ler(K.perfis).map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('');
+  if(v)s.value=v;
+  let regs=ler('mos_coluna');
+  if(s.value)regs=regs.filter(r=>r.perfilId===s.value);
+  regs.sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  document.getElementById('colTabela').innerHTML=regs.length?
+    '<tr><th>Data</th><th>Perfil</th><th>Região</th><th>Tipo</th><th>Dor</th><th>Notas</th><th></th></tr>'+
+    regs.slice(0,34).map(r=>'<tr><td>'+fmtData(r.data)+'</td><td>'+esc(nomePerfil(r.perfilId).split(' ')[0])+'</td>'+
+      '<td><span class="tag tag-azul">'+esc(r.regiao)+'</span></td><td>'+esc(r.tipo)+'</td>'+
+      '<td>'+(r.dor!==''&&r.dor!=null?r.dor+'/10':'—')+'</td><td style="max-width:220px">'+esc(r.notas||'')+'</td>'+
+      '<td><button class="btn btn-red btn-mini" onclick="excluirColuna(\''+r.id+'\')">×</button></td></tr>').join(''):
+    '<tr><td><div class="vazio">Nenhum registro ainda — clique numa região e registre a primeira dor ou ajuste.</div></td></tr>';
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('.col-reg');
+  if(g)selColRegiao(g.dataset.reg);
+});
+
 // ===== MAPA DO SISTEMA =====
 const MODULOS=[
   {fase:'Fase 1 — Fundação (viva ✅)',itens:[
@@ -817,7 +947,7 @@ const MODULOS=[
   {fase:'Fase 2 — Expansão Clínica',itens:[
     ['⚡','Hormônios','Painel masculino e feminino, correlações cruzadas','f2'],
     ['👁️','Oftalmologia Integrativa','Olho único, DGM, triquíase, PIO — prioridade da esposa','f2'],
-    ['🦴','Osteoarticular, Coluna & Músculos','Quiropraxia, ajustes, postura, miologia real (origem, inserção, inervação — apostilas já localizadas no Dropbox)','f2'],
+    ['🦴','Osteoarticular, Coluna & Músculos','Coluna clicável com sinais das raízes nervosas (apostila de Quiro) + registro de dor/ajustes. Miologia detalhada vem depois','vivo','coluna'],
     ['❤️','Cardiovascular','ECG, eco, escore de cálcio, HRV — legado do seu pai','f2'],
     ['🫁','Respiratório','Espirometria, sono, apneia','f2'],
     ['🩺','Gastro & Microbioma','Endoscopia, permeabilidade, intolerâncias','f2'],
@@ -847,7 +977,7 @@ function renderMapa(){
 }
 
 // ===== RENDER GERAL =====
-function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderExames();renderMapa();}
+function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderExames();renderColuna();renderMapa();}
 
 // ============================================================
 // SISTEMA DE LOGIN — padrão universal Montgomery
