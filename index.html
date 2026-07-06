@@ -525,6 +525,15 @@ tr:hover td{background:rgba(201,168,76,0.05)}
     <p>O alimento como raiz — diário do que entra no corpo e como ele responde. Suplementos e cogumelos ficam em Protocolos.</p>
   </div>
   <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4M7 12h2M15 8v8M12 16h6"/></svg>Calculadora de IMC &amp; Recomposição</h2>
+    <div class="linha">
+      <div class="fg"><label>Perfil</label><select id="imcPerfil" onchange="preencherIMC();calcIMC()"></select></div>
+      <div class="fg"><label>Peso (kg)</label><input id="imcPeso" type="number" step="0.1" oninput="calcIMC()" placeholder="78"></div>
+      <div class="fg"><label>Altura (m)</label><input id="imcAltura" type="number" step="0.01" oninput="calcIMC()" placeholder="1.73"></div>
+    </div>
+    <div id="imcResultado"></div>
+  </div>
+  <div class="bloco">
     <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 8c1.2-3.2 4-4.2 6.2-3.2-1 1.2-1.4 3-1.2 4.4M12 8c-2.6-.2-5.2 1.6-5.2 5.4C6.8 18 9.4 21 12 21s5.2-3 5.2-7.6c0-2-.8-3.6-2.2-4.6"/></svg>Novo registro alimentar</h2>
     <div class="linha">
       <div class="fg"><label>Perfil</label><select id="nuPerfil"></select></div>
@@ -675,7 +684,7 @@ function renderPerfis(){
   }).join('');
   // selects de perfil em todos os formulários
   const opts=perfis.map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('');
-  ['vtPerfil','prPerfil','exPerfil','nuPerfil'].forEach(id=>{const s=document.getElementById(id);if(!s)return;const v=s.value;s.innerHTML=opts;if(v)s.value=v;});
+  ['vtPerfil','prPerfil','exPerfil','nuPerfil','imcPerfil'].forEach(id=>{const s=document.getElementById(id);if(!s)return;const v=s.value;s.innerHTML=opts;if(v)s.value=v;});
   const optsTodos='<option value="">Todos os perfis</option>'+opts;
   ['vtFiltroPerfil','prFiltroPerfil','exFiltroPerfil'].forEach(id=>{const s=document.getElementById(id);const v=s.value;s.innerHTML=optsTodos;if(v)s.value=v;});
 }
@@ -978,6 +987,52 @@ function limparTudo(){
   document.getElementById('bkMsg').textContent='Dados apagados — semente inicial restaurada.';
 }
 
+// ===== CALCULADORA DE IMC & RECOMPOSIÇÃO =====
+function preencherIMC(){
+  const pid=document.getElementById('imcPerfil').value;
+  // último peso registrado nos Sinais Vitais
+  const pesos=ler(K.vitais).filter(v=>v.perfilId===pid&&v.peso!==''&&v.peso!=null).sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  if(pesos.length)document.getElementById('imcPeso').value=pesos[0].peso;
+  // altura guardada por perfil
+  const alturas=JSON.parse(localStorage.getItem('mos_altura')||'{}');
+  if(alturas[pid])document.getElementById('imcAltura').value=alturas[pid];
+}
+function faixaIMC(imc){
+  if(imc<18.5)return{t:'Abaixo do peso',c:'s-amarelo',tag:'tag-dourado'};
+  if(imc<25)return{t:'Peso normal',c:'s-verde',tag:'tag-verde'};
+  if(imc<30)return{t:'Sobrepeso',c:'s-amarelo',tag:'tag-dourado'};
+  if(imc<35)return{t:'Obesidade grau I',c:'s-vermelho',tag:'tag-vermelho'};
+  if(imc<40)return{t:'Obesidade grau II',c:'s-vermelho',tag:'tag-vermelho'};
+  return{t:'Obesidade grau III',c:'s-vermelho',tag:'tag-vermelho'};
+}
+function calcIMC(){
+  const pid=document.getElementById('imcPerfil').value;
+  const peso=parseFloat(document.getElementById('imcPeso').value);
+  const alt=parseFloat(document.getElementById('imcAltura').value);
+  const el=document.getElementById('imcResultado');
+  if(!peso||!alt||alt<0.5||alt>2.5){el.innerHTML='<div class="vazio" style="padding:12px">Informe peso e altura para calcular.</div>';return;}
+  // guarda a altura do perfil
+  const alturas=JSON.parse(localStorage.getItem('mos_altura')||'{}');alturas[pid]=alt;localStorage.setItem('mos_altura',JSON.stringify(alturas));
+  const imc=peso/(alt*alt);
+  const f=faixaIMC(imc);
+  const pesoMin=(18.5*alt*alt),pesoMax=(24.9*alt*alt);
+  // metas de recomposição computadas do peso
+  const protMin=Math.round(peso*1.6),protMax=Math.round(peso*2.0),gord=Math.round(peso*0.9);
+  el.innerHTML=
+    '<div style="display:flex;gap:var(--f3);flex-wrap:wrap;align-items:center;margin-top:6px">'+
+    '<div style="text-align:center;min-width:120px"><div style="font-family:Lora,serif;font-size:2.4rem;color:var(--azul);line-height:1">'+imc.toFixed(1)+'</div>'+
+    '<div style="font-size:0.7rem;color:var(--cinza);text-transform:uppercase;letter-spacing:0.5px">IMC (kg/m²)</div></div>'+
+    '<div style="flex:1;min-width:180px"><span class="semaforo '+f.c+'" style="width:12px;height:12px"></span> <span class="tag '+f.tag+'">'+f.t+'</span>'+
+    '<div style="font-size:0.8rem;color:var(--cinza);margin-top:8px">Faixa de peso saudável para '+alt.toFixed(2)+'m: <b>'+pesoMin.toFixed(0)+'–'+pesoMax.toFixed(0)+' kg</b></div></div>'+
+    '</div>'+
+    '<div class="fio" style="margin:var(--f2) 0"></div>'+
+    '<p style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.4px;color:var(--cinza);margin-bottom:6px">Metas diárias de recomposição (a partir do peso atual)</p>'+
+    '<div style="display:flex;gap:var(--f2);flex-wrap:wrap">'+
+    '<div class="card" style="flex:1;min-width:130px;padding:12px"><div style="font-size:0.75rem;color:var(--cinza)">Proteína (1,6–2,0 g/kg)</div><div style="font-family:Lora,serif;font-size:1.3rem;color:var(--azul)">'+protMin+'–'+protMax+' g</div></div>'+
+    '<div class="card" style="flex:1;min-width:130px;padding:12px"><div style="font-size:0.75rem;color:var(--cinza)">Gordura (até 0,9 g/kg)</div><div style="font-family:Lora,serif;font-size:1.3rem;color:var(--azul)">'+gord+' g</div></div>'+
+    '</div>';
+}
+
 // ===== NUTRIÇÃO =====
 const NU_PRINCIPIOS=['Retirada de açúcar','Alcalinização','Jejum intermitente','Anti-inflamatória','Baixo carboidrato','Rica em vegetais','Sem glúten','Sem laticínios','Comida real (sem ultraprocessados)'];
 let _nuPrincAtivos=[];
@@ -1032,6 +1087,7 @@ function excluirNutricao(id){if(!confirm('Excluir este registro?'))return;gravar
 function renderNutricao(){
   if(!document.getElementById('nuId')){const h=document.createElement('input');h.type='hidden';h.id='nuId';document.getElementById('sec-nutricao').appendChild(h);}
   renderNuPrincipios();
+  if(document.getElementById('imcResultado')&&!document.getElementById('imcResultado').innerHTML){preencherIMC();calcIMC();}
   const s=document.getElementById('nuFiltroPerfil');const v=s.value;
   s.innerHTML='<option value="">Todos os perfis</option>'+ler(K.perfis).map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('');
   if(v)s.value=v;
@@ -1278,12 +1334,43 @@ const MODULOS=[
     ['🐕','Dra. Vera (Maly)','Saúde da Maly integrada ao OS','f5']]}
 ];
 const FASE_TAG={vivo:'<span class="tag tag-verde">✓ vivo</span>',f2:'<span class="tag tag-dourado">Fase 2</span>',f3:'<span class="tag tag-azul">Fase 3</span>',f4:'<span class="tag tag-cinza">Fase 4</span>',f5:'<span class="tag tag-cinza">Fase 5</span>'};
+// Ícones SVG de linha fina por módulo (substituem os emojis — padrão visual Montgomery)
+const MOD_ICON={
+  'Identidade & Genética':'<path d="M8 3c0 4 8 6 8 9s-8 5-8 9M16 3c0 4-8 6-8 9s8 5 8 9"/><path d="M9 7h6M9 17h6"/>',
+  'Sinais Vitais & Biométricos':'<path d="M3 12h4l2-6 4 12 2-6h6"/>',
+  'Protocolos':'<path d="M10.5 3.5 3.5 10.5a4.95 4.95 0 1 0 7 7l7-7a4.95 4.95 0 1 0-7-7Z"/><path d="m7 7 7 7"/>',
+  'Nutrição':'<path d="M12 8c1.2-3.2 4-4.2 6.2-3.2-1 1.2-1.4 3-1.2 4.4M12 8c-2.6-.2-5.2 1.6-5.2 5.4C6.8 18 9.4 21 12 21s5.2-3 5.2-7.6c0-2-.8-3.6-2.2-4.6"/>',
+  'Exames Laboratoriais':'<path d="M9 3h6v5l4.5 8.5a2 2 0 0 1-1.8 3H6.3a2 2 0 0 1-1.8-3L9 8Z"/><path d="M7.5 13h9"/>',
+  'Backup':'<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+  'Hormônios':'<circle cx="10" cy="14" r="4"/><path d="M13 11l5-5M15 6h3v3"/>',
+  'Oftalmologia Integrativa':'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  'Osteoarticular, Coluna & Músculos':'<path d="M12 2v20M9 5h6M8.5 8.5h7M8 12h8M8.5 15.5h7M9 19h6"/>',
+  'Cardiovascular':'<path d="M12 21s-7-4.6-9.3-9A5.6 5.6 0 0 1 12 6.3 5.6 5.6 0 0 1 21.3 12c-2.3 4.4-9.3 9-9.3 9Z"/>',
+  'Respiratório':'<path d="M12 3v9M12 12c0 4-2 8-5 8-1.6 0-2.5-1.2-2.5-3.5 0-3.5 1.8-5.5 3.5-7.5M12 12c0 4 2 8 5 8 1.6 0 2.5-1.2 2.5-3.5 0-3.5-1.8-5.5-3.5-7.5"/>',
+  'Gastro & Microbioma':'<path d="M10 3v3a4 4 0 0 0 4 4 3 3 0 0 1 3 3v1a5 5 0 0 1-10 0"/><circle cx="9" cy="16" r="1"/>',
+  'Saúde Mental & Neurológica':'<path d="M9.5 3A3.5 3.5 0 0 0 6 6.5 3 3 0 0 0 5 12a3 3 0 0 0 3 4M14.5 3A3.5 3.5 0 0 1 18 6.5 3 3 0 0 1 19 12a3 3 0 0 1-3 4M12 4v14"/>',
+  'Mapa Energético — Árvore da Vida':'<circle cx="12" cy="4" r="1.6"/><circle cx="6" cy="9" r="1.6"/><circle cx="18" cy="9" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="20" r="1.6"/><path d="M12 5.6v4.8M12 13.6v4.8M7.3 9.8 10.7 11M16.7 9.8 13.3 11M7 10.4l4 8M17 10.4l-5 8"/>',
+  'Fitoterapia & Fungoterapia':'<path d="M12 22c0-6 3-9 8-10-1 6-4 9-8 10ZM12 22c0-6-3-9-8-10 1 6 4 9 8 10Z"/>',
+  'Medicina Integrativa':'<path d="M12 3v18M5 8l14 8M19 8 5 16"/>',
+  'Odontologia Integrativa':'<path d="M12 4c-3-2-7 0-7 4 0 3 1 5 2 9 .5 2 2 2 2.3 0l.7-4c.3-1.7 1.7-1.7 2 0l.7 4c.3 2 1.8 2 2.3 0 1-4 2-6 2-9 0-4-4-6-7-4Z"/>',
+  'Base de Conhecimento':'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M9 3v14"/>',
+  'Epigenética & Ambiente':'<circle cx="12" cy="12" r="9"/><path d="M8 5c0 4 8 5 8 7s-8 3-8 7"/>',
+  'Diário Clínico':'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1M9 10h6M9 14h4"/>',
+  'Desempenho & Longevidade':'<circle cx="13" cy="4.5" r="1.6"/><path d="M6 21l3.5-6 3 2 2.5-5M10 15l-2.5-3 4.5-2.5 3 3.5h2"/>',
+  'Inteligência Preventiva':'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6Z"/><path d="M9 12l2 2 4-4"/>',
+  'Múltiplos perfis & Compartilhamento':'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.5c2.8.3 5 2.3 5 5.5"/>',
+  'Dra. Vera (Maly)':'<path d="M5 15a2.5 2.5 0 0 1 5 0 2 2 0 0 0 4 0 2.5 2.5 0 0 1 5 0c0 3-3 5-7 5s-7-2-7-5Z"/><circle cx="6.5" cy="9" r="1.4"/><circle cx="17.5" cy="9" r="1.4"/><circle cx="10" cy="6" r="1.4"/><circle cx="14" cy="6" r="1.4"/>'
+};
+function modIcon(nome){
+  const inner=MOD_ICON[nome]||'<circle cx="12" cy="12" r="8"/>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+inner+'</svg>';
+}
 function renderMapa(){
   document.getElementById('mapaModulos').innerHTML=MODULOS.map(g=>
-    '<h2 style="font-family:Lora,serif;font-size:1.05rem;color:var(--azul);margin:21px 0 13px">'+g.fase+'</h2>'+
+    '<h2 style="font-family:Lora,serif;font-size:1.05rem;color:var(--azul);margin:21px 0 13px">'+esc(g.fase.replace(' ✅',''))+'</h2>'+
     '<div class="cards">'+g.itens.map(m=>
       '<div class="card'+(m[4]?' click" onclick="go(\''+m[4]+'\')"':'"')+' '+(m[3]!=='vivo'?'style="opacity:0.75"':'')+'>'+
-      '<h3>'+m[0]+' '+esc(m[1])+'</h3><div class="sub" style="margin-bottom:8px">'+esc(m[2])+'</div>'+FASE_TAG[m[3]]+'</div>').join('')+'</div>').join('');
+      '<h3>'+modIcon(m[1])+' '+esc(m[1])+'</h3><div class="sub" style="margin-bottom:8px">'+esc(m[2])+'</div>'+FASE_TAG[m[3]]+'</div>').join('')+'</div>').join('');
 }
 
 // ===== RENDER GERAL =====
