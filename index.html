@@ -230,6 +230,7 @@ tr:hover td{background:rgba(201,168,76,0.05)}
     <a data-sec="exames" onclick="go('exames',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v5l4.5 8.5a2 2 0 0 1-1.8 3H6.3a2 2 0 0 1-1.8-3L9 8Z"/><path d="M7.5 13h9"/></svg></span>Exames</a>
     <a data-sec="coluna" onclick="go('coluna',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M9 5h6M8.5 8.5h7M8 12h8M8.5 15.5h7M9 19h6"/></svg></span>Coluna &amp; Osteo</a>
     <a data-sec="arvore" onclick="go('arvore',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="1.6"/><circle cx="6" cy="9" r="1.6"/><circle cx="18" cy="9" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="20" r="1.6"/><path d="M12 5.6v4.8M12 13.6v4.8M7.3 9.8 10.7 11M16.7 9.8 13.3 11M7 10.4l4 8M17 10.4l-5 8"/></svg></span>Árvore da Vida</a>
+    <a data-sec="metafisica" onclick="go('metafisica',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,3 19.8,7.5 19.8,16.5 12,21 4.2,16.5 4.2,7.5"/><path d="M12 3v9M19.8 16.5 12 12M4.2 16.5 12 12"/></svg></span>Metafísica</a>
     <a data-sec="mapa" onclick="go('mapa',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>Mapa do Sistema</a>
     <a data-sec="config" onclick="go('config',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></span>Backup &amp; Configurações</a>
   </nav>
@@ -506,6 +507,60 @@ tr:hover td{background:rgba(201,168,76,0.05)}
     <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg>Observações energéticas registradas</h2>
     <div class="filtros"><select id="arvFiltroPerfil" onchange="renderArvoreTabela()"></select></div>
     <div class="tbl-wrap"><table id="arvTabela"></table></div>
+  </div>
+</section>
+
+<!-- METAFÍSICA -->
+<section class="sec" id="sec-metafisica">
+  <div class="sec-head">
+    <h1>Metafísica — a Raiz</h1>
+    <p>A camada invisível que sustenta tudo no OS. "Tudo está ligado." A palavra é criadora; o foco é o leme.</p>
+  </div>
+  <div class="bloco" style="display:flex;gap:var(--f4);flex-wrap:wrap;align-items:flex-start">
+    <div style="flex:0 0 320px;max-width:100%;margin:0 auto">
+      <svg viewBox="0 0 600 600" style="width:100%;max-width:320px;border-radius:12px">
+        <defs>
+          <radialGradient id="mtFundo" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#0d1a2e"/><stop offset="100%" stop-color="#060b14"/>
+          </radialGradient>
+          <filter id="mtBrilho" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="2.2" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <rect width="600" height="600" fill="url(#mtFundo)" rx="12"/>
+        <g id="mtTeia" stroke="#3d7db8" stroke-width="0.7" fill="none" opacity="0.55"></g>
+        <g stroke="#9fd8ff" stroke-width="1.6" fill="none" filter="url(#mtBrilho)" opacity="0.95">
+          <polygon points="300,108 466.28,204 466.28,396 300,492 133.72,396 133.72,204"/>
+          <line x1="300" y1="108" x2="300" y2="300"/>
+          <line x1="466.28" y1="396" x2="300" y2="300"/>
+          <line x1="133.72" y1="396" x2="300" y2="300"/>
+        </g>
+        <g stroke="#9fd8ff" stroke-width="1.1" fill="none" opacity="0.8" filter="url(#mtBrilho)">
+          <line x1="300" y1="492" x2="300" y2="300"/>
+          <line x1="466.28" y1="204" x2="300" y2="300"/>
+          <line x1="133.72" y1="204" x2="300" y2="300"/>
+        </g>
+        <g id="mtCirculos" stroke="#e8f4ff" stroke-width="1.3" fill="none" filter="url(#mtBrilho)"></g>
+        <g id="mtCentros" fill="#e8f4ff" filter="url(#mtBrilho)"></g>
+      </svg>
+      <div style="text-align:center;margin-top:8px;font-size:0.68rem;color:var(--cinza)">
+        Cubo de Metatron — 13 círculos da Fruta da Vida, 78 linhas.<br>
+        Dentro da teia vivem os 5 sólidos platônicos: fogo, terra, ar, água e éter.
+      </div>
+    </div>
+    <div style="flex:1;min-width:280px">
+      <h2 style="font-family:Lora,serif;font-size:1rem;color:var(--azul);margin-bottom:10px">As 7 Leis Herméticas</h2>
+      <div id="leisHermeticas"></div>
+    </div>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M12 7v4M10.8 12.6 6.2 16.4M13.2 12.6l4.6 3.8M12 11l-5.8 5.4M12 11l5.8 5.4"/></svg>As Tradições-mãe</h2>
+    <div class="cards">
+      <div class="card"><h3>Hermetismo</h3><div class="sub">As 7 leis do Caibalion — a casa natural: Mentalismo, Vibração, Causa e Efeito. "Que seu sim seja sim."</div></div>
+      <div class="card click" onclick="go('arvore')"><h3>Kabbalah — Árvore da Vida</h3><div class="sub">As 10 Sefirot entre o físico e a fonte. Já vive no OS — clique para visitar o Mapa Energético.</div></div>
+      <div class="card"><h3>Medicina Chinesa — 5 Elementos</h3><div class="sub">A tradição que liga a metafísica ao corpo e à clínica. Vive na Árvore da Vida e no corpo vitruviano.</div></div>
+    </div>
   </div>
 </section>
 
@@ -1303,6 +1358,8 @@ document.addEventListener('click',e=>{
 
 // ===== MAPA DO SISTEMA =====
 const MODULOS=[
+  {fase:'Raiz — Metafísica (viva)',itens:[
+    ['','Metafísica','A camada invisível que liga tudo: 7 Leis Herméticas, Kabbalah, 5 Elementos e as correspondências — o Cubo de Metatron como símbolo','vivo','metafisica']]},
   {fase:'Fase 1 — Fundação (viva ✅)',itens:[
     ['🧬','Identidade & Genética','Perfis da família, histórico, alergias, predisposições','vivo','perfis'],
     ['🫀','Sinais Vitais & Biométricos','Pressão, glicemia, SpO₂, peso, semáforo e evolução','vivo','vitais'],
@@ -1336,6 +1393,7 @@ const MODULOS=[
 const FASE_TAG={vivo:'<span class="tag tag-verde">✓ vivo</span>',f2:'<span class="tag tag-dourado">Fase 2</span>',f3:'<span class="tag tag-azul">Fase 3</span>',f4:'<span class="tag tag-cinza">Fase 4</span>',f5:'<span class="tag tag-cinza">Fase 5</span>'};
 // Ícones SVG de linha fina por módulo (substituem os emojis — padrão visual Montgomery)
 const MOD_ICON={
+  'Metafísica':'<polygon points="12,3 19.8,7.5 19.8,16.5 12,21 4.2,16.5 4.2,7.5"/><path d="M12 3v9M19.8 16.5 12 12M4.2 16.5 12 12"/>',
   'Identidade & Genética':'<path d="M8 3c0 4 8 6 8 9s-8 5-8 9M16 3c0 4-8 6-8 9s8 5 8 9"/><path d="M9 7h6M9 17h6"/>',
   'Sinais Vitais & Biométricos':'<path d="M3 12h4l2-6 4 12 2-6h6"/>',
   'Protocolos':'<path d="M10.5 3.5 3.5 10.5a4.95 4.95 0 1 0 7 7l7-7a4.95 4.95 0 1 0-7-7Z"/><path d="m7 7 7 7"/>',
@@ -1373,8 +1431,48 @@ function renderMapa(){
       '<h3>'+modIcon(m[1])+' '+esc(m[1])+'</h3><div class="sub" style="margin-bottom:8px">'+esc(m[2])+'</div>'+FASE_TAG[m[3]]+'</div>').join('')+'</div>').join('');
 }
 
+// ===== METAFÍSICA =====
+// Os 13 centros da Fruta da Vida (r = 96 entre vizinhos)
+const MT_CENTROS=(function(){
+  const c=[[300,300]];
+  for(let i=0;i<6;i++){const a=(Math.PI/180)*(90+i*60);c.push([300+96*Math.cos(a),300-96*Math.sin(a)]);}
+  for(let i=0;i<6;i++){const a=(Math.PI/180)*(90+i*60);c.push([300+192*Math.cos(a),300-192*Math.sin(a)]);}
+  return c.map(p=>[+p[0].toFixed(2),+p[1].toFixed(2)]);
+})();
+const LEIS_HERMETICAS=[
+  ['Mentalismo','O Todo é mente; o universo é mental.','O que o paciente pensa de si constrói o corpo que ele habita. A palavra sai impregnada do que sabemos sobre ela.'],
+  ['Correspondência','Assim em cima como embaixo, assim embaixo como em cima.','O átomo espelha o sistema solar; o órgão espelha a emoção. Base das tabelas de correspondência.'],
+  ['Vibração','Nada está parado; tudo se move, tudo vibra.','Tom de voz, música, florais — tudo é ajuste de frequência. A matéria é vibração organizada.'],
+  ['Polaridade','Tudo é duplo; os opostos são idênticos em natureza, diferentes em grau.','Transformar medo em coragem não é trocar de coisa — é subir na mesma régua. Ponte com a Psicanálise.'],
+  ['Ritmo','Tudo tem fluxo e refluxo; a medida à direita é a medida à esquerda.','Crises têm maré; recaída não é fracasso, é pêndulo.'],
+  ['Causa e Efeito','Toda causa tem seu efeito; acaso é a lei não reconhecida.','Reclamar da falta gera falta; focar em solução gera solução. Que seu sim seja sim.'],
+  ['Gênero','O gênero está em tudo: princípio masculino e feminino.','Criar exige os dois: intenção (ativo) e gestação (receptivo). Ecoa o yin/yang dos 5 Elementos.']
+];
+function renderMetafisica(){
+  const teia=document.getElementById('mtTeia');
+  if(teia&&!teia.hasChildNodes()){
+    let linhas='',circ='',pontos='';
+    for(let i=0;i<13;i++){
+      for(let j=i+1;j<13;j++)
+        linhas+='<line x1="'+MT_CENTROS[i][0]+'" y1="'+MT_CENTROS[i][1]+'" x2="'+MT_CENTROS[j][0]+'" y2="'+MT_CENTROS[j][1]+'"/>';
+      circ+='<circle cx="'+MT_CENTROS[i][0]+'" cy="'+MT_CENTROS[i][1]+'" r="48"/>';
+      pontos+='<circle cx="'+MT_CENTROS[i][0]+'" cy="'+MT_CENTROS[i][1]+'" r="'+(i===0?3:2.2)+'"/>';
+    }
+    teia.innerHTML=linhas;
+    document.getElementById('mtCirculos').innerHTML=circ;
+    document.getElementById('mtCentros').innerHTML=pontos;
+  }
+  const el=document.getElementById('leisHermeticas');
+  if(el&&!el.hasChildNodes())
+    el.innerHTML=LEIS_HERMETICAS.map((l,i)=>
+      '<div style="padding:10px 0;border-bottom:1px solid rgba(201,168,76,0.15)">'+
+      '<div style="font-weight:600;color:var(--azul);font-size:0.88rem">'+(i+1)+'. '+l[0]+'</div>'+
+      '<div style="font-style:italic;color:var(--cinza);font-size:0.78rem;margin:2px 0">"'+l[1]+'"</div>'+
+      '<div style="font-size:0.8rem">'+l[2]+'</div></div>').join('');
+}
+
 // ===== RENDER GERAL =====
-function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderCrono();renderExames();renderNutricao();renderColuna();renderArvoreSVG();renderArvoreTabela();renderMapa();}
+function renderTudo(){renderPerfis();renderInicio();renderVitais();renderProtocolos();renderCrono();renderExames();renderNutricao();renderColuna();renderArvoreSVG();renderArvoreTabela();renderMapa();renderMetafisica();}
 
 // ============================================================
 // SISTEMA DE LOGIN — padrão universal Montgomery
