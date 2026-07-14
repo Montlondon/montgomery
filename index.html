@@ -516,7 +516,13 @@ tr:hover td{background:rgba(201,168,76,0.05)}
     <h1>Metafísica — a Raiz</h1>
     <p>A camada invisível que sustenta tudo no OS. "Tudo está ligado." A palavra é criadora; o foco é o leme.</p>
   </div>
-  <div class="bloco" style="display:flex;gap:var(--f4);flex-wrap:wrap;align-items:flex-start">
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M17.5 12A5.5 5.5 0 1 1 12 6.5"/><path d="M14.5 12a2.5 2.5 0 1 1-2.5-2.5"/></svg>O Mapa em Fibonacci — anéis da árvore</h2>
+    <p style="font-size:0.78rem;color:var(--cinza);margin-bottom:10px">O mapa da Metafísica cresce como uma árvore: cada anel é um nível. Toque num anel para abrir o nível.</p>
+    <div id="mfFiboNav" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"></div>
+    <div id="mfFiboPainel" class="vazio" style="font-size:0.78rem">Escolha um anel acima.</div>
+  </div>
+  <div class="bloco" id="mfBloco1" style="display:flex;gap:var(--f4);flex-wrap:wrap;align-items:flex-start">
     <div style="flex:0 0 320px;max-width:100%;margin:0 auto">
       <svg viewBox="0 0 600 600" style="width:100%;max-width:320px;border-radius:12px">
         <defs>
@@ -554,12 +560,143 @@ tr:hover td{background:rgba(201,168,76,0.05)}
       <div id="leisHermeticas"></div>
     </div>
   </div>
-  <div class="bloco">
+  <div class="bloco" id="mfBloco3">
     <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M12 7v4M10.8 12.6 6.2 16.4M13.2 12.6l4.6 3.8M12 11l-5.8 5.4M12 11l5.8 5.4"/></svg>As Tradições-mãe</h2>
     <div class="cards">
       <div class="card"><h3>Hermetismo</h3><div class="sub">As 7 leis do Caibalion — a casa natural: Mentalismo, Vibração, Causa e Efeito. "Que seu sim seja sim."</div></div>
       <div class="card click" onclick="go('arvore')"><h3>Kabbalah — Árvore da Vida</h3><div class="sub">As 10 Sefirot entre o físico e a fonte. Já vive no OS — clique para visitar o Mapa Energético.</div></div>
       <div class="card"><h3>Medicina Chinesa — 5 Elementos</h3><div class="sub">A tradição que liga a metafísica ao corpo e à clínica. Vive na Árvore da Vida e no corpo vitruviano.</div></div>
+    </div>
+  </div>
+  <div class="bloco" id="mfBloco8">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.3"/><circle cx="12" cy="12" r="9.6"/></svg>A Leitura em 4 Camadas</h2>
+    <p style="font-size:0.78rem;color:var(--cinza);margin-bottom:12px">Regra de ouro: a metafísica não substitui a escuta — ela organiza o que a escuta trouxe. Primeiro o paciente fala; depois a teia. E nunca substitui médico: sintoma físico persistente vai ao médico E entra no mapa.</p>
+    <div class="cards">
+      <div class="card"><h3>1 · Corpo — o que dói</h3><div class="sub">Onde no corpo? Qual órgão, tecido, sentido? Em que estação piora? A tabela das correspondências aponta o elemento.</div></div>
+      <div class="card"><h3>2 · Emoção — o que mora ali</h3><div class="sub">Qual a emoção de desequilíbrio daquele elemento? Às vezes negada ("raiva eu não tenho") — o que se nega, se afirma: material para a Psicanálise.</div></div>
+      <div class="card"><h3>3 · Símbolo — a imagem trazida</h3><div class="sub">"Um nó na garganta", "afogado em trabalho". A palavra escolhida nunca é por acaso — o símbolo é o dialeto do inconsciente e confirma (ou corrige) as camadas 1 e 2.</div></div>
+      <div class="card"><h3>4 · Lei — o padrão que se repete</h3><div class="sub">Qual lei hermética o padrão demonstra? A queixa vira aprendizado: não "por que isso acontece comigo", mas "o que essa lei está me mostrando". A camada da virada.</div></div>
+    </div>
+    <p style="font-size:0.75rem;color:var(--cinza);margin-top:10px">Quatro portas, uma teia: Montgomery entra pelo corpo e pela lei; Vanessa pelo símbolo e pelo floral.</p>
+  </div>
+  <div class="bloco" id="mfBloco5">
+    <style>.mfZona{cursor:pointer;transition:all .25s}.mfZona path,.mfZona circle,.mfZona polygon{fill-opacity:0;stroke-opacity:0}.mfZona:hover path,.mfZona:hover circle,.mfZona:hover polygon{fill-opacity:.3;stroke-opacity:.7}.mfZona.mfAtiva path,.mfZona.mfAtiva circle,.mfZona.mfAtiva polygon{fill-opacity:.4;stroke-opacity:1;stroke-width:1.6}</style>
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="7" r="2"/><path d="M12 9v5M12 14l-3 6M12 14l3 6M12 10.5 5 9M12 10.5 19 9"/></svg>O Corpo Vitruviano — porta de entrada</h2>
+    <p style="font-size:0.78rem;color:var(--cinza);margin-bottom:10px">Clique onde dói. O corpo aponta o elemento; o elemento abre a teia inteira.</p>
+    <div style="display:flex;gap:var(--f4);flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:0 0 340px;max-width:100%;margin:0 auto">
+        <svg viewBox="0 0 600 660" style="width:100%;max-width:340px;border-radius:12px;background:radial-gradient(circle at 50% 45%,#0d1a2e 0%,#060b14 100%)">
+          <g id="mfCorpoG">
+            <!-- o corpo vitruviano de costas (arte gerada na paleta do OS) -->
+            <image href="corpo_vitruviano_costas.jpg" x="29.3" y="28.6" width="541.5" height="541.5" opacity="0.96"/>
+            <!-- geometria por cima do fundo escuro da imagem -->
+            <g pointer-events="none">
+              <ellipse cx="300" cy="315" rx="292" ry="308" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.22"/>
+              <!-- Quadrado: o homem (púbis no centro). Círculo: o divino (compasso no umbigo, aberto até as extremidades — Leonardo) -->
+              <rect x="98" y="118" width="404" height="404" fill="none" stroke="#3d7db8" stroke-width="0.8" opacity="0.5"/>
+              <circle cx="300" cy="272" r="267" fill="none" stroke="#3d7db8" stroke-width="1" opacity="0.6"/>
+              <!-- Merkabah inscrita no círculo -->
+              <g stroke="#c9a84c" fill="none" stroke-width="0.8" opacity="0.3">
+                <polygon points="300,5 68.8,405.5 531.2,405.5"/>
+                <polygon points="300,539 68.8,138.5 531.2,138.5"/>
+              </g>
+              <circle cx="300" cy="272" r="3" fill="#c9a84c" opacity="0.85"/>
+              <circle cx="300" cy="320" r="2.5" fill="#3d7db8" opacity="0.85"/>
+            </g>
+            <!-- zonas clicáveis invisíveis: a cor do elemento acende no toque -->
+            <g stroke-width="1.4">
+            <g class="mfZona" data-el="Fogo" onclick="mfElemento('Fogo')">
+              <circle cx="300" cy="129" r="27" fill="#e06a5a" stroke="#e06a5a"/>
+            </g>
+            <g class="mfZona" data-el="Madeira" onclick="mfElemento('Madeira')">
+              <polygon points="256,194 256,226 96,230 96,202" fill="#5cb87a" stroke="#5cb87a"/>
+              <polygon points="254,196 264,182 118,98 104,116" fill="#5cb87a" stroke="#5cb87a"/>
+            </g>
+            <g class="mfZona" data-el="Terra" onclick="mfElemento('Terra')">
+              <polygon points="344,194 344,226 504,230 504,202" fill="#d9b84a" stroke="#d9b84a"/>
+              <polygon points="346,196 336,182 482,98 496,116" fill="#d9b84a" stroke="#d9b84a"/>
+            </g>
+            <g class="mfZona" data-el="Água" onclick="mfElemento('Água')">
+              <polygon points="298,346 260,336 165,505 215,524 298,524" fill="#4a7db8" stroke="#4a7db8"/>
+            </g>
+            <g class="mfZona" data-el="Metal" onclick="mfElemento('Metal')">
+              <polygon points="302,346 340,336 435,505 385,524 302,524" fill="#cfd8dc" stroke="#cfd8dc"/>
+            </g>
+            </g>
+          </g>
+          <!-- CAMADA: Árvore da Vida (pilares verticais; lado do desenho = lado real do corpo) -->
+          <g id="mfArvoreG" style="display:none">
+            <g stroke="#c9a84c" stroke-width="0.9" opacity="0.6" fill="none">
+              <path d="M300,110 L370,165 M300,110 L230,165 M370,165 L230,165
+                       M370,165 L370,235 M230,165 L230,235 M370,235 L230,235
+                       M300,110 L300,272 M370,165 L300,272 M230,165 L300,272
+                       M370,235 L300,272 M230,235 L300,272
+                       M370,235 L370,345 M230,235 L230,345 M370,345 L230,345
+                       M370,345 L300,272 M230,345 L300,272
+                       M300,272 L300,400 M370,345 L300,400 M230,345 L300,400
+                       M300,400 L300,505"/>
+            </g>
+            <g fill="#0d1a2e" fill-opacity="0.75" stroke="#c9a84c" stroke-width="1.2">
+              <circle cx="300" cy="110" r="13"/><circle cx="370" cy="165" r="13"/><circle cx="230" cy="165" r="13"/>
+              <circle cx="370" cy="235" r="13"/><circle cx="230" cy="235" r="13"/><circle cx="300" cy="272" r="14" stroke="#e0c56e" stroke-width="1.8"/>
+              <circle cx="370" cy="345" r="13"/><circle cx="230" cy="345" r="13"/>
+              <circle cx="300" cy="400" r="13"/><circle cx="300" cy="505" r="13"/>
+            </g>
+            <g font-size="9.5" fill="#e0c56e" text-anchor="middle" font-family="Lora,serif" opacity="0.95">
+              <text x="300" y="94">Keter</text>
+              <text x="409" y="156">Chokmah</text><text x="193" y="156">Binah</text>
+              <text x="407" y="231">Chesed</text><text x="194" y="231">Gevurah</text>
+              <text x="300" y="259">Tiphereth · Sol</text>
+              <text x="409" y="341">Netzach</text><text x="196" y="341">Hod</text>
+              <text x="331" y="404">Yesod</text><text x="334" y="509">Malkuth</text>
+            </g>
+          </g>
+          <g id="mfLabels" font-size="13" fill="#e8f4ff" opacity="0.9" text-anchor="middle" font-family="Lora,serif"></g>
+        </svg>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px">
+          <span id="mfVistaTxt" style="font-size:0.68rem;color:var(--cinza)"></span>
+          <span style="display:flex;gap:6px">
+            <button class="btn" style="padding:4px 10px;font-size:0.7rem" onclick="mfToggleArvore(this)">Árvore da Vida</button>
+            <button class="btn" style="padding:4px 10px;font-size:0.7rem" onclick="mfToggleVista()">Inverter visão</button>
+          </span>
+        </div>
+      </div>
+      <div style="flex:1;min-width:280px" id="mfCorpoPainel">
+        <div class="vazio">Clique numa região do corpo.<br><br>Visto de costas, o lado do desenho é o lado real do corpo — sem espelhamento. Fogo na cabeça; Madeira no braço esquerdo (a energia yang da manhã entra por ali); Terra no braço direito; Metal na perna direita; Água na perna esquerda.</div>
+      </div>
+    </div>
+  </div>
+  <div class="bloco" id="mfFichaBloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/><path d="M18 3l3 3-9 9H9v-3z"/></svg>Mapa Metafísico do Paciente</h2>
+    <p style="font-size:0.78rem;color:var(--cinza);margin-bottom:12px">Documento vivo por pessoa, alimentado a cada sessão. Quando um símbolo muda, a pessoa mudou.</p>
+    <div class="linha">
+      <div class="fg"><label>Perfil</label><select id="mfPerfil" onchange="mfCarregar()"></select></div>
+      <div class="fg"><label>Elemento dominante (constituição)</label><select id="mfDominante"><option value="">—</option><option>Madeira</option><option>Fogo</option><option>Terra</option><option>Metal</option><option>Água</option></select></div>
+      <div class="fg"><label>Elemento em crise (queixa atual)</label><select id="mfCrise"><option value="">—</option><option>Madeira</option><option>Fogo</option><option>Terra</option><option>Metal</option><option>Água</option></select></div>
+    </div>
+    <div class="linha">
+      <div class="fg"><label>Ciclo entre eles</label><input id="mfCiclo" placeholder="geração ou dominância? ex.: Terra não nutre a Água"></div>
+      <div class="fg"><label>Lei em trabalho</label><select id="mfLei"><option value="">—</option><option>Mentalismo</option><option>Correspondência</option><option>Vibração</option><option>Polaridade</option><option>Ritmo</option><option>Causa e Efeito</option><option>Gênero</option></select></div>
+    </div>
+    <div class="fg"><label>Prescrição da teia</label><input id="mfPrescricao" placeholder="floral, cor, sabor a observar, estação de atenção — a escolha final é sempre clínica"></div>
+    <div class="fg"><label>Símbolos recorrentes (o vocabulário-imagem, sessão a sessão)</label>
+      <div style="display:flex;gap:8px">
+        <input id="mfSimbolo" placeholder='ex.: "afogada em trabalho"' style="flex:1">
+        <button class="btn" onclick="mfAddSimbolo()">Adicionar</button>
+      </div>
+      <div id="mfSimbolos" style="margin-top:8px"></div>
+    </div>
+    <button class="btn" onclick="salvarMapaMetafisico()">Salvar mapa</button> <span id="mfMsg" style="font-size:0.8rem;color:var(--azul)"></span>
+  </div>
+  <div class="bloco">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Exemplo de leitura (paciente fictícia)</h2>
+    <div style="font-size:0.82rem;line-height:1.6">
+      Mulher, 40 anos, "afogada em trabalho", insônia, lombar travada, piora no inverno.<br>
+      <strong>Corpo:</strong> lombar + insônia + inverno → Água (Rim).
+      <strong>Emoção:</strong> medo de faltar dinheiro, herdado da mãe.
+      <strong>Símbolo:</strong> "afogada" — ela mesma escolheu uma palavra de Água; a teia confirmada pela boca da paciente.
+      <strong>Lei:</strong> Mentalismo — o pensamento-raiz "vai faltar" cria a vida em modo escassez.<br>
+      <span style="color:var(--cinza)">Ficha: crise em Água; ciclo: Terra (mãe, preocupação) não nutre a Água. Floral: Aspen ou Mimulus. Trabalho: trocar a raiz "vai faltar" por "eu sustento". Se o símbolo "afogada" um dia virar "nadando", a virada aconteceu.</span>
     </div>
   </div>
 </section>
@@ -655,7 +792,7 @@ tr:hover td{background:rgba(201,168,76,0.05)}
    ============================================================ */
 
 // ===== ARMAZENAMENTO =====
-const K = {perfis:'mos_perfis', vitais:'mos_vitais', protocolos:'mos_protocolos', exames:'mos_exames', coluna:'mos_coluna', arvore:'mos_arvore', nutricao:'mos_nutricao'};
+const K = {perfis:'mos_perfis', vitais:'mos_vitais', protocolos:'mos_protocolos', exames:'mos_exames', coluna:'mos_coluna', arvore:'mos_arvore', nutricao:'mos_nutricao', metafisica:'mos_metafisica'};
 function ler(k){try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]}}
 function gravar(k,v){localStorage.setItem(k,JSON.stringify(v))}
 function uid(){return 'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
@@ -739,7 +876,7 @@ function renderPerfis(){
   }).join('');
   // selects de perfil em todos os formulários
   const opts=perfis.map(p=>'<option value="'+p.id+'">'+esc(p.nome)+'</option>').join('');
-  ['vtPerfil','prPerfil','exPerfil','nuPerfil','imcPerfil'].forEach(id=>{const s=document.getElementById(id);if(!s)return;const v=s.value;s.innerHTML=opts;if(v)s.value=v;});
+  ['vtPerfil','prPerfil','exPerfil','nuPerfil','imcPerfil','mfPerfil'].forEach(id=>{const s=document.getElementById(id);if(!s)return;const v=s.value;s.innerHTML=opts;if(v)s.value=v;});
   const optsTodos='<option value="">Todos os perfis</option>'+opts;
   ['vtFiltroPerfil','prFiltroPerfil','exFiltroPerfil'].forEach(id=>{const s=document.getElementById(id);const v=s.value;s.innerHTML=optsTodos;if(v)s.value=v;});
 }
@@ -1007,7 +1144,7 @@ function renderExames(){
 // ===== BACKUP =====
 function exportarBackup(){
   const dados={app:'Montgomery OS',versao:'Fase 1',exportadoEm:new Date().toISOString(),
-    perfis:ler(K.perfis),vitais:ler(K.vitais),protocolos:ler(K.protocolos),exames:ler(K.exames),coluna:ler(K.coluna),arvore:ler(K.arvore),nutricao:ler(K.nutricao)};
+    perfis:ler(K.perfis),vitais:ler(K.vitais),protocolos:ler(K.protocolos),exames:ler(K.exames),coluna:ler(K.coluna),arvore:ler(K.arvore),nutricao:ler(K.nutricao),metafisica:mfLerTudo()};
   const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
@@ -1026,8 +1163,9 @@ function importarBackup(ev){
       if(!confirm('Importar backup de '+(d.exportadoEm?fmtData(d.exportadoEm.slice(0,16)):'data desconhecida')+'?\nIsto SUBSTITUI os dados atuais deste aparelho.'))return;
       gravar(K.perfis,d.perfis||[]);gravar(K.vitais,d.vitais||[]);
       gravar(K.protocolos,d.protocolos||[]);gravar(K.exames,d.exames||[]);
-      gravar(K.coluna,d.coluna||[]);gravar(K.arvore,d.arvore||[]);gravar(K.nutricao,d.nutricao||[]);
+      gravar(K.coluna,d.coluna||[]);gravar(K.arvore,d.arvore||[]);gravar(K.nutricao,d.nutricao||[]);gravar(K.metafisica,d.metafisica||{});
       document.getElementById('bkMsg').textContent='✓ Backup importado.';
+      mfPerfilAtual=null;
       renderTudo();
     }catch(err){document.getElementById('bkMsg').textContent='Erro: '+err.message;}
   };
@@ -1359,7 +1497,7 @@ document.addEventListener('click',e=>{
 // ===== MAPA DO SISTEMA =====
 const MODULOS=[
   {fase:'Raiz — Metafísica (viva)',itens:[
-    ['','Metafísica','A camada invisível que liga tudo: 7 Leis Herméticas, Kabbalah, 5 Elementos e as correspondências — o Cubo de Metatron como símbolo','vivo','metafisica']]},
+    ['','Metafísica','A camada invisível que liga tudo: 7 Leis Herméticas, Kabbalah, 5 Elementos, a Leitura em 4 Camadas e o Mapa Metafísico do Paciente — o Cubo de Metatron como símbolo','vivo','metafisica']]},
   {fase:'Fase 1 — Fundação (viva ✅)',itens:[
     ['🧬','Identidade & Genética','Perfis da família, histórico, alergias, predisposições','vivo','perfis'],
     ['🫀','Sinais Vitais & Biométricos','Pressão, glicemia, SpO₂, peso, semáforo e evolução','vivo','vitais'],
@@ -1448,7 +1586,38 @@ const LEIS_HERMETICAS=[
   ['Causa e Efeito','Toda causa tem seu efeito; acaso é a lei não reconhecida.','Reclamar da falta gera falta; focar em solução gera solução. Que seu sim seja sim.'],
   ['Gênero','O gênero está em tudo: princípio masculino e feminino.','Criar exige os dois: intenção (ativo) e gestação (receptivo). Ecoa o yin/yang dos 5 Elementos.']
 ];
+// ===== ÍNDICE FIBONACCI DA METAFÍSICA (anéis da árvore) =====
+const MF_NIVEIS=[
+  {n:0,titulo:'O Vazio',resumo:'O que é Metafísica aqui: a compreensão dos fenômenos além dos 5 sentidos. A palavra sai impregnada da frequência do que sabemos sobre ela. "Que seu sim seja sim." A palavra é criadora; o foco é o leme.'},
+  {n:1,titulo:'O Princípio',resumo:'A unidade da qual tudo deriva. As 7 Leis Herméticas do Caibalion, a ponte honesta com a ciência (gravidade, átomo, quântica) e o Cubo de Metatron como símbolo visual.',bloco:'mfBloco1'},
+  {n:2,titulo:'Polaridade',resumo:'A dobradiça do mapa: opostos são a mesma régua em graus diferentes. Três tradições descobriram a mesma lei — Hermetismo (Lei 4), Taoismo (yin/yang) e Freud (o que se nega, se afirma). A sombra é o polo não assumido; transmuta-se por grau, não por salto — como os florais: Rock Rose para o pavor, Mimulus para o medo nomeado.'},
+  {n:3,titulo:'As Tradições-mãe',resumo:'As três escolhidas para começar: Hermetismo, Medicina Chinesa / 5 Elementos e Kabbalah / Árvore da Vida. Vedanta, Alquimia e a tradição estelar entram depois, com calma.',bloco:'mfBloco3'},
+  {n:5,titulo:'Correspondências',resumo:'A teia que liga tudo: elemento, órgão, emoção, estação, cor, sabor, planeta, floral e lei. Cada coluna com sua origem declarada — tradição não se mistura com escolha nossa. A porta de entrada visual é o corpo vitruviano.',bloco:'mfBloco5'},
+  {n:8,titulo:'Uso Clínico',resumo:'A Leitura em 4 Camadas (corpo, emoção, símbolo, lei) e o Mapa Metafísico do Paciente — documento vivo por pessoa. Regra de ouro: a metafísica não substitui a escuta, ela organiza o que a escuta trouxe.',bloco:'mfBloco8'},
+  {n:13,titulo:'Biblioteca',resumo:'Quatro estantes: Hermetismo (Caibalion fichado, Tábua de Esmeralda), Medicina Chinesa (Nei Jing, Tao Te Ching), Kabbalah (as 10 Sefirot, Sefer Yetzirah) e Pontes (Freud já no OS, florais de Bach, física para leigos). Regra: só entra livro com intenção real de leitura.'},
+  {n:21,titulo:'O Sonho',resumo:'A Metafísica como camada invisível do OS inteiro: clicar em qualquer coisa — um osso, uma sessão, um floral — e ver suas correspondências. A teia completa, viva. Este anel fica aberto de propósito: sonho não se fecha.'}
+];
+let mfNivelAtivo=null;
+function mfRenderFibo(){
+  const nav=document.getElementById('mfFiboNav');
+  if(!nav||nav.hasChildNodes())return;
+  nav.innerHTML=MF_NIVEIS.map(nv=>
+    '<button class="btn" id="mfFibo'+nv.n+'" onclick="mfNivel('+nv.n+')" '+
+    'style="padding:5px 0;width:'+(34+nv.n*1.5)+'px;font-size:0.78rem;border-radius:50px">'+nv.n+'</button>').join('');
+}
+function mfNivel(n){
+  const nv=MF_NIVEIS.find(x=>x.n===n);if(!nv)return;
+  mfNivelAtivo=n;
+  MF_NIVEIS.forEach(x=>{const b=document.getElementById('mfFibo'+x.n);
+    if(b){b.style.borderColor=x.n===n?'var(--dourado,#c9a84c)':'';b.style.color=x.n===n?'var(--dourado,#c9a84c)':'';}});
+  const p=document.getElementById('mfFiboPainel');
+  p.classList.remove('vazio');
+  p.innerHTML='<h3 style="font-family:Lora,serif;color:var(--azul);margin-bottom:6px">'+nv.n+' — '+nv.titulo+'</h3>'+
+    '<p style="font-size:0.8rem;line-height:1.55">'+nv.resumo+'</p>'+
+    (nv.bloco?'<button class="btn" style="margin-top:8px;padding:4px 12px;font-size:0.72rem" onclick="document.getElementById(\''+nv.bloco+'\').scrollIntoView({behavior:\'smooth\'})">Ir ao nível na página</button>':'');
+}
 function renderMetafisica(){
+  mfRenderFibo();
   const teia=document.getElementById('mtTeia');
   if(teia&&!teia.hasChildNodes()){
     let linhas='',circ='',pontos='';
@@ -1469,6 +1638,133 @@ function renderMetafisica(){
       '<div style="font-weight:600;color:var(--azul);font-size:0.88rem">'+(i+1)+'. '+l[0]+'</div>'+
       '<div style="font-style:italic;color:var(--cinza);font-size:0.78rem;margin:2px 0">"'+l[1]+'"</div>'+
       '<div style="font-size:0.8rem">'+l[2]+'</div></div>').join('');
+  mfRenderLabels();
+  mfCarregar();
+}
+
+// ===== CORPO VITRUVIANO — porta de entrada da teia (nível 8) =====
+const MF_TEIA={
+  'Madeira':{cor:'#5cb87a',zona:'braço esquerdo',orgao:'Fígado',viscera:'Vesícula Biliar',emocao:'Raiva, frustração',virtude:'Visão, decisão, crescimento',estacao:'Primavera',sentido:'Olhos / visão',tecido:'Tendões',corNome:'Verde',sabor:'Ácido',planeta:'Júpiter',floral:'Holly, Impatiens, Willow',lei:'Causa e Efeito'},
+  'Fogo':{cor:'#e06a5a',zona:'cabeça',orgao:'Coração',viscera:'Intestino Delgado',emocao:'Euforia, ansiedade',virtude:'Alegria serena, presença',estacao:'Verão',sentido:'Língua / fala',tecido:'Vasos',corNome:'Vermelho',sabor:'Amargo',planeta:'Sol / Marte',floral:'Agrimony, Vervain',lei:'Vibração'},
+  'Terra':{cor:'#d9b84a',zona:'braço direito',orgao:'Baço-Pâncreas',viscera:'Estômago',emocao:'Preocupação, ruminação',virtude:'Confiança, nutrição, centro',estacao:'Fim de verão (transições)',sentido:'Boca / paladar',tecido:'Músculos',corNome:'Amarelo',sabor:'Doce',planeta:'Saturno',floral:'Red Chestnut, White Chestnut',lei:'Ritmo'},
+  'Metal':{cor:'#cfd8dc',zona:'perna direita',orgao:'Pulmão',viscera:'Intestino Grosso',emocao:'Tristeza, apego',virtude:'Desapego, inspiração',estacao:'Outono',sentido:'Nariz / olfato',tecido:'Pele e pelos',corNome:'Branco',sabor:'Picante',planeta:'Vênus / Mercúrio',floral:'Water Violet, Walnut',lei:'Polaridade'},
+  'Água':{cor:'#4a7db8',zona:'perna esquerda',orgao:'Rim',viscera:'Bexiga',emocao:'Medo, pavor',virtude:'Vontade, sabedoria profunda',estacao:'Inverno',sentido:'Ouvidos / audição',tecido:'Ossos e medula',corNome:'Azul-escuro / preto',sabor:'Salgado',planeta:'Lua / Netuno',floral:'Mimulus, Aspen, Rock Rose',lei:'Mentalismo'}
+};
+let mfVista='costas';
+// selos dos 5 elementos: anel + glifo SVG (chama, folha, montanha, gota, metal)
+const MF_GLIFO={
+  'Fogo':'<path d="M0,-5 c-3,4 -2,7 0,9 c3,-2 4,-6 0,-9" fill="COR" stroke="none"/>',
+  'Madeira':'<path d="M0,6 q-6,-8 0,-14 q6,6 0,14 M0,6 v-11" fill="none" stroke="COR" stroke-width="1"/>',
+  'Terra':'<path d="M-6,4 L0,-6 L6,4 Z" fill="none" stroke="COR" stroke-width="1"/>',
+  'Água':'<path d="M0,-6 c-4,5 -5,9 0,11 c5,-2 4,-6 0,-11" fill="COR" stroke="none"/>',
+  'Metal':'<circle r="5.5" fill="none" stroke="COR" stroke-width="1"/>'
+};
+function mfSelo(el,x,y,ty){
+  const cor=MF_TEIA[el].cor;
+  return '<g transform="translate('+x+','+y+')">'+
+    '<circle r="13" fill="none" stroke="'+cor+'" stroke-width="1.3"/>'+
+    MF_GLIFO[el].replace(/COR/g,cor)+
+    '<text y="'+ty+'">'+el+'</text></g>';
+}
+function mfRenderLabels(){
+  const g=document.getElementById('mfLabels');if(!g)return;
+  const costas=mfVista==='costas';
+  g.innerHTML=
+    mfSelo('Fogo',300,58,-22)+
+    mfSelo('Madeira',costas?62:538,209,31)+
+    mfSelo('Terra',costas?538:62,209,31)+
+    mfSelo('Água',costas?170:430,556,31)+
+    mfSelo('Metal',costas?430:170,556,31);
+  const corpo=document.getElementById('mfCorpoG');
+  if(corpo)corpo.setAttribute('transform',costas?'':'translate(600,0) scale(-1,1)');
+  const txt=document.getElementById('mfVistaTxt');
+  if(txt)txt.textContent=costas?'Visão do terapeuta — corpo DE COSTAS: o lado do desenho é o lado real.':'Corpo deitado de frente (decúbito dorsal) — imagem espelhada.';
+}
+function mfToggleVista(){mfVista=mfVista==='costas'?'frente':'costas';mfRenderLabels();}
+function mfToggleArvore(btn){
+  const a=document.getElementById('mfArvoreG');if(!a)return;
+  const ligada=a.style.display!=='none';
+  a.style.display=ligada?'none':'';
+  if(btn)btn.classList.toggle('ativo',!ligada);
+}
+function mfElemento(el){
+  const t=MF_TEIA[el];if(!t)return;
+  document.querySelectorAll('.mfZona').forEach(z=>z.classList.toggle('mfAtiva',z.dataset.el===el));
+  const linha=(k,v,origem)=>'<div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid rgba(201,168,76,0.12);font-size:0.8rem">'+
+    '<span style="color:var(--cinza)">'+k+(origem?' <span style="font-size:0.62rem;opacity:0.7">('+origem+')</span>':'')+'</span><span style="text-align:right">'+v+'</span></div>';
+  document.getElementById('mfCorpoPainel').innerHTML=
+    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'+
+    '<span style="width:16px;height:16px;border-radius:50%;background:'+t.cor+';display:inline-block;box-shadow:0 0 10px '+t.cor+'"></span>'+
+    '<h2 style="font-family:Lora,serif;font-size:1.05rem;color:var(--azul);margin:0">'+el+'</h2>'+
+    '<span style="font-size:0.72rem;color:var(--cinza)">· '+t.zona+' (de costas)</span></div>'+
+    linha('Órgão (yin) / Víscera (yang)',t.orgao+' / '+t.viscera)+
+    linha('Emoção em desequilíbrio',t.emocao)+
+    linha('Virtude em equilíbrio',t.virtude)+
+    linha('Estação',t.estacao)+
+    linha('Sentido / abertura',t.sentido)+
+    linha('Tecido',t.tecido)+
+    linha('Cor · Sabor',t.corNome+' · '+t.sabor)+
+    linha('Planeta',t.planeta,'ocidental')+
+    linha('Floral de Bach',t.floral,'ponte nossa')+
+    linha('Lei Hermética',t.lei,'ponte nossa')+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">'+
+    '<button class="btn" onclick="mfMarcar(\'mfCrise\',\''+el+'\')">Marcar como elemento em crise</button>'+
+    '<button class="btn" onclick="mfMarcar(\'mfDominante\',\''+el+'\')">Marcar como dominante</button></div>';
+}
+function mfMarcar(campo,el){
+  document.getElementById(campo).value=el;
+  salvarMapaMetafisico();
+  const b=document.getElementById('mfFichaBloco');if(b)b.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ===== MAPA METAFÍSICO DO PACIENTE (nível 8 do MAPA_METAFISICA.md) =====
+let mfPerfilAtual=null;
+function mfLerTudo(){try{return JSON.parse(localStorage.getItem(K.metafisica))||{}}catch(e){return{}}}
+function mfFicha(pid){return mfLerTudo()[pid]||{dominante:'',crise:'',ciclo:'',lei:'',prescricao:'',simbolos:[]}}
+function mfGravarFicha(pid,f){const t=mfLerTudo();t[pid]=f;gravar(K.metafisica,t)}
+function mfCarregar(force){
+  const sel=document.getElementById('mfPerfil');
+  if(!sel||!sel.value)return;
+  if(!force&&sel.value===mfPerfilAtual)return;
+  mfPerfilAtual=sel.value;
+  const f=mfFicha(sel.value);
+  document.getElementById('mfDominante').value=f.dominante||'';
+  document.getElementById('mfCrise').value=f.crise||'';
+  document.getElementById('mfCiclo').value=f.ciclo||'';
+  document.getElementById('mfLei').value=f.lei||'';
+  document.getElementById('mfPrescricao').value=f.prescricao||'';
+  mfRenderSimbolos(f.simbolos||[]);
+}
+function mfRenderSimbolos(arr){
+  const el=document.getElementById('mfSimbolos');if(!el)return;
+  el.innerHTML=arr.length?arr.map((s,i)=>
+    '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(201,168,76,0.15);font-size:0.82rem">'+
+    '<span>"'+esc(s.txt)+'" <span style="color:var(--cinza);font-size:0.72rem">· '+fmtData(s.data)+'</span></span>'+
+    '<button class="btn" style="padding:2px 8px;font-size:0.7rem" onclick="mfDelSimbolo('+i+')">remover</button></div>').join('')
+  :'<div class="vazio" style="padding:8px">Nenhum símbolo registrado ainda. Colecione as imagens que o paciente traz — quando um símbolo muda, a pessoa mudou.</div>';
+}
+function mfAddSimbolo(){
+  const inp=document.getElementById('mfSimbolo'),pid=document.getElementById('mfPerfil').value;
+  const txt=inp.value.trim();if(!txt||!pid)return;
+  const f=mfFicha(pid);f.simbolos=f.simbolos||[];f.simbolos.push({data:hoje(),txt});
+  mfGravarFicha(pid,f);inp.value='';mfRenderSimbolos(f.simbolos);
+}
+function mfDelSimbolo(i){
+  const pid=document.getElementById('mfPerfil').value;if(!pid)return;
+  const f=mfFicha(pid);(f.simbolos||[]).splice(i,1);
+  mfGravarFicha(pid,f);mfRenderSimbolos(f.simbolos);
+}
+function salvarMapaMetafisico(){
+  const pid=document.getElementById('mfPerfil').value;if(!pid)return;
+  const f=mfFicha(pid);
+  f.dominante=document.getElementById('mfDominante').value;
+  f.crise=document.getElementById('mfCrise').value;
+  f.ciclo=document.getElementById('mfCiclo').value.trim();
+  f.lei=document.getElementById('mfLei').value;
+  f.prescricao=document.getElementById('mfPrescricao').value.trim();
+  mfGravarFicha(pid,f);
+  document.getElementById('mfMsg').textContent='✓ Mapa salvo.';
+  setTimeout(()=>document.getElementById('mfMsg').textContent='',1500);
 }
 
 // ===== RENDER GERAL =====
