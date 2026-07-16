@@ -242,7 +242,7 @@ tr:hover td{background:rgba(201,168,76,0.05)}
       Ir para a Clínica (pacientes)
     </a>
     <div class="frase">"Tudo é padrão. Tudo é proporção. Tudo é luz."</div>
-    Montgomery OS · Fase 2 — Corpo · v1.6 (anatomia por camadas: ossos + músculos + tendões e ligamentos)<br>
+    <span id="sbVersao">Montgomery OS · Fase 2 — Corpo · v1.6</span><br>
     <a onclick="fazerLogout()" style="color:rgba(226,200,120,0.6);cursor:pointer;padding:4px 0;border:none">Sair</a>
   </div>
 </aside>
@@ -1102,6 +1102,11 @@ tr:hover td{background:rgba(201,168,76,0.05)}
   </div>
 </section>
 
+<footer id="appFooter" class="no-print" style="text-align:center;padding:22px 16px 30px;margin-top:10px;border-top:1px solid rgba(201,168,76,0.15);color:var(--cinza);font-size:0.72rem;line-height:1.7">
+  <div style="font-family:Lora,serif;font-style:italic;color:var(--dourado-claro);opacity:0.8;margin-bottom:4px">"Tudo é padrão. Tudo é proporção. Tudo é luz."</div>
+  <span id="appVersion"></span>
+</footer>
+
 </main>
 </div>
 
@@ -1111,6 +1116,15 @@ tr:hover td{background:rgba(201,168,76,0.05)}
    MONTGOMERY OS — Fase 1: Fundação
    HTML/JS standalone · localStorage · offline-first
    ============================================================ */
+
+// ===== VERSÃO — fonte única (atualize só aqui a cada release) =====
+const APP_VERSION='v1.6';
+const APP_VERSION_NOTA='anatomia por camadas: ossos + músculos + tendões e ligamentos';
+function carimbarVersao(){
+  const linha='Montgomery OS · Fase 2 — Corpo · '+APP_VERSION+' ('+APP_VERSION_NOTA+')';
+  const rod=document.getElementById('appVersion');if(rod)rod.textContent=linha;
+  const sb=document.getElementById('sbVersao');if(sb)sb.textContent=linha;
+}
 
 // ===== ARMAZENAMENTO =====
 const K = {perfis:'mos_perfis', vitais:'mos_vitais', protocolos:'mos_protocolos', exames:'mos_exames', coluna:'mos_coluna', arvore:'mos_arvore', nutricao:'mos_nutricao', metafisica:'mos_metafisica'};
@@ -3032,6 +3046,7 @@ function iniciarApp(){
   renderTudo();
 }
 window.addEventListener('DOMContentLoaded',()=>{
+  carimbarVersao();
   initAuth().catch(e=>{
     console.warn('Auth SDK falhou (offline?):',e);
     const s=prompt('Senha de acesso:');
