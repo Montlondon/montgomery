@@ -692,7 +692,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.29</div>
+<div id="versionTag">v1.30</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1615,16 +1615,45 @@ scene.add(sunMesh);
 // helicoidal — como o sistema solar de verdade viaja em espiral pelo espaço,
 // não gira parado no mesmo lugar
 const moonTex = (()=>{
-  const c = document.createElement('canvas'); c.width = c.height = 64;
+  // superfície lunar de verdade: cinza claro de base, mares escuros (as
+  // manchas que dão a cara da Lua cheia) e crateras pequenas com borda clara,
+  // tudo desenhado na hora — sem baixar imagem nenhuma, sem pesar o app
+  const SZ = 256;
+  const c = document.createElement('canvas'); c.width = c.height = SZ;
   const ctx = c.getContext('2d');
-  const g = ctx.createRadialGradient(24,24,0,32,32,32);
-  g.addColorStop(0, '#f4f1ea'); g.addColorStop(1, '#9b9892');
-  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(32,32,30,0,Math.PI*2); ctx.fill();
+  const base = ctx.createRadialGradient(SZ*0.4,SZ*0.38,0,SZ*0.5,SZ*0.5,SZ*0.62);
+  base.addColorStop(0, '#e8e3d8'); base.addColorStop(1, '#a8a299');
+  ctx.fillStyle = base; ctx.fillRect(0,0,SZ,SZ);
+
+  // mares (manchas escuras grandes e irregulares, tipo Mar da Tranquilidade)
+  let seed = 7;
+  function rnd(){ seed = (seed*9301+49297) % 233280; return seed/233280; }
+  const mares = [[0.32,0.3,0.17],[0.62,0.28,0.12],[0.45,0.52,0.2],[0.72,0.55,0.1],[0.28,0.62,0.11],[0.55,0.72,0.09]];
+  mares.forEach(([mx,my,mr])=>{
+    ctx.fillStyle = 'rgba(90,86,80,0.35)';
+    ctx.beginPath();
+    const cx = mx*SZ, cy = my*SZ, rad = mr*SZ;
+    for(let a=0;a<Math.PI*2;a+=0.5){
+      const rr = rad*(0.75+rnd()*0.5);
+      const px = cx+Math.cos(a)*rr, py = cy+Math.sin(a)*rr;
+      a===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+    }
+    ctx.closePath(); ctx.fill();
+  });
+
+  // crateras pequenas espalhadas, com sombra de um lado e brilho do outro
+  for(let i=0;i<70;i++){
+    const cx = rnd()*SZ, cy = rnd()*SZ, r = 2+rnd()*7;
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.fillStyle = 'rgba(70,66,60,0.3)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx-r*0.25,cy-r*0.25,r*0.55,0,Math.PI*2);
+    ctx.fillStyle = 'rgba(235,230,220,0.35)'; ctx.fill();
+  }
   return new THREE.CanvasTexture(c);
 })();
 const moonMesh = new THREE.Mesh(
-  new THREE.SphereGeometry(R*0.22, 24, 16),
-  new THREE.MeshPhongMaterial({map: moonTex, shininess: 2})
+  new THREE.SphereGeometry(R*0.22, 32, 24),
+  new THREE.MeshPhongMaterial({map: moonTex, shininess: 1, specular: 0x111111})
 );
 scene.add(moonMesh);
 const moonGlow = new THREE.Sprite(new THREE.SpriteMaterial({
