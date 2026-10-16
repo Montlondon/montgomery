@@ -678,7 +678,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.21</div>
+<div id="versionTag">v1.22</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1636,10 +1636,9 @@ function updateLabels(){
     const x = Math.round((proj.x + 1) / 2 * innerWidth);
     const y = Math.round((1 - proj.y) / 2 * innerHeight);
     const fade = Math.min(1, (facing - nearThreshold) / (farThreshold - nearThreshold));
-    // perto da borda do globo (facing baixo) o rótulo encolhe e some mais rápido —
-    // dá a sensação de estar preso na curva da esfera, não flutuando solto na tela
-    const scale = 0.5 + 0.5 * fade;
-    item.el.style.transform = 'translate(-50%, -105%) translate('+x+'px,'+y+'px) scale('+scale+')';
+    // sem scale() — escalar texto via transform borra o rastro (notado por ele, 16/10);
+    // some pela opacidade só, que não embaça
+    item.el.style.transform = 'translate(-50%, -105%) translate('+x+'px,'+y+'px)';
     item.el.style.opacity = String(fade * fade);
   }
 
