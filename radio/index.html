@@ -287,7 +287,7 @@
 
   #dock{
     position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
-    width:min(460px, 92vw);
+    width:min(480px, 97vw);
     display:flex; align-items:center; gap:4px;
     padding:8px 10px;
     background:var(--panel); border:1px solid var(--line); border-radius:999px;
@@ -336,7 +336,7 @@
   #dockPlayer #npFav.active{color:#e8735a;}
   #dockPlayer #npFav.active svg{fill:#e8735a;}
   @media (max-width: 480px){
-    #dock{width:96vw; gap:3px; padding:6px 7px;}
+    #dock{width:98vw; gap:4px; padding:6px 8px;}
     #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{width:30px; height:30px;}
     #dockPlayer .np-city{display:none;}
   }
@@ -709,7 +709,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.39</div>
+<div id="versionTag">v1.40</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
