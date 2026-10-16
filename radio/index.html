@@ -304,6 +304,13 @@
     z-index:4;
   }
 
+  #versionTag{
+    position:fixed; right:16px; bottom:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.62rem; color:var(--ink-dim);
+    opacity:.45; z-index:4; pointer-events:none;
+  }
+
   @media (max-width: 900px){
     #favBtnHeader{position:static; transform:none; font-size:0.85rem; padding:8px;}
   }
@@ -465,6 +472,7 @@
   <span id="blockedNote"></span></p>
 </aside>
 <div id="toast"></div>
+<div id="versionTag">v1.0</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
