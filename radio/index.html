@@ -498,7 +498,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.5</div>
+<div id="versionTag">v1.6</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1829,30 +1829,15 @@ document.getElementById('dockFav').addEventListener('click', ()=>{
 
 document.getElementById('npShare').addEventListener('click', async ()=>{
   if (!activeStation) return;
-  const text = 'Ouvindo "'+npName.textContent+'" ('+npCity.textContent+') no Montgomery Rádio';
-  const url = location.origin + location.pathname;
-  if (navigator.share){
-    try { await navigator.share({title: npName.textContent, text, url}); }
-    catch(e){ /* usuário cancelou o compartilhamento, sem problema */ }
-    return;
-  }
-  try {
-    await navigator.clipboard.writeText(text+' — '+url);
-    showToast('Copiado — cola onde quiser');
-  } catch(e){
-    window.prompt('Copie:', text+' — '+url);
-  }
+  const text = 'Ouvindo "'+npName.textContent+'" ('+npCity.textContent+') no Montgomery Rádio — '+location.origin+location.pathname;
+  window.open('https://wa.me/?text='+encodeURIComponent(text), '_blank', 'noopener');
 });
 
-shareBtn.addEventListener('click', async ()=>{
+shareBtn.addEventListener('click', ()=>{
   if (!currentPlace) return;
   const url = location.origin + location.pathname + '?cidade=' + encodeURIComponent(currentPlace.city);
-  try {
-    await navigator.clipboard.writeText(url);
-    showToast('Link copiado');
-  } catch(e){
-    window.prompt('Copie o link:', url);
-  }
+  const text = 'Rádios de '+currentPlace.city+' no Montgomery Rádio — '+url;
+  window.open('https://wa.me/?text='+encodeURIComponent(text), '_blank', 'noopener');
 });
 
 // ---------- busca em todas as rádios do mundo (Radio-Browser, base pública e aberta) ----------
