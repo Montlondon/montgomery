@@ -618,6 +618,10 @@
   </div>
   <div id="dockIdleHint">nada tocando</div>
   <div class="dock-sep"></div>
+  <button id="btnYoutube" aria-label="Abrir YouTube ou YouTube Music" title="YouTube">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+  </button>
+  <div class="dock-sep"></div>
   <button id="btnPostit" aria-label="Post-it — anotar uma ideia rápida" title="Post-it">
     <svg viewBox="0 0 24 24" width="17" height="17">
       <path d="M4 3h13l3 3v15H4Z" fill="#f6e58d" stroke="#ab9a4e" stroke-width="1" stroke-linejoin="round"/>
@@ -698,7 +702,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.34</div>
+<div id="versionTag">v1.35</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2968,6 +2972,44 @@ rotateBtn.addEventListener('click', ()=>{
   autoRotateOn = !autoRotateOn;
   localStorage.setItem('mundoAoVivo_autoRotate', autoRotateOn ? '1' : '0');
   renderRotateBtn();
+});
+
+// botão YouTube no dock: abre fora do app (nunca embutido), porque só assim
+// o navegador de verdade (com o login e o bloqueio de anúncio dele, se tiver)
+// entra em ação — um iframe aqui dentro não herda nada disso
+function abrirForaDoApp(url, pacoteAndroid){
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  if (isAndroid && pacoteAndroid){
+    const semEsquema = url.replace(/^https?:\/\//, '');
+    const intentUrl = 'intent://' + semEsquema + '#Intent;scheme=https;package=' + pacoteAndroid + ';end';
+    window.location.href = intentUrl;
+    setTimeout(()=>{ window.open(url, '_blank', 'noopener'); }, 1200);
+  } else {
+    window.open(url, '_blank', 'noopener');
+  }
+}
+const btnYoutube = document.getElementById('btnYoutube');
+btnYoutube.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  document.querySelectorAll('.yt-menu').forEach(m=> m.remove());
+  const menu = document.createElement('ul');
+  menu.className = 'yt-menu fav-cat-menu';
+  menu.style.position = 'fixed';
+  const rect = btnYoutube.getBoundingClientRect();
+  menu.style.left = rect.left + 'px';
+  menu.style.bottom = (innerHeight - rect.top + 8) + 'px';
+  const liYt = document.createElement('li');
+  const bYt = document.createElement('button');
+  bYt.type = 'button'; bYt.textContent = 'YouTube';
+  bYt.addEventListener('click', ()=>{ abrirForaDoApp('https://m.youtube.com', 'com.brave.browser'); menu.remove(); });
+  liYt.appendChild(bYt); menu.appendChild(liYt);
+  const liYtm = document.createElement('li');
+  const bYtm = document.createElement('button');
+  bYtm.type = 'button'; bYtm.textContent = 'YouTube Music';
+  bYtm.addEventListener('click', ()=>{ abrirForaDoApp('https://music.youtube.com', 'com.brave.browser'); menu.remove(); });
+  liYtm.appendChild(bYtm); menu.appendChild(liYtm);
+  document.body.appendChild(menu);
+  document.addEventListener('click', function fecharMenu(){ menu.remove(); document.removeEventListener('click', fecharMenu); }, {once:true});
 });
 stage.addEventListener('mousedown', ()=>{ lastTouch = performance.now(); });
 addEventListener('mousemove', ()=>{ if (dragging) lastTouch = performance.now(); });
