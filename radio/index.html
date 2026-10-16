@@ -624,7 +624,7 @@
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8V5a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5"/><path d="M2 12a9 9 0 0 1 8 8"/><path d="M2 16a5 5 0 0 1 4 4"/><circle cx="3" cy="20" r="1" fill="currentColor" stroke="none"/></svg>
   </button>
   <div class="dock-sep"></div>
-  <button id="btnYoutube" aria-label="Abrir YouTube ou YouTube Music" title="YouTube">
+  <button id="btnYoutube" aria-label="Abrir YouTube, YouTube Music ou Spotify" title="YouTube / Spotify">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
   </button>
   <div class="dock-sep"></div>
@@ -708,7 +708,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.37</div>
+<div id="versionTag">v1.38</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -3071,6 +3071,11 @@ btnYoutube.addEventListener('click', (e)=>{
   bYtm.type = 'button'; bYtm.textContent = 'YouTube Music';
   bYtm.addEventListener('click', ()=>{ abrirForaDoApp('https://music.youtube.com', 'com.brave.browser'); menu.remove(); });
   liYtm.appendChild(bYtm); menu.appendChild(liYtm);
+  const liSp = document.createElement('li');
+  const bSp = document.createElement('button');
+  bSp.type = 'button'; bSp.textContent = 'Spotify';
+  bSp.addEventListener('click', ()=>{ abrirForaDoApp('https://open.spotify.com', 'com.brave.browser'); menu.remove(); });
+  liSp.appendChild(bSp); menu.appendChild(liSp);
   document.body.appendChild(menu);
   document.addEventListener('click', function fecharMenu(){ menu.remove(); document.removeEventListener('click', fecharMenu); }, {once:true});
 });
