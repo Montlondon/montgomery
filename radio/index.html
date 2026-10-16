@@ -726,7 +726,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.47</div>
+<div id="versionTag">v1.48</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -3123,8 +3123,7 @@ function animate(){
   const sub = pontoSubsolarAgora();
   const sunLocal = toVec3(sub.lat, sub.lon, 1).applyQuaternion(globeGroup.quaternion);
   sun.position.copy(sunLocal.clone().multiplyScalar(10));
-  // o disco do Sol que se vê fica fixo num canto, sempre visível — só a luz
-  // de verdade (invisível) é que segue o horário real e gira com o globo
+  sunMesh.position.copy(sunLocal.clone().multiplyScalar(38));
 
   // a lua desenha uma espiral ao redor do globo — gira em volta e ao mesmo
   // tempo sobe e desce, como o caminho helicoidal do sistema Sol-Terra-Lua
