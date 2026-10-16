@@ -1,4 +1,4 @@
-const CACHE_NAME = 'montgomery-radio-v1';
+const CACHE_NAME = 'montgomery-radio-v2';
 const CORE_ASSETS = ['/', '/manifest.json', '/icon-192.png', '/icon-512.png'];
 
 self.addEventListener('install', (event) => {
@@ -17,8 +17,15 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// sempre tenta buscar a versão mais nova da página primeiro; só usa o cache se estiver offline
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+    fetch(event.request)
+      .then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        return res;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
