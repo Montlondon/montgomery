@@ -1407,19 +1407,22 @@ const continentLabels = [];
 
 PLACES.forEach(place=>{
   const pos = toVec3(place.lat, place.lon, R);
+  // levanta o ponto um pouco da superfície — senão a esfera da Terra corta o brilho do sprite
+  // rente à borda, dando aquele efeito de "sombra triangular" ao girar o globo
+  const lifted = pos.clone().multiplyScalar(1.012);
   // cidades com mais rádios ganham um ponto maior e um brilho mais forte, como no Radio Garden
-  const scale = Math.min(2.4, 0.85 + Math.log2(1 + (place.stations ? place.stations.length : 1)) * 0.22);
+  const scale = Math.min(2.2, 0.75 + Math.log2(1 + (place.stations ? place.stations.length : 1)) * 0.17);
 
   const glow = new THREE.Sprite(new THREE.SpriteMaterial({map: place.home ? homeGlowTex : glowTex, transparent:true, depthWrite:false}));
-  glow.position.copy(pos);
+  glow.position.copy(lifted);
   glow.userData.isGlow = true;
-  glow.userData.baseScale = 0.1 * scale;
+  glow.userData.baseScale = 0.07 * scale;
   glow.scale.setScalar(glow.userData.baseScale);
   globeGroup.add(glow);
 
   const dot = new THREE.Sprite(new THREE.SpriteMaterial({map: place.home ? homeDotTex : dotTex, transparent:true, depthWrite:false}));
-  dot.position.copy(pos);
-  dot.scale.setScalar(0.042 * scale);
+  dot.position.copy(lifted);
+  dot.scale.setScalar(0.028 * scale);
   globeGroup.add(dot);
 
   const hit = new THREE.Mesh(hitGeo, hitMat);
