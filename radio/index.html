@@ -505,7 +505,7 @@
     font-size:0.95rem;
     letter-spacing:0.12em;
     text-transform:uppercase;
-    color:rgba(255,255,255,0.3);
+    color:rgba(255,255,255,0.55);
     text-shadow:0 1px 2px rgba(0,0,0,0.5);
   }
 
@@ -678,7 +678,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.22</div>
+<div id="versionTag">v1.23</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1639,7 +1639,7 @@ function updateLabels(){
     // sem scale() — escalar texto via transform borra o rastro (notado por ele, 16/10);
     // some pela opacidade só, que não embaça
     item.el.style.transform = 'translate(-50%, -105%) translate('+x+'px,'+y+'px)';
-    item.el.style.opacity = String(fade * fade);
+    item.el.style.opacity = String(fade);
   }
 
   cityLabels.forEach(item => place(item, 0.08, 0.4));
