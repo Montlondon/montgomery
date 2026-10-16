@@ -698,7 +698,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.32</div>
+<div id="versionTag">v1.33</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -3032,7 +3032,7 @@ function animate(){
   // a lua desenha uma espiral ao redor do globo — gira em volta e ao mesmo
   // tempo sobe e desce, como o caminho helicoidal do sistema Sol-Terra-Lua
   // de verdade avançando pelo espaço, não um círculo plano parado
-  const moonT = performance.now()*0.00011;
+  const moonT = performance.now()*0.00002;
   const moonOrbitR = R*2.3;
   moonMesh.position.set(
     Math.cos(moonT) * moonOrbitR,
