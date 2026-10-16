@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
 <style>
   :root{
     --ground:#0a0d16;
@@ -293,13 +294,14 @@
     box-shadow:0 8px 28px rgba(0,0,0,0.45);
     z-index:12;
   }
-  #dockFav, #dockRotate, #btnPostit{
+  #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{
     flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
     width:34px; height:34px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     transition:color .15s ease, background .15s ease;
   }
-  #dockFav:hover, #dockRotate:hover, #btnPostit:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
+  #dockFav:hover, #dockRotate:hover, #btnPostit:hover, #btnYoutube:hover, #btnCast:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
+  #btnCast.active{color:#e8735a; background:rgba(232,115,90,0.12);}
   #dock > .dock-sep{flex:none; width:1px; height:22px; background:var(--line);}
   #dockIdleHint{
     flex:1; min-width:0; text-align:center;
@@ -618,6 +620,10 @@
   </div>
   <div id="dockIdleHint">nada tocando</div>
   <div class="dock-sep"></div>
+  <button id="btnCast" aria-label="Enviar para o Chromecast" title="Cast">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8V5a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5"/><path d="M2 12a9 9 0 0 1 8 8"/><path d="M2 16a5 5 0 0 1 4 4"/><circle cx="3" cy="20" r="1" fill="currentColor" stroke="none"/></svg>
+  </button>
+  <div class="dock-sep"></div>
   <button id="btnYoutube" aria-label="Abrir YouTube ou YouTube Music" title="YouTube">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
   </button>
@@ -702,7 +708,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.35</div>
+<div id="versionTag">v1.36</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2988,6 +2994,61 @@ function abrirForaDoApp(url, pacoteAndroid){
     window.open(url, '_blank', 'noopener');
   }
 }
+// Chromecast: manda a rádio que está tocando agora pra TV. Usa o receptor
+// padrão do Google (CC1AD845), que já sabe tocar stream de áudio direto —
+// não precisa de app customizado nenhum
+const btnCast = document.getElementById('btnCast');
+let castAvailable = false;
+window['__onGCastApiAvailable'] = function(isAvailable){
+  if (!isAvailable) return;
+  castAvailable = true;
+  cast.framework.CastContext.getInstance().setOptions({
+    receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+    autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
+  });
+  cast.framework.CastContext.getInstance().addEventListener(
+    cast.framework.CastContextEventType.CAST_STATE_CHANGED,
+    atualizarBotaoCast
+  );
+  atualizarBotaoCast();
+};
+function atualizarBotaoCast(){
+  if (!castAvailable) return;
+  const state = cast.framework.CastContext.getInstance().getCastState();
+  const conectado = state === cast.framework.CastState.CONNECTED;
+  btnCast.classList.toggle('active', conectado);
+}
+btnCast.addEventListener('click', async ()=>{
+  if (!castAvailable){
+    showToast('Cast ainda carregando, tenta de novo em um instante');
+    return;
+  }
+  const context = cast.framework.CastContext.getInstance();
+  const session = context.getCurrentSession();
+  if (session){
+    // já conectado: clicar de novo desconecta
+    context.endCurrentSession(true);
+    return;
+  }
+  if (!activeStation){
+    showToast('Toca uma rádio primeiro pra poder enviar pra TV');
+    return;
+  }
+  try{
+    await context.requestSession();
+    const newSession = context.getCurrentSession();
+    const mediaInfo = new chrome.cast.media.MediaInfo(streamUrlFor(activeStation), 'audio/mpeg');
+    mediaInfo.metadata = new chrome.cast.media.MusicTrackMediaMetadata();
+    mediaInfo.metadata.title = activeStation.title;
+    mediaInfo.metadata.artist = activePlace ? activePlace.city : 'Montgomery Rádio';
+    const request = new chrome.cast.media.LoadRequest(mediaInfo);
+    await newSession.loadMedia(request);
+    showToast('Enviando pra TV…');
+  }catch(e){
+    showToast('Não deu pra conectar no Chromecast agora');
+  }
+});
+
 const btnYoutube = document.getElementById('btnYoutube');
 btnYoutube.addEventListener('click', (e)=>{
   e.stopPropagation();
