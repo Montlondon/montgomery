@@ -1829,12 +1829,13 @@ async function runSearch(q){
     const base = 'https://de1.api.radio-browser.info/json/stations/search?limit=16&hidebroken=true&order=clickcount&reverse=true&';
     const qNorm = stripAccents(q.toLowerCase().trim());
     const countryQuery = PT_TO_EN_COUNTRY[qNorm] || q;
-    const [byName, byCountry] = await Promise.all([
+    const [byName, byCountry, byCity] = await Promise.all([
       fetch(base+'name='+encodeURIComponent(q)).then(r=>r.json()).catch(()=>[]),
-      fetch(base+'country='+encodeURIComponent(countryQuery)).then(r=>r.json()).catch(()=>[])
+      fetch(base+'country='+encodeURIComponent(countryQuery)).then(r=>r.json()).catch(()=>[]),
+      fetch(base+'state='+encodeURIComponent(q)).then(r=>r.json()).catch(()=>[])
     ]);
     const seen = new Set();
-    const data = [...byName, ...byCountry].filter(st=>{
+    const data = [...byName, ...byCountry, ...byCity].filter(st=>{
       if (seen.has(st.stationuuid)) return false;
       seen.add(st.stationuuid);
       return true;
@@ -1847,7 +1848,8 @@ async function runSearch(q){
     data.forEach(st=>{
       const li = document.createElement('li');
       const btn = document.createElement('button');
-      btn.innerHTML = '<span>'+st.name+'</span><span class="sr-sub">'+(st.country||'')+(st.tags ? ' · '+st.tags.split(',')[0] : '')+'</span>';
+      const loc = [st.state, st.country].filter(Boolean).join(', ');
+      btn.innerHTML = '<span>'+st.name+'</span><span class="sr-sub">'+loc+(st.tags ? ' · '+st.tags.split(',')[0] : '')+'</span>';
       const place = {city: st.name, country: st.country || 'mundo'};
       btn.addEventListener('click', ()=>{
         playStation(place, {title: st.name, url: st.url_resolved || st.url}, null);
