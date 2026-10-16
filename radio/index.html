@@ -1368,12 +1368,35 @@ function toVec3(lat, lon, radius){
   );
 }
 
-const dotGeo = new THREE.SphereGeometry(0.028, 12, 12);
-const dotMat = new THREE.MeshBasicMaterial({color:0xd3ad5f});
-const dotMatHover = new THREE.MeshBasicMaterial({color:0xf4dfa8});
-
-const glowGeo = new THREE.SphereGeometry(0.06, 10, 10);
-const glowMat = new THREE.MeshBasicMaterial({color:0xd3ad5f, transparent:true, opacity:0.25});
+// pontos como sprites (sempre de frente pra câmera) com textura circular desenhada em canvas —
+// assim o ponto fica perfeitamente redondo de qualquer ângulo, nunca oval feito uma esfera 3D
+function makeCircleTexture(colorHex){
+  const c = document.createElement('canvas');
+  c.width = c.height = 64;
+  const ctx = c.getContext('2d');
+  const hex = '#' + colorHex.toString(16).padStart(6, '0');
+  ctx.beginPath();
+  ctx.arc(32, 32, 20, 0, Math.PI*2);
+  ctx.fillStyle = hex;
+  ctx.fill();
+  return new THREE.CanvasTexture(c);
+}
+function makeGlowTexture(colorHex){
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const ctx = c.getContext('2d');
+  const hex = '#' + colorHex.toString(16).padStart(6, '0');
+  const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+  grad.addColorStop(0, hex + '77');
+  grad.addColorStop(1, hex + '00');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 128, 128);
+  return new THREE.CanvasTexture(c);
+}
+const dotTex = makeCircleTexture(0xd3ad5f);
+const homeDotTex = makeCircleTexture(0xe8735a);
+const glowTex = makeGlowTexture(0xd3ad5f);
+const homeGlowTex = makeGlowTexture(0xe8735a);
 
 // esfera invisível bem maior só pra facilitar o clique/toque, o ponto visual continua fino
 const hitGeo = new THREE.SphereGeometry(0.16, 8, 8);
@@ -1384,23 +1407,22 @@ const labelsContainer = document.getElementById('labels');
 const cityLabels = [];
 const continentLabels = [];
 
-const homeMat = new THREE.MeshBasicMaterial({color:0xe8735a});
-const homeGlowMat = new THREE.MeshBasicMaterial({color:0xe8735a, transparent:true, opacity:0.32});
-
 PLACES.forEach(place=>{
   const pos = toVec3(place.lat, place.lon, R);
   // cidades com mais rádios ganham um ponto maior e um brilho mais forte, como no Radio Garden
   const scale = Math.min(2.4, 0.85 + Math.log2(1 + (place.stations ? place.stations.length : 1)) * 0.22);
 
-  const dot = new THREE.Mesh(dotGeo, place.home ? homeMat : dotMat.clone());
-  dot.position.copy(pos);
-  dot.scale.setScalar(scale);
-  globeGroup.add(dot);
-
-  const glow = new THREE.Mesh(glowGeo, place.home ? homeGlowMat : glowMat.clone());
+  const glow = new THREE.Sprite(new THREE.SpriteMaterial({map: place.home ? homeGlowTex : glowTex, transparent:true, depthWrite:false}));
   glow.position.copy(pos);
-  glow.scale.setScalar(scale);
+  glow.userData.isGlow = true;
+  glow.userData.baseScale = 0.1 * scale;
+  glow.scale.setScalar(glow.userData.baseScale);
   globeGroup.add(glow);
+
+  const dot = new THREE.Sprite(new THREE.SpriteMaterial({map: place.home ? homeDotTex : dotTex, transparent:true, depthWrite:false}));
+  dot.position.copy(pos);
+  dot.scale.setScalar(0.042 * scale);
+  globeGroup.add(dot);
 
   const hit = new THREE.Mesh(hitGeo, hitMat);
   hit.position.copy(pos);
@@ -1780,12 +1802,43 @@ searchInput.addEventListener('input', ()=>{
   if (q.length < 2){ searchResults.classList.remove('open'); return; }
   searchTimer = setTimeout(()=> runSearch(q), 400);
 });
+// nomes de país em português que a busca entende, mapeados pro nome em inglês que a API usa
+const PT_TO_EN_COUNTRY = {
+  brasil:'Brazil', alemanha:'Germany', espanha:'Spain', franca:'France', italia:'Italy',
+  'reino unido':'United Kingdom', inglaterra:'United Kingdom', suica:'Switzerland',
+  austria:'Austria', belgica:'Belgium', holanda:'Netherlands', paisesbaixos:'Netherlands',
+  irlanda:'Ireland', suecia:'Sweden', noruega:'Norway', dinamarca:'Denmark', polonia:'Poland',
+  grecia:'Greece', turquia:'Turkey', russia:'Russia', ucrania:'Ukraine', japao:'Japan',
+  china:'China', india:'India', coreiadosul:'South Korea', 'estados unidos':'United States',
+  eua:'United States', canada:'Canada', mexico:'Mexico', argentina:'Argentina', chile:'Chile',
+  colombia:'Colombia', peru:'Peru', uruguai:'Uruguay', venezuela:'Venezuela', bolivia:'Bolivia',
+  egito:'Egypt', marrocos:'Morocco', nigeria:'Nigeria', 'africa do sul':'South Africa',
+  quenia:'Kenya', australia:'Australia', 'nova zelandia':'New Zealand', tailandia:'Thailand',
+  vietna:'Vietnam', indonesia:'Indonesia', filipinas:'Philippines', israel:'Israel',
+  'arabia saudita':'Saudi Arabia', portugal:'Portugal', cuba:'Cuba', haiti:'Haiti',
+  jamaica:'Jamaica', islandia:'Iceland', romenia:'Romania', hungria:'Hungary',
+  'republica tcheca':'Czechia', finlandia:'Finland', 'coreia do sul':'South Korea'
+};
+function stripAccents(s){
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
 async function runSearch(q){
   searchResults.innerHTML = '<li class="sr-empty">buscando&hellip;</li>';
   searchResults.classList.add('open');
   try {
-    const res = await fetch('https://de1.api.radio-browser.info/json/stations/search?name='+encodeURIComponent(q)+'&limit=20&hidebroken=true&order=clickcount&reverse=true');
-    const data = await res.json();
+    const base = 'https://de1.api.radio-browser.info/json/stations/search?limit=16&hidebroken=true&order=clickcount&reverse=true&';
+    const qNorm = stripAccents(q.toLowerCase().trim());
+    const countryQuery = PT_TO_EN_COUNTRY[qNorm] || q;
+    const [byName, byCountry] = await Promise.all([
+      fetch(base+'name='+encodeURIComponent(q)).then(r=>r.json()).catch(()=>[]),
+      fetch(base+'country='+encodeURIComponent(countryQuery)).then(r=>r.json()).catch(()=>[])
+    ]);
+    const seen = new Set();
+    const data = [...byName, ...byCountry].filter(st=>{
+      if (seen.has(st.stationuuid)) return false;
+      seen.add(st.stationuuid);
+      return true;
+    }).slice(0, 25);
     searchResults.innerHTML = '';
     if (!data.length){
       searchResults.innerHTML = '<li class="sr-empty">nenhuma rádio encontrada</li>';
@@ -1845,9 +1898,9 @@ function animate(){
   // pulso suave nos glows
   const t = performance.now()*0.0016;
   globeGroup.children.forEach(o=>{
-    if (o.geometry === glowGeo){
-      const s = 1 + Math.sin(t + o.position.x*3) * 0.18;
-      o.scale.setScalar(s);
+    if (o.userData.isGlow){
+      const pulse = 1 + Math.sin(t + o.position.x*3) * 0.1;
+      o.scale.setScalar(o.userData.baseScale * pulse);
     }
   });
   updateLabels();
