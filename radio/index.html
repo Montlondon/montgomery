@@ -524,7 +524,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.8.1</div>
+<div id="versionTag">v1.9</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1993,8 +1993,31 @@ const PT_TO_EN_COUNTRY = {
 function stripAccents(s){
   return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
 }
+function renderLocalPlaceResults(q){
+  const qNorm = stripAccents(q.toLowerCase().trim());
+  const matches = PLACES.filter(p =>
+    stripAccents(p.city.toLowerCase()).includes(qNorm) ||
+    stripAccents(p.country.toLowerCase()).includes(qNorm)
+  );
+  matches.forEach(place=>{
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span>'+place.city+'</span><span class="sr-sub">'+place.country+' · no globo</span>';
+    btn.addEventListener('click', ()=>{
+      openPlace(place);
+      searchResults.classList.remove('open');
+    });
+    li.appendChild(btn);
+    searchResults.appendChild(li);
+  });
+}
 async function runSearch(q){
-  searchResults.innerHTML = '<li class="sr-empty">buscando&hellip;</li>';
+  searchResults.innerHTML = '';
+  renderLocalPlaceResults(q);
+  const loading = document.createElement('li');
+  loading.className = 'sr-empty';
+  loading.textContent = 'buscando no mundo…';
+  searchResults.appendChild(loading);
   searchResults.classList.add('open');
   try {
     const base = 'https://de1.api.radio-browser.info/json/stations/search?limit=16&hidebroken=true&order=clickcount&reverse=true&';
@@ -2011,9 +2034,11 @@ async function runSearch(q){
       seen.add(st.stationuuid);
       return true;
     }).slice(0, 25);
-    searchResults.innerHTML = '';
+    loading.remove();
     if (!data.length){
-      searchResults.innerHTML = '<li class="sr-empty">nenhuma rádio encontrada</li>';
+      if (!searchResults.children.length){
+        searchResults.innerHTML = '<li class="sr-empty">nenhuma rádio encontrada</li>';
+      }
       return;
     }
     data.forEach(st=>{
@@ -2044,7 +2069,10 @@ async function runSearch(q){
       searchResults.appendChild(li);
     });
   } catch(e){
-    searchResults.innerHTML = '<li class="sr-empty">busca indisponível agora, tenta de novo</li>';
+    loading.remove();
+    if (!searchResults.children.length){
+      searchResults.innerHTML = '<li class="sr-empty">busca indisponível agora, tenta de novo</li>';
+    }
   }
 }
 document.addEventListener('click', (e)=>{
