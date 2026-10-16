@@ -423,6 +423,16 @@
   .postit-acao-so-expandido{display:none!important;}
   #postit.expandido .postit-acao-so-expandido{display:inline-flex!important;}
   #postitMic.ouvindo{border-color:#a8462f!important; color:#a8462f!important; background:rgba(168,70,47,.08)!important;}
+  #postitMenuFormatos{position:absolute; bottom:52px; right:16px; z-index:10;
+    background:#fdfaf2; border:1px solid rgba(90,74,30,.3); border-radius:8px; padding:6px; min-width:190px;
+    box-shadow:0 8px 24px rgba(0,0,0,.35); list-style:none; margin:0;
+  }
+  #postitMenuFormatos li{border:none;}
+  #postitMenuFormatos button{display:block; width:100%; text-align:left; border:none; background:none;
+    color:#3a3120; padding:8px 12px; font-size:.85rem; border-radius:6px; cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  #postitMenuFormatos button:hover{background:rgba(90,74,30,.1);}
 
   #versionTag{
     position:fixed; left:16px; bottom:10px;
@@ -631,16 +641,24 @@
       Ditar
     </button>
     <button type="button" id="postitIdioma" class="postit-acao-so-expandido" title="Idioma do ditado">PT</button>
-    <button type="button" class="postit-rodape-btn postit-acao-so-expandido" id="postitCopiar" style="margin-left:auto" title="Copiar o texto">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/></svg>
-      Copiar
+    <button type="button" class="postit-rodape-btn postit-acao-so-expandido" id="postitBtnEnviar" style="margin-left:auto" title="Enviar — todos os formatos da casa">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l16-8-6 16-3-7-7-1z"/></svg>
+      Enviar
     </button>
+    <ul id="postitMenuFormatos" hidden>
+      <li><button type="button" data-formato="texto">Texto simples</button></li>
+      <li><button type="button" data-formato="markdown">Markdown</button></li>
+      <li><button type="button" data-formato="html">HTML</button></li>
+      <li><button type="button" data-formato="opml">OPML</button></li>
+      <li><button type="button" data-formato="jpg">Imagem (JPG)</button></li>
+      <li><button type="button" data-formato="pdf">PDF (imprimir)</button></li>
+    </ul>
   </div>
 </div>
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.13</div>
+<div id="versionTag">v1.14</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2467,12 +2485,146 @@ postitMic.onclick = ()=>{
   postitMic.classList.add('ouvindo');
   postitMicRodada();
 };
-document.getElementById('postitCopiar').onclick = ()=>{
+// ---------- Enviar: mesmo motor de formatos do MontyMap (texto/md/html/opml/jpg/pdf) ----------
+function quebrarLinhas(ctx, texto, larguraMax){
+  const linhas = [];
+  texto.split('\n').forEach(paragrafo=>{
+    const palavras = paragrafo.split(' ');
+    let linha = '';
+    palavras.forEach(p=>{
+      const teste = linha ? linha+' '+p : p;
+      if(ctx.measureText(teste).width > larguraMax && linha){ linhas.push(linha); linha = p; }
+      else linha = teste;
+    });
+    linhas.push(linha);
+  });
+  return linhas;
+}
+function notaComoJpg(titulo, corpo, carimbo){
+  const LARGURA = 800, PAD = 48;
+  const canvasMedida = document.createElement('canvas');
+  const ctxMedida = canvasMedida.getContext('2d');
+  ctxMedida.font = '18px Atkinson Hyperlegible, sans-serif';
+  const linhas = quebrarLinhas(ctxMedida, corpo, LARGURA-PAD*2);
+  const alturaCarimbo = carimbo ? 34 : 0;
+  const ALTURA = PAD*2 + 50 + alturaCarimbo + linhas.length*28 + 20;
+  const canvas = document.createElement('canvas');
+  canvas.width = LARGURA; canvas.height = ALTURA;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#f7f4ec'; ctx.fillRect(0,0,LARGURA,ALTURA);
+  ctx.fillStyle = '#2b2620'; ctx.font = "600 30px 'EB Garamond', serif";
+  ctx.fillText(titulo, PAD, PAD+20);
+  ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(PAD,PAD+40); ctx.lineTo(LARGURA-PAD,PAD+40); ctx.stroke();
+  let yCorpo = PAD+80;
+  if(carimbo){
+    ctx.fillStyle = '#8a7f5e'; ctx.font = '15px Atkinson Hyperlegible, sans-serif';
+    ctx.fillText(carimbo, PAD, PAD+66);
+    yCorpo += alturaCarimbo;
+  }
+  ctx.font = '18px Atkinson Hyperlegible, sans-serif';
+  ctx.fillStyle = '#2b2620';
+  linhas.forEach((linha,i)=> ctx.fillText(linha, PAD, yCorpo+i*28));
+  return canvas.toDataURL('image/jpeg', 0.92);
+}
+function paginaHtml(titulo, corpoHtml){
+  return `<!doctype html><html><head><meta charset="utf-8"><title>${titulo}</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+body{font-family:'Atkinson Hyperlegible',Arial,sans-serif;max-width:680px;margin:40px auto;
+  padding:0 20px;line-height:1.7;color:#2b2620}
+h1{font-family:'EB Garamond',Georgia,serif;font-size:1.8rem;border-bottom:2px solid #c9a84c;
+  padding-bottom:10px}
+ul{padding-left:22px}
+li{margin:4px 0;text-align:justify}
+p{text-align:justify}
+img{width:100%;height:auto}
+</style></head><body><h1>${titulo}</h1>${corpoHtml}</body></html>`;
+}
+async function tentarCompartilharArquivo(blob, nomeArquivo){
+  try{
+    const arquivo = new File([blob], nomeArquivo, {type: blob.type});
+    if(navigator.canShare && navigator.canShare({files:[arquivo]})){
+      await navigator.share({files:[arquivo]});
+      return true;
+    }
+  }catch(e){ if(e.name==='AbortError') return true; }
+  return false;
+}
+async function baixarArquivo(conteudo, nomeArquivo, tipoMime){
+  const blob = new Blob([conteudo], {type: tipoMime || 'text/plain;charset=utf-8'});
+  if(await tentarCompartilharArquivo(blob, nomeArquivo)) return;
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = nomeArquivo;
+  a.click();
+  setTimeout(()=> URL.revokeObjectURL(url), 2000);
+}
+async function baixarBlob(blob, nomeArquivo){
+  if(await tentarCompartilharArquivo(blob, nomeArquivo)) return;
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = nomeArquivo;
+  a.click();
+  setTimeout(()=> URL.revokeObjectURL(url), 2000);
+}
+function copiar(texto, idBotao){
+  const btn = document.getElementById(idBotao || 'postitBtnEnviar');
+  const original = btn.innerHTML;
+  const avisar = msg=>{ btn.innerHTML = msg; setTimeout(()=> btn.innerHTML = original, 1400); };
+  navigator.clipboard.writeText(texto).then(()=> avisar('Copiado!')).catch(()=>{
+    const temp = document.createElement('textarea');
+    temp.value = texto;
+    temp.style.position = 'fixed'; temp.style.opacity = '0';
+    document.body.appendChild(temp);
+    temp.select();
+    try{ document.execCommand('copy'); avisar('Copiado!'); }catch(e){}
+    document.body.removeChild(temp);
+  });
+}
+const postitMenuFormatos = document.getElementById('postitMenuFormatos');
+postitMenuFormatos.querySelectorAll('button').forEach(b=>{
+  b.onclick = ()=>{
+    postitMenuFormatos.hidden = true;
+    const emLista = postit.classList.contains('modo-lista');
+    const corpo = emLista ? _postitItens.map(it=>(it.feito?'[x] ':'[ ] ')+it.texto).join('\n').trim() : postitTexto.value.trim();
+    const titulo = 'Post-it';
+    const formato = b.dataset.formato;
+    const nomeArq = titulo.replace(/[\\/:*?"<>|]/g,'-');
+    if(formato==='texto'){
+      baixarArquivo(`${titulo}\n\n${corpo}`, nomeArq+'.txt');
+      copiar(`${titulo}\n\n${corpo}`);
+    } else if(formato==='markdown'){
+      baixarArquivo(`# ${titulo}\n\n${corpo}`, nomeArq+'.md');
+      copiar(`# ${titulo}\n\n${corpo}`);
+    } else if(formato==='html'){
+      baixarArquivo(paginaHtml(titulo, `<p>${corpo.replace(/\n/g,'<br>')}</p>`), nomeArq+'.html', 'text/html;charset=utf-8');
+      copiar(`<h1>${titulo}</h1>\n<p>${corpo.replace(/\n/g,'<br>')}</p>`);
+    } else if(formato==='opml'){
+      const opml = `<?xml version="1.0" encoding="UTF-8"?>\n<opml version="2.0"><head><title>${titulo}</title></head><body>\n<outline text="${titulo}"><outline text="${corpo.replace(/"/g,'&quot;')}"/></outline>\n</body></opml>`;
+      baixarArquivo(opml, nomeArq+'.opml', 'text/x-opml;charset=utf-8');
+      copiar(opml);
+    } else if(formato==='jpg'){
+      const dataUrl = notaComoJpg(titulo, corpo, '');
+      fetch(dataUrl).then(r=>r.blob()).then(blob=> baixarBlob(blob, nomeArq+'.jpg'));
+    } else if(formato==='pdf'){
+      const janela = window.open('', '_blank');
+      if(!janela){ showToast('O navegador bloqueou a janela de impressão — permita pop-ups pra este site.'); return; }
+      janela.document.write(`<title>${titulo}</title><body style="font-family:'EB Garamond',serif;padding:40px;max-width:640px;margin:0 auto"><h1>${titulo}</h1><p style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:18px;line-height:1.8;white-space:pre-wrap">${corpo}</p></body>`);
+      janela.document.close();
+      janela.print();
+    }
+  };
+});
+document.getElementById('postitBtnEnviar').onclick = e=>{
+  e.stopPropagation();
   const emLista = postit.classList.contains('modo-lista');
-  const corpo = emLista ? _postitItens.map(it=>(it.feito?'[x] ':'[ ] ')+it.texto).join('\n').trim() : postitTexto.value.trim();
-  if(!corpo) return;
-  navigator.clipboard.writeText(corpo).then(()=> showToast('Copiado')).catch(()=> showToast('Não consegui copiar'));
+  const vazio = emLista ? !_postitItens.some(it=>(it.texto||'').trim()) : !postitTexto.value.trim();
+  if(vazio) return;
+  postitMenuFormatos.hidden = !postitMenuFormatos.hidden;
 };
+postitMenuFormatos.addEventListener('click', e=> e.stopPropagation());
+document.addEventListener('click', ()=>{ postitMenuFormatos.hidden = true; });
 
 // abrir direto numa rádio ou cidade se o link veio com ?radio= ou ?cidade=
 (function openFromURL(){
