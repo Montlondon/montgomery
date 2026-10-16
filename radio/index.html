@@ -708,7 +708,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.36</div>
+<div id="versionTag">v1.37</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -3056,6 +3056,8 @@ btnYoutube.addEventListener('click', (e)=>{
   const menu = document.createElement('ul');
   menu.className = 'yt-menu fav-cat-menu';
   menu.style.position = 'fixed';
+  menu.style.top = 'auto';
+  menu.style.right = 'auto';
   const rect = btnYoutube.getBoundingClientRect();
   menu.style.left = rect.left + 'px';
   menu.style.bottom = (innerHeight - rect.top + 8) + 'px';
