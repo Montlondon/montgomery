@@ -82,7 +82,7 @@
   #hint svg{opacity:.6;}
 
   #rotateBtn{
-    position:fixed; left:50%; bottom:22px; transform:translateX(-50%);
+    position:fixed; right:16px; bottom:34px;
     width:30px; height:30px; border-radius:50%;
     background:rgba(16,20,31,0.6); border:1px solid var(--line);
     color:var(--ink-dim); cursor:pointer;
@@ -266,9 +266,13 @@
   .stations li.playing .go{color:#e8735a;}
 
   #nowPlaying{
+    position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
+    width:min(380px, 88vw);
     display:flex; align-items:center; gap:12px;
-    padding:14px 4px; margin-top:4px;
-    border-top:1px solid var(--line);
+    padding:10px 14px;
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    z-index:12;
   }
   #nowPlaying[hidden]{display:none;}
   #nowPlaying .icon-btn{
@@ -474,25 +478,26 @@
   <p class="place-country" id="placeCountry"></p>
   <h2 class="place-title" id="placeTitle"></h2>
   <ul class="stations" id="stationList"></ul>
-  <div id="nowPlaying" hidden>
-    <button class="icon-btn" id="playPauseBtn" aria-label="Tocar ou pausar"></button>
-    <div class="np-info">
-      <div class="np-name" id="npName"></div>
-      <div class="np-city" id="npCity"></div>
-    </div>
-    <button class="np-stop" id="npShare" aria-label="Compartilhar esta rádio">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>
-    </button>
-    <button class="np-stop" id="npStop" aria-label="Parar">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>
-    </button>
-  </div>
-  <audio id="radioAudio" preload="none"></audio>
   <p class="note">toque numa rádio pra ouvir direto aqui, sem sair da página — áudio ao vivo direto da fonte pública de cada estação.
   <span id="blockedNote"></span></p>
 </aside>
+
+<div id="nowPlaying" hidden>
+  <button class="icon-btn" id="playPauseBtn" aria-label="Tocar ou pausar"></button>
+  <div class="np-info">
+    <div class="np-name" id="npName"></div>
+    <div class="np-city" id="npCity"></div>
+  </div>
+  <button class="np-stop" id="npShare" aria-label="Compartilhar esta rádio">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>
+  </button>
+  <button class="np-stop" id="npStop" aria-label="Parar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>
+  </button>
+</div>
+<audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.3</div>
+<div id="versionTag">v1.4</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
