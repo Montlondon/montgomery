@@ -664,7 +664,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.16</div>
+<div id="versionTag">v1.17</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1622,8 +1622,11 @@ function updateLabels(){
     const x = (proj.x + 1) / 2 * innerWidth;
     const y = (1 - proj.y) / 2 * innerHeight;
     const fade = Math.min(1, (facing - nearThreshold) / (farThreshold - nearThreshold));
-    item.el.style.transform = 'translate(-50%, -160%) translate('+x+'px,'+y+'px)';
-    item.el.style.opacity = String(fade);
+    // perto da borda do globo (facing baixo) o rótulo encolhe e some mais rápido —
+    // dá a sensação de estar preso na curva da esfera, não flutuando solto na tela
+    const scale = 0.5 + 0.5 * fade;
+    item.el.style.transform = 'translate(-50%, -120%) translate('+x+'px,'+y+'px) scale('+scale+')';
+    item.el.style.opacity = String(fade * fade);
   }
 
   cityLabels.forEach(item => place(item, 0.08, 0.4));
