@@ -692,7 +692,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.27</div>
+<div id="versionTag">v1.28</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1577,6 +1577,56 @@ sun.position.set(5, 2.4, 4);
 scene.add(sun);
 const ambient = new THREE.AmbientLight(0x8fa0c8, 0.55);
 scene.add(ambient);
+
+// o Sol visível, bem ao longe, na mesma direção de onde vem a luz — parado,
+// só um disco quente com halo, sem pesar textura nenhuma
+const sunDir = sun.position.clone().normalize();
+const sunMesh = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: (()=>{
+    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(64,64,0,64,64,64);
+    g.addColorStop(0, 'rgba(255,244,224,1)');
+    g.addColorStop(0.25, 'rgba(255,214,140,0.9)');
+    g.addColorStop(1, 'rgba(255,214,140,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,128,128);
+    return new THREE.CanvasTexture(c);
+  })(),
+  transparent: true, depthWrite: false,
+}));
+sunMesh.position.copy(sunDir.clone().multiplyScalar(38));
+sunMesh.scale.setScalar(9);
+scene.add(sunMesh);
+
+// a Lua: orbita o planeta não num círculo plano, mas numa trajetória
+// helicoidal — como o sistema solar de verdade viaja em espiral pelo espaço,
+// não gira parado no mesmo lugar
+const moonTex = (()=>{
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(24,24,0,32,32,32);
+  g.addColorStop(0, '#f4f1ea'); g.addColorStop(1, '#9b9892');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(32,32,30,0,Math.PI*2); ctx.fill();
+  return new THREE.CanvasTexture(c);
+})();
+const moonMesh = new THREE.Mesh(
+  new THREE.SphereGeometry(R*0.22, 24, 16),
+  new THREE.MeshPhongMaterial({map: moonTex, shininess: 2})
+);
+scene.add(moonMesh);
+const moonGlow = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: (()=>{
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(32,32,0,32,32,32);
+    g.addColorStop(0, 'rgba(230,230,240,0.5)'); g.addColorStop(1, 'rgba(230,230,240,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,64,64);
+    return new THREE.CanvasTexture(c);
+  })(),
+  transparent: true, depthWrite: false,
+}));
+moonGlow.scale.setScalar(R*0.6);
+moonMesh.add(moonGlow);
 
 // grade de meridianos e paralelos de verdade — círculos limpos, não o
 // triangulado bruto de um wireframe de esfera (aquilo criava diagonais feias)
@@ -2897,6 +2947,17 @@ function animate(){
       o.scale.setScalar(o.userData.baseScale * pulse);
     }
   });
+  // a lua desenha uma espiral ao redor do globo — gira em volta e ao mesmo
+  // tempo sobe e desce, como o caminho helicoidal do sistema Sol-Terra-Lua
+  // de verdade avançando pelo espaço, não um círculo plano parado
+  const moonT = performance.now()*0.00011;
+  const moonOrbitR = R*2.3;
+  moonMesh.position.set(
+    Math.cos(moonT) * moonOrbitR,
+    Math.sin(moonT*0.37) * R*0.9,
+    Math.sin(moonT) * moonOrbitR
+  );
+
   updateLabels();
   renderer.render(scene, camera);
 }
