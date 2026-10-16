@@ -130,10 +130,28 @@
     border-bottom:none; color:var(--gold); font-size:0.75rem; letter-spacing:0.04em;
     text-transform:uppercase; padding:14px 2px 4px; opacity:0.85;
   }
-  #favStationsList .fav-cat-select{
-    flex:none; max-width:108px; background:none; border:1px solid var(--line); color:var(--ink-dim);
-    font-family:'Inter',sans-serif; font-size:0.72rem; border-radius:6px; padding:4px 2px; cursor:pointer;
+  .fav-cat-dropdown{position:relative; flex:none;}
+  .fav-cat-btn{
+    max-width:108px; background:none; border:1px solid var(--line); color:var(--ink-dim);
+    font-family:'Inter',sans-serif; font-size:0.72rem; border-radius:6px; padding:5px 8px; cursor:pointer;
+    display:flex; align-items:center; gap:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
+  .fav-cat-btn:hover, .fav-cat-btn.open{border-color:var(--gold-dim); color:var(--gold);}
+  .fav-cat-btn svg{flex:none; transition:transform .15s;}
+  .fav-cat-btn.open svg{transform:rotate(180deg);}
+  .fav-cat-menu{
+    position:absolute; top:calc(100% + 6px); right:0; z-index:20; min-width:150px;
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:6px; box-shadow:0 10px 30px rgba(0,0,0,.4); list-style:none; margin:0;
+  }
+  .fav-cat-menu li{border:none; display:block;}
+  .fav-cat-menu button{
+    width:100%; text-align:left; background:none; border:none; color:var(--ink);
+    font-family:'Inter',sans-serif; font-size:0.82rem; padding:8px 10px; border-radius:6px; cursor:pointer;
+  }
+  .fav-cat-menu button:hover{background:var(--line); color:var(--gold);}
+  .fav-cat-menu button.active{color:var(--gold);}
+  .fav-cat-menu .new-cat{color:var(--ink-dim); border-top:1px solid var(--line); margin-top:4px; border-radius:0 0 6px 6px;}
   .sr-fav{
     flex:none; width:auto; background:none; border:none; color:var(--ink-dim);
     padding:10px; cursor:pointer; display:flex; align-items:center;
@@ -506,7 +524,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.7</div>
+<div id="versionTag">v1.8</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1743,28 +1761,54 @@ function renderFavStationsList(){
         playStation({city: st.title, country: st.country || 'mundo'}, {title: st.title, url: st.url}, null);
       });
 
-      const catSelect = document.createElement('select');
-      catSelect.className = 'fav-cat-select';
-      catSelect.setAttribute('aria-label', 'Categoria de '+st.title);
-      const optNone = document.createElement('option');
-      optNone.value = ''; optNone.textContent = 'sem categoria';
-      catSelect.appendChild(optNone);
-      categories.forEach(c=>{
-        const opt = document.createElement('option');
-        opt.value = c; opt.textContent = c;
-        if (c === st.category) opt.selected = true;
-        catSelect.appendChild(opt);
-      });
-      const optNew = document.createElement('option');
-      optNew.value = '__nova__'; optNew.textContent = '+ nova categoria…';
-      catSelect.appendChild(optNew);
-      catSelect.addEventListener('change', ()=>{
-        if (catSelect.value === '__nova__'){
+      const catDropdown = document.createElement('div');
+      catDropdown.className = 'fav-cat-dropdown';
+      const catBtn = document.createElement('button');
+      catBtn.type = 'button';
+      catBtn.className = 'fav-cat-btn';
+      catBtn.setAttribute('aria-label', 'Categoria de '+st.title);
+      catBtn.innerHTML = '<span class="fav-cat-label">'+(st.category || 'sem categoria')+'</span>'+
+        '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>';
+      catDropdown.appendChild(catBtn);
+      catBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        document.querySelectorAll('.fav-cat-menu').forEach(m=> m.remove());
+        document.querySelectorAll('.fav-cat-btn.open').forEach(b=> b.classList.remove('open'));
+        const menu = document.createElement('ul');
+        menu.className = 'fav-cat-menu';
+        const optNone = document.createElement('li');
+        const btnNone = document.createElement('button');
+        btnNone.type = 'button'; btnNone.textContent = 'sem categoria';
+        if (!st.category) btnNone.className = 'active';
+        btnNone.addEventListener('click', ()=>{ setStationCategory(st.url, ''); menu.remove(); });
+        optNone.appendChild(btnNone);
+        menu.appendChild(optNone);
+        categories.forEach(c=>{
+          const li = document.createElement('li');
+          const b = document.createElement('button');
+          b.type = 'button'; b.textContent = c;
+          if (c === st.category) b.className = 'active';
+          b.addEventListener('click', ()=>{ setStationCategory(st.url, c); menu.remove(); });
+          li.appendChild(b);
+          menu.appendChild(li);
+        });
+        const liNew = document.createElement('li');
+        const btnNew = document.createElement('button');
+        btnNew.type = 'button'; btnNew.className = 'new-cat'; btnNew.textContent = '+ nova categoria…';
+        btnNew.addEventListener('click', ()=>{
           const nome = (window.prompt('Nome da nova categoria:') || '').trim();
-          setStationCategory(st.url, nome);
-        } else {
-          setStationCategory(st.url, catSelect.value);
-        }
+          if (nome) setStationCategory(st.url, nome);
+          menu.remove();
+        });
+        liNew.appendChild(btnNew);
+        menu.appendChild(liNew);
+        catDropdown.appendChild(menu);
+        catBtn.classList.add('open');
+        document.addEventListener('click', function closeMenu(){
+          menu.remove();
+          catBtn.classList.remove('open');
+          document.removeEventListener('click', closeMenu);
+        }, {once:true});
       });
 
       const unfav = document.createElement('button');
