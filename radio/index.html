@@ -281,13 +281,13 @@
     box-shadow:0 8px 28px rgba(0,0,0,0.45);
     z-index:12;
   }
-  #dockFav, #dockRotate{
+  #dockFav, #dockRotate, #btnPostit{
     flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
     width:34px; height:34px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     transition:color .15s ease, background .15s ease;
   }
-  #dockFav:hover, #dockRotate:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
+  #dockFav:hover, #dockRotate:hover, #btnPostit:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
   #dock > .dock-sep{flex:none; width:1px; height:22px; background:var(--line);}
   #dockIdleHint{
     flex:1; min-width:0; text-align:center;
@@ -348,6 +348,81 @@
     text-align:center;
     z-index:4;
   }
+
+  /* Post-it — motor copiado idêntico do MontyMap/Via Láctea (papel amarelo de verdade) */
+  #postit{position:fixed; z-index:120; right:18px; bottom:84px; width:230px; min-height:190px;
+    background:#f6e58d; color:#4a4020; border-radius:3px; box-shadow:3px 6px 18px rgba(0,0,0,.4);
+    padding:16px 16px 12px; display:none; flex-direction:column; transition:background .3s;
+    font-family:'Inter',sans-serif;
+  }
+  #postit.aberto{display:flex;}
+  #postit.expandido{background:#fdfcf9; top:24px; right:60px; left:60px; bottom:24px; width:auto; min-height:0;}
+  #postit.expandido textarea{font-size:19px; line-height:1.6;}
+  #postit textarea{flex:1; width:100%; resize:none; border:none; background:transparent;
+    font-family:'Atkinson Hyperlegible',sans-serif; font-weight:500; font-size:15px;
+    color:inherit; outline:none; line-height:1.4;
+  }
+  #postit .postit-topo{display:flex; justify-content:space-between; align-items:center;
+    font-size:11px; text-transform:uppercase; letter-spacing:.06em; opacity:.7; margin-bottom:8px;
+  }
+  .postit-carimbo{display:inline-block; margin-left:8px; text-transform:none; letter-spacing:0; opacity:.6; font-size:10px;}
+  #postit .postit-topo button{background:none; border:none; color:inherit; cursor:pointer;
+    font-size:11px; text-decoration:underline; opacity:.8; padding:0; width:auto; position:relative;
+  }
+  #postitNotasBadge:not(:empty){display:inline-flex; margin-left:3px; background:#8a7a3a; color:#f6e58d;
+    border-radius:8px; padding:0 5px; font-size:9px; text-decoration:none;
+  }
+  #postitMenuNotas{position:absolute; top:34px; right:16px; z-index:10; max-width:200px;
+    background:#fdfaf2; border:1px solid rgba(90,74,30,.3); border-radius:8px; padding:6px;
+    list-style:none; margin:0; box-shadow:0 8px 24px rgba(0,0,0,.35);
+  }
+  #postitMenuNotas li{border:none;}
+  #postitMenuNotas button{display:block; width:100%; text-align:left; border:none; background:none;
+    color:#3a3120; padding:8px 10px; font-size:12px; border-radius:6px; text-decoration:none!important;
+    text-transform:none; letter-spacing:0; cursor:pointer;
+  }
+  #postitMenuNotas button:hover{background:rgba(90,74,30,.1);}
+  @media (max-width:760px){
+    #postit{left:16px; right:16px; width:auto;}
+    #postit.expandido{top:40px; bottom:40px; left:20px; right:20px;}
+  }
+  #postit-idioma{background:none; border:none; cursor:pointer; font-size:9px; font-weight:700; opacity:.6; padding:0 0 0 6px;}
+  .postit-lista{flex:1; width:100%; overflow-y:auto; display:none; flex-direction:column; gap:2px;}
+  #postit.modo-lista .postit-lista{display:flex;}
+  #postit.modo-lista textarea{display:none;}
+  .postit-item{display:flex; align-items:flex-start; gap:8px; padding:4px 0;}
+  .postit-item-check{flex-shrink:0; width:19px; height:19px; border-radius:50%; border:1.5px solid rgba(74,64,32,.45);
+    background:none; cursor:pointer; margin-top:1px; display:flex; align-items:center; justify-content:center; padding:0;
+  }
+  .postit-item-check svg{width:12px; height:12px; opacity:0; stroke:#f6e58d;}
+  .postit-item.feito .postit-item-check{background:#8a7a3a; border-color:#8a7a3a;}
+  .postit-item.feito .postit-item-check svg{opacity:1;}
+  .postit-item input{flex:1; border:none; background:transparent; font-family:'Atkinson Hyperlegible',sans-serif;
+    font-weight:500; font-size:15px; color:inherit; outline:none;
+  }
+  #postit.expandido .postit-item input{font-size:19px;}
+  .postit-item.feito input{opacity:.5; text-decoration:line-through;}
+  .postit-item-del{flex-shrink:0; width:18px; height:18px; border:none; background:none; color:inherit; opacity:0;
+    cursor:pointer; padding:0; display:flex; align-items:center; justify-content:center;
+  }
+  .postit-item:hover .postit-item-del{opacity:.5;}
+  .postit-item-del:hover{opacity:1!important;}
+  .postit-item-del svg{width:13px; height:13px;}
+  .postit-add{background:none; border:none; color:inherit; opacity:.55; cursor:pointer; text-align:left;
+    font-family:'Atkinson Hyperlegible',sans-serif; font-size:14px; padding:6px 0 0 27px;
+  }
+  .postit-add:hover{opacity:.9;}
+  .postit-rodape{display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px;
+    border-top:1px solid rgba(74,64,32,.2);
+  }
+  .postit-rodape-btn{background:none; border:1px solid rgba(74,64,32,.3); border-radius:14px;
+    color:inherit; font-family:'Inter',sans-serif; font-size:12px; padding:5px 10px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:5px;
+  }
+  .postit-rodape-btn:hover{background:rgba(74,64,32,.08);}
+  .postit-acao-so-expandido{display:none!important;}
+  #postit.expandido .postit-acao-so-expandido{display:inline-flex!important;}
+  #postitMic.ouvindo{border-color:#a8462f!important; color:#a8462f!important; background:rgba(168,70,47,.08)!important;}
 
   #versionTag{
     position:fixed; left:16px; bottom:10px;
@@ -493,6 +568,13 @@
   </div>
   <div id="dockIdleHint">nada tocando</div>
   <div class="dock-sep"></div>
+  <button id="btnPostit" aria-label="Post-it — anotar uma ideia rápida" title="Post-it">
+    <svg viewBox="0 0 24 24" width="17" height="17">
+      <path d="M4 3h13l3 3v15H4Z" fill="#f6e58d" stroke="#ab9a4e" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M17 3v3h3" fill="none" stroke="#ab9a4e" stroke-width="1" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <div class="dock-sep"></div>
   <button id="dockRotate" aria-label="Girar ou parar o globo"></button>
 </div>
 
@@ -529,9 +611,36 @@
   <span id="blockedNote"></span></p>
 </aside>
 
+<div id="postit">
+  <div class="postit-topo">
+    <span>Post-it<span id="postitCarimbo" class="postit-carimbo" hidden></span></span>
+    <div>
+      <button type="button" id="postitNotas" title="Ver notas guardadas">notas<span id="postitNotasBadge" hidden></span></button>
+      <button type="button" id="postitModo" title="Trocar entre texto livre e lista com caixinha">virar lista</button>
+      <button type="button" id="postitExpandir" title="Crescer a folha">expandir</button>
+      <button type="button" id="postitGuardar" title="Guardar esta ideia numa lista separada">guardar</button>
+      <button type="button" id="postitFechar">fechar</button>
+    </div>
+  </div>
+  <ul id="postitMenuNotas" hidden></ul>
+  <textarea id="postitTexto" placeholder="A ideia veio de uma vez? Escreve aqui..."></textarea>
+  <div id="postitLista" class="postit-lista"></div>
+  <div class="postit-rodape">
+    <button type="button" class="postit-rodape-btn" id="postitMic" title="Ditar">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 11a7 7 0 0 1-14 0"/><path d="M12 18v4M9 22h6"/></svg>
+      Ditar
+    </button>
+    <button type="button" id="postitIdioma" class="postit-acao-so-expandido" title="Idioma do ditado">PT</button>
+    <button type="button" class="postit-rodape-btn postit-acao-so-expandido" id="postitCopiar" style="margin-left:auto" title="Copiar o texto">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/></svg>
+      Copiar
+    </button>
+  </div>
+</div>
+
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.12</div>
+<div id="versionTag">v1.13</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2113,6 +2222,257 @@ async function runSearch(q){
 document.addEventListener('click', (e)=>{
   if (!searchResults.contains(e.target) && e.target !== searchInput) searchResults.classList.remove('open');
 });
+
+// ---------- Post-it — motor copiado idêntico do MontyMap, captura rápida de ideia ----------
+function esc(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+const MIC_IDIOMAS = [['pt-BR','PT'],['fr-FR','FR'],['en-US','EN']];
+let micIdiomaAtual = localStorage.getItem('radio_mic_idioma') || 'pt-BR';
+function micSuportado(){ return !!(window.SpeechRecognition||window.webkitSpeechRecognition); }
+function micIdiomaAtualizarBotao(){
+  const item = MIC_IDIOMAS.find(x=>x[0]===micIdiomaAtual);
+  const rotulo = item ? item[1] : 'PT';
+  const el = document.getElementById('postitIdioma');
+  if (el) el.textContent = rotulo;
+}
+function micIdiomaAlternar(){
+  const idx = MIC_IDIOMAS.findIndex(x=>x[0]===micIdiomaAtual);
+  micIdiomaAtual = MIC_IDIOMAS[(idx+1)%MIC_IDIOMAS.length][0];
+  try{ localStorage.setItem('radio_mic_idioma', micIdiomaAtual); }catch(e){}
+  micIdiomaAtualizarBotao();
+}
+document.getElementById('postitIdioma').onclick = micIdiomaAlternar;
+micIdiomaAtualizarBotao();
+
+const postit = document.getElementById('postit');
+const postitTexto = document.getElementById('postitTexto');
+const btnPostit = document.getElementById('btnPostit');
+function postitAlternar(ev){
+  if(ev) ev.stopPropagation();
+  postit.classList.toggle('aberto');
+  if(postit.classList.contains('aberto')) postitTexto.focus();
+}
+btnPostit.onclick = postitAlternar;
+postit.addEventListener('click', e=> e.stopPropagation());
+let _postitRascunhoTimer = null;
+postitTexto.addEventListener('input', ()=>{
+  if(_notaEditandoId){
+    const notas=_notasLer();
+    const idx=notas.findIndex(n=>n.id===_notaEditandoId);
+    if(idx>=0){ notas[idx].textoLivre=postitTexto.value; _notasGravar(notas); }
+  } else {
+    clearTimeout(_postitRascunhoTimer);
+    _postitRascunhoTimer = setTimeout(()=>{
+      try{ localStorage.setItem('radioPostitRascunho', postitTexto.value); }catch(e){}
+    }, 800);
+  }
+});
+document.getElementById('postitFechar').onclick = ()=>{
+  postit.classList.remove('aberto','expandido');
+  if(_notaEditandoId){
+    _notaEditandoId=null;
+    try{ _postitItens=JSON.parse(localStorage.getItem('radioPostitItens')||'[]'); }catch(e){ _postitItens=[]; }
+    postitTexto.value='';
+    postit.classList.remove('modo-lista');
+    document.getElementById('postitModo').textContent='virar lista';
+    postitRenderLista();
+    postitAtualizarCarimbo(null);
+  }
+};
+document.getElementById('postitExpandir').onclick = function(){
+  postit.classList.toggle('expandido');
+  this.textContent = postit.classList.contains('expandido') ? 'encolher' : 'expandir';
+  postitTexto.focus();
+};
+const postitLista = document.getElementById('postitLista');
+let _postitItens = [];
+try{ _postitItens = JSON.parse(localStorage.getItem('radioPostitItens')||'[]'); }catch(e){ _postitItens=[]; }
+try{ const r=localStorage.getItem('radioPostitRascunho'); if(r) postitTexto.value=r; }catch(e){}
+let _postitFocoId = null;
+let _notaEditandoId = null;
+function _notasLer(){ try{ return JSON.parse(localStorage.getItem('radioNotasGuardadas')||'[]'); }catch(e){ return []; } }
+function _notasGravar(v){ try{ localStorage.setItem('radioNotasGuardadas', JSON.stringify(v)); }catch(e){} }
+function _notaTitulo(n){
+  if(n.modo==='lista'){
+    const primeiro=(n.itens||[]).find(it=>(it.texto||'').trim());
+    return primeiro?primeiro.texto.trim():'nota vazia';
+  }
+  return (n.textoLivre||'').trim().slice(0,40)||'nota vazia';
+}
+function postitAtualizarBadge(){
+  const n=_notasLer().length;
+  const badge=document.getElementById('postitNotasBadge');
+  badge.hidden=!n; badge.textContent=n;
+}
+function renderMenuNotas(){
+  const menu=document.getElementById('postitMenuNotas');
+  const notas=_notasLer();
+  if(!notas.length){ menu.innerHTML='<li style="padding:6px 10px;opacity:.6;font-size:12px">Nenhuma nota guardada ainda.</li>'; return; }
+  menu.innerHTML=notas.map(n=>'<li><button type="button" onclick="abrirNotaSolta(\''+n.id+'\')">'+esc(_notaTitulo(n))+'</button></li>').join('');
+}
+document.getElementById('postitNotas').onclick = e=>{
+  e.stopPropagation();
+  const menu=document.getElementById('postitMenuNotas');
+  renderMenuNotas();
+  menu.hidden = !menu.hidden;
+};
+document.getElementById('postitMenuNotas').addEventListener('click', e=> e.stopPropagation());
+document.addEventListener('click', ()=>{ const m=document.getElementById('postitMenuNotas'); if(m) m.hidden = true; });
+function postitAtualizarCarimbo(nota){
+  const el=document.getElementById('postitCarimbo');
+  if(nota&&nota.criadoQuando){ el.hidden=false; el.textContent=nota.criadoQuando; }
+  else el.hidden=true;
+}
+function abrirNotaSolta(id){
+  const nota=_notasLer().find(n=>n.id===id);
+  if(!nota) return;
+  _notaEditandoId=id;
+  _postitItens=JSON.parse(JSON.stringify(nota.itens||[]));
+  postitTexto.value=nota.textoLivre||'';
+  postit.classList.toggle('modo-lista', nota.modo==='lista');
+  document.getElementById('postitModo').textContent = nota.modo==='lista' ? 'virar texto' : 'virar lista';
+  postit.classList.add('aberto');
+  document.getElementById('postitMenuNotas').hidden=true;
+  postitRenderLista();
+  postitAtualizarCarimbo(nota);
+}
+document.getElementById('postitGuardar').onclick = ()=>{
+  const emLista = postit.classList.contains('modo-lista');
+  const vazio = emLista ? !_postitItens.some(it=>(it.texto||'').trim()) : !postitTexto.value.trim();
+  if(vazio) return;
+  const notas=_notasLer();
+  if(_notaEditandoId){
+    const idx=notas.findIndex(n=>n.id===_notaEditandoId);
+    if(idx>=0){ notas[idx].modo=emLista?'lista':'texto'; notas[idx].itens=emLista?_postitItens:[]; notas[idx].textoLivre=emLista?'':postitTexto.value; }
+  }else{
+    const nota={id:'nota'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),
+      modo:emLista?'lista':'texto', itens:emLista?_postitItens:[], textoLivre:emLista?'':postitTexto.value, criado:Date.now(),
+      criadoQuando:new Date().toLocaleString('pt-BR').replace(', ',' - ')};
+    notas.push(nota);
+    _notaEditandoId=nota.id;
+    postitAtualizarCarimbo(nota);
+  }
+  _notasGravar(notas);
+  postitAtualizarBadge();
+  try{ localStorage.removeItem('radioPostitRascunho'); }catch(e){}
+  showToast('Guardada');
+};
+function postitSalvarItens(){
+  if(_notaEditandoId){
+    const notas=_notasLer();
+    const idx=notas.findIndex(n=>n.id===_notaEditandoId);
+    if(idx>=0){ notas[idx].itens=_postitItens; _notasGravar(notas); }
+    return;
+  }
+  try{ localStorage.setItem('radioPostitItens', JSON.stringify(_postitItens)); }catch(e){}
+}
+function postitRenderLista(){
+  postitLista.innerHTML = _postitItens.map(it=>
+    '<div class="postit-item'+(it.feito?' feito':'')+'" data-id="'+it.id+'">'
+    +'<button type="button" class="postit-item-check" onclick="postitItemMarcar(\''+it.id+'\')" aria-label="Marcar"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></button>'
+    +'<input value="'+esc(it.texto)+'" id="postitItem'+it.id+'" oninput="postitItemEditar(\''+it.id+'\',this.value)" onfocus="_postitFocoId=\''+it.id+'\'" onkeydown="postitItemTecla(event,\''+it.id+'\')" placeholder="novo item">'
+    +'<button type="button" class="postit-item-del" onclick="postitItemApagar(\''+it.id+'\')" aria-label="Apagar item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>'
+    +'</div>'
+  ).join('') + '<button type="button" class="postit-add" onclick="postitItemNovo()">+ item</button>';
+}
+function postitItemNovo(){
+  const id = 'pi'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+  _postitItens.push({id, texto:'', feito:false});
+  postitSalvarItens(); postitRenderLista();
+  requestAnimationFrame(()=>{ const el=document.getElementById('postitItem'+id); if(el) el.focus(); });
+  return id;
+}
+function postitItemEditar(id, v){
+  const it = _postitItens.find(x=>x.id===id); if(!it) return;
+  it.texto = v; postitSalvarItens();
+}
+function postitItemMarcar(id){
+  const it = _postitItens.find(x=>x.id===id); if(!it) return;
+  it.feito = !it.feito; postitSalvarItens(); postitRenderLista();
+}
+function postitItemApagar(id){
+  _postitItens = _postitItens.filter(x=>x.id!==id);
+  postitSalvarItens(); postitRenderLista();
+}
+function postitItemTecla(ev, id){
+  if(ev.key==='Enter'){ ev.preventDefault(); postitItemNovo(); }
+  else if(ev.key==='Backspace' && !ev.target.value){
+    ev.preventDefault();
+    const idx = _postitItens.findIndex(x=>x.id===id);
+    postitItemApagar(id);
+    const anterior = _postitItens[idx-1];
+    if(anterior) requestAnimationFrame(()=>{ const el=document.getElementById('postitItem'+anterior.id); if(el){ el.focus(); el.setSelectionRange(el.value.length, el.value.length); } });
+  }
+}
+document.getElementById('postitModo').onclick = function(){
+  const paraLista = !postit.classList.contains('modo-lista');
+  postit.classList.toggle('modo-lista', paraLista);
+  this.textContent = paraLista ? 'virar texto' : 'virar lista';
+  if(_notaEditandoId){
+    const notas=_notasLer();
+    const idx=notas.findIndex(n=>n.id===_notaEditandoId);
+    if(idx>=0){ notas[idx].modo=paraLista?'lista':'texto'; _notasGravar(notas); }
+  }
+  if(paraLista){ if(!_postitItens.length) postitItemNovo(); else postitRenderLista(); }
+  else postitTexto.focus();
+};
+postitRenderLista();
+postitAtualizarBadge();
+
+// microfone do post-it — mesmo motor de sempre (uma frase por vez, religa sozinho)
+let postitGravando = false, postitReco = null, postitBase = '', postitAlvoAtual = postitTexto;
+const postitMic = document.getElementById('postitMic');
+function postitAlvoEl(){
+  if(!postit.classList.contains('modo-lista')) return postitTexto;
+  if(_postitFocoId && _postitItens.find(x=>x.id===_postitFocoId)) return document.getElementById('postitItem'+_postitFocoId);
+  return document.getElementById('postitItem'+postitItemNovo());
+}
+function postitMicRodada(){
+  const Motor = window.SpeechRecognition||window.webkitSpeechRecognition;
+  postitReco = new Motor();
+  postitReco.lang = micIdiomaAtual;
+  postitReco.continuous = false; postitReco.interimResults = true;
+  postitReco.onresult = ev=>{
+    let final='', interim='';
+    for(let i=0;i<ev.results.length;i++){
+      const t = ev.results[i][0].transcript;
+      if(ev.results[i].isFinal) final+=t; else interim+=t;
+    }
+    const base = postitBase ? postitBase.replace(/\s+$/,'')+' ' : '';
+    postitAlvoAtual.value = base+(final.trim()+(interim?' '+interim.trim():'')).trim();
+    postitAlvoAtual.dispatchEvent(new Event('input', {bubbles:true}));
+  };
+  postitReco.onend = ()=>{
+    if(!postitGravando) return;
+    postitBase = postitAlvoAtual.value;
+    postitMicRodada();
+  };
+  postitReco.onerror = ev=>{
+    postitGravando=false; postitMic.classList.remove('ouvindo');
+    if(ev.error==='not-allowed'||ev.error==='service-not-allowed'){
+      alert('O navegador bloqueou o microfone pra este site. Clique no ícone de cadeado/informações ao lado do endereço, procure "Microfone" e mude pra "Permitir".');
+    } else if(ev.error!=='no-speech' && ev.error!=='aborted'){
+      alert('O microfone parou com um erro: '+ev.error);
+    }
+  };
+  try{ postitReco.start(); }catch(e){ postitGravando=false; postitMic.classList.remove('ouvindo'); alert('Não consegui iniciar o microfone: '+e.message); }
+}
+postitMic.onclick = ()=>{
+  if(!micSuportado()){ alert('Este navegador não tem ditado por voz — funciona no Chrome e no Edge'); return; }
+  if(postitGravando){ postitGravando=false; postitMic.classList.remove('ouvindo'); return; }
+  postitAlvoAtual = postitAlvoEl();
+  postitBase = postitAlvoAtual.value;
+  postitGravando = true;
+  postitMic.classList.add('ouvindo');
+  postitMicRodada();
+};
+document.getElementById('postitCopiar').onclick = ()=>{
+  const emLista = postit.classList.contains('modo-lista');
+  const corpo = emLista ? _postitItens.map(it=>(it.feito?'[x] ':'[ ] ')+it.texto).join('\n').trim() : postitTexto.value.trim();
+  if(!corpo) return;
+  navigator.clipboard.writeText(corpo).then(()=> showToast('Copiado')).catch(()=> showToast('Não consegui copiar'));
+};
 
 // abrir direto numa rádio ou cidade se o link veio com ?radio= ou ?cidade=
 (function openFromURL(){
