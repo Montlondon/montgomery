@@ -2094,9 +2094,9 @@ document.getElementById('dockFav').addEventListener('click', ()=>{
   favPanel.classList.toggle('open');
 });
 
-async function encurtar(url){
+async function encurtar(url, nome){
   try {
-    const r = await fetch('/api/encurtar?url=' + encodeURIComponent(url));
+    const r = await fetch('/api/encurtar?url=' + encodeURIComponent(url) + (nome ? '&nome='+encodeURIComponent(nome) : ''));
     const data = await r.json();
     return data.short || url;
   } catch(e){
@@ -2111,7 +2111,7 @@ document.getElementById('npShare').addEventListener('click', async ()=>{
     '&nome=' + encodeURIComponent(activeStation.title) +
     '&cidade=' + encodeURIComponent((activePlace && activePlace.city) || npCity.textContent) +
     '&pais=' + encodeURIComponent((activePlace && activePlace.country) || '');
-  const shortLink = await encurtar(link);
+  const shortLink = await encurtar(link, activeStation.title);
   const text = 'Ouvindo "'+npName.textContent+'" ('+npCity.textContent+') no Montgomery Rádio — '+shortLink;
   window.open('https://wa.me/?text='+encodeURIComponent(text), '_blank', 'noopener');
 });
@@ -2119,7 +2119,7 @@ document.getElementById('npShare').addEventListener('click', async ()=>{
 shareBtn.addEventListener('click', async ()=>{
   if (!currentPlace) return;
   const url = location.origin + location.pathname + '?cidade=' + encodeURIComponent(currentPlace.city);
-  const shortLink = await encurtar(url);
+  const shortLink = await encurtar(url, currentPlace.city);
   const text = 'Rádios de '+currentPlace.city+' no Montgomery Rádio — '+shortLink;
   window.open('https://wa.me/?text='+encodeURIComponent(text), '_blank', 'noopener');
 });
