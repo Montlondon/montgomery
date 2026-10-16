@@ -469,6 +469,10 @@
     display:flex; flex-direction:column; align-items:center;
     white-space:nowrap;
     will-change:transform, opacity;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+    backface-visibility:hidden;
   }
   .city-label .name{
     font-family:'Inter',sans-serif;
@@ -674,7 +678,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.20</div>
+<div id="versionTag">v1.21</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1629,8 +1633,8 @@ function updateLabels(){
     if (facing < nearThreshold){ item.el.style.opacity = '0'; return; }
     const proj = world.clone().project(camera);
     if (proj.z > 1){ item.el.style.opacity = '0'; return; }
-    const x = (proj.x + 1) / 2 * innerWidth;
-    const y = (1 - proj.y) / 2 * innerHeight;
+    const x = Math.round((proj.x + 1) / 2 * innerWidth);
+    const y = Math.round((1 - proj.y) / 2 * innerHeight);
     const fade = Math.min(1, (facing - nearThreshold) / (farThreshold - nearThreshold));
     // perto da borda do globo (facing baixo) o rótulo encolhe e some mais rápido —
     // dá a sensação de estar preso na curva da esfera, não flutuando solto na tela
