@@ -346,6 +346,10 @@
   .city-label.is-home .name{
     color:#f0a190;
   }
+  .city-label.is-home{
+    pointer-events:auto; cursor:pointer;
+  }
+  .city-label.is-home .name:hover{ text-decoration:underline; }
   .city-label .country{
     font-family:'Inter',sans-serif;
     font-size:0.55rem;
@@ -472,7 +476,7 @@
   <span id="blockedNote"></span></p>
 </aside>
 <div id="toast"></div>
-<div id="versionTag">v1.0</div>
+<div id="versionTag">v1.2</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1394,8 +1398,17 @@ PLACES.forEach(place=>{
 
   const el = document.createElement('div');
   el.className = 'city-label' + (place.home ? ' is-home' : '');
-  const nome = place.home ? 'Montgomery Acupuntura, Quiropraxia e Psicanálise' : place.city;
-  el.innerHTML = '<span class="name">'+nome+'</span><span class="country">'+place.country+'</span>';
+  if (place.home){
+    el.innerHTML = '<span class="name">Montgomery Acupuntura</span><span class="country">Quiropraxia e Psicanálise</span>';
+  } else {
+    el.innerHTML = '<span class="name">'+place.city+'</span><span class="country">'+place.country+'</span>';
+  }
+  if (place.home){
+    el.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      window.open('https://linktr.ee/montgomerymagalhaes', '_blank', 'noopener');
+    });
+  }
   labelsContainer.appendChild(el);
   cityLabels.push({el, lat:place.lat, lon:place.lon});
 });
