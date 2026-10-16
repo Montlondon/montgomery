@@ -271,6 +271,12 @@
   .stations .name{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; transition:color .15s;}
   .stations .go{color:var(--ink-dim); flex:none;}
   .stations li.playing .go{color:#e8735a;}
+  #favStationsList .fav-dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--gold-dim); flex:none; margin-right:8px; transition:background .15s;
+  }
+  #favStationsList li.playing .fav-dot{background:#e8735a; box-shadow:0 0 0 3px rgba(232,115,90,0.25); animation:dotPulse 1.6s ease-in-out infinite;}
+  #favStationsList li.playing .fav-station-btn .name{color:#e8735a;}
 
   #dock{
     position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
@@ -658,7 +664,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.14</div>
+<div id="versionTag">v1.16</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1786,6 +1792,7 @@ function playStation(place, st, li, queue, queueIndex){
   audioStuck = false;
   audioEl.src = streamUrlFor(st);
   audioEl.play().catch(()=>{ if (!audioStuck) failStation(); });
+  renderFavStationsList();
 }
 function playQueueOffset(delta){
   if (activeQueue.length < 2) return;
@@ -1800,6 +1807,7 @@ function failStation(){
   setDockPlaying(false);
   activeLi = null; activeStation = null;
   audioEl.removeAttribute('src'); audioEl.load();
+  renderFavStationsList();
 }
 function stopStation(){
   audioEl.pause();
@@ -1808,6 +1816,7 @@ function stopStation(){
   if (activeLi) activeLi.classList.remove('playing');
   activeLi = null; activeStation = null;
   setDockPlaying(false);
+  renderFavStationsList();
 }
 let audioStuck = false;
 audioEl.addEventListener('play', updatePlayButton);
@@ -1856,6 +1865,7 @@ function toggleFavStation(station){
   else favStations = [{...station, category: ''}, ...favStations];
   saveFavStations(favStations);
   renderFavStationsList();
+  syncFavoritosNaNuvem();
 }
 
 // ---------- categorias das rádios favoritas ----------
@@ -1877,7 +1887,46 @@ function setStationCategory(url, category){
     saveCategories(categories);
   }
   renderFavStationsList();
+  syncFavoritosNaNuvem();
 }
+
+// ---------- sincronizar favoritas entre aparelhos (Supabase, uma linha só) ----------
+const SUPABASE_URL = 'https://eltjhrhrtuymejojxyhe.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVsdGpocmhydHV5bWVqb2p4eWhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NDUxODcsImV4cCI6MjA5NjAyMTE4N30.cEgQrQ-Svr61s2O9JTLytqHEL8BpPYZWjS6ZCrAop58';
+let _syncTimer = null;
+function syncFavoritosNaNuvem(){
+  clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(async ()=>{
+    try{
+      await fetch(SUPABASE_URL + '/rest/v1/radio_favoritos', {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'resolution=merge-duplicates'
+        },
+        body: JSON.stringify({ id: 'montgomery', dados: { favStations, categories }, atualizado_em: new Date().toISOString() })
+      });
+    }catch(e){ /* sem internet agora, fica só local — tenta de novo na próxima mudança */ }
+  }, 600);
+}
+async function puxarFavoritosDaNuvem(){
+  try{
+    const r = await fetch(SUPABASE_URL + '/rest/v1/radio_favoritos?id=eq.montgomery&select=dados', {
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+    });
+    const rows = await r.json();
+    if (rows && rows[0] && rows[0].dados){
+      const remoto = rows[0].dados;
+      if (Array.isArray(remoto.favStations)){ favStations = remoto.favStations; saveFavStations(favStations); }
+      if (Array.isArray(remoto.categories)){ categories = remoto.categories; saveCategories(categories); }
+      renderFavStationsList();
+    }
+  }catch(e){ /* sem internet agora, segue com o que já tinha salvo localmente */ }
+}
+puxarFavoritosDaNuvem();
+
 function renderFavStationsList(){
   const favStationsList = document.getElementById('favStationsList');
   const favStationsEmpty = document.getElementById('favStationsEmpty');
@@ -1900,9 +1949,10 @@ function renderFavStationsList(){
 
     groups.get(cat).forEach(st=>{
       const li = document.createElement('li');
+      if (activeStation && activeStation.url === st.url) li.classList.add('playing');
       const btn = document.createElement('button');
       btn.className = 'fav-station-btn';
-      btn.innerHTML = '<span class="name">'+st.title+'</span><span class="fav-country">'+(st.country||'')+'</span>';
+      btn.innerHTML = '<span class="fav-dot"></span><span class="name">'+st.title+'</span><span class="fav-country">'+(st.country||'')+'</span>';
       btn.addEventListener('click', ()=>{
         const queue = favStations.map(s => ({place: {city: s.title, country: s.country || 'mundo'}, st: {title: s.title, url: s.url}}));
         playStation({city: st.title, country: st.country || 'mundo'}, {title: st.title, url: st.url}, null, queue, favStations.indexOf(st));
