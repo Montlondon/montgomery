@@ -119,17 +119,30 @@
   }
   #favPanel.open{transform:translateX(0);}
   #favPanel h2{font-family:'Fraunces',serif; font-weight:500; font-size:1.5rem; margin:0 0 20px;}
-  #favList{list-style:none; margin:0; padding:0; border-top:1px solid var(--line);}
-  #favList li{border-bottom:1px solid var(--line);}
-  #favList button{
-    width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px;
+  #favList, #favStationsList{list-style:none; margin:0; padding:0; border-top:1px solid var(--line);}
+  #favList li, #favStationsList li{border-bottom:1px solid var(--line); display:flex; align-items:center;}
+  #favList button, #favStationsList .fav-station-btn{
+    flex:1; min-width:0; display:flex; align-items:center; justify-content:space-between; gap:10px;
     background:none; border:none; color:var(--ink);
     font-family:'Inter',sans-serif; font-size:0.95rem;
     text-align:left; padding:14px 2px; cursor:pointer;
   }
-  #favList button:hover{color:var(--gold);}
-  #favList .fav-country{color:var(--ink-dim); font-size:0.75rem;}
-  #favEmpty{color:var(--ink-dim); font-size:0.85rem; line-height:1.5;}
+  #favList button:hover, #favStationsList .fav-station-btn:hover{color:var(--gold);}
+  #favList .fav-country, #favStationsList .fav-country{color:var(--ink-dim); font-size:0.75rem;}
+  #favStationsList .fav-station-btn .name{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  #favEmpty, #favStationsEmpty{color:var(--ink-dim); font-size:0.85rem; line-height:1.5; margin-bottom:20px;}
+  #favStationsList .unfav{
+    flex:none; background:none; border:none; color:#e8735a;
+    padding:10px 4px; cursor:pointer; display:flex;
+  }
+  .sr-fav{
+    flex:none; width:auto; background:none; border:none; color:var(--ink-dim);
+    padding:10px; cursor:pointer; display:flex; align-items:center;
+  }
+  .sr-fav:hover, .sr-fav.active{color:#e8735a;}
+  .sr-fav.active svg{fill:#e8735a;}
+  #searchResults li{display:flex; align-items:center;}
+  #searchResults button:not(.sr-fav){flex:1; min-width:0;}
   #favBtnHeader{
     position:absolute; left:50%; top:28px; transform:translateX(-50%);
     background:none; border:none; color:var(--ink-dim); cursor:pointer;
@@ -438,7 +451,10 @@
     <input id="searchInput" type="text" placeholder="rádio, cidade ou país&hellip;" autocomplete="off">
   </div>
   <ul id="searchResults"></ul>
-  <h2>Favoritas</h2>
+  <h2>Rádios favoritas</h2>
+  <p id="favStationsEmpty">Favorite uma rádio da busca (o coração ao lado dela) — ela aparece aqui.</p>
+  <ul id="favStationsList"></ul>
+  <h2>Cidades favoritas</h2>
   <p id="favEmpty">Favorite uma cidade pelo coração no painel dela — ela aparece aqui.</p>
   <ul id="favList"></ul>
 </aside>
@@ -476,7 +492,7 @@
   <span id="blockedNote"></span></p>
 </aside>
 <div id="toast"></div>
-<div id="versionTag">v1.2</div>
+<div id="versionTag">v1.3</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1634,9 +1650,52 @@ function saveSet(key, set){
 }
 const FAV_KEY = 'mundoAoVivo_favoritos';
 const BLOCK_KEY = 'mundoAoVivo_bloqueadas';
+const FAV_STATIONS_KEY = 'mundoAoVivo_radiosFavoritas';
 const favorites = loadSet(FAV_KEY);
 const blocked = loadSet(BLOCK_KEY);
 const stationKey = (place, st) => place.city + '::' + st.id;
+
+// ---------- rádios avulsas favoritas (da busca global), guardadas no seu navegador ----------
+function loadFavStations(){
+  try { return JSON.parse(localStorage.getItem(FAV_STATIONS_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function saveFavStations(list){
+  try { localStorage.setItem(FAV_STATIONS_KEY, JSON.stringify(list)); }
+  catch(e){ /* sem localStorage, segue sem salvar */ }
+}
+let favStations = loadFavStations();
+function isFavStation(url){ return favStations.some(s => s.url === url); }
+function toggleFavStation(station){
+  if (isFavStation(station.url)) favStations = favStations.filter(s => s.url !== station.url);
+  else favStations = [station, ...favStations];
+  saveFavStations(favStations);
+  renderFavStationsList();
+}
+function renderFavStationsList(){
+  const favStationsList = document.getElementById('favStationsList');
+  const favStationsEmpty = document.getElementById('favStationsEmpty');
+  favStationsList.innerHTML = '';
+  favStationsEmpty.style.display = favStations.length ? 'none' : 'block';
+  favStations.forEach(st=>{
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    btn.className = 'fav-station-btn';
+    btn.innerHTML = '<span class="name">'+st.title+'</span><span class="fav-country">'+(st.country||'')+'</span>';
+    btn.addEventListener('click', ()=>{
+      playStation({city: st.title, country: st.country || 'mundo'}, {title: st.title, url: st.url}, null);
+    });
+    const unfav = document.createElement('button');
+    unfav.className = 'unfav';
+    unfav.setAttribute('aria-label', 'Tirar dos favoritos');
+    unfav.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>';
+    unfav.addEventListener('click', ()=> toggleFavStation(st));
+    li.appendChild(btn);
+    li.appendChild(unfav);
+    favStationsList.appendChild(li);
+  });
+}
+renderFavStationsList();
 
 function showToast(msg, undoFn){
   toast.innerHTML = '';
@@ -1844,11 +1903,25 @@ async function runSearch(q){
       const loc = [st.state, st.country].filter(Boolean).join(', ');
       btn.innerHTML = '<span>'+st.name+'</span><span class="sr-sub">'+loc+(st.tags ? ' · '+st.tags.split(',')[0] : '')+'</span>';
       const place = {city: st.name, country: st.country || 'mundo'};
+      const streamUrl = st.url_resolved || st.url;
       btn.addEventListener('click', ()=>{
-        playStation(place, {title: st.name, url: st.url_resolved || st.url}, null);
+        playStation(place, {title: st.name, url: streamUrl}, null);
         searchResults.classList.remove('open');
       });
+
+      const favBtn2 = document.createElement('button');
+      favBtn2.className = 'sr-fav' + (isFavStation(streamUrl) ? ' active' : '');
+      favBtn2.setAttribute('aria-label', 'Favoritar esta rádio');
+      favBtn2.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>';
+      favBtn2.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        toggleFavStation({title: st.name, url: streamUrl, country: st.country});
+        favBtn2.classList.toggle('active', isFavStation(streamUrl));
+        showToast(isFavStation(streamUrl) ? st.name+' nos favoritos' : 'Removida dos favoritos');
+      });
+
       li.appendChild(btn);
+      li.appendChild(favBtn2);
       searchResults.appendChild(li);
     });
   } catch(e){
