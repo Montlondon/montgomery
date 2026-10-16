@@ -126,6 +126,14 @@
     flex:none; background:none; border:none; color:#e8735a;
     padding:10px 4px; cursor:pointer; display:flex;
   }
+  #favStationsList .fav-cat-header{
+    border-bottom:none; color:var(--gold); font-size:0.75rem; letter-spacing:0.04em;
+    text-transform:uppercase; padding:14px 2px 4px; opacity:0.85;
+  }
+  #favStationsList .fav-cat-select{
+    flex:none; max-width:108px; background:none; border:1px solid var(--line); color:var(--ink-dim);
+    font-family:'Inter',sans-serif; font-size:0.72rem; border-radius:6px; padding:4px 2px; cursor:pointer;
+  }
   .sr-fav{
     flex:none; width:auto; background:none; border:none; color:var(--ink-dim);
     padding:10px; cursor:pointer; display:flex; align-items:center;
@@ -498,7 +506,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.6</div>
+<div id="versionTag">v1.7</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1597,6 +1605,7 @@ const ICON_PLAY = '<svg width="15" height="15" viewBox="0 0 24 24" fill="current
 const ICON_PAUSE = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>';
 let activeLi = null;
 let activeStation = null;
+let activePlace = null;
 
 function updatePlayButton(){
   playPauseBtn.innerHTML = audioEl.paused ? ICON_PLAY : ICON_PAUSE;
@@ -1614,6 +1623,7 @@ function playStation(place, st, li){
   activeLi = li || null;
   if (li) li.classList.add('playing');
   activeStation = st;
+  activePlace = place;
   npName.textContent = st.title;
   npCity.textContent = place.city;
   setDockPlaying(true);
@@ -1679,8 +1689,29 @@ let favStations = loadFavStations();
 function isFavStation(url){ return favStations.some(s => s.url === url); }
 function toggleFavStation(station){
   if (isFavStation(station.url)) favStations = favStations.filter(s => s.url !== station.url);
-  else favStations = [station, ...favStations];
+  else favStations = [{...station, category: ''}, ...favStations];
   saveFavStations(favStations);
+  renderFavStationsList();
+}
+
+// ---------- categorias das rádios favoritas ----------
+const CATEGORY_KEY = 'mundoAoVivo_categorias';
+function loadCategories(){
+  try { return JSON.parse(localStorage.getItem(CATEGORY_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function saveCategories(list){
+  try { localStorage.setItem(CATEGORY_KEY, JSON.stringify(list)); }
+  catch(e){ /* sem localStorage, segue sem salvar */ }
+}
+let categories = loadCategories();
+function setStationCategory(url, category){
+  favStations = favStations.map(s => s.url === url ? {...s, category} : s);
+  saveFavStations(favStations);
+  if (category && !categories.includes(category)){
+    categories = [...categories, category];
+    saveCategories(categories);
+  }
   renderFavStationsList();
 }
 function renderFavStationsList(){
@@ -1688,22 +1719,65 @@ function renderFavStationsList(){
   const favStationsEmpty = document.getElementById('favStationsEmpty');
   favStationsList.innerHTML = '';
   favStationsEmpty.style.display = favStations.length ? 'none' : 'block';
+
+  const groups = new Map();
   favStations.forEach(st=>{
-    const li = document.createElement('li');
-    const btn = document.createElement('button');
-    btn.className = 'fav-station-btn';
-    btn.innerHTML = '<span class="name">'+st.title+'</span><span class="fav-country">'+(st.country||'')+'</span>';
-    btn.addEventListener('click', ()=>{
-      playStation({city: st.title, country: st.country || 'mundo'}, {title: st.title, url: st.url}, null);
+    const cat = st.category || 'Sem categoria';
+    if (!groups.has(cat)) groups.set(cat, []);
+    groups.get(cat).push(st);
+  });
+  const order = [...categories.filter(c => groups.has(c)), 'Sem categoria'].filter(c => groups.has(c));
+
+  order.forEach(cat=>{
+    const header = document.createElement('li');
+    header.className = 'fav-cat-header';
+    header.textContent = cat;
+    favStationsList.appendChild(header);
+
+    groups.get(cat).forEach(st=>{
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.className = 'fav-station-btn';
+      btn.innerHTML = '<span class="name">'+st.title+'</span><span class="fav-country">'+(st.country||'')+'</span>';
+      btn.addEventListener('click', ()=>{
+        playStation({city: st.title, country: st.country || 'mundo'}, {title: st.title, url: st.url}, null);
+      });
+
+      const catSelect = document.createElement('select');
+      catSelect.className = 'fav-cat-select';
+      catSelect.setAttribute('aria-label', 'Categoria de '+st.title);
+      const optNone = document.createElement('option');
+      optNone.value = ''; optNone.textContent = 'sem categoria';
+      catSelect.appendChild(optNone);
+      categories.forEach(c=>{
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c;
+        if (c === st.category) opt.selected = true;
+        catSelect.appendChild(opt);
+      });
+      const optNew = document.createElement('option');
+      optNew.value = '__nova__'; optNew.textContent = '+ nova categoria…';
+      catSelect.appendChild(optNew);
+      catSelect.addEventListener('change', ()=>{
+        if (catSelect.value === '__nova__'){
+          const nome = (window.prompt('Nome da nova categoria:') || '').trim();
+          setStationCategory(st.url, nome);
+        } else {
+          setStationCategory(st.url, catSelect.value);
+        }
+      });
+
+      const unfav = document.createElement('button');
+      unfav.className = 'unfav';
+      unfav.setAttribute('aria-label', 'Tirar dos favoritos');
+      unfav.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>';
+      unfav.addEventListener('click', ()=> toggleFavStation(st));
+
+      li.appendChild(btn);
+      li.appendChild(catSelect);
+      li.appendChild(unfav);
+      favStationsList.appendChild(li);
     });
-    const unfav = document.createElement('button');
-    unfav.className = 'unfav';
-    unfav.setAttribute('aria-label', 'Tirar dos favoritos');
-    unfav.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>';
-    unfav.addEventListener('click', ()=> toggleFavStation(st));
-    li.appendChild(btn);
-    li.appendChild(unfav);
-    favStationsList.appendChild(li);
   });
 }
 renderFavStationsList();
@@ -1829,7 +1903,12 @@ document.getElementById('dockFav').addEventListener('click', ()=>{
 
 document.getElementById('npShare').addEventListener('click', async ()=>{
   if (!activeStation) return;
-  const text = 'Ouvindo "'+npName.textContent+'" ('+npCity.textContent+') no Montgomery Rádio — '+location.origin+location.pathname;
+  const streamUrl = streamUrlFor(activeStation);
+  const link = location.origin + location.pathname + '?radio=' + encodeURIComponent(streamUrl) +
+    '&nome=' + encodeURIComponent(activeStation.title) +
+    '&cidade=' + encodeURIComponent((activePlace && activePlace.city) || npCity.textContent) +
+    '&pais=' + encodeURIComponent((activePlace && activePlace.country) || '');
+  const text = 'Ouvindo "'+npName.textContent+'" ('+npCity.textContent+') no Montgomery Rádio — '+link;
   window.open('https://wa.me/?text='+encodeURIComponent(text), '_blank', 'noopener');
 });
 
@@ -1928,9 +2007,16 @@ document.addEventListener('click', (e)=>{
   if (!searchResults.contains(e.target) && e.target !== searchInput) searchResults.classList.remove('open');
 });
 
-// abrir direto numa cidade se o link veio com ?cidade=
+// abrir direto numa rádio ou cidade se o link veio com ?radio= ou ?cidade=
 (function openFromURL(){
   const params = new URLSearchParams(location.search);
+  const radioUrl = params.get('radio');
+  if (radioUrl){
+    const place = {city: params.get('cidade') || '', country: params.get('pais') || 'mundo'};
+    const st = {title: params.get('nome') || 'Rádio', url: radioUrl};
+    playStation(place, st, null);
+    return;
+  }
   const wanted = params.get('cidade');
   if (!wanted) return;
   const found = PLACES.find(p => p.city.toLowerCase() === wanted.toLowerCase());
