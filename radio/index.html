@@ -318,6 +318,7 @@
     cursor:pointer; padding:5px; flex:none; display:flex;
   }
   #dockPlayer .np-stop:hover{color:#e8735a;}
+  #dockPlayer #prevBtn:hover, #dockPlayer #nextBtn:hover{color:var(--gold);}
   @media (max-width: 480px){
     #dock{width:94vw; gap:2px; padding:7px 8px;}
     #dockPlayer .np-city{display:none;}
@@ -472,7 +473,13 @@
   </button>
   <div class="dock-sep"></div>
   <div id="dockPlayer" hidden>
+    <button class="np-stop" id="prevBtn" aria-label="Rádio anterior">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM20 6v12L9 12z"/></svg>
+    </button>
     <button class="icon-btn" id="playPauseBtn" aria-label="Tocar ou pausar"></button>
+    <button class="np-stop" id="nextBtn" aria-label="Próxima rádio">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6v12l11-6z"/></svg>
+    </button>
     <div class="np-info">
       <div class="np-name" id="npName"></div>
       <div class="np-city" id="npCity"></div>
@@ -524,7 +531,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.11</div>
+<div id="versionTag">v1.12</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1624,6 +1631,8 @@ const ICON_PAUSE = '<svg width="15" height="15" viewBox="0 0 24 24" fill="curren
 let activeLi = null;
 let activeStation = null;
 let activePlace = null;
+let activeQueue = [];
+let activeQueueIndex = -1;
 
 function updatePlayButton(){
   playPauseBtn.innerHTML = audioEl.paused ? ICON_PLAY : ICON_PAUSE;
@@ -1631,7 +1640,7 @@ function updatePlayButton(){
 function streamUrlFor(st){
   return st.url || ('https://radio.garden/api/ara/content/listen/'+st.id+'/channel.mp3');
 }
-function playStation(place, st, li){
+function playStation(place, st, li, queue, queueIndex){
   const key = st.id || st.url;
   if (activeStation && (activeStation.id || activeStation.url) === key){
     if (audioEl.paused) audioEl.play(); else audioEl.pause();
@@ -1642,12 +1651,20 @@ function playStation(place, st, li){
   if (li) li.classList.add('playing');
   activeStation = st;
   activePlace = place;
+  activeQueue = queue || [{place, st}];
+  activeQueueIndex = queueIndex != null ? queueIndex : 0;
   npName.textContent = st.title;
   npCity.textContent = place.city;
   setDockPlaying(true);
   audioStuck = false;
   audioEl.src = streamUrlFor(st);
   audioEl.play().catch(()=>{ if (!audioStuck) failStation(); });
+}
+function playQueueOffset(delta){
+  if (activeQueue.length < 2) return;
+  const newIndex = (activeQueueIndex + delta + activeQueue.length) % activeQueue.length;
+  const next = activeQueue[newIndex];
+  playStation(next.place, next.st, null, activeQueue, newIndex);
 }
 function failStation(){
   audioStuck = true;
@@ -1672,6 +1689,8 @@ audioEl.addEventListener('error', ()=>{
   if (!activeStation || audioStuck) return;
   failStation();
 });
+document.getElementById('prevBtn').addEventListener('click', ()=> playQueueOffset(-1));
+document.getElementById('nextBtn').addEventListener('click', ()=> playQueueOffset(1));
 playPauseBtn.addEventListener('click', ()=>{
   if (!activeStation) return;
   if (audioEl.paused) audioEl.play(); else audioEl.pause();
@@ -1758,7 +1777,8 @@ function renderFavStationsList(){
       btn.className = 'fav-station-btn';
       btn.innerHTML = '<span class="name">'+st.title+'</span><span class="fav-country">'+(st.country||'')+'</span>';
       btn.addEventListener('click', ()=>{
-        playStation({city: st.title, country: st.country || 'mundo'}, {title: st.title, url: st.url}, null);
+        const queue = favStations.map(s => ({place: {city: s.title, country: s.country || 'mundo'}, st: {title: s.title, url: s.url}}));
+        playStation({city: st.title, country: st.country || 'mundo'}, {title: st.title, url: st.url}, null, queue, favStations.indexOf(st));
       });
 
       const catDropdown = document.createElement('div');
@@ -1856,6 +1876,8 @@ function openPlace(place){
   favBtn.classList.toggle('active', favorites.has(place.city));
 
   let hiddenCount = 0;
+  const visibleStations = place.stations.filter(st => !blocked.has(stationKey(place, st)));
+  const placeQueue = visibleStations.map(st => ({place, st}));
   place.stations.forEach(st=>{
     const key = stationKey(place, st);
     if (blocked.has(key)){ hiddenCount++; return; }
@@ -1868,7 +1890,7 @@ function openPlace(place){
     link.className = 'station-link';
     link.innerHTML = '<span class="dot"></span><span class="name">'+st.title+'</span>'+
       '<svg class="go" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
-    link.addEventListener('click', ()=> playStation(place, st, li));
+    link.addEventListener('click', ()=> playStation(place, st, li, placeQueue, visibleStations.indexOf(st)));
 
     const blockBtn = document.createElement('button');
     blockBtn.className = 'icon-btn block';
@@ -2053,7 +2075,8 @@ async function runSearch(q){
       }
       return;
     }
-    data.forEach(st=>{
+    const searchQueue = data.map(s => ({place: {city: s.name, country: s.country || 'mundo'}, st: {title: s.name, url: s.url_resolved || s.url}}));
+    data.forEach((st, stIdx)=>{
       const li = document.createElement('li');
       const btn = document.createElement('button');
       const loc = [st.state, st.country].filter(Boolean).join(', ');
@@ -2061,7 +2084,7 @@ async function runSearch(q){
       const place = {city: st.name, country: st.country || 'mundo'};
       const streamUrl = st.url_resolved || st.url;
       btn.addEventListener('click', ()=>{
-        playStation(place, {title: st.name, url: streamUrl}, null);
+        playStation(place, {title: st.name, url: streamUrl}, null, searchQueue, stIdx);
         searchResults.classList.remove('open');
       });
 
