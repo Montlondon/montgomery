@@ -698,7 +698,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.31</div>
+<div id="versionTag">v1.32</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2196,7 +2196,9 @@ function renderFavStationsList(){
     if (!groups.has(cat)) groups.set(cat, []);
     groups.get(cat).push(st);
   });
-  const order = [...categories.filter(c => groups.has(c)), 'Sem categoria'].filter(c => groups.has(c));
+  groups.forEach(list => list.sort((a,b)=> a.title.localeCompare(b.title, 'pt-BR')));
+  const order = [...groups.keys()].filter(c => c !== 'Sem categoria').sort((a,b)=> a.localeCompare(b, 'pt-BR'));
+  if (groups.has('Sem categoria')) order.push('Sem categoria');
 
   order.forEach(cat=>{
     const header = document.createElement('li');
@@ -2250,7 +2252,7 @@ function renderFavStationsList(){
         optNone.appendChild(btnNone);
         optNone.dataset.nome = 'sem categoria';
         menu.appendChild(optNone);
-        categories.forEach(c=>{
+        [...categories].sort((a,b)=> a.localeCompare(b, 'pt-BR')).forEach(c=>{
           const li = document.createElement('li');
           li.dataset.nome = c.toLowerCase();
           const b = document.createElement('button');
@@ -2403,7 +2405,7 @@ const favList = document.getElementById('favList');
 const favEmpty = document.getElementById('favEmpty');
 function renderFavPanel(){
   favList.innerHTML = '';
-  const cities = [...favorites];
+  const cities = [...favorites].sort((a,b)=> a.localeCompare(b, 'pt-BR'));
   favEmpty.style.display = cities.length ? 'none' : 'block';
   cities.forEach(cityName=>{
     const place = PLACES.find(p => p.city === cityName);
