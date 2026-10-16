@@ -152,6 +152,12 @@
   .fav-cat-menu button:hover{background:var(--line); color:var(--gold);}
   .fav-cat-menu button.active{color:var(--gold);}
   .fav-cat-menu .new-cat{color:var(--ink-dim); border-top:1px solid var(--line); margin-top:4px; border-radius:0 0 6px 6px;}
+  .fav-cat-filtro{
+    width:100%; background:var(--ground-deep); border:1px solid var(--line); border-radius:6px;
+    color:var(--ink); font-family:'Inter',sans-serif; font-size:0.8rem; padding:7px 9px;
+    margin-bottom:4px; box-sizing:border-box;
+  }
+  .fav-cat-filtro:focus{outline:none; border-color:var(--gold-dim);}
   .sr-fav{
     flex:none; width:auto; background:none; border:none; color:var(--ink-dim);
     padding:10px; cursor:pointer; display:flex; align-items:center;
@@ -692,7 +698,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.30</div>
+<div id="versionTag">v1.31</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2224,15 +2230,29 @@ function renderFavStationsList(){
         document.querySelectorAll('.fav-cat-btn.open').forEach(b=> b.classList.remove('open'));
         const menu = document.createElement('ul');
         menu.className = 'fav-cat-menu';
+        // com muitas categorias, igual no YouTube: campo de filtro no topo,
+        // digita e já vai achando a pasta certa
+        let filtro = null;
+        if (categories.length >= 5){
+          const liFiltro = document.createElement('li');
+          filtro = document.createElement('input');
+          filtro.type = 'text';
+          filtro.className = 'fav-cat-filtro';
+          filtro.placeholder = 'filtrar categoria…';
+          liFiltro.appendChild(filtro);
+          menu.appendChild(liFiltro);
+        }
         const optNone = document.createElement('li');
         const btnNone = document.createElement('button');
         btnNone.type = 'button'; btnNone.textContent = 'sem categoria';
         if (!st.category) btnNone.className = 'active';
         btnNone.addEventListener('click', ()=>{ setStationCategory(st.url, ''); menu.remove(); });
         optNone.appendChild(btnNone);
+        optNone.dataset.nome = 'sem categoria';
         menu.appendChild(optNone);
         categories.forEach(c=>{
           const li = document.createElement('li');
+          li.dataset.nome = c.toLowerCase();
           const b = document.createElement('button');
           b.type = 'button'; b.textContent = c;
           if (c === st.category) b.className = 'active';
@@ -2240,6 +2260,16 @@ function renderFavStationsList(){
           li.appendChild(b);
           menu.appendChild(li);
         });
+        if (filtro){
+          filtro.addEventListener('click', e=> e.stopPropagation());
+          filtro.addEventListener('input', ()=>{
+            const q = filtro.value.trim().toLowerCase();
+            menu.querySelectorAll('li[data-nome]').forEach(li=>{
+              li.style.display = li.dataset.nome.includes(q) ? '' : 'none';
+            });
+          });
+          setTimeout(()=> filtro.focus(), 0);
+        }
         const liNew = document.createElement('li');
         const btnNew = document.createElement('button');
         btnNew.type = 'button'; btnNew.className = 'new-cat'; btnNew.textContent = '+ nova categoria…';
