@@ -466,7 +466,6 @@
   .city-label, .continent-label{
     position:absolute;
     top:0; left:0;
-    display:flex; flex-direction:column; align-items:center;
     white-space:nowrap;
     will-change:transform, opacity;
     -webkit-font-smoothing:antialiased;
@@ -474,12 +473,27 @@
     text-rendering:optimizeLegibility;
     backface-visibility:hidden;
   }
+  .city-label{
+    display:flex; flex-direction:row; align-items:center;
+  }
+  .city-label .dot{
+    width:5px; height:5px; border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 3px rgba(255,255,255,0.9), 0 0 1px rgba(0,0,0,0.8);
+    flex:none;
+    margin-right:5px;
+  }
+  .city-label.is-home .dot{ background:#f0a190; box-shadow:0 0 4px rgba(240,161,144,0.9); }
+  .city-label .label-text{
+    display:flex; flex-direction:column;
+    line-height:1.15;
+  }
   .city-label .name{
     font-family:'Inter',sans-serif;
-    font-weight:600;
-    font-size:0.72rem;
+    font-weight:700;
+    font-size:0.74rem;
     color:var(--ink);
-    text-shadow:0 1px 2px rgba(0,0,0,0.9);
+    text-shadow:0 1px 1px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.6);
   }
   .city-label.is-home .name{
     color:#f0a190;
@@ -490,23 +504,23 @@
   .city-label.is-home .name:hover{ text-decoration:underline; }
   .city-label .country{
     font-family:'Inter',sans-serif;
-    font-size:0.6rem;
-    font-weight:400;
+    font-size:0.62rem;
+    font-weight:500;
     letter-spacing:0.01em;
     text-transform:none;
-    color:rgba(255,255,255,0.65);
-    text-shadow:0 1px 2px rgba(0,0,0,0.9);
+    color:rgba(255,255,255,0.8);
+    text-shadow:0 1px 1px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.6);
     margin-top:1px;
   }
   .continent-label{
     font-family:'Inter',sans-serif;
-    font-weight:300;
-    font-style:italic;
-    font-size:0.95rem;
-    letter-spacing:0.12em;
+    font-weight:500;
+    font-style:normal;
+    font-size:1rem;
+    letter-spacing:0.1em;
     text-transform:uppercase;
-    color:rgba(255,255,255,0.55);
-    text-shadow:0 1px 2px rgba(0,0,0,0.5);
+    color:rgba(255,255,255,0.7);
+    text-shadow:0 1px 1px rgba(0,0,0,0.7), 0 0 4px rgba(0,0,0,0.5);
   }
 
   #lockScreen{
@@ -678,7 +692,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.25</div>
+<div id="versionTag">v1.26</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1697,9 +1711,9 @@ PLACES.forEach(place=>{
   const el = document.createElement('div');
   el.className = 'city-label' + (place.home ? ' is-home' : '');
   if (place.home){
-    el.innerHTML = '<span class="name">Montgomery Acupuntura</span><span class="country">Quiropraxia e Psicanálise</span>';
+    el.innerHTML = '<span class="dot"></span><span class="label-text"><span class="name">Montgomery Acupuntura</span><span class="country">Quiropraxia e Psicanálise</span></span>';
   } else {
-    el.innerHTML = '<span class="name">'+place.city+'</span><span class="country">'+place.country+'</span>';
+    el.innerHTML = '<span class="dot"></span><span class="label-text"><span class="name">'+place.city+'</span><span class="country">'+place.country+'</span></span>';
   }
   if (place.home){
     el.addEventListener('click', (e)=>{
@@ -1723,7 +1737,7 @@ function updateLabels(){
   camera.getWorldPosition(camPos);
   const camN = camPos.clone().normalize();
 
-  function place(item, nearThreshold, farThreshold){
+  function place(item, nearThreshold, farThreshold, isCity){
     const world = toVec3(item.lat, item.lon, R).applyMatrix4(globeGroup.matrixWorld);
     const facing = world.clone().normalize().dot(camN);
     if (facing < nearThreshold){ item.el.style.opacity = '0'; return; }
@@ -1734,12 +1748,15 @@ function updateLabels(){
     const fade = Math.min(1, (facing - nearThreshold) / (farThreshold - nearThreshold));
     // sem scale() — escalar texto via transform borra o rastro (notado por ele, 16/10);
     // some pela opacidade só, que não embaça
-    item.el.style.transform = 'translate(-50%, -105%) translate('+x+'px,'+y+'px)';
+    // cidade: o pontinho fica exatamente na coordenada, texto encostado nele (preso ao planeta, não boiando acima)
+    // continente: nome grande centrado no meio do território, sem pontinho
+    const anchor = isCity ? 'translate(-2px, -50%)' : 'translate(-50%, -50%)';
+    item.el.style.transform = anchor + ' translate('+x+'px,'+y+'px)';
     item.el.style.opacity = String(fade);
   }
 
-  cityLabels.forEach(item => place(item, 0.08, 0.4));
-  continentLabels.forEach(item => place(item, -0.05, 0.35));
+  cityLabels.forEach(item => place(item, 0.08, 0.4, true));
+  continentLabels.forEach(item => place(item, -0.05, 0.35, false));
 }
 
 function resize(){
