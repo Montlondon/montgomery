@@ -524,7 +524,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.8</div>
+<div id="versionTag">v1.8.1</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1818,7 +1818,7 @@ function renderFavStationsList(){
       unfav.addEventListener('click', ()=> toggleFavStation(st));
 
       li.appendChild(btn);
-      li.appendChild(catSelect);
+      li.appendChild(catDropdown);
       li.appendChild(unfav);
       favStationsList.appendChild(li);
     });
