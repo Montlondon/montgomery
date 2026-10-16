@@ -343,12 +343,17 @@
   #dockPlayer #npFav.active{color:#e8735a;}
   #dockPlayer #npFav.active svg{fill:#e8735a;}
   @media (max-width: 480px){
-    #dock{width:98vw; gap:4px; padding:6px 8px;}
-    #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{width:30px; height:30px;}
+    #dock{
+      width:98vw; gap:4px; padding:6px 8px;
+      overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+    }
+    #dock::-webkit-scrollbar{display:none;}
+    #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{width:30px; height:30px; flex-shrink:0;}
     #dockPlayer .np-city{display:none;}
-    #dockPlayer{gap:4px;}
-    #dockPlayer .np-info{flex:0 1 auto; max-width:30vw;}
-    #dockPlayer .np-stop{padding:8px 6px;}
+    #dockPlayer{gap:4px; flex-shrink:0;}
+    #dockPlayer .np-info{flex:0 1 auto; max-width:20vw;}
+    #dockPlayer .np-stop{padding:8px 6px; flex-shrink:0;}
+    #dock > .dock-sep{flex-shrink:0;}
   }
   .stations .icon-btn.block{
     flex:none;
@@ -720,7 +725,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.42</div>
+<div id="versionTag">v1.43</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
