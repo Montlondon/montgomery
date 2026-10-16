@@ -692,7 +692,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.28</div>
+<div id="versionTag">v1.29</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1578,9 +1578,23 @@ scene.add(sun);
 const ambient = new THREE.AmbientLight(0x8fa0c8, 0.55);
 scene.add(ambient);
 
-// o Sol visível, bem ao longe, na mesma direção de onde vem a luz — parado,
-// só um disco quente com halo, sem pesar textura nenhuma
-const sunDir = sun.position.clone().normalize();
+// ponto subsolar real: lat/lon de onde o Sol está a pino agora, calculado
+// pela hora UTC de verdade — assim a luz do globo acompanha o relógio, e
+// ao girar ou arrastar o globo a linha de sombra (dia/noite) bate com a
+// posição real de cada país naquele instante
+function pontoSubsolarAgora(){
+  const agora = new Date();
+  const inicioAno = Date.UTC(agora.getUTCFullYear(), 0, 1);
+  const diaDoAno = Math.floor((agora.getTime() - inicioAno) / 86400000);
+  const declinacao = 23.44 * Math.sin((2*Math.PI/365) * (diaDoAno + 284));
+  const horasUTC = agora.getUTCHours() + agora.getUTCMinutes()/60 + agora.getUTCSeconds()/3600;
+  const lon = -(horasUTC - 12) * 15;
+  return {lat: declinacao, lon: ((lon + 540) % 360) - 180};
+}
+
+// o Sol visível, bem ao longe, na direção de onde vem a luz — só um disco
+// quente com halo, sem pesar textura nenhuma; sua posição é atualizada a
+// cada quadro em animate() pra seguir o horário real
 const sunMesh = new THREE.Sprite(new THREE.SpriteMaterial({
   map: (()=>{
     const c = document.createElement('canvas'); c.width = c.height = 128;
@@ -1594,7 +1608,6 @@ const sunMesh = new THREE.Sprite(new THREE.SpriteMaterial({
   })(),
   transparent: true, depthWrite: false,
 }));
-sunMesh.position.copy(sunDir.clone().multiplyScalar(38));
 sunMesh.scale.setScalar(9);
 scene.add(sunMesh);
 
@@ -2947,6 +2960,14 @@ function animate(){
       o.scale.setScalar(o.userData.baseScale * pulse);
     }
   });
+  // Sol real: pega o ponto subsolar de agora (fixo no planeta) e converte
+  // pra espaço do mundo usando a rotação atual do globo — assim, girando ou
+  // arrastando o globo, quem fica de frente pro Sol é sempre o lugar certo
+  const sub = pontoSubsolarAgora();
+  const sunLocal = toVec3(sub.lat, sub.lon, 1).applyQuaternion(globeGroup.quaternion);
+  sun.position.copy(sunLocal.clone().multiplyScalar(10));
+  sunMesh.position.copy(sunLocal.clone().multiplyScalar(38));
+
   // a lua desenha uma espiral ao redor do globo — gira em volta e ao mesmo
   // tempo sobe e desce, como o caminho helicoidal do sistema Sol-Terra-Lua
   // de verdade avançando pelo espaço, não um círculo plano parado
