@@ -297,11 +297,18 @@
   #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{
     flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
     width:34px; height:34px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
+    display:flex; align-items:center; justify-content:center; position:relative;
     transition:color .15s ease, background .15s ease;
   }
   #dockFav:hover, #dockRotate:hover, #btnPostit:hover, #btnYoutube:hover, #btnCast:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
   #btnCast.active{color:#e8735a; background:rgba(232,115,90,0.12);}
+  #dockPostitBadge:not([hidden]){
+    position:absolute; top:2px; right:2px;
+    min-width:14px; height:14px; padding:0 3px; border-radius:999px;
+    background:#e8402f; color:#fff;
+    font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:700; line-height:14px; text-align:center;
+    box-shadow:0 0 0 2px var(--panel);
+  }
   #dock > .dock-sep{flex:none; width:1px; height:22px; background:var(--line);}
   #dockIdleHint{
     flex:1; min-width:0; text-align:center;
@@ -637,6 +644,7 @@
       <path d="M4 3h13l3 3v15H4Z" fill="#f6e58d" stroke="#ab9a4e" stroke-width="1" stroke-linejoin="round"/>
       <path d="M17 3v3h3" fill="none" stroke="#ab9a4e" stroke-width="1" stroke-linejoin="round"/>
     </svg>
+    <span id="dockPostitBadge" hidden></span>
   </button>
   <div class="dock-sep"></div>
   <button id="dockRotate" aria-label="Girar ou parar o globo"></button>
@@ -712,7 +720,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.41</div>
+<div id="versionTag">v1.42</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2634,6 +2642,8 @@ function postitAtualizarBadge(){
   const n=_notasLer().length;
   const badge=document.getElementById('postitNotasBadge');
   badge.hidden=!n; badge.textContent=n;
+  const badgeDock=document.getElementById('dockPostitBadge');
+  badgeDock.hidden=!n; badgeDock.textContent=n;
 }
 function renderMenuNotas(){
   const menu=document.getElementById('postitMenuNotas');
