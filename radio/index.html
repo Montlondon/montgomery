@@ -692,7 +692,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.26</div>
+<div id="versionTag">v1.27</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1617,8 +1617,8 @@ const atmoMat = new THREE.ShaderMaterial({
   fragmentShader: `
     varying vec3 vNormal;
     void main(){
-      float intensity = pow(0.62 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.2);
-      gl_FragColor = vec4(0.42, 0.62, 1.0, 1.0) * intensity;
+      float intensity = pow(0.62 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 1.7);
+      gl_FragColor = vec4(0.42, 0.62, 1.0, 1.0) * intensity * 1.6;
     }
   `,
   side: THREE.BackSide,
