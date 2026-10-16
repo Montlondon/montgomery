@@ -1,0 +1,9 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "tradutor", "runtimeExecutable": "npx", "runtimeArgs": ["--yes", "serve", "-l", "5173", "C:/mc/tradutor"], "port": 5173 },
+    { "name": "vanessa-fr", "runtimeExecutable": "npx", "runtimeArgs": ["--yes", "serve", "-l", "5174", "C:/mc/montgomery-clinica/vanessa-fr"], "port": 5174 },
+    { "name": "clinica", "runtimeExecutable": "npx", "runtimeArgs": ["--yes", "serve", "-l", "5175", "C:/mc/montgomery-clinica"], "port": 5175 },
+    { "name": "radio", "runtimeExecutable": "npx", "runtimeArgs": ["--yes", "serve", "-l", "5176", "C:/mc/radio"], "port": 5176 }
+  ]
+}
