@@ -81,15 +81,6 @@
   }
   #hint svg{opacity:.6;}
 
-  #rotateBtn{
-    position:fixed; right:16px; bottom:34px;
-    width:30px; height:30px; border-radius:50%;
-    background:rgba(16,20,31,0.6); border:1px solid var(--line);
-    color:var(--ink-dim); cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    z-index:5; opacity:.55; transition:opacity .2s ease, color .2s ease;
-  }
-  #rotateBtn:hover{opacity:1; color:var(--gold);}
 
   #panel{
     position:fixed; top:0; right:0; bottom:0;
@@ -143,16 +134,6 @@
   .sr-fav.active svg{fill:#e8735a;}
   #searchResults li{display:flex; align-items:center;}
   #searchResults button:not(.sr-fav){flex:1; min-width:0;}
-  #favBtnHeader{
-    position:absolute; left:50%; top:28px; transform:translateX(-50%);
-    background:none; border:none; color:var(--ink-dim); cursor:pointer;
-    padding:8px 14px; display:flex; align-items:center; gap:8px;
-    font-family:'Fraunces',serif; font-weight:500; font-size:1.05rem;
-    letter-spacing:0.01em;
-    pointer-events:auto;
-  }
-  #favBtnHeader:hover{color:var(--gold);}
-  #favBtnHeader svg{flex:none;}
 
   #searchBar{
     display:flex; align-items:center; gap:8px; flex:none;
@@ -265,36 +246,56 @@
   .stations .go{color:var(--ink-dim); flex:none;}
   .stations li.playing .go{color:#e8735a;}
 
-  #nowPlaying{
+  #dock{
     position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
-    width:min(380px, 88vw);
-    display:flex; align-items:center; gap:12px;
-    padding:10px 14px;
-    background:var(--panel); border:1px solid var(--line); border-radius:14px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    width:min(460px, 92vw);
+    display:flex; align-items:center; gap:4px;
+    padding:8px 10px;
+    background:var(--panel); border:1px solid var(--line); border-radius:999px;
+    box-shadow:0 8px 28px rgba(0,0,0,0.45);
     z-index:12;
   }
-  #nowPlaying[hidden]{display:none;}
-  #nowPlaying .icon-btn{
+  #dockFav, #dockRotate{
+    flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition:color .15s ease, background .15s ease;
+  }
+  #dockFav:hover, #dockRotate:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
+  #dock > .dock-sep{flex:none; width:1px; height:22px; background:var(--line);}
+  #dockIdleHint{
+    flex:1; min-width:0; text-align:center;
+    font-size:0.78rem; color:var(--ink-dim); letter-spacing:0.02em;
+  }
+  #dockPlayer{
+    flex:1; min-width:0; display:flex; align-items:center; gap:10px;
+  }
+  #dockPlayer[hidden]{display:none;}
+  #dockPlayer .icon-btn{
     background:var(--gold); color:var(--ground);
     border:none; border-radius:50%;
-    width:34px; height:34px; flex:none;
+    width:32px; height:32px; flex:none;
     display:flex; align-items:center; justify-content:center;
     cursor:pointer;
   }
-  #nowPlaying .np-info{flex:1; min-width:0;}
-  #nowPlaying .np-name{
-    font-size:0.88rem; font-weight:600; color:var(--ink);
+  #dockPlayer .np-info{flex:1; min-width:0;}
+  #dockPlayer .np-name{
+    font-size:0.85rem; font-weight:600; color:var(--ink);
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
-  #nowPlaying .np-city{
-    font-size:0.72rem; color:var(--ink-dim);
+  #dockPlayer .np-city{
+    font-size:0.68rem; color:var(--ink-dim);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
-  #nowPlaying .np-stop{
+  #dockPlayer .np-stop{
     background:none; border:none; color:var(--ink-dim);
-    cursor:pointer; padding:6px; flex:none; display:flex;
+    cursor:pointer; padding:5px; flex:none; display:flex;
   }
-  #nowPlaying .np-stop:hover{color:#e8735a;}
+  #dockPlayer .np-stop:hover{color:#e8735a;}
+  @media (max-width: 480px){
+    #dock{width:94vw; gap:2px; padding:7px 8px;}
+    #dockPlayer .np-city{display:none;}
+  }
   .stations .icon-btn.block{
     flex:none;
     background:none; border:none;
@@ -328,16 +329,12 @@
     opacity:.45; z-index:4; pointer-events:none;
   }
 
-  @media (max-width: 900px){
-    #favBtnHeader{position:static; transform:none; font-size:0.85rem; padding:8px;}
-  }
   @media (max-width: 640px){
     header{padding:16px 20px 0;}
     h1{font-size:1.1rem;}
     .sub, .clock{display:none;}
     #hint{left:20px;}
     .place-title{font-size:1.5rem;}
-    #favBtnHeader span{display:none;}
   }
 
   #labels{
@@ -435,10 +432,6 @@
     <h1>Montgomery <em>Rádio</em></h1>
     <div class="sub">o mundo, ao vivo &mdash; um globo de rádios reais</div>
   </div>
-  <button id="favBtnHeader" aria-label="Buscar e favoritas">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-    <span>buscar &amp; favoritas</span>
-  </button>
   <div class="clock" id="clock"></div>
 </header>
 
@@ -447,7 +440,28 @@
   arraste para girar &middot; toque num ponto dourado
 </div>
 
-<button id="rotateBtn" aria-label="Girar ou parar o globo"></button>
+<div id="dock">
+  <button id="dockFav" aria-label="Buscar e favoritas">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <div id="dockPlayer" hidden>
+    <button class="icon-btn" id="playPauseBtn" aria-label="Tocar ou pausar"></button>
+    <div class="np-info">
+      <div class="np-name" id="npName"></div>
+      <div class="np-city" id="npCity"></div>
+    </div>
+    <button class="np-stop" id="npShare" aria-label="Compartilhar esta rádio">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>
+    </button>
+    <button class="np-stop" id="npStop" aria-label="Parar">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>
+    </button>
+  </div>
+  <div id="dockIdleHint">nada tocando</div>
+  <div class="dock-sep"></div>
+  <button id="dockRotate" aria-label="Girar ou parar o globo"></button>
+</div>
 
 <aside id="favPanel">
   <div id="searchBar">
@@ -482,22 +496,9 @@
   <span id="blockedNote"></span></p>
 </aside>
 
-<div id="nowPlaying" hidden>
-  <button class="icon-btn" id="playPauseBtn" aria-label="Tocar ou pausar"></button>
-  <div class="np-info">
-    <div class="np-name" id="npName"></div>
-    <div class="np-city" id="npCity"></div>
-  </div>
-  <button class="np-stop" id="npShare" aria-label="Compartilhar esta rádio">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>
-  </button>
-  <button class="np-stop" id="npStop" aria-label="Parar">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>
-  </button>
-</div>
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.4</div>
+<div id="versionTag">v1.5</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1581,7 +1582,12 @@ const shareBtn = document.getElementById('shareBtn');
 const toast = document.getElementById('toast');
 
 // ---------- tocador embutido — a rádio toca aqui dentro, sem abrir aba nova ----------
-const nowPlaying = document.getElementById('nowPlaying');
+const dockPlayer = document.getElementById('dockPlayer');
+const dockIdleHint = document.getElementById('dockIdleHint');
+function setDockPlaying(isPlaying){
+  dockPlayer.hidden = !isPlaying;
+  dockIdleHint.hidden = isPlaying;
+}
 const npName = document.getElementById('npName');
 const npCity = document.getElementById('npCity');
 const playPauseBtn = document.getElementById('playPauseBtn');
@@ -1610,7 +1616,7 @@ function playStation(place, st, li){
   activeStation = st;
   npName.textContent = st.title;
   npCity.textContent = place.city;
-  nowPlaying.hidden = false;
+  setDockPlaying(true);
   audioStuck = false;
   audioEl.src = streamUrlFor(st);
   audioEl.play().catch(()=>{ if (!audioStuck) failStation(); });
@@ -1619,7 +1625,7 @@ function failStation(){
   audioStuck = true;
   showToast('Essa estação não respondeu agora — tenta outra');
   if (activeLi) activeLi.classList.remove('playing');
-  nowPlaying.hidden = true;
+  setDockPlaying(false);
   activeLi = null; activeStation = null;
   audioEl.removeAttribute('src'); audioEl.load();
 }
@@ -1629,7 +1635,7 @@ function stopStation(){
   audioEl.load();
   if (activeLi) activeLi.classList.remove('playing');
   activeLi = null; activeStation = null;
-  nowPlaying.hidden = true;
+  setDockPlaying(false);
 }
 let audioStuck = false;
 audioEl.addEventListener('play', updatePlayButton);
@@ -1816,7 +1822,7 @@ function renderFavPanel(){
   });
 }
 renderFavPanel();
-document.getElementById('favBtnHeader').addEventListener('click', ()=>{
+document.getElementById('dockFav').addEventListener('click', ()=>{
   panel.classList.remove('open');
   favPanel.classList.toggle('open');
 });
@@ -1961,7 +1967,7 @@ let lastTouch = 0;
 const RESUME_SPIN_MS = 2200;
 
 // ---------- girar ou parar o globo, escolha do usuário, guardada no navegador ----------
-const rotateBtn = document.getElementById('rotateBtn');
+const rotateBtn = document.getElementById('dockRotate');
 let autoRotateOn = localStorage.getItem('mundoAoVivo_autoRotate') !== '0';
 const ICON_SPIN = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>';
 const ICON_SPIN_PLAY = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
