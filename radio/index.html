@@ -606,6 +606,10 @@
     color:rgba(255,255,255,0.7);
     text-shadow:0 1px 1px rgba(0,0,0,0.7), 0 0 4px rgba(0,0,0,0.5);
   }
+  .continent-label.ref-line-label{
+    font-size:0.62rem; font-weight:500; letter-spacing:0.06em;
+    color:rgba(240,227,192,0.75);
+  }
 
   #lockScreen{
     position:fixed; inset:0; z-index:100;
@@ -789,7 +793,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.54</div>
+<div id="versionTag">v1.55</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -1035,7 +1039,7 @@ const PLACES = [
     {title:"Active 107.4", id:"HN7kbr_Q"},
     {title:"Astra FM 92.8", id:"iSVdx5zq"},
     {title:"Bayrak FM 92.1", id:"62aRVC1T"}]},
-  {city:"Prague", country:"Chéquia", lat:50.09, lon:14.42, stations:[{title:"AB Radio Humor", id:"05r4TeMy"},{title:"atma.FM - channel 1", id:"GKAhCLFd"},{title:"atma.FM - channel 2", id:"92tdY7IS"},{title:"Classic FM", id:"XWszQhwB"},{title:"Color Music Radio 90.7 FM", id:"FqqkYvMp"},{title:"Country Radio", id:"FTy5XV2q"},{title:"ČRo D-dur", id:"0eFHkwGO"},{title:"ČRo Dvojka", id:"YwjQ9xfR"},{title:"ČRo Jazz", id:"srnaEXqE"},{title:"Čro Plus", id:"XgIDy9WT"},{title:"ČRo Pohoda", id:"iRF2bFh5"},{title:"ČRo Radio DAB Praha", id:"dVh929U4"},{title:"ČRo Rádio Junior", id:"oPPD4LhV"},{title:"ČRo Radio Prague International", id:"cIZ48asO"},{title:"ČRo Radio Wave", id:"0ItVFkEL"},{title:"ČRo Radiožurnál", id:"sC2waCBA"},{title:"ČRo Radiožurnál Sport", id:"fgQWE4sA"},{title:"ČRo Region", id:"Rry7MTFN"},{title:"ČRo Vltava", id:"uz8K5o6o"},{title:"Dance Radio", id:"5QpFLgDZ"},{title:"Dandy Radio", id:"-gV5Q6MK"},{title:"Evropa2", id:"EwiN37X4"},{title:"Express FM 90.3", id:"9BfRWWh2"},{title:"Fajn Radio 97.2 FM", id:"ZdI7j3Am"},{title:"Frekvence 1", id:"dq9mQ4jF"},{title:"Hitradio FM", id:"MDUWyMBS"},{title:"Hitrádio Osmdesátka", id:"eWtMSapQ"},{title:"Kiss Radio", id:"bTk3h2CN"},{title:"Oldies Radio", id:"867PEBHH"},{title:"Prostor_", id:"nsFEEIsM"},{title:"Queen Radio", id:"NnBf0ZOG"},{title:"Radio 1 FM 91.9", id:"khYGHC0Y"},{title:"Rádio Beat", id:"4pmQTXZV"},{title:"Radio Blanik 97.8 FM", id:"SBqjN5ig"},{title:"Radio Bonton", id:"hDVndQAL"},{title:"Rádio Český Impuls AM 981", id:"Ue3dSxAE"},{title:"Radio City 93,7 FM", id:"6RmTkC0C"},{title:"Radio Farda", id:"pN848Cxp"},{title:"Radio Folk - Abradio", id:"FSE3kkYi"},{title:"Rádio Géčko", id:"ss7Q02Sv"},{title:"Rádio HEY", id:"hk4zMOaU"},{title:"Radio Nostalgie", id:"wHsU0bwE"},{title:"Radio Pohadka", id:"a7m4Gufg"},{title:"Radio Povidka", id:"1vSyZ0Nw"},{title:"Rádio Spin", id:"TBZnBGOA"},{title:"Radio Vysočina", id:"tFA8wtDJ"},{title:"Radio Vyšší Hlas", id:"sYzocnIv"},{title:"RockZone 105.9", id:"9C658O9Z"},{title:"Slow Down Radio", id:"UqF1Wo5R"},{title:"Sound Bricks Radio", id:"jAMiVv-3"},{title:"WorldRadio.eu", id:"v58GpGRz"},{title:"ZUN radio", id:"04VKy7cZ"},{title:"Свобода", id:"8PcBDZGh"}]},
+  {city:"Prague", country:"Tchéquia", lat:50.09, lon:14.42, stations:[{title:"AB Radio Humor", id:"05r4TeMy"},{title:"atma.FM - channel 1", id:"GKAhCLFd"},{title:"atma.FM - channel 2", id:"92tdY7IS"},{title:"Classic FM", id:"XWszQhwB"},{title:"Color Music Radio 90.7 FM", id:"FqqkYvMp"},{title:"Country Radio", id:"FTy5XV2q"},{title:"ČRo D-dur", id:"0eFHkwGO"},{title:"ČRo Dvojka", id:"YwjQ9xfR"},{title:"ČRo Jazz", id:"srnaEXqE"},{title:"Čro Plus", id:"XgIDy9WT"},{title:"ČRo Pohoda", id:"iRF2bFh5"},{title:"ČRo Radio DAB Praha", id:"dVh929U4"},{title:"ČRo Rádio Junior", id:"oPPD4LhV"},{title:"ČRo Radio Prague International", id:"cIZ48asO"},{title:"ČRo Radio Wave", id:"0ItVFkEL"},{title:"ČRo Radiožurnál", id:"sC2waCBA"},{title:"ČRo Radiožurnál Sport", id:"fgQWE4sA"},{title:"ČRo Region", id:"Rry7MTFN"},{title:"ČRo Vltava", id:"uz8K5o6o"},{title:"Dance Radio", id:"5QpFLgDZ"},{title:"Dandy Radio", id:"-gV5Q6MK"},{title:"Evropa2", id:"EwiN37X4"},{title:"Express FM 90.3", id:"9BfRWWh2"},{title:"Fajn Radio 97.2 FM", id:"ZdI7j3Am"},{title:"Frekvence 1", id:"dq9mQ4jF"},{title:"Hitradio FM", id:"MDUWyMBS"},{title:"Hitrádio Osmdesátka", id:"eWtMSapQ"},{title:"Kiss Radio", id:"bTk3h2CN"},{title:"Oldies Radio", id:"867PEBHH"},{title:"Prostor_", id:"nsFEEIsM"},{title:"Queen Radio", id:"NnBf0ZOG"},{title:"Radio 1 FM 91.9", id:"khYGHC0Y"},{title:"Rádio Beat", id:"4pmQTXZV"},{title:"Radio Blanik 97.8 FM", id:"SBqjN5ig"},{title:"Radio Bonton", id:"hDVndQAL"},{title:"Rádio Český Impuls AM 981", id:"Ue3dSxAE"},{title:"Radio City 93,7 FM", id:"6RmTkC0C"},{title:"Radio Farda", id:"pN848Cxp"},{title:"Radio Folk - Abradio", id:"FSE3kkYi"},{title:"Rádio Géčko", id:"ss7Q02Sv"},{title:"Rádio HEY", id:"hk4zMOaU"},{title:"Radio Nostalgie", id:"wHsU0bwE"},{title:"Radio Pohadka", id:"a7m4Gufg"},{title:"Radio Povidka", id:"1vSyZ0Nw"},{title:"Rádio Spin", id:"TBZnBGOA"},{title:"Radio Vysočina", id:"tFA8wtDJ"},{title:"Radio Vyšší Hlas", id:"sYzocnIv"},{title:"RockZone 105.9", id:"9C658O9Z"},{title:"Slow Down Radio", id:"UqF1Wo5R"},{title:"Sound Bricks Radio", id:"jAMiVv-3"},{title:"WorldRadio.eu", id:"v58GpGRz"},{title:"ZUN radio", id:"04VKy7cZ"},{title:"Свобода", id:"8PcBDZGh"}]},
   {city:"Copenhagen", country:"Dinamarca", lat:55.68, lon:12.57, stations:[
     {title:"DR P1", id:"i1tZgyC7"},
     {title:"DR P2", id:"QO1Q3gRx"},
@@ -1081,7 +1085,7 @@ const PLACES = [
     {title:"Antena M", id:"sTTl7xX5"},
     {title:"Arena Radio", id:"addjgtrz"},
     {title:"Drugačija Radio Stanica", id:"CN7lcA1Z"}]},
-  {city:"Amsterdam", country:"Países Baixos", lat:52.37, lon:4.9, stations:[{title:"247Blitz", id:"mhSuz1QX"},{title:"247Jamz", id:"GiAbcYt7"},{title:"247Spice", id:"UfD-s6Nm"},{title:"40ROCK Radio", id:"dB2OzlaT"},{title:"80s Alive", id:"u546cfgb"},{title:"Allsound Radio", id:"U_ObLK0w"},{title:"Amigo Radio", id:"FjDSCZ90"},{title:"Amsterdam Funk Channel", id:"Gw0LGB8j"},{title:"AudioMaze Radio", id:"uYuEOR70"},{title:"BNR Business Beats", id:"gfPMDjcD"},{title:"BNR Nieuwsradio", id:"nR5bWXJ5"},{title:"Broadcast Amsterdam", id:"ZMyebz5b"},{title:"Club Dance Radio", id:"w4eGLToH"},{title:"CREAM", id:"8tyFxs4X"},{title:"Dance.FM", id:"F6Bu5R04"},{title:"DanceGroove Radio", id:"YRRMpYPY"},{title:"DanceRadio Amsterdam", id:"OSATM0mN"},{title:"Decibel 962 Radio", id:"FiWGggMH"},{title:"Deep Dance Radio", id:"Dlz2b5-7"},{title:"DFM RTV INT", id:"IOpVhBrF"},{title:"Echobox Radio", id:"m8wMM0Vo"},{title:"Fame Radio", id:"kWFz7wpP"},{title:"Freak31", id:"co19thA0"},{title:"Gospel Radio Parousia", id:"MVMY6rfs"},{title:"Hot Dance Radio", id:"mekYgq8y"},{title:"IndieXL", id:"ChaIAi9e"},{title:"Jazz Radio by Maestro - Groovin'", id:"NNqo1bgy"},{title:"Jazz Radio by Maestro - Relaxin'", id:"kh39e9bB"},{title:"Jazz Radio by Maestro - Steamin'", id:"4WN95mKe"},{title:"Jazz Radio by Maestro - Swingin'", id:"6yz0hkpV"},{title:"JOE", id:"L1PNTsX0"},{title:"JOE Non-stop", id:"VpkWKfuJ"},{title:"Kreisy FM", id:"sMcV4l88"},{title:"Layzer", id:"WGcHETqh"},{title:"NH Radio", id:"7kXVT2f6"},{title:"NPO FunX Amsterdam", id:"hEYDlgNt"},{title:"Octaaf Radio", id:"9yI16HV9"},{title:"outta mi yard", id:"yFFRfHEx"},{title:"Pidi Radio", id:"NkBZDDfb"},{title:"PinQradio", id:"8LjRR4Re"},{title:"Pokoe FM", id:"hyynosL8"},{title:"Pop31", id:"w9y5KKv1"},{title:"Q-Dance Radio", id:"VDs4s0Dm"},{title:"Qmusic", id:"tdPxbN50"},{title:"Qmusic - 90s & 00s", id:"IjjDjfUM"},{title:"Qmusic - Christmas", id:"gRfGGFRZ"},{title:"Qmusic - Het Foute Uur", id:"fmrRd6qL"},{title:"Qmusic - Nederlandstalig", id:"Tx6fdIeC"},{title:"Qmusic - Non-Stop", id:"xBfmwW7i"},{title:"Qmusic - One World Radio", id:"dGPwiEnx"},{title:"Qmusic - Summer", id:"dSeLtiKb"},{title:"Qmusic - Top 40", id:"wn-lENiy"},{title:"Radio Antidoto", id:"oLKMENK_"},{title:"Radio Arcadia", id:"a9kxUFrN"},{title:"Radio Bangsa Jawa", id:"FypY0hqr"},{title:"Radio Boven IJ", id:"D3h6fnRp"},{title:"Radio Cybernet", id:"XwCyuQUL"},{title:"Radio Dance 90s", id:"SXMEp0la"},{title:"Radio Decibel FM 98.0", id:"3JkCEIMy"},{title:"Radio mArt FM 107.9", id:"WrcP1u7A"},{title:"Radio Patapoe 88.3 FM", id:"ysDcrlLT"},{title:"Radio Tamara", id:"eBjmVDGi"},{title:"Radio Terranova", id:"Ka2HtgBG"},{title:"RaZO Amsterdam", id:"DkCQCGDr"},{title:"Red Light Jazz Radio", id:"K8EWPx8W"},{title:"Ridder Radio", id:"lLQFGVny"},{title:"Salsa Radio Amsterdam", id:"btmtSH9L"},{title:"SinterklaasRadio", id:"JUsMhaE2"},{title:"Sublime", id:"vplRXqGa"},{title:"Sublime - Funk & Disco", id:"_oQ9WWAc"},{title:"Sublime - Jazz", id:"rnlpdNn8"},{title:"Sublime - Smooth", id:"dypa0_yt"},{title:"Sublime - Soul", id:"7uuhHD43"},{title:"The Finest Amsterdam", id:"yhhy7uHz"},{title:"Trance 21", id:"fZYl0vat"},{title:"Trance 21 - In The Mix", id:"ox0m4qNB"},{title:"Trance 21 - Psy Trance", id:"nVUy96xp"},{title:"Trance 21 - Vocal Trance", id:"e6XzYWrl"},{title:"Ujala Radio", id:"sCFHyXDN"},{title:"Veronica", id:"45WA2Cqz"},{title:"Veronica - Goud van Oud", id:"dqGw3Rcv"},{title:"Veronica - Non-Stop", id:"IQi-xQ5U"},{title:"Veronica - Rockradio", id:"aMXkgxHY"},{title:"Veronica - Top 1000 Allertijden", id:"k8Qsuoqa"},{title:"Vibe Radio 93.3 FM", id:"jfPNeXCE"},{title:"WGRV.FM", id:"cEcEdqwA"},{title:"World Music Radio Classic", id:"nHxP0tIZ"}]},
+  {city:"Amsterdam", country:"Holanda", lat:52.37, lon:4.9, stations:[{title:"247Blitz", id:"mhSuz1QX"},{title:"247Jamz", id:"GiAbcYt7"},{title:"247Spice", id:"UfD-s6Nm"},{title:"40ROCK Radio", id:"dB2OzlaT"},{title:"80s Alive", id:"u546cfgb"},{title:"Allsound Radio", id:"U_ObLK0w"},{title:"Amigo Radio", id:"FjDSCZ90"},{title:"Amsterdam Funk Channel", id:"Gw0LGB8j"},{title:"AudioMaze Radio", id:"uYuEOR70"},{title:"BNR Business Beats", id:"gfPMDjcD"},{title:"BNR Nieuwsradio", id:"nR5bWXJ5"},{title:"Broadcast Amsterdam", id:"ZMyebz5b"},{title:"Club Dance Radio", id:"w4eGLToH"},{title:"CREAM", id:"8tyFxs4X"},{title:"Dance.FM", id:"F6Bu5R04"},{title:"DanceGroove Radio", id:"YRRMpYPY"},{title:"DanceRadio Amsterdam", id:"OSATM0mN"},{title:"Decibel 962 Radio", id:"FiWGggMH"},{title:"Deep Dance Radio", id:"Dlz2b5-7"},{title:"DFM RTV INT", id:"IOpVhBrF"},{title:"Echobox Radio", id:"m8wMM0Vo"},{title:"Fame Radio", id:"kWFz7wpP"},{title:"Freak31", id:"co19thA0"},{title:"Gospel Radio Parousia", id:"MVMY6rfs"},{title:"Hot Dance Radio", id:"mekYgq8y"},{title:"IndieXL", id:"ChaIAi9e"},{title:"Jazz Radio by Maestro - Groovin'", id:"NNqo1bgy"},{title:"Jazz Radio by Maestro - Relaxin'", id:"kh39e9bB"},{title:"Jazz Radio by Maestro - Steamin'", id:"4WN95mKe"},{title:"Jazz Radio by Maestro - Swingin'", id:"6yz0hkpV"},{title:"JOE", id:"L1PNTsX0"},{title:"JOE Non-stop", id:"VpkWKfuJ"},{title:"Kreisy FM", id:"sMcV4l88"},{title:"Layzer", id:"WGcHETqh"},{title:"NH Radio", id:"7kXVT2f6"},{title:"NPO FunX Amsterdam", id:"hEYDlgNt"},{title:"Octaaf Radio", id:"9yI16HV9"},{title:"outta mi yard", id:"yFFRfHEx"},{title:"Pidi Radio", id:"NkBZDDfb"},{title:"PinQradio", id:"8LjRR4Re"},{title:"Pokoe FM", id:"hyynosL8"},{title:"Pop31", id:"w9y5KKv1"},{title:"Q-Dance Radio", id:"VDs4s0Dm"},{title:"Qmusic", id:"tdPxbN50"},{title:"Qmusic - 90s & 00s", id:"IjjDjfUM"},{title:"Qmusic - Christmas", id:"gRfGGFRZ"},{title:"Qmusic - Het Foute Uur", id:"fmrRd6qL"},{title:"Qmusic - Nederlandstalig", id:"Tx6fdIeC"},{title:"Qmusic - Non-Stop", id:"xBfmwW7i"},{title:"Qmusic - One World Radio", id:"dGPwiEnx"},{title:"Qmusic - Summer", id:"dSeLtiKb"},{title:"Qmusic - Top 40", id:"wn-lENiy"},{title:"Radio Antidoto", id:"oLKMENK_"},{title:"Radio Arcadia", id:"a9kxUFrN"},{title:"Radio Bangsa Jawa", id:"FypY0hqr"},{title:"Radio Boven IJ", id:"D3h6fnRp"},{title:"Radio Cybernet", id:"XwCyuQUL"},{title:"Radio Dance 90s", id:"SXMEp0la"},{title:"Radio Decibel FM 98.0", id:"3JkCEIMy"},{title:"Radio mArt FM 107.9", id:"WrcP1u7A"},{title:"Radio Patapoe 88.3 FM", id:"ysDcrlLT"},{title:"Radio Tamara", id:"eBjmVDGi"},{title:"Radio Terranova", id:"Ka2HtgBG"},{title:"RaZO Amsterdam", id:"DkCQCGDr"},{title:"Red Light Jazz Radio", id:"K8EWPx8W"},{title:"Ridder Radio", id:"lLQFGVny"},{title:"Salsa Radio Amsterdam", id:"btmtSH9L"},{title:"SinterklaasRadio", id:"JUsMhaE2"},{title:"Sublime", id:"vplRXqGa"},{title:"Sublime - Funk & Disco", id:"_oQ9WWAc"},{title:"Sublime - Jazz", id:"rnlpdNn8"},{title:"Sublime - Smooth", id:"dypa0_yt"},{title:"Sublime - Soul", id:"7uuhHD43"},{title:"The Finest Amsterdam", id:"yhhy7uHz"},{title:"Trance 21", id:"fZYl0vat"},{title:"Trance 21 - In The Mix", id:"ox0m4qNB"},{title:"Trance 21 - Psy Trance", id:"nVUy96xp"},{title:"Trance 21 - Vocal Trance", id:"e6XzYWrl"},{title:"Ujala Radio", id:"sCFHyXDN"},{title:"Veronica", id:"45WA2Cqz"},{title:"Veronica - Goud van Oud", id:"dqGw3Rcv"},{title:"Veronica - Non-Stop", id:"IQi-xQ5U"},{title:"Veronica - Rockradio", id:"aMXkgxHY"},{title:"Veronica - Top 1000 Allertijden", id:"k8Qsuoqa"},{title:"Vibe Radio 93.3 FM", id:"jfPNeXCE"},{title:"WGRV.FM", id:"cEcEdqwA"},{title:"World Music Radio Classic", id:"nHxP0tIZ"}]},
   {city:"Skopje", country:"Macedônia do Norte", lat:42, lon:21.43, stations:[
     {title:"Antenna 5 Radio Network", id:"dedmmXu4"},
     {title:"Bikers Garage Radio", id:"tfT62u7Y"},
@@ -1241,7 +1245,7 @@ const PLACES = [
     {title:"Business FM", id:"nvtlScBO"}]},
   {city:"Pyongyang", country:"Coreia do Norte", lat:39.02, lon:125.75, stations:[
     {title:"Pyongyang FM 105.2", id:"NPzavm5p"}]},
-  {city:"Dubai", country:"Emirados Árabes Unidos", lat:25.2, lon:55.27, stations:[
+  {city:"Dubai", country:"Emirados Árabes", lat:25.2, lon:55.27, stations:[
     {title:"Al Khaleejiya FM 100.9", id:"V4wsiv10"},
     {title:"Aloula Radio", id:"oewB1XnU"},
     {title:"Al Rabia FM 107.8", id:"cZgSJhKI"}]},
@@ -1277,7 +1281,7 @@ const PLACES = [
     {title:"988", id:"GQRXn-cX"},
     {title:"Ai FM 89.3", id:"md5fO7UT"},
     {title:"Asyik FM", id:"cOJMzQp4"}]},
-  {city:"Yangon", country:"Mianmar", lat:16.87, lon:96.2, stations:[
+  {city:"Yangon", country:"Myanmar", lat:16.87, lon:96.2, stations:[
     {title:"Cherry FM", id:"O5J0SxlZ"},
     {title:"Mandalay FM 87.9", id:"2BFT3OF7"},
     {title:"Padamyar FM 88.2", id:"lCU3aeUm"}]},
@@ -1497,7 +1501,7 @@ const PLACES = [
   {city:"Ndjamena", country:"Chade", lat:12.1348, lon:15.0557, stations:[{title:"Radio Tchad", url:"https://strhls.streamakaci.tv/str_tchad_radio/str_tchad_radio/icecast.audio?fbclid=IwAR32Ir_eHaV-HSrh46OVT_VeTZt5KoNggoq8qzeSiAeZTJNBKKUtsSNUtcY"},{title:"Abdulbasit Abdulsamad", url:"https://radio.mp3islam.com/listen/abdulbasit/radio.mp3"}]},
   {city:"Moroni", country:"Comores", lat:-11.7172, lon:43.2473, stations:[{title:"Radio Domoni Inter", url:"http://www.domoni-inter.org:8000/live"},{title:"Abdulbasit Abdulsamad", url:"https://radio.mp3islam.com/listen/abdulbasit/radio.mp3"},{title:"Radio Chifa", url:"http://www.radiochifa.fr:8000/main"},{title:"Radio Chifa", url:"http://www.radiochifa.fr:8000/main"}]},
   {city:"Brazzaville", country:"Congo", lat:-4.2634, lon:15.2429, stations:[{title:"Radio Maria Democratic Rep. Congo", url:"https://dreamsiteradiocp2.com/proxy/rmrepdemcongo?mp=/stream"},{title:"Abdulbasit Abdulsamad", url:"https://radio.mp3islam.com/listen/abdulbasit/radio.mp3"}]},
-  {city:"Nicósia", country:"Cipre", lat:35.1856, lon:33.3823, stations:[{title:"Kiss fm Cyprus 89.0", url:"http://r1.phileradio.com:8193/89FM"},{title:"Diesi Cyprus 101.1", url:"http://r1.cloudskep.com/radio/diesi/icecast.audio"},{title:"Kanali6 (106.00 | 98.6 | 107.00 | 106.9) Lemesos Cyprus Alte", url:"http://live3.istoikona.net:8372/stream/2/Title1=Kanali"},{title:"Trito Live", url:"http://r1.cloudskep.com/cybcr/cybc3/icecast.audio"}]},
+  {city:"Nicósia", country:"Chipre", lat:35.1856, lon:33.3823, stations:[{title:"Kiss fm Cyprus 89.0", url:"http://r1.phileradio.com:8193/89FM"},{title:"Diesi Cyprus 101.1", url:"http://r1.cloudskep.com/radio/diesi/icecast.audio"},{title:"Kanali6 (106.00 | 98.6 | 107.00 | 106.9) Lemesos Cyprus Alte", url:"http://live3.istoikona.net:8372/stream/2/Title1=Kanali"},{title:"Trito Live", url:"http://r1.cloudskep.com/cybcr/cybc3/icecast.audio"}]},
   {city:"Praga", country:"Tchéquia", lat:50.0755, lon:14.4378, stations:[{title:"RFE/RL Radio Farda", url:"http://rfe21.akacast.akamaistream.net/7/751/437779/v1/ibb.akacast.akamaistream.net/rfe21"},{title:"Радио Свобода (Radio Svoboda, RFE/RL Russian, ch. 4)", url:"http://rfe04.akacast.akamaistream.net/7/509/437762/v1/ibb.akacast.akamaistream.net/rfe04.m3u"},{title:"Country Radio", url:"http://icecast2.play.cz:8000/country128aac"},{title:"Радио Свобода", url:"https://rfe-ingest.akamaized.net/hls/live/2035254/axia04/playlist.m3u8"}]},
   {city:"Copenhague", country:"Dinamarca", lat:55.6761, lon:12.5683, stations:[{title:"Vinylhits.dk", url:"http://stream.vinylhits.dk/vinylmp3"},{title:"Classic FM", url:"http://webradio.classicfm.dk/classichorsens"},{title:"DR P1", url:"http://live-icy.gss.dr.dk/A/A03H.mp3"},{title:"DR P4 København", url:"http://live-icy.dr.dk/A/A08H.mp3"}]},
   {city:"Djibuti", country:"Djibuti", lat:11.5721, lon:43.1456, stations:[{title:"Abdulbasit Abdulsamad", url:"https://radio.mp3islam.com/listen/abdulbasit/radio.mp3"}]},
@@ -1578,6 +1582,8 @@ const PLACES = [
   {city:"Hanói", country:"Vietnã", lat:21.0278, lon:105.8342, stations:[{title:"RFI Tiếng Việt", url:"https://rfienvietnamien64k.ice.infomaniak.ch/rfienvietnamien-64.mp3"},{title:"Vietnamese National People", url:"http://c13.radioboss.fm:8127/stream"},{title:"VOV1", url:"https://str.vov.gov.vn/vovlive/vov1vov5Vietnamese.sdp_aac/playlist.m3u8"},{title:"VOV Giao thông Hà Nội", url:"https://play.vovgiaothong.vn/live/gthn/playlist.m3u8"}]},
   {city:"Pristina", country:"Kosovo", lat:42.6629, lon:21.1655, stations:[{title:"KLAN Kosova FM", url:"http://s4.radio.co/sd1d1904dc/listen"},{title:"RTK Radio Kosova 1", url:"http://82.114.72.2:8088/;.mp3"},{title:"Radio Kosova 1", url:"http://82.114.72.2:8088/"},{title:"RTK Radio Kosova 2", url:"http://82.114.72.2:8098/;stream.mp3"}]},
   {city:"Nuuk", country:"Groenlândia", lat:64.1836, lon:-51.7214, stations:[{title:"Nanoq FM", url:"http://getnanoq.retro-radio.dk/Nanoq-TX-1"},{title:"Dfm rtv int160k", url:"https://stereo.dfm.nu/"},{title:"ΡΑΔΙΟ ΔΙΠΛΟΠΕΝΙΕΣ", url:"https://play.streams.gr/sc/radiodiplopenies/stream"},{title:"KNR Live Radio", url:"https://i1.cdn.jetstre.am:8000/sz=knr=audio192?token=ea282bc02bb373156231dd1522a33943&time=6a184ec2"}]},
+  // sem capital — continente sem país, marcado pela estação McMurdo (a maior base lá)
+  {city:"Estação McMurdo", country:"Antártida", lat:-77.85, lon:166.67, weight:40, stations:[]},
 ];
 
 // continentes, só pra dar o nome grande no fundo do globo
@@ -1772,26 +1778,45 @@ moonMesh.add(moonGlow);
 // grade de meridianos e paralelos de verdade — círculos limpos, não o
 // triangulado bruto de um wireframe de esfera (aquilo criava diagonais feias)
 const graticuleMat = new THREE.LineBasicMaterial({color:0xd3ad5f, transparent:true, opacity:0.22});
+// Equador e Meridiano de Greenwich — as duas linhas de referência de verdade,
+// mais claras e um pouco mais altas que a grade comum pra não se confundir com ela
+const refLineMat = new THREE.LineBasicMaterial({color:0xf0e3c0, transparent:true, opacity:0.55});
 const Rg = R * 1.006;
+const RgRef = R * 1.008;
 
-function addLine(points){
+function addLine(points, mat){
   const geo = new THREE.BufferGeometry().setFromPoints(points);
-  globeGroup.add(new THREE.Line(geo, graticuleMat));
+  globeGroup.add(new THREE.Line(geo, mat || graticuleMat));
 }
 
-// paralelos (linhas horizontais), de -80 a 80 a cada 20 graus
+// paralelos (linhas horizontais), de -80 a 80 a cada 20 graus — pula o 0 (é o Equador, desenhado à parte)
 for (let lat = -80; lat <= 80; lat += 20){
+  if (lat === 0) continue;
   const pts = [];
   for (let lon = -180; lon <= 180; lon += 4) pts.push(toVec3(lat, lon, Rg));
   addLine(pts);
 }
 
-// meridianos (linhas de polo a polo), a cada 20 graus
+// meridianos (linhas de polo a polo), a cada 20 graus — pula o 0 (é Greenwich, desenhado à parte)
 for (let lon = -180; lon < 180; lon += 20){
+  if (lon === 0) continue;
   const pts = [];
   for (let lat = -90; lat <= 90; lat += 4) pts.push(toVec3(lat, lon, Rg));
   addLine(pts);
 }
+
+// Equador
+(function(){
+  const pts = [];
+  for (let lon = -180; lon <= 180; lon += 2) pts.push(toVec3(0, lon, RgRef));
+  addLine(pts, refLineMat);
+})();
+// Meridiano de Greenwich
+(function(){
+  const pts = [];
+  for (let lat = -90; lat <= 90; lat += 2) pts.push(toVec3(lat, 0, RgRef));
+  addLine(pts, refLineMat);
+})();
 
 // atmosfera de verdade: um brilho azulado que só aparece na borda, olhando
 // de raspão pro globo — o mesmo efeito que dá aquele "risquinho azul" nas
@@ -1875,7 +1900,7 @@ const continentLabels = [];
 
 // ranking de importância da cidade (pelo número de rádios) — decide quem aparece
 // primeiro quando o globo está bem afastado, igual zoom de níveis no Google Earth
-const cityImportances = PLACES.map(p => p.stations ? p.stations.length : 1).sort((a,b)=> a-b);
+const cityImportances = PLACES.map(p => p.weight != null ? p.weight : (p.stations ? p.stations.length : 1)).sort((a,b)=> a-b);
 function importanceRank(v){
   let lo=0, hi=cityImportances.length;
   while (lo<hi){ const mid=(lo+hi)>>1; if (cityImportances[mid] < v) lo=mid+1; else hi=mid; }
@@ -1888,7 +1913,7 @@ PLACES.forEach(place=>{
   // rente à borda, dando aquele efeito de "sombra triangular" ao girar o globo
   const lifted = pos.clone().multiplyScalar(1.012);
   // cidades com mais rádios ganham um ponto maior e um brilho mais forte, como no Radio Garden
-  const scale = Math.min(2.2, 0.75 + Math.log2(1 + (place.stations ? place.stations.length : 1)) * 0.17);
+  const scale = Math.min(2.2, 0.75 + Math.log2(1 + (place.weight != null ? place.weight : (place.stations ? place.stations.length : 1))) * 0.17);
 
   const glow = new THREE.Sprite(new THREE.SpriteMaterial({map: place.home ? homeGlowTex : glowTex, transparent:true, depthWrite:false}));
   glow.position.copy(lifted);
@@ -1908,7 +1933,7 @@ PLACES.forEach(place=>{
   hit.userData.dot = dot;
   globeGroup.add(hit);
 
-  const rank = importanceRank(place.stations ? place.stations.length : 1);
+  const rank = importanceRank(place.weight != null ? place.weight : (place.stations ? place.stations.length : 1));
   const el = document.createElement('div');
   el.className = 'city-label' + (place.home ? ' is-home' : '');
   if (!place.home){
@@ -1933,6 +1958,19 @@ PLACES.forEach(place=>{
 CONTINENTS.forEach(c=>{
   const el = document.createElement('div');
   el.className = 'continent-label';
+  el.textContent = c.name;
+  labelsContainer.appendChild(el);
+  continentLabels.push({el, lat:c.lat, lon:c.lon});
+});
+
+// nome das duas linhas de referência, discreto, em pontos sem rádio por perto pra não brigar com nada
+const REF_LINES = [
+  {name:"Equador", lat:0, lon:-28},
+  {name:"Meridiano de Greenwich", lat:-38, lon:0.6},
+];
+REF_LINES.forEach(c=>{
+  const el = document.createElement('div');
+  el.className = 'continent-label ref-line-label';
   el.textContent = c.name;
   labelsContainer.appendChild(el);
   continentLabels.push({el, lat:c.lat, lon:c.lon});
