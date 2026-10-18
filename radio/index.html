@@ -181,6 +181,15 @@
     color:var(--ink); font-family:'Inter',sans-serif; font-size:0.85rem;
   }
   #searchBar input::placeholder{color:var(--ink-dim);}
+  #moodShortcuts{
+    display:flex; flex-wrap:wrap; gap:6px; margin:0 0 14px;
+  }
+  #moodShortcuts button{
+    flex:none; background:var(--ground-deep); border:1px solid var(--line); color:var(--ink-dim);
+    font-family:'Inter',sans-serif; font-size:0.72rem; padding:6px 11px; border-radius:999px;
+    cursor:pointer; transition:color .15s, border-color .15s;
+  }
+  #moodShortcuts button:hover{color:var(--gold); border-color:var(--gold-dim);}
   #searchBar svg{flex:none; color:var(--ink-dim);}
   #searchResults{
     flex:none; max-height:40vh; overflow-y:auto;
@@ -728,6 +737,7 @@
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
     <input id="searchInput" type="text" placeholder="rádio, cidade ou país&hellip;" autocomplete="off">
   </div>
+  <div id="moodShortcuts"></div>
   <ul id="searchResults"></ul>
   <h2>Rádios favoritas</h2>
   <p id="favStationsEmpty">Favorite uma rádio da busca (o coração ao lado dela) — ela aparece aqui.</p>
@@ -793,7 +803,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.55</div>
+<div id="versionTag">v1.56</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2724,34 +2734,7 @@ async function runSearch(q){
       }
       return;
     }
-    const searchQueue = data.map(s => ({place: {city: s.name, country: s.country || 'mundo'}, st: {title: s.name, url: s.url_resolved || s.url}}));
-    data.forEach((st, stIdx)=>{
-      const li = document.createElement('li');
-      const btn = document.createElement('button');
-      const loc = [st.state, st.country].filter(Boolean).join(', ');
-      btn.innerHTML = '<span>'+st.name+'</span><span class="sr-sub">'+loc+(st.tags ? ' · '+st.tags.split(',')[0] : '')+'</span>';
-      const place = {city: st.name, country: st.country || 'mundo'};
-      const streamUrl = st.url_resolved || st.url;
-      btn.addEventListener('click', ()=>{
-        playStation(place, {title: st.name, url: streamUrl}, null, searchQueue, stIdx);
-        searchResults.classList.remove('open');
-      });
-
-      const favBtn2 = document.createElement('button');
-      favBtn2.className = 'sr-fav' + (isFavStation(streamUrl) ? ' active' : '');
-      favBtn2.setAttribute('aria-label', 'Favoritar esta rádio');
-      favBtn2.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>';
-      favBtn2.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        toggleFavStation({title: st.name, url: streamUrl, country: st.country});
-        favBtn2.classList.toggle('active', isFavStation(streamUrl));
-        showToast(isFavStation(streamUrl) ? st.name+' nos favoritos' : 'Removida dos favoritos');
-      });
-
-      li.appendChild(btn);
-      li.appendChild(favBtn2);
-      searchResults.appendChild(li);
-    });
+    renderStationResults(data);
   } catch(e){
     loading.remove();
     if (!searchResults.children.length){
@@ -2759,8 +2742,97 @@ async function runSearch(q){
     }
   }
 }
+
+// desenha a lista de resultados (rádios), usado tanto pela busca por texto
+// quanto pelos atalhos de clima/ambiente (sono, spa, lo-fi…)
+function renderStationResults(data){
+  const searchQueue = data.map(s => ({place: {city: s.name, country: s.country || 'mundo'}, st: {title: s.name, url: s.url_resolved || s.url}}));
+  data.forEach((st, stIdx)=>{
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    const loc = [st.state, st.country].filter(Boolean).join(', ');
+    btn.innerHTML = '<span>'+st.name+'</span><span class="sr-sub">'+loc+(st.tags ? ' · '+st.tags.split(',')[0] : '')+'</span>';
+    const place = {city: st.name, country: st.country || 'mundo'};
+    const streamUrl = st.url_resolved || st.url;
+    btn.addEventListener('click', ()=>{
+      playStation(place, {title: st.name, url: streamUrl}, null, searchQueue, stIdx);
+      searchResults.classList.remove('open');
+    });
+
+    const favBtn2 = document.createElement('button');
+    favBtn2.className = 'sr-fav' + (isFavStation(streamUrl) ? ' active' : '');
+    favBtn2.setAttribute('aria-label', 'Favoritar esta rádio');
+    favBtn2.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>';
+    favBtn2.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      toggleFavStation({title: st.name, url: streamUrl, country: st.country});
+      favBtn2.classList.toggle('active', isFavStation(streamUrl));
+      showToast(isFavStation(streamUrl) ? st.name+' nos favoritos' : 'Removida dos favoritos');
+    });
+
+    li.appendChild(btn);
+    li.appendChild(favBtn2);
+    searchResults.appendChild(li);
+  });
+}
+
+// ---------- atalhos de clima/ambiente — rádios que tocam contínuo (sono, spa, lo-fi…) ----------
+// são streams ao vivo, sem fim marcado — por isso servem pra "8 horas de sono" sem parar
+const MOOD_SHORTCUTS = [
+  {label:'Sono · relax', tags:['sleep','deep sleep','calm','relax']},
+  {label:'Spa · oriental', tags:['spa','meditation','zen','asian']},
+  {label:'Meditação', tags:['meditation','yoga','mindfulness']},
+  {label:'Lo-fi', tags:['lofi','chillhop']},
+  {label:'Natureza', tags:['nature sounds','rain','ambient nature']},
+  {label:'Piano suave', tags:['piano','instrumental']},
+];
+async function runMoodSearch(tags, label){
+  searchResults.innerHTML = '';
+  const loading = document.createElement('li');
+  loading.className = 'sr-empty';
+  loading.textContent = 'buscando '+label.toLowerCase()+'…';
+  searchResults.appendChild(loading);
+  searchResults.classList.add('open');
+  try {
+    const base = 'https://de1.api.radio-browser.info/json/stations/bytag/';
+    const lists = await Promise.all(tags.map(t =>
+      fetch(base+encodeURIComponent(t)+'?limit=12&hidebroken=true&order=votes&reverse=true').then(r=>r.json()).catch(()=>[])
+    ));
+    const seen = new Set();
+    const data = lists.flat().filter(st=>{
+      if (seen.has(st.stationuuid)) return false;
+      seen.add(st.stationuuid);
+      return true;
+    }).slice(0, 25);
+    loading.remove();
+    if (!data.length){
+      searchResults.innerHTML = '<li class="sr-empty">nenhuma rádio encontrada pra '+label.toLowerCase()+' agora</li>';
+      return;
+    }
+    renderStationResults(data);
+  } catch(e){
+    loading.remove();
+    searchResults.innerHTML = '<li class="sr-empty">busca indisponível agora, tenta de novo</li>';
+  }
+}
+const moodShortcutsEl = document.getElementById('moodShortcuts');
+if (moodShortcutsEl){
+  MOOD_SHORTCUTS.forEach(m=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = m.label;
+    b.addEventListener('click', ()=>{
+      searchInput.value = '';
+      runMoodSearch(m.tags, m.label);
+    });
+    moodShortcutsEl.appendChild(b);
+  });
+}
+
 document.addEventListener('click', (e)=>{
-  if (!searchResults.contains(e.target) && e.target !== searchInput) searchResults.classList.remove('open');
+  if (!searchResults.contains(e.target) && e.target !== searchInput && !(moodShortcutsEl && moodShortcutsEl.contains(e.target))){
+    searchResults.classList.remove('open');
+  }
 });
 
 // ---------- Post-it — motor copiado idêntico do MontyMap, captura rápida de ideia ----------
