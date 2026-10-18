@@ -2829,6 +2829,48 @@ if (moodShortcutsEl){
   });
 }
 
+// ---------- semeadura única das categorias de clima/ambiente nos favoritos ----------
+// roda uma vez só (marca a flag) e já deixa ~5 rádios de cada estilo prontas nos
+// favoritos, por categoria — ele só precisa ir apagando as que não curtir
+const MOOD_SEED_KEY = 'mundoAoVivo_moodSeedFeito';
+async function seedMoodFavorites(){
+  try { if (localStorage.getItem(MOOD_SEED_KEY) === '1') return; } catch(e){ return; }
+  try {
+    let added = 0;
+    for (const m of MOOD_SHORTCUTS){
+      const lists = await Promise.all(m.tags.map(t =>
+        fetch('https://de1.api.radio-browser.info/json/stations/bytag/'+encodeURIComponent(t)+'?limit=4&hidebroken=true&order=votes&reverse=true')
+          .then(r=>r.json()).catch(()=>[])
+      ));
+      const seen = new Set();
+      const picked = lists.flat().filter(st=>{
+        if (!st.url_resolved && !st.url) return false;
+        if (seen.has(st.stationuuid)) return false;
+        seen.add(st.stationuuid);
+        return true;
+      }).slice(0, 5);
+      picked.forEach(st=>{
+        const url = st.url_resolved || st.url;
+        if (favStations.some(s => s.url === url)) return;
+        favStations = [{title: st.name, url, country: st.country, category: m.label}, ...favStations];
+        added++;
+      });
+      if (picked.length && !categories.includes(m.label)){
+        categories = [...categories, m.label];
+      }
+    }
+    if (added){
+      saveFavStations(favStations);
+      saveCategories(categories);
+      renderFavStationsList();
+      syncFavoritosNaNuvem();
+      showToast(added+' rádios de clima/ambiente adicionadas aos favoritos');
+    }
+    localStorage.setItem(MOOD_SEED_KEY, '1');
+  } catch(e){ /* sem internet agora — tenta de novo na próxima vez que abrir */ }
+}
+seedMoodFavorites();
+
 document.addEventListener('click', (e)=>{
   if (!searchResults.contains(e.target) && e.target !== searchInput && !(moodShortcutsEl && moodShortcutsEl.contains(e.target))){
     searchResults.classList.remove('open');
