@@ -1948,26 +1948,52 @@ function updateLabels(){
   const rankCutoff = Math.pow(zoomT, 1.5) * 0.94;
 
   function place(item, nearThreshold, farThreshold, isCity){
-    if (isCity && !item.home && item.rank < rankCutoff){ item.el.style.opacity = '0'; return; }
     const world = toVec3(item.lat, item.lon, R).applyMatrix4(globeGroup.matrixWorld);
     const facing = world.clone().normalize().dot(camN);
-    if (facing < nearThreshold){ item.el.style.opacity = '0'; return; }
+    if (facing < nearThreshold) return null;
     const proj = world.clone().project(camera);
-    if (proj.z > 1){ item.el.style.opacity = '0'; return; }
+    if (proj.z > 1) return null;
     const x = Math.round((proj.x + 1) / 2 * innerWidth);
     const y = Math.round((1 - proj.y) / 2 * innerHeight);
     const fade = Math.min(1, (facing - nearThreshold) / (farThreshold - nearThreshold));
-    // sem scale() — escalar texto via transform borra o rastro (notado por ele, 16/10);
-    // some pela opacidade só, que não embaça
-    // cidade: o pontinho fica exatamente na coordenada, texto encostado nele (preso ao planeta, não boiando acima)
-    // continente: nome grande centrado no meio do território, sem pontinho
-    const anchor = isCity ? 'translate(-2px, -50%)' : 'translate(-50%, -50%)';
-    item.el.style.transform = anchor + ' translate('+x+'px,'+y+'px)';
-    item.el.style.opacity = String(fade);
+    return {x, y, fade};
   }
 
-  cityLabels.forEach(item => place(item, 0.08, 0.4, true));
-  continentLabels.forEach(item => place(item, -0.05, 0.35, false));
+  // continentes sempre entram primeiro — não competem por espaço com as cidades
+  continentLabels.forEach(item=>{
+    const p = place(item, -0.05, 0.35, false);
+    if (!p){ item.el.style.opacity = '0'; return; }
+    item.el.style.transform = 'translate(-50%, -50%) translate('+p.x+'px,'+p.y+'px)';
+    item.el.style.opacity = String(p.fade);
+  });
+
+  // cidades: calcula onde cada nome cairia na tela e só mostra quem não esbarra
+  // em outro nome já aceito — prioridade pra quem tem mais rádios (estilo Google Earth,
+  // onde em regiões apertadas tipo a Europa só os nomes que cabem aparecem)
+  const candidates = [];
+  cityLabels.forEach(item=>{
+    if (!item.home && item.rank < rankCutoff){ item.el.style.opacity = '0'; return; }
+    const p = place(item, 0.08, 0.4, true);
+    if (!p){ item.el.style.opacity = '0'; return; }
+    candidates.push({item, x:p.x, y:p.y, fade:p.fade});
+  });
+  candidates.sort((a,b)=> (b.item.home - a.item.home) || (b.item.rank - a.item.rank));
+
+  const placedBoxes = [];
+  const GAP = 8;
+  candidates.forEach(c=>{
+    const w = c.item.home ? 210 : (c.item.rank >= 0.82 ? 150 : (c.item.rank < 0.4 ? 62 : 100));
+    const h = 32;
+    const box = {x1:c.x-2, y1:c.y-h/2, x2:c.x-2+w, y2:c.y+h/2};
+    const collide = placedBoxes.some(b => box.x1 < b.x2+GAP && box.x2+GAP > b.x1 && box.y1 < b.y2+GAP && box.y2+GAP > b.y1);
+    if (collide){ c.item.el.style.opacity = '0'; return; }
+    placedBoxes.push(box);
+    // sem scale() — escalar texto via transform borra o rastro (notado por ele, 16/10);
+    // some pela opacidade só, que não embaça
+    // o pontinho fica exatamente na coordenada, texto encostado nele (preso ao planeta, não boiando acima)
+    c.item.el.style.transform = 'translate(-2px, -50%) translate('+c.x+'px,'+c.y+'px)';
+    c.item.el.style.opacity = String(c.fade);
+  });
 }
 
 function resize(){
