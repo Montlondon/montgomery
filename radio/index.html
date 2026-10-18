@@ -803,7 +803,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.56</div>
+<div id="versionTag">v1.57</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2783,6 +2783,7 @@ const MOOD_SHORTCUTS = [
   {label:'Spa · oriental', tags:['spa','meditation','zen','asian']},
   {label:'Meditação', tags:['meditation','yoga','mindfulness']},
   {label:'Lo-fi', tags:['lofi','chillhop']},
+  {label:'Estudar', tags:['study','study music','focus']},
   {label:'Natureza', tags:['nature sounds','rain','ambient nature']},
   {label:'Piano suave', tags:['piano','instrumental']},
 ];
@@ -2832,12 +2833,20 @@ if (moodShortcutsEl){
 // ---------- semeadura única das categorias de clima/ambiente nos favoritos ----------
 // roda uma vez só (marca a flag) e já deixa ~5 rádios de cada estilo prontas nos
 // favoritos, por categoria — ele só precisa ir apagando as que não curtir
-const MOOD_SEED_KEY = 'mundoAoVivo_moodSeedFeito';
+// guarda quais categorias já foram semeadas (não um flag único), pra se eu
+// acrescentar uma categoria nova depois (tipo "Estudar"), ela também seja
+// semeada sozinha sem repetir as que ele já pode ter apagado
+const MOOD_SEED_KEY = 'mundoAoVivo_moodSeedFeitas';
+function loadSeededMoods(){
+  try { return JSON.parse(localStorage.getItem(MOOD_SEED_KEY) || '[]'); } catch(e){ return []; }
+}
 async function seedMoodFavorites(){
-  try { if (localStorage.getItem(MOOD_SEED_KEY) === '1') return; } catch(e){ return; }
+  const seeded = loadSeededMoods();
+  const pending = MOOD_SHORTCUTS.filter(m => !seeded.includes(m.label));
+  if (!pending.length) return;
   try {
     let added = 0;
-    for (const m of MOOD_SHORTCUTS){
+    for (const m of pending){
       const lists = await Promise.all(m.tags.map(t =>
         fetch('https://de1.api.radio-browser.info/json/stations/bytag/'+encodeURIComponent(t)+'?limit=4&hidebroken=true&order=votes&reverse=true')
           .then(r=>r.json()).catch(()=>[])
@@ -2858,6 +2867,7 @@ async function seedMoodFavorites(){
       if (picked.length && !categories.includes(m.label)){
         categories = [...categories, m.label];
       }
+      seeded.push(m.label);
     }
     if (added){
       saveFavStations(favStations);
@@ -2866,7 +2876,7 @@ async function seedMoodFavorites(){
       syncFavoritosNaNuvem();
       showToast(added+' rádios de clima/ambiente adicionadas aos favoritos');
     }
-    localStorage.setItem(MOOD_SEED_KEY, '1');
+    localStorage.setItem(MOOD_SEED_KEY, JSON.stringify(seeded));
   } catch(e){ /* sem internet agora — tenta de novo na próxima vez que abrir */ }
 }
 seedMoodFavorites();
