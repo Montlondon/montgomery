@@ -1,5 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <title>Montgomery Rádio</title>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0a0d16">
@@ -130,7 +131,9 @@
   #favStationsList .fav-cat-header{
     border-bottom:none; color:var(--gold); font-size:0.75rem; letter-spacing:0.04em;
     text-transform:uppercase; padding:14px 2px 4px; opacity:0.85;
+    cursor:pointer; transition:opacity .15s, color .15s;
   }
+  #favStationsList .fav-cat-header:hover{opacity:1; color:#e8c87a;}
   .fav-cat-dropdown{position:relative; flex:none;}
   .fav-cat-btn{
     max-width:108px; background:none; border:1px solid var(--line); color:var(--ink-dim);
@@ -193,8 +196,16 @@
     text-align:left; padding:10px 14px; font-family:'Inter',sans-serif;
   }
   #searchResults button:hover{color:var(--gold);}
+  #searchResults button:not(.sr-fav) span{
+    max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
   #searchResults .sr-sub{font-size:0.72rem; color:var(--ink-dim);}
   #searchResults .sr-empty{padding:14px; color:var(--ink-dim); font-size:0.82rem;}
+  #searchResults li{padding-right:4px;}
+  #searchResults .sr-fav{
+    margin-left:4px; padding-left:10px; padding-right:14px;
+    border-left:1px solid var(--line);
+  }
 
   .panel-top{
     display:flex; align-items:center; justify-content:flex-end; gap:6px;
@@ -333,6 +344,27 @@
   #dockPlayer .np-city{
     font-size:0.68rem; color:var(--ink-dim);
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  #npPopup{
+    position:fixed; left:50%; bottom:84px; transform:translateX(-50%);
+    max-width:min(380px, 92vw);
+    display:flex; flex-direction:column; align-items:center; gap:1px;
+    padding:9px 18px;
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    z-index:11; pointer-events:none;
+  }
+  #npPopup[hidden]{display:none;}
+  #npPopup .popup-name{
+    font-size:0.86rem; font-weight:600; color:var(--ink);
+    max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  #npPopup .popup-city{
+    font-size:0.7rem; color:var(--gold); letter-spacing:0.02em;
+    max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  @media (max-width: 480px){
+    #npPopup{bottom:76px; padding:7px 14px;}
   }
   #dockPlayer .np-stop{
     background:none; border:none; color:var(--ink-dim);
@@ -508,6 +540,13 @@
     flex:none;
     margin-right:5px;
   }
+  @media (min-width: 641px){
+    .city-label .dot{
+      width:3px; height:3px;
+      box-shadow:0 0 1px rgba(255,255,255,0.7), 0 0 1px rgba(0,0,0,0.8);
+      margin-right:4px;
+    }
+  }
   .city-label.is-home .dot{ background:#f0a190; box-shadow:0 0 4px rgba(240,161,144,0.9); }
   .city-label .label-text{
     display:flex; flex-direction:column;
@@ -605,6 +644,10 @@
   arraste para girar &middot; toque num ponto dourado
 </div>
 
+<div id="npPopup" hidden>
+  <div class="popup-name" id="npPopupName"></div>
+  <div class="popup-city" id="npPopupCity"></div>
+</div>
 <div id="dock">
   <button id="dockFav" aria-label="Buscar e favoritas">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -2007,12 +2050,16 @@ const toast = document.getElementById('toast');
 // ---------- tocador embutido — a rádio toca aqui dentro, sem abrir aba nova ----------
 const dockPlayer = document.getElementById('dockPlayer');
 const dockIdleHint = document.getElementById('dockIdleHint');
+const npPopup = document.getElementById('npPopup');
 function setDockPlaying(isPlaying){
   dockPlayer.hidden = !isPlaying;
   dockIdleHint.hidden = isPlaying;
+  npPopup.hidden = !isPlaying;
 }
 const npName = document.getElementById('npName');
 const npCity = document.getElementById('npCity');
+const npPopupName = document.getElementById('npPopupName');
+const npPopupCity = document.getElementById('npPopupCity');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const npStop = document.getElementById('npStop');
 const audioEl = document.getElementById('radioAudio');
@@ -2045,6 +2092,8 @@ function playStation(place, st, li, queue, queueIndex){
   activeQueueIndex = queueIndex != null ? queueIndex : 0;
   npName.textContent = st.title;
   npCity.textContent = place.city;
+  npPopupName.textContent = st.title;
+  npPopupCity.textContent = place.city;
   setDockPlaying(true);
   audioStuck = false;
   audioEl.src = streamUrlFor(st);
@@ -2231,12 +2280,18 @@ function renderFavStationsList(){
   if (groups.has('Sem categoria')) order.push('Sem categoria');
 
   order.forEach(cat=>{
+    const catList = groups.get(cat);
     const header = document.createElement('li');
     header.className = 'fav-cat-header';
     header.textContent = cat;
+    header.title = 'Tocar esta categoria';
+    header.addEventListener('click', ()=>{
+      const queue = catList.map(s => ({place: {city: s.title, country: s.country || 'mundo'}, st: {title: s.title, url: s.url}}));
+      playStation({city: catList[0].title, country: catList[0].country || 'mundo'}, {title: catList[0].title, url: catList[0].url}, null, queue, 0);
+    });
     favStationsList.appendChild(header);
 
-    groups.get(cat).forEach(st=>{
+    catList.forEach(st=>{
       const li = document.createElement('li');
       if (activeStation && activeStation.url === st.url) li.classList.add('playing');
       const btn = document.createElement('button');
