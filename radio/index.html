@@ -203,7 +203,7 @@
   #searchResults .sr-empty{padding:14px; color:var(--ink-dim); font-size:0.82rem;}
   #searchResults li{padding-right:4px;}
   #searchResults .sr-fav{
-    margin-left:4px; padding-left:10px; padding-right:14px;
+    width:auto; margin-left:4px; padding-left:10px; padding-right:14px;
     border-left:1px solid var(--line);
   }
 
@@ -566,6 +566,26 @@
     pointer-events:auto; cursor:pointer;
   }
   .city-label.is-home .name:hover{ text-decoration:underline; }
+  .city-label.label-major .name{
+    font-size:0.88rem; font-weight:800; letter-spacing:0.01em;
+  }
+  .city-label.label-major .dot{
+    width:6px; height:6px;
+    box-shadow:0 0 5px rgba(255,255,255,0.95), 0 0 1px rgba(0,0,0,0.8);
+  }
+  .city-label.label-minor .name{
+    font-size:0.64rem; font-weight:600; opacity:0.78;
+  }
+  .city-label.label-minor .country{
+    display:none;
+  }
+  .city-label.label-minor .dot{
+    width:3px; height:3px;
+  }
+  @media (min-width: 641px){
+    .city-label.label-major .dot{width:4px; height:4px;}
+    .city-label.label-minor .dot{width:2px; height:2px;}
+  }
   .city-label .country{
     font-family:'Inter',sans-serif;
     font-size:0.62rem;
@@ -1853,6 +1873,15 @@ const labelsContainer = document.getElementById('labels');
 const cityLabels = [];
 const continentLabels = [];
 
+// ranking de importância da cidade (pelo número de rádios) — decide quem aparece
+// primeiro quando o globo está bem afastado, igual zoom de níveis no Google Earth
+const cityImportances = PLACES.map(p => p.stations ? p.stations.length : 1).sort((a,b)=> a-b);
+function importanceRank(v){
+  let lo=0, hi=cityImportances.length;
+  while (lo<hi){ const mid=(lo+hi)>>1; if (cityImportances[mid] < v) lo=mid+1; else hi=mid; }
+  return lo / cityImportances.length;
+}
+
 PLACES.forEach(place=>{
   const pos = toVec3(place.lat, place.lon, R);
   // levanta o ponto um pouco da superfície — senão a esfera da Terra corta o brilho do sprite
@@ -1879,8 +1908,13 @@ PLACES.forEach(place=>{
   hit.userData.dot = dot;
   globeGroup.add(hit);
 
+  const rank = importanceRank(place.stations ? place.stations.length : 1);
   const el = document.createElement('div');
   el.className = 'city-label' + (place.home ? ' is-home' : '');
+  if (!place.home){
+    if (rank >= 0.82) el.classList.add('label-major');
+    else if (rank < 0.4) el.classList.add('label-minor');
+  }
   if (place.home){
     el.innerHTML = '<span class="dot"></span><span class="label-text"><span class="name">Montgomery Acupuntura</span><span class="country">Quiropraxia e Psicanálise</span></span>';
   } else {
@@ -1893,7 +1927,7 @@ PLACES.forEach(place=>{
     });
   }
   labelsContainer.appendChild(el);
-  cityLabels.push({el, lat:place.lat, lon:place.lon});
+  cityLabels.push({el, lat:place.lat, lon:place.lon, rank, home:!!place.home});
 });
 
 CONTINENTS.forEach(c=>{
@@ -1908,7 +1942,13 @@ function updateLabels(){
   camera.getWorldPosition(camPos);
   const camN = camPos.clone().normalize();
 
+  // quanto mais afastado o globo, menos nomes aparecem — só as cidades com mais
+  // rádios cadastradas "ganham" o nome primeiro, igual os níveis de zoom do Google Earth
+  const zoomT = Math.max(0, Math.min(1, (camera.position.z - ZOOM_MIN) / (ZOOM_MAX - ZOOM_MIN)));
+  const rankCutoff = Math.pow(zoomT, 1.5) * 0.94;
+
   function place(item, nearThreshold, farThreshold, isCity){
+    if (isCity && !item.home && item.rank < rankCutoff){ item.el.style.opacity = '0'; return; }
     const world = toVec3(item.lat, item.lon, R).applyMatrix4(globeGroup.matrixWorld);
     const facing = world.clone().normalize().dot(camN);
     if (facing < nearThreshold){ item.el.style.opacity = '0'; return; }
