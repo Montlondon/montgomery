@@ -759,7 +759,7 @@
   <div class="dock-sep"></div>
   <button id="dockRotate" aria-label="Girar ou parar o globo"></button>
   <div class="dock-sep"></div>
-  <button id="btnBorders" aria-label="Mostrar divisas dos estados do Brasil" title="Divisas dos estados">
+  <button id="btnBorders" aria-label="Mostrar fronteiras dos países e estados do Brasil" title="Fronteiras">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10l6-5 6 4 6-6M4 19l5-4 6 3 5-5" stroke-dasharray="2.2 2.2"/></svg>
   </button>
   <div class="dock-sep"></div>
@@ -1888,27 +1888,35 @@ for (let lon = -180; lon < 180; lon += 20){
   addLine(pts, refLineMat);
 })();
 
-// ---------- divisas dos estados do Brasil — pra estudar geografia olhando o globo ----------
-// desenhadas um pouquinho acima da grade (Rg), escondidas por padrão (botão liga/desliga no dock)
-const brStatesGroup = new THREE.Group();
-brStatesGroup.visible = false;
-globeGroup.add(brStatesGroup);
-const brStatesMat = new THREE.LineBasicMaterial({color:0xd3ad5f, transparent:true, opacity:0.75});
-let brStatesLoaded = false;
-function loadBrStatesBorders(){
-  if (brStatesLoaded) return;
-  brStatesLoaded = true;
-  fetch('/br-states.json').then(r=> r.json()).then(geo=>{
-    const RgStates = R * 1.009;
+// ---------- fronteiras — países do mundo todo + divisas dos estados do Brasil,
+// pra estudar geografia olhando o globo. Desenhadas um pouquinho acima da grade
+// (Rg), escondidas por padrão (botão liga/desliga no dock) ----------
+const bordersGroup = new THREE.Group();
+bordersGroup.visible = false;
+globeGroup.add(bordersGroup);
+const worldBorderMat = new THREE.LineBasicMaterial({color:0xd3ad5f, transparent:true, opacity:0.5});
+const brStatesMat = new THREE.LineBasicMaterial({color:0xf0e3c0, transparent:true, opacity:0.85});
+
+function addGeoJsonLines(url, mat, group, radius){
+  return fetch(url).then(r=> r.json()).then(geo=>{
     geo.features.forEach(feat=>{
       const polys = feat.geometry.type === 'MultiPolygon' ? feat.geometry.coordinates : [feat.geometry.coordinates];
       polys.forEach(poly=> poly.forEach(ring=>{
-        const pts = ring.map(([lon, lat]) => toVec3(lat, lon, RgStates));
+        const pts = ring.map(([lon, lat]) => toVec3(lat, lon, radius));
         const geoLine = new THREE.BufferGeometry().setFromPoints(pts);
-        brStatesGroup.add(new THREE.Line(geoLine, brStatesMat));
+        group.add(new THREE.Line(geoLine, mat));
       }));
     });
-  }).catch(()=>{ brStatesLoaded = false; });
+  });
+}
+let bordersLoaded = false;
+function loadBorders(){
+  if (bordersLoaded) return;
+  bordersLoaded = true;
+  Promise.all([
+    addGeoJsonLines('/world-countries.json', worldBorderMat, bordersGroup, R * 1.008),
+    addGeoJsonLines('/br-states.json', brStatesMat, bordersGroup, R * 1.009),
+  ]).catch(()=>{ bordersLoaded = false; });
 }
 
 // atmosfera de verdade: um brilho azulado que só aparece na borda, olhando
@@ -3571,19 +3579,19 @@ rotateBtn.addEventListener('click', ()=>{
   renderRotateBtn();
 });
 
-// ---------- divisas dos estados do Brasil (liga/desliga) ----------
+// ---------- fronteiras do mundo + estados do Brasil (liga/desliga) ----------
 const btnBorders = document.getElementById('btnBorders');
-let brStatesOn = localStorage.getItem('mundoAoVivo_divisasBR') === '1';
-function applyBrStatesVisibility(){
-  brStatesGroup.visible = brStatesOn;
-  btnBorders.classList.toggle('active', brStatesOn);
-  if (brStatesOn) loadBrStatesBorders();
+let bordersOn = localStorage.getItem('mundoAoVivo_divisasBR') === '1';
+function applyBordersVisibility(){
+  bordersGroup.visible = bordersOn;
+  btnBorders.classList.toggle('active', bordersOn);
+  if (bordersOn) loadBorders();
 }
-applyBrStatesVisibility();
+applyBordersVisibility();
 btnBorders.addEventListener('click', ()=>{
-  brStatesOn = !brStatesOn;
-  localStorage.setItem('mundoAoVivo_divisasBR', brStatesOn ? '1' : '0');
-  applyBrStatesVisibility();
+  bordersOn = !bordersOn;
+  localStorage.setItem('mundoAoVivo_divisasBR', bordersOn ? '1' : '0');
+  applyBordersVisibility();
 });
 
 // ---------- painel largo — nome das rádios cortando demais? expande ----------
