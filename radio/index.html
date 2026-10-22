@@ -2984,11 +2984,11 @@ renderFavPanel();
 // esquerdo); coração abre direto a aba da direita, já com a busca de
 // cidade e as cidades favoritas prontas ----------
 document.getElementById('dockFav').addEventListener('click', ()=>{
-  favPanel.classList.add('open');
+  favPanel.classList.toggle('open');
 });
 document.getElementById('btnFavorites').addEventListener('click', ()=>{
-  panel.classList.add('open');
-  citySearchInput.focus();
+  const abrindo = panel.classList.toggle('open');
+  if (abrindo) citySearchInput.focus();
 });
 document.getElementById('favPanelClose').addEventListener('click', ()=>{
   favPanel.classList.remove('open');
