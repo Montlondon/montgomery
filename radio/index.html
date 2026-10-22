@@ -195,6 +195,19 @@
     color:var(--ink); font-family:'Inter',sans-serif; font-size:0.85rem;
   }
   #searchBar input::placeholder{color:var(--ink-dim);}
+  #micBtn{
+    flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:2px;
+    transition:color .15s ease;
+  }
+  #micBtn:hover{color:var(--gold);}
+  #micBtn.listening{color:#e8735a; animation:micPulse 1s ease-in-out infinite;}
+  @keyframes micPulse{0%,100%{opacity:1;} 50%{opacity:.4;}}
+  /* o painel esquerdo mostra só uma seção por vez — busca/mundo OU favoritos —
+     pra não precisar rolar procurando enquanto dirige */
+  #favPanel #worldSearchSection, #favPanel #favoritesSection{display:none;}
+  #favPanel.mode-world #worldSearchSection{display:block;}
+  #favPanel.mode-favorites #favoritesSection{display:block;}
   #moodShortcuts{
     display:flex; flex-wrap:wrap; gap:6px; margin:0 0 14px;
   }
@@ -803,18 +816,25 @@
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
-  <div id="searchBar">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-    <input id="searchInput" type="text" placeholder="rádio, cidade ou país&hellip;" autocomplete="off">
+  <div id="worldSearchSection">
+    <div id="searchBar">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="searchInput" type="text" placeholder="rádio, cidade ou país&hellip;" autocomplete="off">
+      <button id="micBtn" type="button" aria-label="Ditar por voz" title="Ditar por voz" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg>
+      </button>
+    </div>
+    <div id="moodShortcuts"></div>
+    <ul id="searchResults"></ul>
   </div>
-  <div id="moodShortcuts"></div>
-  <ul id="searchResults"></ul>
-  <h2 id="favoritesSectionTitle">Rádios favoritas</h2>
-  <p id="favStationsEmpty">Favorite uma rádio da busca (o coração ao lado dela) — ela aparece aqui.</p>
-  <ul id="favStationsList"></ul>
-  <h2>Cidades favoritas</h2>
-  <p id="favEmpty">Favorite uma cidade pelo coração no painel dela — ela aparece aqui.</p>
-  <ul id="favList"></ul>
+  <div id="favoritesSection">
+    <h2 id="favoritesSectionTitle">Rádios favoritas</h2>
+    <p id="favStationsEmpty">Favorite uma rádio da busca (o coração ao lado dela) — ela aparece aqui.</p>
+    <ul id="favStationsList"></ul>
+    <h2>Cidades favoritas</h2>
+    <p id="favEmpty">Favorite uma cidade pelo coração no painel dela — ela aparece aqui.</p>
+    <ul id="favList"></ul>
+  </div>
 </aside>
 
 <aside id="panel" aria-live="polite">
@@ -2881,15 +2901,16 @@ function renderFavPanel(){
 renderFavPanel();
 
 // ---------- dois botões pro painel esquerdo: "rádios do mundo" (busca) e
-// "favoritos" — cada um abre o painel já rolado pra seção certa ----------
+// "favoritos" — cada um mostra só a sua seção, sem precisar rolar
+// procurando enquanto dirige ----------
 document.getElementById('dockFav').addEventListener('click', ()=>{
-  favPanel.classList.add('open');
-  favPanel.scrollTo({top: 0, behavior: 'smooth'});
+  favPanel.classList.remove('mode-favorites');
+  favPanel.classList.add('open', 'mode-world');
   searchInput.focus();
 });
 document.getElementById('btnFavorites').addEventListener('click', ()=>{
-  favPanel.classList.add('open');
-  document.getElementById('favoritesSectionTitle').scrollIntoView({behavior: 'smooth', block: 'start'});
+  favPanel.classList.remove('mode-world');
+  favPanel.classList.add('open', 'mode-favorites');
 });
 document.getElementById('favPanelClose').addEventListener('click', ()=>{
   favPanel.classList.remove('open');
@@ -2935,6 +2956,36 @@ searchInput.addEventListener('input', ()=>{
   if (q.length < 2){ searchResults.classList.remove('open'); return; }
   searchTimer = setTimeout(()=> runSearch(q), 400);
 });
+
+// ---------- microfone — dita o nome da rádio ou cidade, pra buscar sem tirar
+// a mão do volante; só aparece em navegadores com reconhecimento de voz ----------
+const micBtn = document.getElementById('micBtn');
+const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SpeechRecognitionCtor){
+  micBtn.hidden = false;
+  const recognition = new SpeechRecognitionCtor();
+  recognition.lang = 'pt-BR';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  let listening = false;
+  micBtn.addEventListener('click', ()=>{
+    if (listening){ recognition.stop(); return; }
+    try { recognition.start(); } catch(e){ /* já estava escutando, ignora */ }
+  });
+  recognition.addEventListener('start', ()=>{ listening = true; micBtn.classList.add('listening'); });
+  recognition.addEventListener('end', ()=>{ listening = false; micBtn.classList.remove('listening'); });
+  recognition.addEventListener('result', (e)=>{
+    const texto = e.results[0][0].transcript.trim();
+    if (!texto) return;
+    searchInput.value = texto;
+    runSearch(texto);
+  });
+  recognition.addEventListener('error', ()=>{
+    listening = false;
+    micBtn.classList.remove('listening');
+    showToast('Não entendi — tenta falar de novo');
+  });
+}
 // nomes de país em português que a busca entende, mapeados pro nome em inglês que a API usa
 const PT_TO_EN_COUNTRY = {
   brasil:'Brazil', alemanha:'Germany', espanha:'Spain', franca:'France', italia:'Italy',
