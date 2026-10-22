@@ -236,11 +236,10 @@
   }
   #citySearchResults button:hover{color:var(--gold);}
   #citySearchResults .sr-sub{font-size:0.72rem; color:var(--ink-dim);}
-  /* o painel esquerdo mostra só uma seção por vez — busca/mundo OU favoritos —
-     pra não precisar rolar procurando enquanto dirige */
-  #favPanel #worldSearchSection, #favPanel #favoritesSection{display:none;}
-  #favPanel.mode-world #worldSearchSection{display:block;}
-  #favPanel.mode-favorites #favoritesSection{display:block;}
+  /* painel direita: a lista de cidades favoritas fica compacta, acima
+     da cidade atual em exibição */
+  #favCitiesQuick h2{font-size:1.05rem; margin:4px 0 10px;}
+  #favCitiesQuick{margin-bottom:10px;}
   #moodShortcuts{
     display:flex; flex-wrap:wrap; gap:6px; margin:0 0 14px;
   }
@@ -602,7 +601,7 @@
   #postitMenuFormatos button:hover{background:rgba(90,74,30,.1);}
 
   #versionTag{
-    position:fixed; left:16px; bottom:10px;
+    position:fixed; left:56px; bottom:10px;
     font-family:'JetBrains Mono',monospace;
     font-size:0.72rem; color:var(--ink-dim);
     opacity:.75; z-index:4; pointer-events:none;
@@ -613,6 +612,7 @@
     h1{font-size:1.1rem;}
     .sub, .clock{display:none;}
     #hint{left:20px;}
+    #versionTag{left:42px;}
     .place-title{font-size:1.5rem;}
   }
 
@@ -789,7 +789,7 @@
   <button id="dockFav" aria-label="Abrir favoritos" title="Favoritos">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
   </button>
-  <button id="btnFavorites" aria-label="Cidades favoritas" title="Cidades favoritas">
+  <button id="btnFavorites" aria-label="Buscar ou abrir uma cidade" title="Cidades do mundo">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>
   </button>
   <div class="dock-sep"></div>
@@ -864,11 +864,6 @@
     <p id="favStationsEmpty">Favorite uma rádio da busca (o coração ao lado dela) — ela aparece aqui.</p>
     <ul id="favStationsList"></ul>
   </div>
-  <div id="worldSearchSection">
-    <h2>Cidades favoritas</h2>
-    <p id="favEmpty">Favorite uma cidade pelo coração no painel dela — ela aparece aqui.</p>
-    <ul id="favList"></ul>
-  </div>
 </aside>
 
 <aside id="panel" aria-live="polite">
@@ -891,6 +886,11 @@
     <input id="citySearchInput" type="text" placeholder="ir pra outra cidade&hellip;" autocomplete="off">
   </div>
   <ul id="citySearchResults"></ul>
+  <div id="favCitiesQuick">
+    <h2>Cidades favoritas</h2>
+    <p id="favEmpty">Favorite uma cidade pelo coração aqui em cima — ela aparece aqui.</p>
+    <ul id="favList"></ul>
+  </div>
   <p class="place-country" id="placeCountry"></p>
   <h2 class="place-title" id="placeTitle"></h2>
   <ul class="stations" id="stationList"></ul>
@@ -935,7 +935,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.60</div>
+<div id="versionTag">v1.61</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -2976,16 +2976,15 @@ function renderFavPanel(){
 }
 renderFavPanel();
 
-// ---------- dois botões pro painel esquerdo: "favoritos" (lupinha —
-// busca de rádio + rádios favoritas) e "cidades favoritas" (coração —
-// clicar numa cidade abre ela na aba da direita) ----------
+// ---------- lupinha abre a busca de rádio + rádios favoritas (painel
+// esquerdo); coração abre direto a aba da direita, já com a busca de
+// cidade e as cidades favoritas prontas ----------
 document.getElementById('dockFav').addEventListener('click', ()=>{
-  favPanel.classList.remove('mode-world');
-  favPanel.classList.add('open', 'mode-favorites');
+  favPanel.classList.add('open');
 });
 document.getElementById('btnFavorites').addEventListener('click', ()=>{
-  favPanel.classList.remove('mode-favorites');
-  favPanel.classList.add('open', 'mode-world');
+  panel.classList.add('open');
+  citySearchInput.focus();
 });
 document.getElementById('favPanelClose').addEventListener('click', ()=>{
   favPanel.classList.remove('open');
