@@ -1,7 +1,7 @@
 # Roadmap — Montgomery Rádio
 
 Itens pendentes/planejados. Quando um item for concluído, mover para o
-[ROADMAP_CONCLUIDO.md](ROADMAP_CONCLUIDO.md) com a data.
+[ROADMAP_RADIO_CONCLUIDO.md](ROADMAP_RADIO_CONCLUIDO.md) com a data.
 
 ## Antes de comercializar / compartilhar com outras pessoas
 - [ ] **Favoritos por visitante** — hoje a sincronização na nuvem usa um
