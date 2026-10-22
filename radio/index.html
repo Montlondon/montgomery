@@ -2412,6 +2412,7 @@ function playStation(place, st, li, queue, queueIndex){
   refreshPlayingHighlight();
   atualizarNpFav();
   atualizarMediaSession(place, st);
+  registrarEvento('tocou', { estacao: st.title, cidade: place.city, pais: place.country });
 }
 function playQueueOffset(delta){
   if (activeQueue.length < 2) return;
@@ -2746,6 +2747,35 @@ async function puxarFavoritosDaNuvem(){
   }catch(e){ /* sem internet agora, segue com o que já tinha salvo localmente */ }
 }
 puxarFavoritosDaNuvem();
+
+// ---------- métricas de uso bem simples — só escreve, ninguém lê pela chave
+// pública (sem política de SELECT); serve pra eu saber quantas pessoas de
+// verdade usam o app antes de pensar em vender ou monetizar ----------
+const VISITANTE_KEY = 'mundoAoVivo_visitanteId';
+function getVisitanteId(){
+  try{
+    let id = localStorage.getItem(VISITANTE_KEY);
+    if (!id){
+      id = (crypto.randomUUID ? crypto.randomUUID() : 'v-'+Date.now()+'-'+Math.random().toString(36).slice(2));
+      localStorage.setItem(VISITANTE_KEY, id);
+    }
+    return id;
+  }catch(e){ return 'anon'; }
+}
+function registrarEvento(tipo, extra){
+  try{
+    fetch(SUPABASE_URL + '/rest/v1/radio_eventos', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(Object.assign({ tipo, visitante_id: getVisitanteId() }, extra || {})),
+    }).catch(()=>{ /* sem internet agora, não insiste — não é crítico */ });
+  }catch(e){ /* ambiente sem fetch/crypto, ignora */ }
+}
+registrarEvento('visita');
 
 function renderFavStationsList(){
   const favStationsList = document.getElementById('favStationsList');
