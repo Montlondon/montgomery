@@ -2305,6 +2305,15 @@ function updatePlayButton(){
 function streamUrlFor(st){
   return st.url || ('https://radio.garden/api/ara/content/listen/'+st.id+'/channel.mp3');
 }
+// marca "tocando agora" em qualquer lista aberta na tela (cidade, busca) —
+// não só no dock — mesmo quando a troca veio do botão anterior/próxima,
+// do carro ou da tela de bloqueio, que não têm o <li> clicado em mãos
+function refreshPlayingHighlight(){
+  const key = activeStation ? (activeStation.id || activeStation.url) : null;
+  document.querySelectorAll('#stationList li[data-st-key], #searchResults li[data-st-key]').forEach(li=>{
+    li.classList.toggle('playing', !!key && li.dataset.stKey === key);
+  });
+}
 function playStation(place, st, li, queue, queueIndex){
   const key = st.id || st.url;
   if (activeStation && (activeStation.id || activeStation.url) === key){
@@ -2330,6 +2339,7 @@ function playStation(place, st, li, queue, queueIndex){
   audioEl.src = streamUrlFor(st);
   audioEl.play().catch(()=>{ if (!audioStuck) tryReconnect(); });
   renderFavStationsList();
+  refreshPlayingHighlight();
   atualizarNpFav();
   atualizarMediaSession(place, st);
 }
@@ -2349,6 +2359,7 @@ function failStation(){
   activeLi = null; activeStation = null;
   audioEl.removeAttribute('src'); audioEl.load();
   renderFavStationsList();
+  refreshPlayingHighlight();
   atualizarNpFav();
   if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
 }
@@ -2363,6 +2374,7 @@ function stopStation(){
   activeLi = null; activeStation = null;
   setDockPlaying(false);
   renderFavStationsList();
+  refreshPlayingHighlight();
   atualizarNpFav();
   if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
 }
@@ -2743,7 +2755,6 @@ let currentPlace = null;
 
 function openPlace(place){
   currentPlace = place;
-  document.getElementById('favPanel').classList.remove('open');
   placeCountry.textContent = place.country;
   placeTitle.textContent = place.city;
   stationList.innerHTML = '';
@@ -2758,6 +2769,7 @@ function openPlace(place){
     if (blocked.has(key)){ hiddenCount++; return; }
 
     const li = document.createElement('li');
+    li.dataset.stKey = st.id;
     if (activeStation && activeStation.id === st.id) li.classList.add('playing');
 
     const link = document.createElement('button');
@@ -2854,17 +2866,13 @@ function renderFavPanel(){
     const li = document.createElement('li');
     const btn = document.createElement('button');
     btn.innerHTML = '<span>'+place.city+'</span><span class="fav-country">'+place.country+'</span>';
-    btn.addEventListener('click', ()=>{
-      favPanel.classList.remove('open');
-      openPlace(place);
-    });
+    btn.addEventListener('click', ()=> openPlace(place));
     li.appendChild(btn);
     favList.appendChild(li);
   });
 }
 renderFavPanel();
 document.getElementById('dockFav').addEventListener('click', ()=>{
-  panel.classList.remove('open');
   favPanel.classList.toggle('open');
 });
 
@@ -2991,13 +2999,15 @@ function renderStationResults(data){
   const searchQueue = data.map(s => ({place: {city: s.name, country: s.country || 'mundo'}, st: {title: s.name, url: s.url_resolved || s.url}}));
   data.forEach((st, stIdx)=>{
     const li = document.createElement('li');
+    const streamUrl = st.url_resolved || st.url;
+    li.dataset.stKey = streamUrl;
+    if (activeStation && (activeStation.id || activeStation.url) === streamUrl) li.classList.add('playing');
     const btn = document.createElement('button');
     const loc = [st.state, st.country].filter(Boolean).join(', ');
     btn.innerHTML = '<span>'+st.name+'</span><span class="sr-sub">'+loc+(st.tags ? ' · '+st.tags.split(',')[0] : '')+'</span>';
     const place = {city: st.name, country: st.country || 'mundo'};
-    const streamUrl = st.url_resolved || st.url;
     btn.addEventListener('click', ()=>{
-      playStation(place, {title: st.name, url: streamUrl}, null, searchQueue, stIdx);
+      playStation(place, {title: st.name, url: streamUrl}, li, searchQueue, stIdx);
       searchResults.classList.remove('open');
     });
 
