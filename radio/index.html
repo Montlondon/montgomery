@@ -363,17 +363,15 @@
 
   #dock{
     position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
-    width:min(480px, 97vw);
-    display:flex; align-items:center; gap:4px;
+    width:min(520px, 97vw);
+    display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:4px 4px;
     padding:8px 10px;
-    background:var(--panel); border:1px solid var(--line); border-radius:999px;
+    background:var(--panel); border:1px solid var(--line); border-radius:24px;
     box-shadow:0 8px 28px rgba(0,0,0,0.45);
     z-index:12;
-    /* mais ícones do que cabem? rola em vez de sumir — vale pra qualquer
-       largura de tela, não só celular */
-    overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+    /* mais ícones do que cabem numa linha só? quebra pra segunda linha em vez
+       de sumir ou pedir rolagem — assim nada fica escondido */
   }
-  #dock::-webkit-scrollbar{display:none;}
   #dockFav, #btnFavorites, #btnPostit, #btnYoutube, #btnCast{
     flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
     width:34px; height:34px; border-radius:50%;
@@ -397,7 +395,11 @@
     font-size:0.78rem; color:var(--ink-dim); letter-spacing:0.02em;
   }
   #dockPlayer{
-    flex:1; min-width:0; display:flex; align-items:center; gap:10px;
+    /* flex-basis 0 + grow faz ele usar o espaço livre quando sobra, mas
+       min-width:auto (sem sobrescrever) impede que os ícones de dentro
+       (favoritar, bloquear, compartilhar, parar) sumam por overflow —
+       só o nome/cidade (via .np-info) encolhe até 0 */
+    flex:1 1 0%; display:flex; align-items:center; gap:8px;
   }
   #dockPlayer[hidden]{display:none;}
   #dockPlayer .icon-btn{
@@ -451,14 +453,12 @@
   #dockPlayer #npFav.active svg{fill:#e8735a;}
   @media (max-width: 480px){
     #dock{
-      width:98vw; gap:3px; padding:6px 5px;
-      overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+      width:98vw; gap:4px 3px; padding:6px 5px;
     }
-    #dock::-webkit-scrollbar{display:none;}
     #dock > .dock-sep{display:none;}
     #dockFav, #btnFavorites, #btnPostit, #btnYoutube, #btnCast{width:30px; height:30px; flex-shrink:0;}
     #dockPlayer .np-city{display:none;}
-    #dockPlayer{gap:3px; flex-shrink:0;}
+    #dockPlayer{gap:3px; flex:1 1 auto;}
     #dockPlayer .np-info{display:none;}
     #dockPlayer .np-stop{padding:7px 5px; flex-shrink:0;}
   }
