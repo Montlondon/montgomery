@@ -246,7 +246,7 @@
   .panel-top .icon-btn#favBtn.active{color:#e8735a;}
   .panel-top .icon-btn#favBtn.active svg{fill:#e8735a;}
   .panel-top .icon-btn.panel-expand-btn.active{color:var(--gold);}
-  #favPanel .panel-top{justify-content:flex-start; margin:-6px 0 6px -4px;}
+  #favPanel .panel-top{justify-content:space-between; margin:-6px -6px 6px -4px;}
 
   /* painel "largo" — pra quem acha o nome das rádios cortado demais */
   #panel.wide{width:min(640px, 94vw);}
@@ -355,14 +355,16 @@
     overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
   #dock::-webkit-scrollbar{display:none;}
-  #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{
+  #dockFav, #btnFavorites, #btnPostit, #btnYoutube, #btnCast{
     flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
     width:34px; height:34px; border-radius:50%;
     display:flex; align-items:center; justify-content:center; position:relative;
     transition:color .15s ease, background .15s ease;
   }
-  #dockFav:hover, #dockRotate:hover, #btnPostit:hover, #btnYoutube:hover, #btnCast:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
+  #dockFav:hover, #btnFavorites:hover, #btnPostit:hover, #btnYoutube:hover, #btnCast:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
+  .header-actions #dockRotate svg{width:16px; height:16px;}
   #btnCast.active{color:#e8735a; background:rgba(232,115,90,0.12);}
+  #btnFavorites.active{color:#e8735a; background:rgba(232,115,90,0.1);}
   #dockPostitBadge:not([hidden]){
     position:absolute; top:2px; right:2px;
     min-width:14px; height:14px; padding:0 3px; border-radius:999px;
@@ -435,7 +437,7 @@
     }
     #dock::-webkit-scrollbar{display:none;}
     #dock > .dock-sep{display:none;}
-    #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{width:30px; height:30px; flex-shrink:0;}
+    #dockFav, #btnFavorites, #btnPostit, #btnYoutube, #btnCast{width:30px; height:30px; flex-shrink:0;}
     #dockPlayer .np-city{display:none;}
     #dockPlayer{gap:3px; flex-shrink:0;}
     #dockPlayer .np-info{display:none;}
@@ -716,6 +718,7 @@
   </div>
   <div class="header-right">
     <div class="header-actions">
+      <button id="dockRotate" aria-label="Girar ou parar o globo" title="Girar o globo"></button>
       <button id="btnBorders" aria-label="Mostrar fronteiras dos países e estados do Brasil" title="Fronteiras">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10l6-5 6 4 6-6M4 19l5-4 6 3 5-5" stroke-dasharray="2.2 2.2"/></svg>
       </button>
@@ -737,8 +740,11 @@
   <div class="popup-city" id="npPopupCity"></div>
 </div>
 <div id="dock">
-  <button id="dockFav" aria-label="Buscar e favoritas">
+  <button id="dockFav" aria-label="Rádios do mundo — buscar" title="Rádios do mundo">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+  </button>
+  <button id="btnFavorites" aria-label="Abrir favoritos" title="Favoritos">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>
   </button>
   <div class="dock-sep"></div>
   <div id="dockPlayer" hidden>
@@ -783,8 +789,6 @@
     </svg>
     <span id="dockPostitBadge" hidden></span>
   </button>
-  <div class="dock-sep"></div>
-  <button id="dockRotate" aria-label="Girar ou parar o globo"></button>
 </div>
 <button id="exitGlobeOnly" aria-label="Sair da tela cheia">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -795,6 +799,9 @@
     <button class="icon-btn panel-expand-btn" id="favPanelExpand" aria-label="Expandir painel">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3H5a2 2 0 0 0-2 2v4M15 3h4a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4M15 21h4a2 2 0 0 0 2-2v-4"/></svg>
     </button>
+    <button class="icon-btn" id="favPanelClose" aria-label="Fechar">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
   </div>
   <div id="searchBar">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -802,7 +809,7 @@
   </div>
   <div id="moodShortcuts"></div>
   <ul id="searchResults"></ul>
-  <h2>Rádios favoritas</h2>
+  <h2 id="favoritesSectionTitle">Rádios favoritas</h2>
   <p id="favStationsEmpty">Favorite uma rádio da busca (o coração ao lado dela) — ela aparece aqui.</p>
   <ul id="favStationsList"></ul>
   <h2>Cidades favoritas</h2>
@@ -2872,8 +2879,20 @@ function renderFavPanel(){
   });
 }
 renderFavPanel();
+
+// ---------- dois botões pro painel esquerdo: "rádios do mundo" (busca) e
+// "favoritos" — cada um abre o painel já rolado pra seção certa ----------
 document.getElementById('dockFav').addEventListener('click', ()=>{
-  favPanel.classList.toggle('open');
+  favPanel.classList.add('open');
+  favPanel.scrollTo({top: 0, behavior: 'smooth'});
+  searchInput.focus();
+});
+document.getElementById('btnFavorites').addEventListener('click', ()=>{
+  favPanel.classList.add('open');
+  document.getElementById('favoritesSectionTitle').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+document.getElementById('favPanelClose').addEventListener('click', ()=>{
+  favPanel.classList.remove('open');
 });
 
 async function encurtar(url, nome){
