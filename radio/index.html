@@ -231,6 +231,27 @@
   .panel-top .icon-btn:focus-visible, #panel .close:focus-visible{outline:1px solid var(--gold); outline-offset:2px;}
   .panel-top .icon-btn#favBtn.active{color:#e8735a;}
   .panel-top .icon-btn#favBtn.active svg{fill:#e8735a;}
+  .panel-top .icon-btn.panel-expand-btn.active{color:var(--gold);}
+  #favPanel .panel-top{justify-content:flex-start; margin:-6px 0 6px -4px;}
+
+  /* painel "largo" — pra quem acha o nome das rádios cortado demais */
+  #panel.wide{width:min(640px, 94vw);}
+  #favPanel.wide{width:min(560px, 92vw);}
+
+  /* modo "só o globo" — some com toda a interface, fica só a esfera girando */
+  body.globe-only header, body.globe-only #hint, body.globe-only #dock,
+  body.globe-only #labels, body.globe-only #npPopup, body.globe-only #versionTag{
+    display:none !important;
+  }
+  #exitGlobeOnly{
+    position:fixed; top:16px; right:16px; z-index:50;
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(10,13,22,0.55); border:1px solid var(--line); color:var(--ink-dim);
+    display:none; align-items:center; justify-content:center; cursor:pointer;
+    backdrop-filter:blur(4px); opacity:0.5; transition:opacity .2s, color .2s, border-color .2s;
+  }
+  #exitGlobeOnly:hover{opacity:1; color:var(--gold); border-color:var(--gold-dim);}
+  body.globe-only #exitGlobeOnly{display:flex;}
 
   #toast{
     position:fixed; left:50%; bottom:28px; transform:translate(-50%, 12px);
@@ -316,14 +337,15 @@
     box-shadow:0 8px 28px rgba(0,0,0,0.45);
     z-index:12;
   }
-  #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{
+  #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast, #btnFullscreen, #btnBorders{
     flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
     width:34px; height:34px; border-radius:50%;
     display:flex; align-items:center; justify-content:center; position:relative;
     transition:color .15s ease, background .15s ease;
   }
-  #dockFav:hover, #dockRotate:hover, #btnPostit:hover, #btnYoutube:hover, #btnCast:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
+  #dockFav:hover, #dockRotate:hover, #btnPostit:hover, #btnYoutube:hover, #btnCast:hover, #btnFullscreen:hover, #btnBorders:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
   #btnCast.active{color:#e8735a; background:rgba(232,115,90,0.12);}
+  #btnBorders.active{color:var(--gold); background:rgba(211,173,95,0.14);}
   #dockPostitBadge:not([hidden]){
     position:absolute; top:2px; right:2px;
     min-width:14px; height:14px; padding:0 3px; border-radius:999px;
@@ -356,6 +378,9 @@
     font-size:0.68rem; color:var(--ink-dim);
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
+  #dockPlayer.reconnecting .np-city::after{content:" · reconectando…"; color:var(--gold);}
+  #dockPlayer.reconnecting .np-name{animation:reconnectPulse 1.2s ease-in-out infinite;}
+  @keyframes reconnectPulse{0%,100%{opacity:1;} 50%{opacity:.45;}}
   #npPopup{
     position:fixed; left:50%; bottom:84px; transform:translateX(-50%);
     max-width:min(380px, 92vw);
@@ -393,7 +418,7 @@
     }
     #dock::-webkit-scrollbar{display:none;}
     #dock > .dock-sep{display:none;}
-    #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{width:30px; height:30px; flex-shrink:0;}
+    #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast, #btnFullscreen, #btnBorders{width:30px; height:30px; flex-shrink:0;}
     #dockPlayer .np-city{display:none;}
     #dockPlayer{gap:3px; flex-shrink:0;}
     #dockPlayer .np-info{display:none;}
@@ -733,9 +758,25 @@
   </button>
   <div class="dock-sep"></div>
   <button id="dockRotate" aria-label="Girar ou parar o globo"></button>
+  <div class="dock-sep"></div>
+  <button id="btnBorders" aria-label="Mostrar divisas dos estados do Brasil" title="Divisas dos estados">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10l6-5 6 4 6-6M4 19l5-4 6 3 5-5" stroke-dasharray="2.2 2.2"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button id="btnFullscreen" aria-label="Tela cheia — só o globo girando" title="Tela cheia">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
 </div>
+<button id="exitGlobeOnly" aria-label="Sair da tela cheia">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+</button>
 
 <aside id="favPanel">
+  <div class="panel-top">
+    <button class="icon-btn panel-expand-btn" id="favPanelExpand" aria-label="Expandir painel">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3H5a2 2 0 0 0-2 2v4M15 3h4a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4M15 21h4a2 2 0 0 0 2-2v-4"/></svg>
+    </button>
+  </div>
   <div id="searchBar">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
     <input id="searchInput" type="text" placeholder="rádio, cidade ou país&hellip;" autocomplete="off">
@@ -757,6 +798,9 @@
     </button>
     <button class="icon-btn" id="favBtn" aria-label="Favoritar cidade">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>
+    </button>
+    <button class="icon-btn panel-expand-btn" id="panelExpand" aria-label="Expandir painel">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3H5a2 2 0 0 0-2 2v4M15 3h4a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4M15 21h4a2 2 0 0 0 2-2v-4"/></svg>
     </button>
     <button class="close" id="panelClose" aria-label="Fechar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -811,6 +855,19 @@
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
 const PLACES = [
+  {city:"Rio Branco", country:"Acre, Brasil", lat:-9.97, lon:-67.81, stations:[{title:"Rádio Play Mix FM", id:"5fecd1e5-7282-4de3-a03d-72a26b123674", url:"https://tgaurl.com.br/playmixfm"},{title:"maresol web radio - rio branco", id:"cf11dc3f-547c-4728-ac5b-5cd0e0346d39", url:"https://stream.zeno.fm/pxbrdor4opmvv"},{title:"maresol web radio - cruzeiro do sul", id:"9876a444-d30e-4abe-8845-e0e9fbdee9e3", url:"https://stream.zeno.fm/pxbrdor4opmvv"},{title:"maresol web radio - Feijó", id:"494265b5-4c68-458d-9695-df3c5d5ea567", url:"https://stream.zeno.fm/pxbrdor4opmvv"},{title:"WEB RADIO REIS FM", id:"047c92ab-8302-4a80-a050-bb9b6c28a21c", url:"http://stream.zeno.fm/8w14fzzztchvv"},{title:"WEB RADIO REIS FM", id:"8ac677e9-c0aa-4a5c-b58b-6811d14135de", url:"http://stream.zeno.fm/8w14fzzztchvv"}]},
+  {city:"Maceió", country:"Alagoas, Brasil", lat:-9.65, lon:-35.7, stations:[{title:"Grande Rio FM 99,1 Penedo", id:"e4906342-204c-4b06-bbc8-721fe64c2364", url:"https://hts07.brascast.com:10708/live"},{title:"96 Fm - Arapiraca Alagoas", id:"a698ad4b-a7bf-4219-891d-673316f8bc6b", url:"https://www.appradio.app:8182/live"},{title:"Pajuçara FM 103,7 Maceió", id:"37f2eb85-d9a8-4ca4-b113-01481d66c45d", url:"https://cast3.hoost.com.br:8679/stream"},{title:"Rede aleluia 100,3 FM Maceió", id:"a5c615ac-7cf2-47a7-89a6-b84a302fb9fc", url:"https://station.azrmcsoftbroadcast.com.br/listen/radio_alagoas/Alagoas"},{title:"Alerta Penedo", id:"cb4b365b-bd73-4711-8baf-db3efc107487", url:"http://stm28.srvaudio.com.br:11706/stream"},{title:"Lobo web rádio Penedo", id:"ea53eebf-6fb8-49a4-be61-9b834678b222", url:"http://stm21.srvaudio.com.br:9358/stream"},{title:"Educativa FM Maceió", id:"87c18c1c-a397-4e30-94f3-073c58e745f5", url:"https://radio.saopaulo01.com.br/9370/stream"},{title:"Educativa 107,7 FM Maceió", id:"f47365a8-f55d-48ca-957c-6ec6d26a1617", url:"https://radio.saopaulo01.com.br/9370/stream"},{title:"Jovem pan 100,7 FM Maceió", id:"d27508c7-9b6b-4eba-812a-09a94143f68a", url:"https://directradios.net/proxy/jpmaceio?mp=/stream"},{title:"Radio UFAL", id:"cb95bf54-e976-4994-ab0c-77d7c0b0ac9d", url:"https://directradios.net/proxy/ufal?mp=/stream"},{title:"Alagoas FM 102,5 Penedo", id:"0dda9883-f824-46ff-8989-634daf5b53a3", url:"https://stm26.xcast.com.br:11260/stream"},{title:"Jornal web rádio de Penedo", id:"0d12be7b-dce0-4a8a-857b-9d20d742bb8c", url:"https://09.stmip.net:2380/stream"},{title:"Teotônio FM", id:"c00b509b-f464-407f-b135-0ce951a67a4e", url:"https://teotonio-fm.speedvox.cloud/radio/stream_teotonio-fm"},{title:"96 FM Maceió", id:"3533ed9c-d371-4202-91a5-ab77aa600492", url:"https://streaming.livespanel.com:20096/radio96fm"},{title:"Adore 89,3 FM Maceió", id:"ba4f0645-cbfb-42b7-b511-7f01ad8e7483", url:"https://03.painelstreaming.com.br:27014/stream"},{title:"CBN 104,5 FM Maceió", id:"0c598d60-f9f3-4813-86c6-92cbd81ac864", url:"http://v3.directradios.com:8229/stream"},{title:"Difusora 93,3 FM Maceió", id:"e9fce72c-61dc-44a0-a6cd-11e5fd297ebd", url:"https://radio.saopaulo01.com.br/9348/stream"},{title:"Francês FM 106,1 Maceió", id:"ef15c12d-fc7a-4559-852c-cdcc997f7b15", url:"https://26643.live.streamtheworld.com/FRANCESFM_MACAAC.aac?dist=RadiosNet"},{title:"Gazeta FM 94,1 Maceió", id:"e7b6a268-2c4e-42c9-8556-f03a9349220e", url:"https://www.appradio.app:8061/stream"},{title:"Imaculada 92,3 FM Maceió", id:"81d917bd-da4c-4ee5-b880-435256c2f5c4", url:"https://radio.saopaulo01.com.br:10862/stream"},{title:"Mar azul 104,9 FM Maceió", id:"727b6563-bce9-49a8-9312-2690d339a8c8", url:"http://stm25.xcast.com.br:7666/stream"},{title:"CBN MACEIÓ", id:"e0ea2a1e-3590-11e9-8f31-52543be04c81", url:"http://v3.directradios.com:8229/stream"},{title:"Metropolitana FM 97,7 Maceió", id:"a41c5dcc-7cd8-44da-a071-d74a3ea01ce4", url:"https://streaming.livespanel.com:8032/maceiofm"},{title:"Mix FM 98,3 Maceió", id:"552e5477-0986-494e-af5c-33724580a1bd", url:"https://virtues.live:8184/stream"},{title:"Nova Brasil 106,5 FM Maceió", id:"dce066a5-0682-4604-a4c3-66b8c0deaece", url:"https://26643.live.streamtheworld.com/NOVABRASIL_MACAAC.aac?dist=RadiosNet"},{title:"Jovem pan News Maceió 102,7 FM", id:"e24dea61-3ca4-4bbb-8ba2-2125b5b1233e", url:"https://streaming.livespanel.com:20520/"},{title:"Rádio Lagoa nova fm", id:"49666676-d7b1-4a78-a2c2-b051f7b81d2c", url:"https://stm20.srvaudio.com.br:9990/;"},{title:"Maragogi Fm 97.3", id:"0c7b22e4-b262-4f98-80e7-e4bdc097cc35", url:"https://04.painelstreaming.com.br:27124/;"},{title:"Penedo FM 97,3", id:"f7387e77-0e61-4078-987e-bbae8504c053", url:"https://stm16.painelcast.com:7206/stream"},{title:"Francês FM 103,6 Penedo", id:"fde7409a-7f2d-452a-9c8f-a3fa8bde5d3d", url:"https://s16.maxcast.com.br:8711/live"},{title:"Nova Brasil FM - Maceió", id:"77502e2f-6ac7-4489-9a8f-0b94eda12855", url:"https://playerservices.streamtheworld.com/api/livestream-redirect/NOVABRASIL_MACAAC.aac"}]},
+  {city:"Macapá", country:"Amapá, Brasil", lat:0.03, lon:-51.05, stations:[{title:"maresol web radio - Macapá", id:"9f6c0cc5-5028-4739-8dd4-4942f5230052", url:"https://stream.zeno.fm/pxbrdor4opmvv"},{title:"maresol web radio - Macapá", id:"55467b5f-a511-4aac-b634-a992d5332ef3", url:"https://stream.zeno.fm/pxbrdor4opmvv"}]},
+  {city:"Vitória", country:"Espírito Santo, Brasil", lat:-20.32, lon:-40.34, stations:[{title:"Rádio Maanaim", id:"696d7b85-d8ca-45a3-8fa6-7ec5ff7e905c", url:"https://65492b4a9e231.streamlock.net/liverm/rmaac/playlist.m3u8"},{title:"SpaceSex 93.1", id:"31fa0dbf-da4b-4b5b-b5e1-dd4f76723c2f", url:"https://8846.brasilstream.com.br/stream"},{title:"Radio Bitcoin", id:"27a42493-5783-49d3-a46e-781da7d995a8", url:"https://stream.radiobitcoin.org/radio"},{title:"Ouvindo a Biblia", id:"eaec8346-31ce-4047-98bf-f4960f8f605a", url:"http://v3.directradios.com:8235/stream"},{title:"Radio Sepiol", id:"4239e6f5-3046-407f-9b53-ac811664e9cd", url:"https://paineldj.com.br:20087/stream"},{title:"Rockett 97,7", id:"e6863ec0-9d04-4da3-97c2-db6cac2ed845", url:"https://8817.brasilstream.com.br/stream?cc=1645359200316"},{title:"Rádio Clock 94,1 FM", id:"b337787e-dca7-4e3f-aa9a-84bd16f82889", url:"https://azura4.cmaudioevideo.com:8040/radio.aac"},{title:"Rádio Tradição Católica", id:"4daed06d-617f-4035-993e-663252016232", url:"https://servidor17-1.brlogic.com:7126/live"},{title:"Rádio Nova Onda 104.9 FM", id:"33b3e547-375e-4674-bcdf-f28968ac1111", url:"https://virtues.live:8076/stream"},{title:"Jovem Pan FM - Vitória - ES - 100.1", id:"f2b280eb-dfd6-4642-af2b-5b4293c2c80c", url:"https://shout25.crossradio.com.br:18022/1"},{title:"Rádio UP 100.1 FM Vitoria da Conquista", id:"f6e99720-4f7d-44ef-8870-d85e8238c9cc", url:"https://azura4.cmaudioevideo.com:8290/radio.aac"},{title:"Rádio Antena 1 Vitória", id:"22b186c8-7afc-439c-af03-15ae488553c6", url:"https://antenaone.crossradio.com.br/stream/1;"}]},
+  {city:"São Luís", country:"Maranhão, Brasil", lat:-2.53, lon:-44.3, stations:[{title:"Rádio Terra FM 100.3", id:"84137697-9722-11e9-a605-52543be04c81", url:"http://servidor30.brlogic.com:8622/live?1561450793452"},{title:"Universidade FM 106,9", id:"9312868a-e231-4ad8-877a-7df77dad4509", url:"http://s26.maxcast.com.br:8280/live"},{title:"Rádio Cidade Grajaú 91.1 FM", id:"70962492-2208-496a-b7da-efb1e418d938", url:"https://servidor25-2.brlogic.com:8268/live?source=website"},{title:"Rádio Reprise", id:"efb11e94-09bd-4851-a67a-9139d85632fd", url:"https://usa10.fastcast4u.com:1890/;?type=http&nocache=1791042940"},{title:"Nova FM", id:"f192696a-9755-11e9-a605-52543be04c81", url:"http://hd3.matutos.com.br:8394/stream?1561472887177"},{title:"Newton Bello FM", id:"34860139-5bdd-472e-83fe-45a9ce949255", url:"https://stm1.voxnovo.com.br:7010/stream"},{title:"Rádio Nacional São Luís", id:"918e02e3-f592-4ab5-81a8-86bc89dbf403", url:"https://radionacionalfmsl-stream.ebc.com.br/index.m3u8"}]},
+  {city:"Cuiabá", country:"Mato Grosso, Brasil", lat:-15.6, lon:-56.1, stations:[{title:"Rádio Cidade Maracaju 104.3 FM", id:"35ac4203-2b03-4b57-93d6-3aeb5701d78f", url:"https://servidor33-5.brlogic.com:7078/live"},{title:"Rádio Modão MT", id:"ce9e3fa7-331d-43af-9248-9d1d59f6cfec", url:"http://stm1.matutos.com.br:11356/stream"},{title:"Rádio Jovem Pan 102.9 FM", id:"e1fb3547-73f6-4b22-a4cd-ca28d02a7f1a", url:"https://paineldj5.com.br:20030/stream"},{title:"Rádio Centro América - Rondonópolis", id:"9a3ef6e4-900f-4294-bdef-9f761fccf16a", url:"https://centova.svdns.com.br:20111/stream"},{title:"Radio Nova FM Nova Canaã", id:"fce1fac2-1606-49aa-a6c0-fd942d508337", url:"http://stream.splug.com.br:8000/Radio136"},{title:"Capital 95 - Campo Grande", id:"ae53c96b-9b16-4036-a078-8b9169c7f30e", url:"https://stm1.srvif.com:7908/stream"},{title:"Cidade 97 - Campo Grande", id:"ad4d02f5-82b7-45ba-941a-34ac96e7027c", url:"https://radio.megadj.com.br/listen/cidade97/radio.mp3"},{title:"BLINK102FM - Campo Grande", id:"773a6a80-ab20-4e48-8fd4-f30859fa246b", url:"https://27323.live.streamtheworld.com/BLINK102FMAAC.aac"},{title:"Rádio Difusora Pantanal 101.9 FM - Campo Grande", id:"0564b26b-8d4a-4394-8f27-e195bbb3a610", url:"https://aovivo.difusorapantanal.com.br/listen/difusora_pantanal/radio.mp3"},{title:"Educativa FM 104,7 - Campo Grande", id:"f9ccf0b3-dc5e-465d-99cb-cb8df6c39103", url:"https://stream01.digilab.com.br/fertel/radio/icecast.audio"},{title:"Morena FM Easy", id:"b75c874c-1f89-4bf2-993b-e30807657afe", url:"https://centova.svdns.com.br:20110/stream"},{title:"Rádio Marabá FM 93,9", id:"17bf4e43-5f4b-4a8a-a162-e5cf413e4cad", url:"https://rvn01.painelstream.net:9274/"},{title:"Rádio Líder 87,9 FM", id:"5bc6fe06-6fd0-4bb0-9bf8-115295103c14", url:"https://9182.brasilstream.com.br/stream"},{title:"POP ROCK BRASIL (A Rádio Pop Rock Brasil em Rondonópolis, Mato Grosso)", id:"ad3b4743-8400-4b41-8351-60b0bac9fc4b", url:"https://stm2.sradios.com.br:7048/stream"},{title:"Rádio Coração 95.7 FM", id:"e0b4dd14-08e3-4fe5-b1be-a61944c8f241", url:"https://5a57bda70564a.streamlock.net/coracaohd/coracaohd.stream/chunklist_w23782252.m3u8"},{title:"Morena FM 107,1 FM - Campo Grande", id:"eca86762-c8e0-4f42-baeb-13ec0e38aa69", url:"http://centova.svdns.com.br:25518/stream"},{title:"Rádio Amorim 104.1 FM", id:"e106985b-2404-4c66-b420-2544ab8510f4", url:"http://streaming05.maxcast.com.br:8080/live"},{title:"Rádio Centro América 101.5 FM", id:"4bbf411c-7844-41b3-b290-64561bc8465c", url:"https://centova.svdns.com.br:20111/stream"}]},
+  {city:"Campo Grande", country:"Mato Grosso do Sul, Brasil", lat:-20.46, lon:-54.62, stations:[{title:"Rádio Cidade Maracaju 104.3 FM", id:"35ac4203-2b03-4b57-93d6-3aeb5701d78f", url:"https://servidor33-5.brlogic.com:7078/live"},{title:"MMM Rádio", id:"65b5c1c0-773c-4ffe-ae9c-88c366075be0", url:"https://mmm.rio.br/radio.mp3"},{title:"Capital 95 - Campo Grande", id:"ae53c96b-9b16-4036-a078-8b9169c7f30e", url:"https://stm1.srvif.com:7908/stream"},{title:"Cidade 97 - Campo Grande", id:"ad4d02f5-82b7-45ba-941a-34ac96e7027c", url:"https://radio.megadj.com.br/listen/cidade97/radio.mp3"},{title:"BLINK102FM - Campo Grande", id:"773a6a80-ab20-4e48-8fd4-f30859fa246b", url:"https://27323.live.streamtheworld.com/BLINK102FMAAC.aac"},{title:"Rádio Difusora Pantanal 101.9 FM - Campo Grande", id:"0564b26b-8d4a-4394-8f27-e195bbb3a610", url:"https://aovivo.difusorapantanal.com.br/listen/difusora_pantanal/radio.mp3"},{title:"Educativa FM 104,7 - Campo Grande", id:"f9ccf0b3-dc5e-465d-99cb-cb8df6c39103", url:"https://stream01.digilab.com.br/fertel/radio/icecast.audio"},{title:"Morena FM Easy", id:"b75c874c-1f89-4bf2-993b-e30807657afe", url:"https://centova.svdns.com.br:20110/stream"},{title:"Rádio Marabá FM 93,9", id:"17bf4e43-5f4b-4a8a-a162-e5cf413e4cad", url:"https://rvn01.painelstream.net:9274/"},{title:"Rádio Líder 87,9 FM", id:"5bc6fe06-6fd0-4bb0-9bf8-115295103c14", url:"https://9182.brasilstream.com.br/stream"},{title:"Rádio Coração 95.7 FM", id:"e0b4dd14-08e3-4fe5-b1be-a61944c8f241", url:"https://5a57bda70564a.streamlock.net/coracaohd/coracaohd.stream/chunklist_w23782252.m3u8"},{title:"Morena FM 107,1 FM - Campo Grande", id:"eca86762-c8e0-4f42-baeb-13ec0e38aa69", url:"http://centova.svdns.com.br:25518/stream"}]},
+  {city:"João Pessoa", country:"Paraíba, Brasil", lat:-7.12, lon:-34.86, stations:[{title:"Rádio Universidade 105.1 FM", id:"60633a59-98ab-4372-a33d-b7f83513de0c", url:"https://stm20.srvstm.com:7264/;?type=https&nocache=1"},{title:"Campina FM", id:"587dbed3-67c8-11ea-be63-52543be04c81", url:"http://cast61.sitehosting.com.br:9962/live?1583625618600"},{title:"Rádio Arapuan 98.9 FM", id:"823e517b-82e0-447c-a8ca-2f6454e9d852", url:"https://streaming.engelhosting.com.br:10036/stream"},{title:"Radio MAX Correio FM 99.1 Souza - PB", id:"cecfa9de-c3ae-44a5-b111-bad4c1d68425", url:"http://stm22.xcast.com.br:9166/stream"},{title:"Tabajara FM 105,5 Mhz", id:"ac0b5f17-93a3-428b-b3c4-e02283cc504d", url:"https://stm2.xcast.com.br:7524/stream"},{title:"Rádio Arapuan 98.9 FM", id:"6d2e2602-7569-4267-bb8e-644dafd6aaea", url:"https://streaming.engelhosting.com.br:10036/stream"},{title:"Radio Espinharas", id:"f98b7623-b31d-452d-a496-4b35e7e88ca2", url:"https://radio.saopaulo01.com.br:10843/stream"},{title:"Rádio Itatiunga 102.9 FM", id:"f6f2ccd1-9c1a-47ca-9caf-1edd6c66eed1", url:"https://str1.streamhostpg.com.br:8100/stream"},{title:"Rádio Click Guarabira", id:"36bb19dc-67ca-45dc-b4eb-b7ef4771bd23", url:"https://stm15.voxhd.com.br:12428/"},{title:"Rádio Lance Oficial", id:"722f6b0d-0bdd-42d7-9c85-61fa474f6e0d", url:"https://stm23.xcast.com.br:9952/stream"},{title:"Rádio Cajá Esportes", id:"f1af83b3-c4c4-4736-8cdc-cd3153278358", url:"https://sv16.hdradios.net:8972/stream"},{title:"Mais FM", id:"2a4413a2-23c5-4fcd-8185-1866596aecfe", url:"https://streaming.livespanel.com:20970/maisfm977"},{title:"Mais FM Uirauna", id:"fbdef918-5008-4284-9604-d8668f74fd3c", url:"https://streaming.livespanel.com:20101/maisfm1011"},{title:"Rádio Caturité", id:"a44327f2-073a-4a0c-b4f5-2affb090a91e", url:"http://radio01.logicahost.com.br:8255/;stream.nsv?1732909310643"},{title:"Rádio Zé Ramalho", id:"7874dd3f-76a4-4efb-ac08-bb8e66c1f939", url:"https://stream.zeno.fm/qnx6k0pfmxhvv"},{title:"Correio FM Correio FM Campina Grande", id:"c593daee-3e50-45db-a208-4eaed1be8165", url:"https://e-spo-106.fabricahost.com.br/98campinagrande?f=1787370738N01M0KSJ4K42PESWXSXPB70EDM9&tid=01M0KSJ4K4KHXWCHENK19GHDF4"},{title:"Serra Branca FM", id:"692acc84-76e4-431a-848b-8b99b1ec0ce4", url:"https://serrabrancafm.jmvstream.com/stream](https://serrabrancafm.jmvstream.com/stream)"}]},
+  {city:"Natal", country:"Rio Grande do Norte, Brasil", lat:-5.79, lon:-35.21, stations:[{title:"104 FM Natal", id:"c8996b5e-e4d3-420a-8d3e-62b49356cc52", url:"http://radios.braviahost.com.br:8000/radio.mp3"},{title:"94 FM Natal | Rádio Cidade", id:"86e9afc9-e7bd-4864-87ab-58166e97662d", url:"https://cidadedosolaac.jmvstream.com/stream"},{title:"Rádio Maroca", id:"5469196d-3ed8-4228-9d44-5dac3c6144f2", url:"https://server03.srvsh.com.br:6844/"},{title:"104.7 FM Natal RN Brazil", id:"a8ab203e-df01-4d80-9f09-481eafbc8af9", url:"https://radios.braviahost.com.br:8000/radio.mp3"},{title:"97 FM Natal", id:"d0eddde0-9105-4af6-a61b-9679ed8ba96d", url:"https://azevedo.jmvstream.com/stream"},{title:"Radio 104 FM Natal", id:"a50d8a1a-70c8-40fa-be7a-591618cc8688", url:"https://radios.braviahost.com.br:8000/radio.mp3"},{title:"104 FM Natal", id:"29d98505-7966-4807-8265-08dc4f46d0a9", url:"https://radios.braviahost.com.br:8000/radio.mp3"},{title:"Rádio Rural de Natal 91.9 FM", id:"78681021-3333-4df7-a28d-ef420a92812d", url:"https://live9.livemus.com.br:27802/stream?1732977845423"},{title:"Rádio Marinha (Natal) 100.1 FM  RN Brasil", id:"46c4f8fd-af3e-4e94-9abb-3bdcfe7f1bc5", url:"https://stm0.inovativa.net/listen/radiomarinha/radio.mp3"},{title:"104.7 FM Natal RN Brazil", id:"b220458a-5559-49c7-9e46-6cbd1f28641f", url:"https://radios.braviahost.com.br:8000/radio.mp3"},{title:"Radio Libertadora", id:"146be1df-bf51-4fad-8940-a1a9b48fb6a0", url:"https://stm12.pluscast.com.br:7222//;stream.mp3"},{title:"Rádio Grafith", id:"61b9176a-a6b2-4d41-b6d7-3462d643c968", url:"https://stream-177.surfernetwork.com/qxabz8qwfzzuv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJxeGFiejhxd2Z6enV2IiwiaG9zdCI6InN0cmVhbS0xNzcuc3VyZmVybmV0d29yay5jb20iLCJ0bSI6ZmFsc2UsInJ0dGwiOjUsImp0aSI6InhUeHFlOURoUkV1YS1ObWkxZUdkeVEiLCJpYXQiOjE3OTIyNDYzMDgsImV4cCI6MTc5MjI0NjM2OH0.rZcltXELXWMYARHr7L89dcR-gUYliS7jsjwIN4OkZmk"},{title:"Rádio 104 FM Natal RN", id:"f8dad9f0-2871-4edb-a9f8-1fbb8f6c02bd", url:"https://radios.braviahost.com.br:8000/radio.mp3?1732983388728"},{title:"104 FM Natal", id:"10440c1d-0efd-4bc0-bc89-a12bdb854871", url:"https://radios.braviahost.com.br:8000/radio.mp3"},{title:"Jovem Pan Natal", id:"07604a13-094e-4eb1-83c3-0adf5d77a8a9", url:"http://pannatal.jmvstream.com:8522/stream/"},{title:"Rádio Cidade 94.3 FM Natal RN", id:"3bf3d027-13a8-4840-9281-067d48c64b7c", url:"https://cidadedosolaac.jmvstream.com/stream?1732978147095"},{title:"Rádio Mix FM Natal 103.9", id:"3eafa48e-b723-4d78-aad5-166cf8e2be40", url:"https://radio.saopaulo01.com.br/9324/stream"}]},
+  {city:"Porto Velho", country:"Rondônia, Brasil", lat:-8.76, lon:-63.9, stations:[{title:"maresol web radio - Porto Velho", id:"b420828d-d670-48b7-b0e4-8293be3553e6", url:"https://stream.zeno.fm/pxbrdor4opmvv"}]},
+  {city:"Boa Vista", country:"Roraima, Brasil", lat:2.82, lon:-60.67, stations:[{title:"Radio Boa Vista 96.5 Paracatu, MG", id:"960ff62c-0601-11e8-ae97-52543be04c81", url:"http://wz3.dnip.com.br/sc_boavi/sc_boavi.stream/playlist.m3u8"},{title:"maresol web radio - Macapá", id:"55467b5f-a511-4aac-b634-a992d5332ef3", url:"https://stream.zeno.fm/pxbrdor4opmvv"},{title:"maresol web radio - Boa vista", id:"66efda45-9e03-4f7b-bc15-b8c405e25135", url:"https://stream.zeno.fm/pxbrdor4opmvv"}]},
+  {city:"Aracaju", country:"Sergipe, Brasil", lat:-10.95, lon:-37.07, stations:[{title:"Rádio Cidade Maracaju 104.3 FM", id:"35ac4203-2b03-4b57-93d6-3aeb5701d78f", url:"https://servidor33-5.brlogic.com:7078/live"},{title:"Rádio Jornal 91.3 FM", id:"9c7a386f-8575-4f60-baae-f8c6db926fce", url:"https://str1.streamhostpg.com.br:8124/stream?1771879202034"},{title:"Boa Fm - Aracaju Sergipe", id:"f42f8a02-a87f-41a3-a53a-ab36a2797d2b", url:"https://s07.maxcast.com.br:8074/live"},{title:"Rádio Xodó 89.9 FM -  Aracaju Sergipe", id:"9eacfbe2-1368-416d-8eeb-e55d4feb0f6b", url:"http://09.stmip.net:8824/stream"},{title:"Nova Brasil FM 93.5 Aracaju", id:"b8cb31b3-5a4b-11e9-a622-52543be04c81", url:"http://27573.live.streamtheworld.com:3690/NOVABRASIL_ARACAJUAAC_SC"},{title:"Rádio Jornal 91.3 FM", id:"faca1ae5-f170-4428-a0e7-b8ab6502f6bf", url:"https://str1.streamhostpg.com.br:8124/stream"},{title:"Fan FM Aracaju", id:"ed0b45a6-bd8f-4a31-8fe2-d13bfe4983d7", url:"http://08.stmip.net:7114/"},{title:"Maresol web radio", id:"5b366b31-9b4e-4330-bab9-a42020f6fa40", url:"https://stream.zeno.fm/pxbrdor4opmvv"},{title:"Rádio Sergipe 95.9 FM - Aracaju Sergipe", id:"8cbe4f82-4bbc-4afe-b39e-63a5b3e2497f", url:"http://08.stmip.net:8012/stream"},{title:"Observatorio Radio Web", id:"516ca290-28b5-4da4-aae0-3991276e8b37", url:"https://observatoriosergipe.com.br/radio/live.mp3"},{title:"Web Rádio Arauto da Imaculada", id:"355e20ee-5e3e-4e0d-88e2-40950003ee86", url:"https://servidor34-1.brlogic.com:8090/live"},{title:"Observatorio Radio Web", id:"57b45695-ff27-49ae-8b94-6dead00e6bc8", url:"https://observatoriosergipe.com.br/radio/live.mp3"}]},
+  {city:"Palmas", country:"Tocantins, Brasil", lat:-10.18, lon:-48.33, stations:[{title:"Rádio Meio Norte 91.1 FM", id:"8502b446-a0b2-4d7e-a418-f305dfb14235", url:"http://webradio.amsolution.com.br:8300/live?1782849020576"},{title:"Conexão FM 98,1", id:"1d29549e-b10e-4cd5-8937-ab5687d66ace", url:"https://ssl1.transmissaodigital.com:20441/stream"},{title:"Radio Capital 87.9 FM", id:"6cb336e1-3f19-43f0-9e17-e1de50b3ad99", url:"https://sv11.hdradios.net:6928/stream"},{title:"Jovem Fm", id:"48045353-18f1-11e8-9a35-52543be04c81", url:"http://wz3.dnip.com.br/aycomau1/aycomau1.stream/playlist.m3u8"},{title:"Unitins FM", id:"657b7033-e4fb-47f3-8c43-629244f5f3da", url:"https://live.unitins.br/"}]},
   {city:"Rio de Janeiro", country:"Brasil", lat:-22.9, lon:-43.2, stations:[{title:"1090AM Metropolitana", id:"YpD8YecX"},{title:"Aeroporto do Galeao", id:"1-DVXYKC"},{title:"A FoFa PoliFônica", id:"0LJ33yN0"},{title:"Antena 1 Rio FM 103.7", id:"rwYHKZfu"},{title:"Bike Web Rádio", id:"r4mhJXjj"},{title:"Bossa Nova Brazil", id:"C7oYgrrg"},{title:"BRR Batera Radio Rock", id:"m8fDgvYv"},{title:"Canção Nova Web Rádio Rio de Janeiro", id:"CGK2Qwh6"},{title:"CBN Rio 92.5 FM", id:"28iukBGa"},{title:"Clássicos do Funk", id:"tF2-otqP"},{title:"Croc Rio Web Station", id:"lfs7m7wX"},{title:"EldoPop FM", id:"LKsPOQIs"},{title:"FM o Dia 100.5", id:"YJX-1rfR"},{title:"GameFM", id:"rxkK47U2"},{title:"Gospel Brasil", id:"H1bHO0LS"},{title:"HBC Radio", id:"GCSxgJoj"},{title:"LG Rádio Web", id:"Fs8-L1pJ"},{title:"Lully FM", id:"HSUIlZns"},{title:"maracutaia.FM", id:"4P0t5zYb"},{title:"Melodia FM 97.5", id:"WYo7g41c"},{title:"Morena FM /Rio", id:"8b93T8uG"},{title:"Nossa Web Rádio Gospel", id:"RrsrtnKr"},{title:"Nova Brasil FM Rio 89.5", id:"vWdMwWtw"},{title:"Nova FM Digital", id:"e1yh1ke2"},{title:"Nova Paradiso 89.5 FM", id:"ty0PiDKp"},{title:"Oeste Rádio", id:"6JcBlswS"},{title:"Palavra Sem Fronteira", id:"xMO-CVvJ"},{title:"Parada MPB", id:"cGss3GdR"},{title:"Paul In Rio", id:"aqL36uFi"},{title:"Planeta Reggae", id:"2ylBTpLC"},{title:"Positividade FM", id:"I2PtGKW5"},{title:"Power Web Radio", id:"Tzeg2NP2"},{title:"ProgSky", id:"11Jrk23j"},{title:"Rádio 93 FM 93.3", id:"DpKPWHNK"},{title:"Radio 98 FM Rio", id:"pHiCobO6"},{title:"Rádio A Razão", id:"VSHqoYDU"},{title:"Rádio Arquibancada", id:"WxZZ0RuC"},{title:"Radio Atlantis", id:"1ZDtc_9E"},{title:"Radio Batuta Clássicos", id:"IkXC2opn"},{title:"Radio Batuta MPB", id:"dMnKhUsh"},{title:"Rádio BTN", id:"fX65fSSB"},{title:"Radio Campo Grande FM 95.1", id:"6EZDEyFb"},{title:"Radio Capital Gospel", id:"Y6yUl71X"},{title:"Radio Carioca Futebol", id:"woNaRaEg"},{title:"Rádio Cidade", id:"XRSgIgN8"},{title:"Rádio Cult FM", id:"2u7NgoPq"},{title:"Rádio das Antigas", id:"JmOprdBi"},{title:"Rádio Doce Louvor", id:"ZzBTEVtS"},{title:"Rádio Encontro de Adoradores", id:"x8GTpLew"},{title:"Rádio Escola", id:"Jd5g0lV6"},{title:"Radio Estilo Leblon", id:"pox2VGIm"},{title:"Rádio FM Music Brasil", id:"AcJc8LEN"},{title:"Rádio Furacão 2000", id:"dwTeA8Qb"},{title:"Radio Globo 98.1 FM", id:"D00jZlYK"},{title:"Rádio Graviola", id:"Htx0ewvs"},{title:"Rádio JB FM 99,9", id:"2IS4841d"},{title:"Rádio Louvor Sertanejo", id:"lgKH1D6e"},{title:"Rádio MIS RJ", id:"03VgJGkP"},{title:"Radio Missões", id:"imVzuZ9O"},{title:"Rádio Mix 102.1", id:"p5WtSIJq"},{title:"Rádio Mundial 860", id:"PFKqYsHB"},{title:"Radio Pegasus FM", id:"8pmF2aL9"},{title:"Rádio Planeta Rei", id:"dSAisJrF"},{title:"Radio Pop Rio FM 98.7", id:"-6K0zJ59"},{title:"Rádio Reggae Brasil", id:"kUtCQiab"},{title:"Rádio Retroativa", id:"IUMU1GRn"},{title:"Radio Rio de Janeiro 1400AM", id:"eyVSUUCu"},{title:"Rádio Rio de Janeiro Light Hits FM 99.5", id:"1XERAhsX"},{title:"Rádio Roquette-Pinto 94.1 FM", id:"fjuJj_Dv"},{title:"Rádio Roquette-Pinto AM 639", id:"oK7p0vyr"},{title:"Rádio Sarau", id:"41IG7FXx"},{title:"Rádio Transamérica POP", id:"K6vVGVA0"},{title:"Rádio Tributu's Online", id:"zS9cUA6C"},{title:"Rádio Viva o Samba", id:"3uNz3T9T"},{title:"Rádio Yandê", id:"7BmlRqci"},{title:"Radio Zona Sertaneja", id:"ZK9BC0cm"},{title:"Rádio Zum", id:"AbmqAAI6"},{title:"Rede 3.16", id:"If1boMck"},{title:"Rede Big Mix", id:"xYvfiegv"},{title:"Reggae Jah", id:"mk6KTff7"},{title:"Rock FM Brasil", id:"1aa4ClJ5"},{title:"Só Kakarecos Classic Rock", id:"3HTDtoTJ"},{title:"Só Kakarecos Festa", id:"TJXCtySd"},{title:"Só Kakarecos Light", id:"jsPeOJZG"},{title:"Super Rádio Tupi FM 96.5", id:"RMuzTKOn"},{title:"Tropical Smooth Jazz", id:"IM9pW2uK"},{title:"Web Radio Novelas", id:"bDUkTvKY"}]},
   {city:"Tóquio", country:"Japão", lat:35.6, lon:139.7, stations:[
     {title:"AFN Eagle 810 AM Tokyo", id:"OjFb4M9Q"},
@@ -1831,6 +1888,29 @@ for (let lon = -180; lon < 180; lon += 20){
   addLine(pts, refLineMat);
 })();
 
+// ---------- divisas dos estados do Brasil — pra estudar geografia olhando o globo ----------
+// desenhadas um pouquinho acima da grade (Rg), escondidas por padrão (botão liga/desliga no dock)
+const brStatesGroup = new THREE.Group();
+brStatesGroup.visible = false;
+globeGroup.add(brStatesGroup);
+const brStatesMat = new THREE.LineBasicMaterial({color:0xd3ad5f, transparent:true, opacity:0.75});
+let brStatesLoaded = false;
+function loadBrStatesBorders(){
+  if (brStatesLoaded) return;
+  brStatesLoaded = true;
+  fetch('/br-states.json').then(r=> r.json()).then(geo=>{
+    const RgStates = R * 1.009;
+    geo.features.forEach(feat=>{
+      const polys = feat.geometry.type === 'MultiPolygon' ? feat.geometry.coordinates : [feat.geometry.coordinates];
+      polys.forEach(poly=> poly.forEach(ring=>{
+        const pts = ring.map(([lon, lat]) => toVec3(lat, lon, RgStates));
+        const geoLine = new THREE.BufferGeometry().setFromPoints(pts);
+        brStatesGroup.add(new THREE.Line(geoLine, brStatesMat));
+      }));
+    });
+  }).catch(()=>{ brStatesLoaded = false; });
+}
+
 // atmosfera de verdade: um brilho azulado que só aparece na borda, olhando
 // de raspão pro globo — o mesmo efeito que dá aquele "risquinho azul" nas
 // fotos da Terra vistas do espaço
@@ -2172,6 +2252,10 @@ function setDockPlaying(isPlaying){
   dockPlayer.hidden = !isPlaying;
   dockIdleHint.hidden = isPlaying;
   npPopup.hidden = !isPlaying;
+  if (!isPlaying) dockPlayer.classList.remove('reconnecting');
+}
+function setDockReconnecting(isReconnecting){
+  dockPlayer.classList.toggle('reconnecting', isReconnecting);
 }
 const npName = document.getElementById('npName');
 const npCity = document.getElementById('npCity');
@@ -2213,10 +2297,14 @@ function playStation(place, st, li, queue, queueIndex){
   npPopupCity.textContent = place.city;
   setDockPlaying(true);
   audioStuck = false;
+  reconnectAttempts = 0;
+  clearTimeout(reconnectTimer);
+  clearTimeout(stallTimer);
   audioEl.src = streamUrlFor(st);
-  audioEl.play().catch(()=>{ if (!audioStuck) failStation(); });
+  audioEl.play().catch(()=>{ if (!audioStuck) tryReconnect(); });
   renderFavStationsList();
   atualizarNpFav();
+  atualizarMediaSession(place, st);
 }
 function playQueueOffset(delta){
   if (activeQueue.length < 2) return;
@@ -2226,6 +2314,8 @@ function playQueueOffset(delta){
 }
 function failStation(){
   audioStuck = true;
+  clearTimeout(reconnectTimer);
+  clearTimeout(stallTimer);
   showToast('Essa estação não respondeu agora — tenta outra');
   if (activeLi) activeLi.classList.remove('playing');
   setDockPlaying(false);
@@ -2233,8 +2323,12 @@ function failStation(){
   audioEl.removeAttribute('src'); audioEl.load();
   renderFavStationsList();
   atualizarNpFav();
+  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
 }
 function stopStation(){
+  audioStuck = true;
+  clearTimeout(reconnectTimer);
+  clearTimeout(stallTimer);
   audioEl.pause();
   audioEl.removeAttribute('src');
   audioEl.load();
@@ -2243,16 +2337,78 @@ function stopStation(){
   setDockPlaying(false);
   renderFavStationsList();
   atualizarNpFav();
+  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
 }
 let audioStuck = false;
-audioEl.addEventListener('play', updatePlayButton);
-audioEl.addEventListener('pause', updatePlayButton);
+
+// ---------- reconexão automática — o sinal do carro cai e volta o tempo todo
+// (Bluetooth, túnel, área sem 4G), então em vez de desistir na primeira falha,
+// tenta de novo sozinho algumas vezes antes de mostrar erro pro motorista ----------
+const RECONNECT_MAX = 6;
+const RECONNECT_DELAYS = [1000, 2000, 4000, 8000, 12000, 20000];
+let reconnectAttempts = 0;
+let reconnectTimer = null;
+let stallTimer = null;
+function tryReconnect(){
+  if (!activeStation || audioStuck) return;
+  if (reconnectAttempts >= RECONNECT_MAX){ failStation(); return; }
+  const delay = RECONNECT_DELAYS[Math.min(reconnectAttempts, RECONNECT_DELAYS.length - 1)];
+  reconnectAttempts++;
+  if (reconnectAttempts === 1) showToast('Conexão caiu, reconectando…');
+  setDockReconnecting(true);
+  clearTimeout(reconnectTimer);
+  reconnectTimer = setTimeout(()=>{
+    if (!activeStation || audioStuck) return;
+    audioEl.src = streamUrlFor(activeStation);
+    audioEl.play().catch(()=> tryReconnect());
+  }, delay);
+}
+function armStallWatchdog(){
+  clearTimeout(stallTimer);
+  stallTimer = setTimeout(()=>{ if (activeStation && !audioStuck) tryReconnect(); }, 9000);
+}
+audioEl.addEventListener('play', ()=>{ updatePlayButton(); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
+audioEl.addEventListener('pause', ()=>{ updatePlayButton(); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; });
+audioEl.addEventListener('playing', ()=>{
+  reconnectAttempts = 0;
+  clearTimeout(reconnectTimer);
+  clearTimeout(stallTimer);
+  setDockReconnecting(false);
+});
+audioEl.addEventListener('waiting', armStallWatchdog);
+audioEl.addEventListener('stalled', armStallWatchdog);
 audioEl.addEventListener('error', ()=>{
   if (!activeStation || audioStuck) return;
-  failStation();
+  tryReconnect();
+});
+window.addEventListener('online', ()=>{
+  if (activeStation && audioEl.paused && !audioStuck) tryReconnect();
 });
 document.getElementById('prevBtn').addEventListener('click', ()=> playQueueOffset(-1));
 document.getElementById('nextBtn').addEventListener('click', ()=> playQueueOffset(1));
+
+// ---------- Media Session — faz o botão de anterior/próxima do carro (Bluetooth,
+// Android Auto, CarPlay) e da tela de bloqueio do celular trocar de rádio também ----------
+function atualizarMediaSession(place, st){
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: st.title,
+    artist: place.city,
+    album: 'Montgomery Rádio',
+    artwork: [
+      {src: '/icon-192.png', sizes: '192x192', type: 'image/png'},
+      {src: '/icon-512.png', sizes: '512x512', type: 'image/png'},
+    ],
+  });
+  navigator.mediaSession.playbackState = 'playing';
+}
+if ('mediaSession' in navigator){
+  navigator.mediaSession.setActionHandler('play', ()=>{ if (audioEl.paused) audioEl.play(); });
+  navigator.mediaSession.setActionHandler('pause', ()=>{ if (!audioEl.paused) audioEl.pause(); });
+  navigator.mediaSession.setActionHandler('previoustrack', ()=> playQueueOffset(-1));
+  navigator.mediaSession.setActionHandler('nexttrack', ()=> playQueueOffset(1));
+  try { navigator.mediaSession.setActionHandler('stop', stopStation); } catch(e){ /* nem todo navegador tem o handler "stop" */ }
+}
 playPauseBtn.addEventListener('click', ()=>{
   if (!activeStation) return;
   if (audioEl.paused) audioEl.play(); else audioEl.pause();
@@ -2909,17 +3065,23 @@ const MOOD_SEED_KEY = 'mundoAoVivo_moodSeedFeitas';
 function loadSeededMoods(){
   try { return JSON.parse(localStorage.getItem(MOOD_SEED_KEY) || '[]'); } catch(e){ return []; }
 }
-async function seedMoodFavorites(){
+// semeia uma lista de {label, tags} como categorias de favoritos, usando a
+// mesma chave de controle (MOOD_SEED_KEY) pra cada label só ser semeada uma vez —
+// serve tanto pros atalhos de clima/ambiente quanto pros estilos de música brasileira
+async function seedCategoryFavorites(list, opts){
+  opts = opts || {};
   const seeded = loadSeededMoods();
-  const pending = MOOD_SHORTCUTS.filter(m => !seeded.includes(m.label));
+  const pending = list.filter(m => !seeded.includes(m.label));
   if (!pending.length) return;
   try {
     let added = 0;
     for (const m of pending){
-      const lists = await Promise.all(m.tags.map(t =>
-        fetch('https://de1.api.radio-browser.info/json/stations/bytag/'+encodeURIComponent(t)+'?limit=4&hidebroken=true&order=votes&reverse=true')
-          .then(r=>r.json()).catch(()=>[])
-      ));
+      const lists = await Promise.all(m.tags.map(t => {
+        const params = new URLSearchParams({tag: t, limit: '5', hidebroken: 'true', order: 'votes', reverse: 'true'});
+        if (opts.country) params.set('country', opts.country);
+        return fetch('https://de1.api.radio-browser.info/json/stations/search?'+params.toString())
+          .then(r=>r.json()).catch(()=>[]);
+      }));
       const seen = new Set();
       const picked = lists.flat().filter(st=>{
         if (!st.url_resolved && !st.url) return false;
@@ -2943,12 +3105,32 @@ async function seedMoodFavorites(){
       saveCategories(categories);
       renderFavStationsList();
       syncFavoritosNaNuvem();
-      showToast(added+' rádios de clima/ambiente adicionadas aos favoritos');
+      showToast(added+' rádios de '+(opts.toastLabel || 'clima/ambiente')+' adicionadas aos favoritos');
     }
     localStorage.setItem(MOOD_SEED_KEY, JSON.stringify(seeded));
   } catch(e){ /* sem internet agora — tenta de novo na próxima vez que abrir */ }
 }
+function seedMoodFavorites(){
+  return seedCategoryFavorites(MOOD_SHORTCUTS, {toastLabel: 'clima/ambiente'});
+}
+// ---------- categorias por estilo de música brasileira, mesma ideia das de clima/ambiente ----------
+const BR_STYLE_SEED = [
+  {label:'Sertanejo', tags:['sertanejo']},
+  {label:'Forró', tags:['forro']},
+  {label:'Pagode', tags:['pagode']},
+  {label:'Funk Brasil', tags:['funk']},
+  {label:'Samba', tags:['samba']},
+  {label:'MPB', tags:['mpb']},
+  {label:'Gospel', tags:['gospel']},
+  {label:'Axé', tags:['axé']},
+  {label:'Rock Nacional', tags:['rock nacional']},
+  {label:'Reggae', tags:['reggae']},
+];
+function seedBrazilStyleFavorites(){
+  return seedCategoryFavorites(BR_STYLE_SEED, {country: 'Brazil', toastLabel: 'estilos brasileiros'});
+}
 seedMoodFavorites();
+seedBrazilStyleFavorites();
 
 document.addEventListener('click', (e)=>{
   if (!searchResults.contains(e.target) && e.target !== searchInput && !(moodShortcutsEl && moodShortcutsEl.contains(e.target))){
@@ -3387,6 +3569,69 @@ rotateBtn.addEventListener('click', ()=>{
   autoRotateOn = !autoRotateOn;
   localStorage.setItem('mundoAoVivo_autoRotate', autoRotateOn ? '1' : '0');
   renderRotateBtn();
+});
+
+// ---------- divisas dos estados do Brasil (liga/desliga) ----------
+const btnBorders = document.getElementById('btnBorders');
+let brStatesOn = localStorage.getItem('mundoAoVivo_divisasBR') === '1';
+function applyBrStatesVisibility(){
+  brStatesGroup.visible = brStatesOn;
+  btnBorders.classList.toggle('active', brStatesOn);
+  if (brStatesOn) loadBrStatesBorders();
+}
+applyBrStatesVisibility();
+btnBorders.addEventListener('click', ()=>{
+  brStatesOn = !brStatesOn;
+  localStorage.setItem('mundoAoVivo_divisasBR', brStatesOn ? '1' : '0');
+  applyBrStatesVisibility();
+});
+
+// ---------- painel largo — nome das rádios cortando demais? expande ----------
+const PANEL_WIDE_KEY = 'mundoAoVivo_painelLargo';
+function applyPanelWidth(){
+  const wide = localStorage.getItem(PANEL_WIDE_KEY) === '1';
+  panel.classList.toggle('wide', wide);
+  favPanel.classList.toggle('wide', wide);
+  document.querySelectorAll('.panel-expand-btn').forEach(b=>{
+    b.classList.toggle('active', wide);
+    b.setAttribute('aria-label', wide ? 'Encolher painel' : 'Expandir painel');
+  });
+}
+function togglePanelWidth(){
+  const wide = localStorage.getItem(PANEL_WIDE_KEY) === '1';
+  localStorage.setItem(PANEL_WIDE_KEY, wide ? '0' : '1');
+  applyPanelWidth();
+}
+applyPanelWidth();
+document.getElementById('panelExpand').addEventListener('click', togglePanelWidth);
+document.getElementById('favPanelExpand').addEventListener('click', togglePanelWidth);
+
+// ---------- tela cheia "só o globo" — pra deixar rodando numa segunda tela ----------
+const btnFullscreen = document.getElementById('btnFullscreen');
+const exitGlobeOnlyBtn = document.getElementById('exitGlobeOnly');
+function enterGlobeOnly(){
+  document.body.classList.add('globe-only');
+  const el = document.documentElement;
+  const req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+  if (req) req.call(el).catch(()=>{});
+}
+function exitGlobeOnly(){
+  document.body.classList.remove('globe-only');
+  if (document.fullscreenElement || document.webkitFullscreenElement){
+    const exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+    if (exit) exit.call(document).catch(()=>{});
+  }
+}
+btnFullscreen.addEventListener('click', ()=>{
+  if (document.body.classList.contains('globe-only')) exitGlobeOnly();
+  else enterGlobeOnly();
+});
+exitGlobeOnlyBtn.addEventListener('click', exitGlobeOnly);
+document.addEventListener('fullscreenchange', ()=>{
+  if (!document.fullscreenElement) document.body.classList.remove('globe-only');
+});
+document.addEventListener('keydown', (e)=>{
+  if (e.key === 'Escape' && document.body.classList.contains('globe-only')) exitGlobeOnly();
 });
 
 // botão YouTube no dock: abre fora do app (nunca embutido), porque só assim
