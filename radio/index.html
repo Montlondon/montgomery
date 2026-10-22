@@ -203,6 +203,12 @@
   #micBtn:hover{color:var(--gold);}
   #micBtn.listening{color:#e8735a; animation:micPulse 1s ease-in-out infinite;}
   @keyframes micPulse{0%,100%{opacity:1;} 50%{opacity:.4;}}
+  #micLangBtn{
+    flex:none; background:none; border:1px solid var(--line); color:var(--ink-dim); cursor:pointer;
+    font-family:'Inter',sans-serif; font-size:0.62rem; font-weight:600; letter-spacing:0.02em;
+    border-radius:999px; padding:2px 6px; transition:color .15s ease, border-color .15s ease;
+  }
+  #micLangBtn:hover{color:var(--gold); border-color:var(--gold-dim);}
   /* o painel esquerdo mostra só uma seção por vez — busca/mundo OU favoritos —
      pra não precisar rolar procurando enquanto dirige */
   #favPanel #worldSearchSection, #favPanel #favoritesSection{display:none;}
@@ -823,6 +829,7 @@
       <button id="micBtn" type="button" aria-label="Ditar por voz" title="Ditar por voz" hidden>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg>
       </button>
+      <button id="micLangBtn" type="button" aria-label="Idioma do microfone" title="Idioma do microfone" hidden>PT</button>
     </div>
     <div id="moodShortcuts"></div>
     <ul id="searchResults"></ul>
@@ -2960,16 +2967,28 @@ searchInput.addEventListener('input', ()=>{
 // ---------- microfone — dita o nome da rádio ou cidade, pra buscar sem tirar
 // a mão do volante; só aparece em navegadores com reconhecimento de voz ----------
 const micBtn = document.getElementById('micBtn');
+const micLangBtn = document.getElementById('micLangBtn');
+const MIC_LANGS = [{code:'pt-BR', label:'PT'}, {code:'fr-FR', label:'FR'}, {code:'en-US', label:'EN'}];
+const MIC_LANG_KEY = 'mundoAoVivo_idiomaMic';
+let micLangIdx = Math.max(0, MIC_LANGS.findIndex(l => l.code === localStorage.getItem(MIC_LANG_KEY)));
 const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (SpeechRecognitionCtor){
   micBtn.hidden = false;
+  micLangBtn.hidden = false;
+  micLangBtn.textContent = MIC_LANGS[micLangIdx].label;
+  micLangBtn.addEventListener('click', ()=>{
+    micLangIdx = (micLangIdx + 1) % MIC_LANGS.length;
+    localStorage.setItem(MIC_LANG_KEY, MIC_LANGS[micLangIdx].code);
+    micLangBtn.textContent = MIC_LANGS[micLangIdx].label;
+    showToast('Microfone em '+MIC_LANGS[micLangIdx].label);
+  });
   const recognition = new SpeechRecognitionCtor();
-  recognition.lang = 'pt-BR';
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
   let listening = false;
   micBtn.addEventListener('click', ()=>{
     if (listening){ recognition.stop(); return; }
+    recognition.lang = MIC_LANGS[micLangIdx].code;
     try { recognition.start(); } catch(e){ /* já estava escutando, ignora */ }
   });
   recognition.addEventListener('start', ()=>{ listening = true; micBtn.classList.add('listening'); });
