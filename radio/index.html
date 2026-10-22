@@ -44,6 +44,20 @@
     pointer-events:none;
     z-index:5;
   }
+  .header-right{display:flex; align-items:center; gap:12px; pointer-events:auto;}
+  .header-actions{display:flex; gap:6px;}
+  .header-actions button{
+    background:none; border:1px solid var(--line); color:var(--ink-dim);
+    width:32px; height:32px; border-radius:50%; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .header-actions button:hover{color:var(--gold); border-color:var(--gold-dim); background:rgba(211,173,95,0.08);}
+  .header-actions button.active{color:var(--gold); border-color:var(--gold-dim); background:rgba(211,173,95,0.14);}
+  @media (max-width: 640px){
+    .header-actions button{width:28px; height:28px;}
+    .header-right{gap:8px;}
+  }
   h1{
     font-family:'Fraunces',serif;
     font-weight:500;
@@ -336,16 +350,19 @@
     background:var(--panel); border:1px solid var(--line); border-radius:999px;
     box-shadow:0 8px 28px rgba(0,0,0,0.45);
     z-index:12;
+    /* mais ícones do que cabem? rola em vez de sumir — vale pra qualquer
+       largura de tela, não só celular */
+    overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
-  #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast, #btnFullscreen, #btnBorders{
+  #dock::-webkit-scrollbar{display:none;}
+  #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{
     flex:none; background:none; border:none; color:var(--ink-dim); cursor:pointer;
     width:34px; height:34px; border-radius:50%;
     display:flex; align-items:center; justify-content:center; position:relative;
     transition:color .15s ease, background .15s ease;
   }
-  #dockFav:hover, #dockRotate:hover, #btnPostit:hover, #btnYoutube:hover, #btnCast:hover, #btnFullscreen:hover, #btnBorders:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
+  #dockFav:hover, #dockRotate:hover, #btnPostit:hover, #btnYoutube:hover, #btnCast:hover{color:var(--gold); background:rgba(211,173,95,0.1);}
   #btnCast.active{color:#e8735a; background:rgba(232,115,90,0.12);}
-  #btnBorders.active{color:var(--gold); background:rgba(211,173,95,0.14);}
   #dockPostitBadge:not([hidden]){
     position:absolute; top:2px; right:2px;
     min-width:14px; height:14px; padding:0 3px; border-radius:999px;
@@ -418,7 +435,7 @@
     }
     #dock::-webkit-scrollbar{display:none;}
     #dock > .dock-sep{display:none;}
-    #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast, #btnFullscreen, #btnBorders{width:30px; height:30px; flex-shrink:0;}
+    #dockFav, #dockRotate, #btnPostit, #btnYoutube, #btnCast{width:30px; height:30px; flex-shrink:0;}
     #dockPlayer .np-city{display:none;}
     #dockPlayer{gap:3px; flex-shrink:0;}
     #dockPlayer .np-info{display:none;}
@@ -697,7 +714,17 @@
     <h1>Montgomery <em>Rádio</em></h1>
     <div class="sub">o mundo, ao vivo &mdash; um globo de rádios reais</div>
   </div>
-  <div class="clock" id="clock"></div>
+  <div class="header-right">
+    <div class="header-actions">
+      <button id="btnBorders" aria-label="Mostrar fronteiras dos países e estados do Brasil" title="Fronteiras">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10l6-5 6 4 6-6M4 19l5-4 6 3 5-5" stroke-dasharray="2.2 2.2"/></svg>
+      </button>
+      <button id="btnFullscreen" aria-label="Tela cheia — só o globo girando" title="Tela cheia">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+      </button>
+    </div>
+    <div class="clock" id="clock"></div>
+  </div>
 </header>
 
 <div id="hint">
@@ -758,14 +785,6 @@
   </button>
   <div class="dock-sep"></div>
   <button id="dockRotate" aria-label="Girar ou parar o globo"></button>
-  <div class="dock-sep"></div>
-  <button id="btnBorders" aria-label="Mostrar fronteiras dos países e estados do Brasil" title="Fronteiras">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10l6-5 6 4 6-6M4 19l5-4 6 3 5-5" stroke-dasharray="2.2 2.2"/></svg>
-  </button>
-  <div class="dock-sep"></div>
-  <button id="btnFullscreen" aria-label="Tela cheia — só o globo girando" title="Tela cheia">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
-  </button>
 </div>
 <button id="exitGlobeOnly" aria-label="Sair da tela cheia">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
