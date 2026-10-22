@@ -209,6 +209,33 @@
     border-radius:999px; padding:2px 6px; transition:color .15s ease, border-color .15s ease;
   }
   #micLangBtn:hover{color:var(--gold); border-color:var(--gold-dim);}
+  /* busca de cidade dentro do painel da direita — trocar de cidade sem
+     precisar voltar pro globo ou pro painel esquerdo */
+  #citySearchBar{
+    display:flex; align-items:center; gap:8px; flex:none;
+    background:var(--ground-deep); border:1px solid var(--line); border-radius:999px;
+    padding:8px 14px; margin-bottom:10px; color:var(--ink-dim);
+  }
+  #citySearchBar input{
+    flex:1; min-width:0; background:none; border:none; outline:none;
+    color:var(--ink); font-family:'Inter',sans-serif; font-size:0.85rem;
+  }
+  #citySearchBar input::placeholder{color:var(--ink-dim);}
+  #citySearchResults{
+    list-style:none; margin:0 0 16px; padding:0; display:none;
+    max-height:40vh; overflow-y:auto;
+    background:var(--ground-deep); border:1px solid var(--line); border-radius:12px;
+  }
+  #citySearchResults.open{display:block;}
+  #citySearchResults li{border-bottom:1px solid var(--line);}
+  #citySearchResults li:last-child{border-bottom:none;}
+  #citySearchResults button{
+    width:100%; display:flex; flex-direction:column; align-items:flex-start; gap:2px;
+    background:none; border:none; color:var(--ink); cursor:pointer;
+    text-align:left; padding:10px 14px; font-family:'Inter',sans-serif;
+  }
+  #citySearchResults button:hover{color:var(--gold);}
+  #citySearchResults .sr-sub{font-size:0.72rem; color:var(--ink-dim);}
   /* o painel esquerdo mostra só uma seção por vez — busca/mundo OU favoritos —
      pra não precisar rolar procurando enquanto dirige */
   #favPanel #worldSearchSection, #favPanel #favoritesSection{display:none;}
@@ -762,7 +789,7 @@
   <button id="dockFav" aria-label="Abrir favoritos" title="Favoritos">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
   </button>
-  <button id="btnFavorites" aria-label="Rádios do mundo — buscar" title="Rádios do mundo">
+  <button id="btnFavorites" aria-label="Cidades favoritas" title="Cidades favoritas">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>
   </button>
   <div class="dock-sep"></div>
@@ -822,7 +849,7 @@
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
-  <div id="worldSearchSection">
+  <div id="favoritesSection">
     <div id="searchBar">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="searchInput" type="text" placeholder="rádio, cidade ou país&hellip;" autocomplete="off">
@@ -833,11 +860,11 @@
     </div>
     <div id="moodShortcuts"></div>
     <ul id="searchResults"></ul>
-  </div>
-  <div id="favoritesSection">
     <h2 id="favoritesSectionTitle">Rádios favoritas</h2>
     <p id="favStationsEmpty">Favorite uma rádio da busca (o coração ao lado dela) — ela aparece aqui.</p>
     <ul id="favStationsList"></ul>
+  </div>
+  <div id="worldSearchSection">
     <h2>Cidades favoritas</h2>
     <p id="favEmpty">Favorite uma cidade pelo coração no painel dela — ela aparece aqui.</p>
     <ul id="favList"></ul>
@@ -859,6 +886,11 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
+  <div id="citySearchBar">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input id="citySearchInput" type="text" placeholder="ir pra outra cidade&hellip;" autocomplete="off">
+  </div>
+  <ul id="citySearchResults"></ul>
   <p class="place-country" id="placeCountry"></p>
   <h2 class="place-title" id="placeTitle"></h2>
   <ul class="stations" id="stationList"></ul>
@@ -2871,6 +2903,43 @@ document.getElementById('panelClose').addEventListener('click', ()=>{
   panel.classList.remove('open');
 });
 
+// ---------- busca de cidade dentro do painel da direita — troca de cidade
+// sem precisar fechar o painel nem voltar pro globo ----------
+const citySearchInput = document.getElementById('citySearchInput');
+const citySearchResults = document.getElementById('citySearchResults');
+citySearchInput.addEventListener('input', ()=>{
+  const q = citySearchInput.value.trim();
+  citySearchResults.innerHTML = '';
+  if (q.length < 2){ citySearchResults.classList.remove('open'); return; }
+  const qNorm = stripAccentsSafe(q.toLowerCase());
+  const matches = PLACES.filter(p =>
+    stripAccentsSafe(p.city.toLowerCase()).includes(qNorm) ||
+    stripAccentsSafe(p.country.toLowerCase()).includes(qNorm)
+  ).slice(0, 12);
+  if (!matches.length){
+    citySearchResults.innerHTML = '<li class="sr-empty" style="padding:14px; color:var(--ink-dim); font-size:0.82rem;">nenhuma cidade encontrada</li>';
+  } else {
+    matches.forEach(place=>{
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.innerHTML = '<span>'+place.city+'</span><span class="sr-sub">'+place.country+'</span>';
+      btn.addEventListener('click', ()=>{
+        openPlace(place);
+        citySearchInput.value = '';
+        citySearchResults.classList.remove('open');
+      });
+      li.appendChild(btn);
+      citySearchResults.appendChild(li);
+    });
+  }
+  citySearchResults.classList.add('open');
+});
+// versão própria de "tirar acento" pra não depender da ordem de declaração
+// de stripAccents (definida mais abaixo, junto da busca global)
+function stripAccentsSafe(s){
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
 favBtn.addEventListener('click', ()=>{
   if (!currentPlace) return;
   if (favorites.has(currentPlace.city)){
@@ -2907,9 +2976,9 @@ function renderFavPanel(){
 }
 renderFavPanel();
 
-// ---------- dois botões pro painel esquerdo: "favoritos" (lupinha) e
-// "rádios do mundo" (coração) — cada um mostra só a sua seção, sem
-// precisar rolar procurando enquanto dirige ----------
+// ---------- dois botões pro painel esquerdo: "favoritos" (lupinha —
+// busca de rádio + rádios favoritas) e "cidades favoritas" (coração —
+// clicar numa cidade abre ela na aba da direita) ----------
 document.getElementById('dockFav').addEventListener('click', ()=>{
   favPanel.classList.remove('mode-world');
   favPanel.classList.add('open', 'mode-favorites');
@@ -2917,7 +2986,6 @@ document.getElementById('dockFav').addEventListener('click', ()=>{
 document.getElementById('btnFavorites').addEventListener('click', ()=>{
   favPanel.classList.remove('mode-favorites');
   favPanel.classList.add('open', 'mode-world');
-  searchInput.focus();
 });
 document.getElementById('favPanelClose').addEventListener('click', ()=>{
   favPanel.classList.remove('open');
