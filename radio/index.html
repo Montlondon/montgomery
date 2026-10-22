@@ -215,6 +215,8 @@
     width:auto; margin-left:4px; padding-left:10px; padding-right:14px;
     border-left:1px solid var(--line);
   }
+  #searchResults .fav-cat-dropdown{margin-left:4px;}
+  #searchResults .fav-cat-btn{max-width:84px;}
 
   .panel-top{
     display:flex; align-items:center; justify-content:flex-end; gap:6px;
@@ -406,6 +408,7 @@
     display:flex;
   }
   .stations .icon-btn.block:hover{color:#e8735a;}
+  .stations .fav-cat-btn{max-width:84px;}
   .stations .icon-btn.block:focus-visible{outline:1px solid var(--gold); outline-offset:-2px;}
 
   #panel .note{
@@ -2339,6 +2342,108 @@ function setStationCategory(url, category){
   renderFavStationsList();
   syncFavoritosNaNuvem();
 }
+// favorita a rádio (se ainda não for) e já aplica a categoria escolhida —
+// usado pela cápsula de categoria na busca, onde a rádio pode não estar nos favoritos ainda
+function setStationCategoryOrAdd(station, category){
+  if (isFavStation(station.url)){
+    setStationCategory(station.url, category);
+    return;
+  }
+  favStations = [{...station, category}, ...favStations];
+  saveFavStations(favStations);
+  if (category && !categories.includes(category)){
+    categories = [...categories, category];
+    saveCategories(categories);
+  }
+  renderFavStationsList();
+  syncFavoritosNaNuvem();
+}
+
+// ---------- cápsula de categoria (dropdown), reaproveitada nos favoritos e na busca ----------
+function createCatDropdown(initialCategory, onSelect, opts){
+  opts = opts || {};
+  const ariaLabel = opts.ariaLabel || 'Categoria';
+  const placeholder = opts.placeholder || 'sem categoria';
+  const catDropdown = document.createElement('div');
+  catDropdown.className = 'fav-cat-dropdown';
+  const catBtn = document.createElement('button');
+  catBtn.type = 'button';
+  catBtn.className = 'fav-cat-btn';
+  catBtn.setAttribute('aria-label', ariaLabel);
+  let current = initialCategory;
+  const setLabel = (cat)=>{
+    current = cat;
+    catBtn.innerHTML = '<span class="fav-cat-label">'+(cat || placeholder)+'</span>'+
+      '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>';
+  };
+  setLabel(initialCategory);
+  catDropdown.appendChild(catBtn);
+  catBtn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    document.querySelectorAll('.fav-cat-menu').forEach(m=> m.remove());
+    document.querySelectorAll('.fav-cat-btn.open').forEach(b=> b.classList.remove('open'));
+    const menu = document.createElement('ul');
+    menu.className = 'fav-cat-menu';
+    // com muitas categorias, igual no YouTube: campo de filtro no topo,
+    // digita e já vai achando a pasta certa
+    let filtro = null;
+    if (categories.length >= 5){
+      const liFiltro = document.createElement('li');
+      filtro = document.createElement('input');
+      filtro.type = 'text';
+      filtro.className = 'fav-cat-filtro';
+      filtro.placeholder = 'filtrar categoria…';
+      liFiltro.appendChild(filtro);
+      menu.appendChild(liFiltro);
+    }
+    const optNone = document.createElement('li');
+    const btnNone = document.createElement('button');
+    btnNone.type = 'button'; btnNone.textContent = 'sem categoria';
+    if (!current) btnNone.className = 'active';
+    btnNone.addEventListener('click', ()=>{ onSelect(''); setLabel(''); menu.remove(); });
+    optNone.appendChild(btnNone);
+    optNone.dataset.nome = 'sem categoria';
+    menu.appendChild(optNone);
+    [...categories].sort((a,b)=> a.localeCompare(b, 'pt-BR')).forEach(c=>{
+      const li = document.createElement('li');
+      li.dataset.nome = c.toLowerCase();
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = c;
+      if (c === current) b.className = 'active';
+      b.addEventListener('click', ()=>{ onSelect(c); setLabel(c); menu.remove(); });
+      li.appendChild(b);
+      menu.appendChild(li);
+    });
+    if (filtro){
+      filtro.addEventListener('click', e=> e.stopPropagation());
+      filtro.addEventListener('input', ()=>{
+        const q = filtro.value.trim().toLowerCase();
+        menu.querySelectorAll('li[data-nome]').forEach(li=>{
+          li.style.display = li.dataset.nome.includes(q) ? '' : 'none';
+        });
+      });
+      setTimeout(()=> filtro.focus(), 0);
+    }
+    const liNew = document.createElement('li');
+    const btnNew = document.createElement('button');
+    btnNew.type = 'button'; btnNew.className = 'new-cat'; btnNew.textContent = '+ nova categoria…';
+    btnNew.addEventListener('click', ()=>{
+      const nome = (window.prompt('Nome da nova categoria:') || '').trim();
+      if (nome){ onSelect(nome); setLabel(nome); }
+      menu.remove();
+    });
+    liNew.appendChild(btnNew);
+    menu.appendChild(liNew);
+    catDropdown.appendChild(menu);
+    catBtn.classList.add('open');
+    document.addEventListener('click', function closeMenu(){
+      menu.remove();
+      catBtn.classList.remove('open');
+      document.removeEventListener('click', closeMenu);
+    }, {once:true});
+  });
+  return {el: catDropdown, setLabel};
+}
 
 // ---------- sincronizar favoritas entre aparelhos (Supabase, uma linha só) ----------
 const SUPABASE_URL = 'https://eltjhrhrtuymejojxyhe.supabase.co';
@@ -2416,79 +2521,7 @@ function renderFavStationsList(){
         playStation({city: st.title, country: st.country || 'mundo'}, {title: st.title, url: st.url}, null, queue, favStations.indexOf(st));
       });
 
-      const catDropdown = document.createElement('div');
-      catDropdown.className = 'fav-cat-dropdown';
-      const catBtn = document.createElement('button');
-      catBtn.type = 'button';
-      catBtn.className = 'fav-cat-btn';
-      catBtn.setAttribute('aria-label', 'Categoria de '+st.title);
-      catBtn.innerHTML = '<span class="fav-cat-label">'+(st.category || 'sem categoria')+'</span>'+
-        '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>';
-      catDropdown.appendChild(catBtn);
-      catBtn.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        document.querySelectorAll('.fav-cat-menu').forEach(m=> m.remove());
-        document.querySelectorAll('.fav-cat-btn.open').forEach(b=> b.classList.remove('open'));
-        const menu = document.createElement('ul');
-        menu.className = 'fav-cat-menu';
-        // com muitas categorias, igual no YouTube: campo de filtro no topo,
-        // digita e já vai achando a pasta certa
-        let filtro = null;
-        if (categories.length >= 5){
-          const liFiltro = document.createElement('li');
-          filtro = document.createElement('input');
-          filtro.type = 'text';
-          filtro.className = 'fav-cat-filtro';
-          filtro.placeholder = 'filtrar categoria…';
-          liFiltro.appendChild(filtro);
-          menu.appendChild(liFiltro);
-        }
-        const optNone = document.createElement('li');
-        const btnNone = document.createElement('button');
-        btnNone.type = 'button'; btnNone.textContent = 'sem categoria';
-        if (!st.category) btnNone.className = 'active';
-        btnNone.addEventListener('click', ()=>{ setStationCategory(st.url, ''); menu.remove(); });
-        optNone.appendChild(btnNone);
-        optNone.dataset.nome = 'sem categoria';
-        menu.appendChild(optNone);
-        [...categories].sort((a,b)=> a.localeCompare(b, 'pt-BR')).forEach(c=>{
-          const li = document.createElement('li');
-          li.dataset.nome = c.toLowerCase();
-          const b = document.createElement('button');
-          b.type = 'button'; b.textContent = c;
-          if (c === st.category) b.className = 'active';
-          b.addEventListener('click', ()=>{ setStationCategory(st.url, c); menu.remove(); });
-          li.appendChild(b);
-          menu.appendChild(li);
-        });
-        if (filtro){
-          filtro.addEventListener('click', e=> e.stopPropagation());
-          filtro.addEventListener('input', ()=>{
-            const q = filtro.value.trim().toLowerCase();
-            menu.querySelectorAll('li[data-nome]').forEach(li=>{
-              li.style.display = li.dataset.nome.includes(q) ? '' : 'none';
-            });
-          });
-          setTimeout(()=> filtro.focus(), 0);
-        }
-        const liNew = document.createElement('li');
-        const btnNew = document.createElement('button');
-        btnNew.type = 'button'; btnNew.className = 'new-cat'; btnNew.textContent = '+ nova categoria…';
-        btnNew.addEventListener('click', ()=>{
-          const nome = (window.prompt('Nome da nova categoria:') || '').trim();
-          if (nome) setStationCategory(st.url, nome);
-          menu.remove();
-        });
-        liNew.appendChild(btnNew);
-        menu.appendChild(liNew);
-        catDropdown.appendChild(menu);
-        catBtn.classList.add('open');
-        document.addEventListener('click', function closeMenu(){
-          menu.remove();
-          catBtn.classList.remove('open');
-          document.removeEventListener('click', closeMenu);
-        }, {once:true});
-      });
+      const {el: catDropdown} = createCatDropdown(st.category, (cat)=> setStationCategory(st.url, cat), {ariaLabel: 'Categoria de '+st.title});
 
       const unfav = document.createElement('button');
       unfav.className = 'unfav';
@@ -2551,6 +2584,30 @@ function openPlace(place){
       '<svg class="go" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
     link.addEventListener('click', ()=> playStation(place, st, li, placeQueue, visibleStations.indexOf(st)));
 
+    const streamUrl = streamUrlFor(st);
+
+    const favBtn3 = document.createElement('button');
+    favBtn3.className = 'sr-fav' + (isFavStation(streamUrl) ? ' active' : '');
+    favBtn3.setAttribute('aria-label', 'Favoritar '+st.title);
+    favBtn3.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.8-10-9.3C.3 8.2 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.3C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.3 4.2 3.6 7.7C19.5 16.2 12 21 12 21z"/></svg>';
+    favBtn3.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      toggleFavStation({title: st.title, url: streamUrl, country: place.country});
+      favBtn3.classList.toggle('active', isFavStation(streamUrl));
+      atualizarNpFav();
+      showToast(isFavStation(streamUrl) ? st.title+' nos favoritos' : 'Removida dos favoritos');
+    });
+
+    // cápsula de categoria — favorita (se ainda não for) e já joga na categoria escolhida,
+    // sem precisar ir até a lista de favoritas pra organizar depois
+    const existingFav = favStations.find(s => s.url === streamUrl);
+    const {el: catDropdown} = createCatDropdown(existingFav ? existingFav.category : '', (cat)=>{
+      setStationCategoryOrAdd({title: st.title, url: streamUrl, country: place.country}, cat);
+      favBtn3.classList.add('active');
+      atualizarNpFav();
+    }, {ariaLabel: 'Categoria de '+st.title, placeholder: '+ categoria'});
+    catDropdown.addEventListener('click', e=> e.stopPropagation());
+
     const blockBtn = document.createElement('button');
     blockBtn.className = 'icon-btn block';
     blockBtn.setAttribute('aria-label', 'Bloquear '+st.title);
@@ -2568,6 +2625,8 @@ function openPlace(place){
     });
 
     li.appendChild(link);
+    li.appendChild(catDropdown);
+    li.appendChild(favBtn3);
     li.appendChild(blockBtn);
     stationList.appendChild(li);
   });
@@ -2770,7 +2829,17 @@ function renderStationResults(data){
       showToast(isFavStation(streamUrl) ? st.name+' nos favoritos' : 'Removida dos favoritos');
     });
 
+    // cápsula de categoria — favorita (se ainda não for) e já joga na categoria escolhida,
+    // sem precisar ir até a lista de favoritas pra organizar depois
+    const existing = favStations.find(s => s.url === streamUrl);
+    const {el: catDropdown} = createCatDropdown(existing ? existing.category : '', (cat)=>{
+      setStationCategoryOrAdd({title: st.name, url: streamUrl, country: st.country}, cat);
+      favBtn2.classList.add('active');
+    }, {ariaLabel: 'Categoria de '+st.name, placeholder: '+ categoria'});
+    catDropdown.addEventListener('click', e=> e.stopPropagation());
+
     li.appendChild(btn);
+    li.appendChild(catDropdown);
     li.appendChild(favBtn2);
     searchResults.appendChild(li);
   });
