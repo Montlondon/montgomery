@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Receitas</title>
+<meta name="description" content="Livro de receitas pessoal — pães, com busca total e fotos.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#C9752E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --radius: 22px;
+  --radius-sm: 14px;
+}
+
+/* ---------- Paletas ---------- */
+[data-theme="forno"]{
+  --bg:#F4EFE6; --surface:#FFFFFF; --surface-2:#EFE4D2;
+  --text:#3A2E22; --text-soft:#7A6A55;
+  --accent:#C9752E; --accent-ink:#FFF7EC; --accent-soft:#F0D6B4;
+  --border:#E3D5BC; --shadow: 201,117,46;
+}
+[data-theme="noturna"]{
+  --bg:#211C18; --surface:#2C2520; --surface-2:#38302A;
+  --text:#F3E9DC; --text-soft:#BBA98F;
+  --accent:#E8A74E; --accent-ink:#2A1C0B; --accent-soft:#4A3A23;
+  --border:#473C32; --shadow: 232,167,78;
+}
+[data-theme="trigo"]{
+  --bg:#F2F1E9; --surface:#FFFFFF; --surface-2:#E6E7DA;
+  --text:#2F3327; --text-soft:#6D7363;
+  --accent:#6F8F5B; --accent-ink:#F7FAF2; --accent-soft:#D9E3CD;
+  --border:#DADFCB; --shadow: 111,143,91;
+}
+[data-theme="fermento"]{
+  --bg:#2B1F33; --surface:#382A41; --surface-2:#44334F;
+  --text:#F3E7E9; --text-soft:#C7AEC9;
+  --accent:#E8B84B; --accent-ink:#2A1C0B; --accent-soft:#5A4463;
+  --border:#50405B; --shadow: 232,184,75;
+}
+[data-theme="manha"]{
+  --bg:#FBFAF6; --surface:#FFFFFF; --surface-2:#F1EBE2;
+  --text:#2E2622; --text-soft:#8A7A6D;
+  --accent:#C4552F; --accent-ink:#FFF7EC; --accent-soft:#F2D9CB;
+  --border:#EDE3D6; --shadow: 196,85,47;
+}
+
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding-bottom:96px;
+}
+button{ font-family:inherit; }
+h1,h2,h3,p,ul,ol{ margin:0; }
+
+/* sem contorno/halo em texto: sempre texto sólido sobre superfície sólida ou gradiente */
+
+.topbar{
+  position:sticky; top:0; z-index:40;
+  background:var(--bg);
+  padding:18px 16px 12px;
+  border-bottom:1px solid var(--border);
+}
+.topbar-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.logo{ width:38px; height:38px; flex:none; border-radius:10px; }
+.brand{ font-weight:700; font-size:1.25rem; letter-spacing:.2px; }
+.brand-sub{ font-size:.82rem; color:var(--text-soft); margin-top:-2px; }
+
+.search-wrap{ position:relative; }
+.search-input{
+  width:100%; border:1px solid var(--border); background:var(--surface);
+  color:var(--text); border-radius:999px; padding:14px 48px 14px 20px;
+  font-size:1.05rem; font-family:var(--font); outline:none;
+}
+.search-input:focus{ border-color:var(--accent); }
+.search-icon{ position:absolute; right:16px; top:50%; transform:translateY(-50%); width:22px; height:22px; color:var(--text-soft); pointer-events:none; }
+.search-count{ font-size:.82rem; color:var(--text-soft); margin-top:8px; padding-left:6px; }
+
+.chips{ display:flex; gap:8px; margin-top:10px; overflow-x:auto; padding-bottom:2px; }
+.chip{
+  flex:none; border:1px solid var(--border); background:var(--surface);
+  color:var(--text); padding:8px 16px; border-radius:999px; font-size:.9rem; cursor:pointer;
+}
+.chip[aria-pressed="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:700; }
+
+main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
+
+.grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:14px;
+}
+.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  overflow:hidden; cursor:pointer; text-align:left; padding:0; display:flex; flex-direction:column;
+  transition:transform .18s ease, box-shadow .18s ease;
+  will-change:transform;
+}
+.card:hover{ transform:translateY(-2px); box-shadow:0 10px 22px -12px rgba(var(--shadow),.45); }
+.card:active{ transform:scale(.97); }
+.card-photo{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--surface-2); }
+.card-photo.placeholder{ display:flex; align-items:center; justify-content:center; }
+.card-photo.placeholder svg{ width:46%; height:46%; color:var(--accent-soft); }
+.card-body{ padding:12px 14px 14px; flex:1; display:flex; flex-direction:column; gap:4px; }
+.card-title{ font-size:.98rem; font-weight:700; line-height:1.28; }
+.card-title mark, .snippet mark{ background:var(--accent-soft); color:var(--text); border-radius:3px; padding:0 2px; }
+.card-tag{ font-size:.74rem; color:var(--text-soft); }
+.card-snippet{ font-size:.78rem; color:var(--text-soft); line-height:1.3; }
+
+.empty{ text-align:center; padding:60px 20px; color:var(--text-soft); }
+.empty svg{ width:64px; height:64px; margin-bottom:14px; color:var(--accent-soft); }
+
+/* ---------- Detalhe em zoom infinito ---------- */
+.detail-overlay{
+  position:fixed; inset:0; z-index:100; background:var(--bg);
+  display:none; overflow-y:auto; -webkit-overflow-scrolling:touch;
+}
+.detail-overlay.open{ display:block; }
+.detail-overlay.animating{ animation:zoomIn .32s cubic-bezier(.2,.8,.2,1); }
+@keyframes zoomIn{
+  from{ opacity:0; transform:scale(.92); }
+  to{ opacity:1; transform:scale(1); }
+}
+.detail-top{
+  position:sticky; top:0; z-index:5; display:flex; align-items:center; justify-content:space-between;
+  padding:14px 14px; background:linear-gradient(to bottom, var(--bg) 70%, transparent);
+}
+.icon-btn{
+  width:44px; height:44px; border-radius:50%; border:1px solid var(--border);
+  background:var(--surface); color:var(--text); display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.icon-btn svg{ width:22px; height:22px; }
+
+.photo-zoom-wrap{
+  width:100%; aspect-ratio:4/3; background:var(--surface-2); overflow:hidden; position:relative; touch-action:pan-y;
+}
+.photo-zoom-wrap img{
+  width:100%; height:100%; object-fit:cover; display:block; transform-origin:center center;
+  cursor:zoom-in;
+}
+#photoPlaceholder svg{ width:30%; height:30%; color:var(--accent-soft); }
+.zoom-hint{
+  position:absolute; bottom:10px; right:12px; background:rgba(0,0,0,.45); color:#fff;
+  font-size:.74rem; padding:5px 10px; border-radius:999px; pointer-events:none;
+}
+
+.detail-body{ max-width:720px; margin:0 auto; padding:22px 20px 60px; }
+.detail-title{ font-size:1.6rem; font-weight:700; line-height:1.2; margin-bottom:6px; }
+.detail-tag{ display:inline-flex; align-items:center; gap:6px; font-size:.82rem; color:var(--accent); font-weight:700; margin-bottom:22px; }
+.detail-tag .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); }
+
+.section-title{ font-size:1.02rem; font-weight:700; margin:28px 0 12px; display:flex; align-items:center; gap:8px; }
+.section-title svg{ width:20px; height:20px; color:var(--accent); }
+
+.ing-list{ list-style:none; padding:0; display:flex; flex-direction:column; gap:10px; }
+.ing-list li{
+  display:flex; gap:10px; align-items:flex-start; background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:12px 14px; font-size:.96rem; line-height:1.4;
+}
+.ing-list li .bullet{ flex:none; width:8px; height:8px; border-radius:50%; background:var(--accent); margin-top:7px; }
+
+.step-list{ list-style:none; padding:0; display:flex; flex-direction:column; gap:14px; counter-reset:step; }
+.step-list li{ display:flex; gap:14px; align-items:flex-start; counter-increment:step; }
+.step-num{
+  flex:none; width:30px; height:30px; border-radius:50%; background:var(--accent); color:var(--accent-ink);
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.9rem;
+}
+.step-text{ padding-top:4px; font-size:.97rem; line-height:1.5; }
+
+.detail-actions{ display:flex; gap:10px; margin-top:34px; }
+.btn-ghost{
+  flex:1; border:1px solid var(--border); background:var(--surface); color:var(--text);
+  padding:13px; border-radius:999px; font-weight:700; font-size:.92rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.btn-ghost svg{ width:18px; height:18px; }
+.btn-ghost.danger{ color:#C84B4B; border-color:#E8C2C2; }
+
+/* ---------- FAB + paleta ---------- */
+.fab-row{ position:fixed; right:16px; bottom:18px; z-index:60; display:flex; flex-direction:column; gap:12px; align-items:flex-end; }
+.fab{
+  width:58px; height:58px; border-radius:50%; background:var(--accent); color:var(--accent-ink);
+  border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  box-shadow:0 10px 24px -8px rgba(var(--shadow),.6);
+}
+.fab svg{ width:26px; height:26px; }
+.fab-mini{
+  width:46px; height:46px; border-radius:50%; background:var(--surface); color:var(--text);
+  border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer;
+  box-shadow:0 8px 18px -8px rgba(0,0,0,.25);
+}
+.fab-mini svg{ width:20px; height:20px; }
+
+.palette-panel{
+  position:fixed; right:16px; bottom:84px; z-index:61; background:var(--surface); border:1px solid var(--border);
+  border-radius:18px; padding:12px; display:none; gap:10px; flex-direction:column; box-shadow:0 14px 30px -10px rgba(0,0,0,.3);
+}
+.palette-panel.open{ display:flex; }
+.palette-opt{ display:flex; align-items:center; gap:10px; border:none; background:transparent; color:var(--text); cursor:pointer; padding:8px 6px; border-radius:10px; font-size:.9rem; text-align:left; }
+.palette-opt[aria-pressed="true"]{ background:var(--surface-2); font-weight:700; }
+.swatch{ width:26px; height:26px; border-radius:50%; flex:none; border:2px solid var(--border); }
+
+/* ---------- Modal adicionar/editar ---------- */
+.modal-backdrop{
+  position:fixed; inset:0; z-index:120; background:rgba(0,0,0,.5); display:none;
+  align-items:flex-end; justify-content:center;
+}
+.modal-backdrop.open{ display:flex; }
+.modal{
+  width:100%; max-width:640px; max-height:92vh; overflow-y:auto; background:var(--bg);
+  border-radius:24px 24px 0 0; padding:20px 20px 32px;
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp{ from{ transform:translateY(24px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+.modal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
+.modal-head h2{ font-size:1.2rem; font-weight:700; }
+
+.field{ margin-bottom:16px; }
+.field label{ display:block; font-size:.86rem; font-weight:700; color:var(--text-soft); margin-bottom:6px; }
+.field input[type=text], .field select, .field textarea{
+  width:100%; border:1px solid var(--border); background:var(--surface); color:var(--text);
+  border-radius:var(--radius-sm); padding:12px 14px; font-size:.96rem; font-family:var(--font); resize:vertical;
+}
+.field textarea{ min-height:110px; line-height:1.5; }
+.field-hint{ font-size:.78rem; color:var(--text-soft); margin-top:5px; }
+
+.photo-pick{
+  width:100%; aspect-ratio:4/3; border:2px dashed var(--border); border-radius:var(--radius-sm);
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; color:var(--text-soft);
+  cursor:pointer; overflow:hidden; position:relative; background:var(--surface);
+}
+.photo-pick img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.photo-pick svg{ width:30px; height:30px; }
+
+.btn-primary{
+  width:100%; background:var(--accent); color:var(--accent-ink); border:none; padding:15px;
+  border-radius:999px; font-weight:700; font-size:1rem; cursor:pointer; margin-top:6px;
+}
+.btn-text{ background:none; border:none; color:var(--text-soft); font-size:.9rem; cursor:pointer; padding:8px; }
+
+.visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+@media (min-width:720px){
+  .grid{ grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); }
+}
+</style>
+</head>
+<body data-theme="forno">
+
+<header class="topbar">
+  <div class="topbar-row">
+    <img src="icon-512.png" class="logo" alt="">
+    <div>
+      <div class="brand">Receitas</div>
+      <div class="brand-sub" id="subcount">carregando…</div>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <input id="search" class="search-input" type="text" inputmode="search" autocomplete="off"
+      placeholder="Buscar qualquer palavra — pão, aveia, farinha...">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path>
+    </svg>
+  </div>
+  <div class="search-count" id="resultCount"></div>
+  <div class="chips" id="chips"></div>
+</header>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="emptyState" style="display:none">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+      <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path>
+    </svg>
+    <p>Nenhuma receita encontrada.<br>Tente outra palavra, ou adicione a sua própria receita.</p>
+  </div>
+</main>
+
+<!-- Detalhe -->
+<div class="detail-overlay" id="detailOverlay">
+  <div class="detail-top">
+    <button class="icon-btn" id="closeDetail" aria-label="Voltar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg>
+    </button>
+    <button class="icon-btn" id="editRecipeBtn" aria-label="Editar" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"></path></svg>
+    </button>
+  </div>
+  <div class="photo-zoom-wrap" id="photoZoomWrap">
+    <div class="placeholder-icon" id="photoPlaceholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;"></div>
+    <img id="detailPhoto" alt="" draggable="false">
+    <div class="zoom-hint" id="zoomHint">toque / roda para ampliar</div>
+  </div>
+  <div class="detail-body">
+    <h1 class="detail-title" id="detailTitle"></h1>
+    <div class="detail-tag" id="detailTag"><span class="dot"></span><span id="detailTagText"></span></div>
+
+    <div class="section-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
+      Ingredientes
+    </div>
+    <ul class="ing-list" id="ingList"></ul>
+
+    <div class="section-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+      Modo de preparo
+    </div>
+    <ol class="step-list" id="stepList"></ol>
+
+    <div class="detail-actions" id="customActions" style="display:none">
+      <button class="btn-ghost" id="editBtn2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"></path></svg>
+        Editar
+      </button>
+      <button class="btn-ghost danger" id="deleteBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path></svg>
+        Excluir
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Ações flutuantes -->
+<div class="fab-row">
+  <div class="palette-panel" id="palettePanel"></div>
+  <button class="fab-mini" id="paletteBtn" aria-label="Trocar paleta de cores">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 22c5.5 0 10-4.03 10-9 0-4-3-6-6-6a5 5 0 00-5 5c0 1 .5 2 1 2.5.5.5 1 1 1 2 0 1.5-1.5 2.5-3 2.5-5 0-7-3.5-7-6.5C3 6.5 7 2 12 2a10 10 0 010 20z"></path></svg>
+  </button>
+  <button class="fab" id="addBtn" aria-label="Adicionar receita">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"></path></svg>
+  </button>
+</div>
+
+<!-- Modal adicionar/editar receita -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modalTitle">Nova receita</h2>
+      <button class="icon-btn" id="closeModal" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <form id="recipeForm">
+      <div class="field">
+        <label for="f-photo">Foto</label>
+        <div class="photo-pick" id="photoPick">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 17l-5-5-4 4-2-2-5 5"></path></svg>
+          <span>Toque para escolher uma foto</span>
+        </div>
+        <input type="file" id="f-photo" accept="image/*" class="visually-hidden">
+      </div>
+      <div class="field">
+        <label for="f-title">Título</label>
+        <input type="text" id="f-title" placeholder="Ex.: Pão de Fermentação Natural" required>
+      </div>
+      <div class="field">
+        <label for="f-category">Categoria</label>
+        <select id="f-category"></select>
+      </div>
+      <div class="field" id="newCatField" style="display:none">
+        <label for="f-newcategory">Nome da nova categoria</label>
+        <input type="text" id="f-newcategory" placeholder="Ex.: Bolos">
+      </div>
+      <div class="field">
+        <label for="f-ingredients">Ingredientes</label>
+        <textarea id="f-ingredients" placeholder="Um ingrediente por linha" required></textarea>
+        <div class="field-hint">Um por linha</div>
+      </div>
+      <div class="field">
+        <label for="f-steps">Modo de preparo</label>
+        <textarea id="f-steps" placeholder="Um passo por linha" required></textarea>
+        <div class="field-hint">Um passo por linha — a numeração é automática</div>
+      </div>
+      <button type="submit" class="btn-primary">Salvar receita</button>
+      <button type="button" class="btn-text" id="cancelModal" style="display:block;width:100%;text-align:center;margin-top:4px;">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var PALETTES = [
+    { id:"forno",    name:"Forno de Pedra",  color:"#C9752E" },
+    { id:"noturna",  name:"Padaria Noturna", color:"#E8A74E" },
+    { id:"trigo",    name:"Trigo & Sal",     color:"#6F8F5B" },
+    { id:"fermento", name:"Fermento Vivo",   color:"#E8B84B" },
+    { id:"manha",    name:"Manhã Clara",     color:"#C4552F" }
+  ];
+  var CATEGORY_LABELS = { paes:"Pães" };
+  var LS_CUSTOM = "receitas.custom.v1";
+  var LS_THEME = "receitas.theme.v1";
+
+  var state = { builtin:[], custom:[], all:[], filtered:[], activeCategory:"todas", query:"" };
+
+  function stripAccents(s){ return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase(); }
+
+  function el(tag, cls, html){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  function placeholderIconSVG(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c-4 0-7.5 3-7.5 7.5C4.5 15 7 17 7 19c0 1.1 2.2 2 5 2s5-.9 5-2c0-2 2.5-4 2.5-8.5C19.5 6 16 3 12 3z"></path><path d="M9.5 10c.3 1.4.3 2.9 0 4.3M12 9.5c.3 1.6.3 3.4 0 5M14.5 10c-.3 1.4-.3 2.9 0 4.3" stroke-linecap="round"></path></svg>';
+  }
+
+  /* ---------------- Paleta ---------------- */
+  function initPalette(){
+    var saved = localStorage.getItem(LS_THEME) || "forno";
+    document.body.setAttribute("data-theme", saved);
+    var panel = document.getElementById("palettePanel");
+    panel.innerHTML = "";
+    PALETTES.forEach(function(p){
+      var btn = el("button","palette-opt");
+      btn.setAttribute("aria-pressed", String(p.id === saved));
+      btn.innerHTML = '<span class="swatch" style="background:'+p.color+'"></span><span>'+p.name+'</span>';
+      btn.addEventListener("click", function(){
+        document.body.setAttribute("data-theme", p.id);
+        localStorage.setItem(LS_THEME, p.id);
+        panel.querySelectorAll(".palette-opt").forEach(function(b){ b.setAttribute("aria-pressed","false"); });
+        btn.setAttribute("aria-pressed","true");
+      });
+      panel.appendChild(btn);
+    });
+    document.getElementById("paletteBtn").addEventListener("click", function(){
+      panel.classList.toggle("open");
+    });
+    document.addEventListener("click", function(ev){
+      if (!panel.contains(ev.target) && ev.target.id !== "paletteBtn" && !document.getElementById("paletteBtn").contains(ev.target)){
+        panel.classList.remove("open");
+      }
+    });
+  }
+
+  /* ---------------- Dados ---------------- */
+  function loadCustom(){
+    try { return JSON.parse(localStorage.getItem(LS_CUSTOM) || "[]"); } catch(e){ return []; }
+  }
+  function saveCustom(list){ localStorage.setItem(LS_CUSTOM, JSON.stringify(list)); }
+
+  function buildSearchBlob(r){
+    return stripAccents([r.title, (r.ingredients||[]).join(" "), (r.steps||[]).join(" ")].join(" "));
+  }
+
+  function mergeAll(){
+    state.all = state.builtin.concat(state.custom);
+    state.all.forEach(function(r){ if (!r.search) r.search = buildSearchBlob(r); });
+  }
+
+  function categoriesInUse(){
+    var map = {};
+    state.all.forEach(function(r){
+      var label = CATEGORY_LABELS[r.category] || r.category;
+      map[r.category] = label;
+    });
+    return map;
+  }
+
+  function renderChips(){
+    var chips = document.getElementById("chips");
+    chips.innerHTML = "";
+    var cats = categoriesInUse();
+    var all = el("button","chip"); all.textContent = "Todas"; all.setAttribute("aria-pressed", String(state.activeCategory==="todas"));
+    all.addEventListener("click", function(){ state.activeCategory="todas"; renderChips(); applyFilter(); });
+    chips.appendChild(all);
+    Object.keys(cats).forEach(function(cid){
+      var b = el("button","chip"); b.textContent = cats[cid];
+      b.setAttribute("aria-pressed", String(state.activeCategory===cid));
+      b.addEventListener("click", function(){ state.activeCategory=cid; renderChips(); applyFilter(); });
+      chips.appendChild(b);
+    });
+  }
+
+  /* ---------------- Busca ---------------- */
+  function applyFilter(){
+    var q = stripAccents(state.query.trim());
+    var tokens = q.length ? q.split(/\s+/).filter(Boolean) : [];
+    var list = state.all.filter(function(r){
+      if (state.activeCategory !== "todas" && r.category !== state.activeCategory) return false;
+      if (!tokens.length) return true;
+      return tokens.every(function(t){ return r.search.indexOf(t) !== -1; });
+    });
+    state.filtered = list;
+    renderGrid(tokens);
+    var countEl = document.getElementById("resultCount");
+    if (tokens.length){
+      countEl.textContent = list.length + (list.length===1 ? " receita encontrada" : " receitas encontradas");
+    } else {
+      countEl.textContent = "";
+    }
+    document.getElementById("subcount").textContent = state.all.length + " receitas no livro";
+  }
+
+  function highlight(text, tokens){
+    if (!tokens.length) return escapeHtml(text);
+    var stripped = stripAccents(text);
+    var marks = [];
+    tokens.forEach(function(t){
+      var idx = 0;
+      while (true){
+        var pos = stripped.indexOf(t, idx);
+        if (pos === -1) break;
+        marks.push([pos, pos + t.length]);
+        idx = pos + t.length;
+      }
+    });
+    if (!marks.length) return escapeHtml(text);
+    marks.sort(function(a,b){ return a[0]-b[0]; });
+    var merged = [marks[0]];
+    marks.slice(1).forEach(function(m){
+      var last = merged[merged.length-1];
+      if (m[0] <= last[1]) last[1] = Math.max(last[1], m[1]); else merged.push(m);
+    });
+    var out = "", cursor = 0;
+    merged.forEach(function(m){
+      out += escapeHtml(text.slice(cursor, m[0]));
+      out += "<mark>" + escapeHtml(text.slice(m[0], m[1])) + "</mark>";
+      cursor = m[1];
+    });
+    out += escapeHtml(text.slice(cursor));
+    return out;
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];
+    });
+  }
+
+  function findSnippet(r, tokens){
+    if (!tokens.length) return null;
+    var pools = [
+      { label:"ingredientes", arr:r.ingredients||[] },
+      { label:"modo de preparo", arr:r.steps||[] }
+    ];
+    for (var p=0; p<pools.length; p++){
+      for (var i=0; i<pools[p].arr.length; i++){
+        var line = pools[p].arr[i];
+        var sl = stripAccents(line);
+        if (tokens.some(function(t){ return sl.indexOf(t) !== -1; })){
+          return { where: pools[p].label, text: line };
+        }
+      }
+    }
+    return null;
+  }
+
+  /* ---------------- Grade ---------------- */
+  function renderGrid(tokens){
+    var grid = document.getElementById("grid");
+    var empty = document.getElementById("emptyState");
+    grid.innerHTML = "";
+    if (!state.filtered.length){
+      empty.style.display = "block";
+      return;
+    }
+    empty.style.display = "none";
+    var frag = document.createDocumentFragment();
+    state.filtered.forEach(function(r){
+      var card = el("button","card");
+      card.type = "button";
+      card.setAttribute("data-id", r.id);
+
+      var photo;
+      if (r.photo){
+        photo = el("img","card-photo");
+        photo.src = r.photo; photo.loading = "lazy"; photo.alt = r.title;
+      } else {
+        photo = el("div","card-photo placeholder", placeholderIconSVG());
+      }
+      card.appendChild(photo);
+
+      var body = el("div","card-body");
+      var titleHtml = (tokens && tokens.length && stripAccents(r.title).indexOf(tokens[0]) !== -1)
+        ? highlight(r.title, tokens) : escapeHtml(r.title);
+      var title = el("div","card-title", titleHtml);
+      body.appendChild(title);
+
+      var tag = el("div","card-tag", (CATEGORY_LABELS[r.category]||r.category) + (r.isCustom ? " · sua receita" : ""));
+      body.appendChild(tag);
+
+      var snip = findSnippet(r, tokens || []);
+      if (snip){
+        var snippetEl = el("div","card-snippet", highlight(snip.text.slice(0,70) + (snip.text.length>70?"…":""), tokens));
+        body.appendChild(snippetEl);
+      }
+
+      card.appendChild(body);
+      card.addEventListener("click", function(){ openDetail(r.id, card); });
+      frag.appendChild(card);
+    });
+    grid.appendChild(frag);
+  }
+
+  /* ---------------- Detalhe (zoom infinito) ---------------- */
+  var currentRecipe = null;
+  var zoomState = { scale:1, x:0, y:0 };
+
+  function resetZoom(){
+    zoomState = { scale:1, x:0, y:0 };
+    var img = document.getElementById("detailPhoto");
+    img.style.transform = "translate(0px,0px) scale(1)";
+    img.style.cursor = "zoom-in";
+  }
+
+  function openDetail(id, cardEl){
+    var r = state.all.find(function(x){ return x.id === id; });
+    if (!r) return;
+    currentRecipe = r;
+
+    document.getElementById("detailTitle").textContent = r.title;
+    document.getElementById("detailTagText").textContent = (CATEGORY_LABELS[r.category]||r.category) + (r.isCustom ? " · sua receita" : "");
+
+    var img = document.getElementById("detailPhoto");
+    var placeholder = document.getElementById("photoPlaceholder");
+    if (r.photo){
+      img.style.display = "block";
+      img.src = r.photo;
+      img.alt = r.title;
+      placeholder.style.display = "none";
+      document.getElementById("zoomHint").style.display = "block";
+    } else {
+      img.style.display = "none";
+      img.removeAttribute("src");
+      placeholder.style.display = "flex";
+      placeholder.innerHTML = placeholderIconSVG();
+      document.getElementById("zoomHint").style.display = "none";
+    }
+    resetZoom();
+
+    var ingList = document.getElementById("ingList");
+    ingList.innerHTML = "";
+    (r.ingredients||[]).forEach(function(line){
+      var li = el("li","", '<span class="bullet"></span><span>'+escapeHtml(line)+'</span>');
+      ingList.appendChild(li);
+    });
+
+    var stepList = document.getElementById("stepList");
+    stepList.innerHTML = "";
+    (r.steps||[]).forEach(function(line, i){
+      var li = el("li","", '<span class="step-num">'+(i+1)+'</span><span class="step-text">'+escapeHtml(line)+'</span>');
+      stepList.appendChild(li);
+    });
+
+    document.getElementById("customActions").style.display = r.isCustom ? "flex" : "none";
+    document.getElementById("editRecipeBtn").style.display = r.isCustom ? "flex" : "none";
+
+    var overlay = document.getElementById("detailOverlay");
+    overlay.classList.add("open","animating");
+    overlay.scrollTop = 0;
+    document.body.style.overflow = "hidden";
+    setTimeout(function(){ overlay.classList.remove("animating"); }, 340);
+  }
+
+  function closeDetail(){
+    document.getElementById("detailOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+    currentRecipe = null;
+  }
+
+  function setupPhotoZoom(){
+    var wrap = document.getElementById("photoZoomWrap");
+    var dragging = false, lastX=0, lastY=0;
+
+    wrap.addEventListener("wheel", function(e){
+      if (!currentRecipe || !currentRecipe.photo) return;
+      // só intercepta como zoom quando é gesto de pinça (ctrlKey) ou já ampliado;
+      // caso contrário, deixa a roda rolar a página normalmente.
+      if (!e.ctrlKey && zoomState.scale <= 1) return;
+      e.preventDefault();
+      var delta = e.deltaY < 0 ? 0.18 : -0.18;
+      zoomState.scale = Math.min(4, Math.max(1, zoomState.scale + delta));
+      if (zoomState.scale === 1){ zoomState.x = 0; zoomState.y = 0; }
+      applyZoom();
+    }, { passive:false });
+
+    wrap.addEventListener("click", function(e){
+      if (!currentRecipe || !currentRecipe.photo) return;
+      if (dragMoved) { dragMoved = false; return; }
+      zoomState.scale = zoomState.scale > 1 ? 1 : 2.2;
+      zoomState.x = 0; zoomState.y = 0;
+      applyZoom();
+    });
+
+    var dragMoved = false;
+    wrap.addEventListener("pointerdown", function(e){
+      if (zoomState.scale <= 1) return;
+      dragging = true; dragMoved = false; lastX = e.clientX; lastY = e.clientY;
+      wrap.setPointerCapture(e.pointerId);
+    });
+    wrap.addEventListener("pointermove", function(e){
+      if (!dragging) return;
+      var dx = e.clientX - lastX, dy = e.clientY - lastY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
+      zoomState.x += dx; zoomState.y += dy;
+      lastX = e.clientX; lastY = e.clientY;
+      applyZoom();
+    });
+    ["pointerup","pointerleave","pointercancel"].forEach(function(ev){
+      wrap.addEventListener(ev, function(){ dragging = false; });
+    });
+
+    function applyZoom(){
+      var img = document.getElementById("detailPhoto");
+      img.style.transform = "translate("+zoomState.x+"px,"+zoomState.y+"px) scale("+zoomState.scale+")";
+      img.style.cursor = zoomState.scale > 1 ? "grab" : "zoom-in";
+    }
+  }
+
+  /* ---------------- Adicionar / editar receita ---------------- */
+  var editingId = null;
+  var pickedPhoto = null;
+
+  function populateCategorySelect(){
+    var sel = document.getElementById("f-category");
+    sel.innerHTML = "";
+    var cats = categoriesInUse();
+    Object.keys(cats).forEach(function(cid){
+      var opt = el("option"); opt.value = cid; opt.textContent = cats[cid];
+      sel.appendChild(opt);
+    });
+    var optNew = el("option"); optNew.value = "__nova__"; optNew.textContent = "+ Nova categoria";
+    sel.appendChild(optNew);
+  }
+
+  function openModal(recipeToEdit){
+    editingId = recipeToEdit ? recipeToEdit.id : null;
+    pickedPhoto = recipeToEdit ? recipeToEdit.photo : null;
+    document.getElementById("modalTitle").textContent = recipeToEdit ? "Editar receita" : "Nova receita";
+    populateCategorySelect();
+    document.getElementById("newCatField").style.display = "none";
+
+    document.getElementById("f-title").value = recipeToEdit ? recipeToEdit.title : "";
+    document.getElementById("f-ingredients").value = recipeToEdit ? (recipeToEdit.ingredients||[]).join("\n") : "";
+    document.getElementById("f-steps").value = recipeToEdit ? (recipeToEdit.steps||[]).join("\n") : "";
+    if (recipeToEdit) document.getElementById("f-category").value = recipeToEdit.category;
+
+    var pick = document.getElementById("photoPick");
+    if (pickedPhoto){
+      pick.innerHTML = '<img src="'+pickedPhoto+'" alt="">';
+    } else {
+      pick.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 17l-5-5-4 4-2-2-5 5"></path></svg><span>Toque para escolher uma foto</span>';
+    }
+
+    document.getElementById("modalBackdrop").classList.add("open");
+  }
+
+  function closeModal(){
+    document.getElementById("modalBackdrop").classList.remove("open");
+    document.getElementById("recipeForm").reset();
+    editingId = null; pickedPhoto = null;
+  }
+
+  function slugify(s){
+    return stripAccents(s).replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"") || ("receita-"+Date.now());
+  }
+
+  function compressImage(file, cb){
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var img = new Image();
+      img.onload = function(){
+        var maxDim = 900;
+        var w = img.width, h = img.height;
+        var scale = Math.min(1, maxDim / Math.max(w,h));
+        var cw = Math.round(w*scale), ch = Math.round(h*scale);
+        var canvas = document.createElement("canvas");
+        canvas.width = cw; canvas.height = ch;
+        canvas.getContext("2d").drawImage(img, 0, 0, cw, ch);
+        cb(canvas.toDataURL("image/jpeg", 0.75));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function setupModalEvents(){
+    document.getElementById("addBtn").addEventListener("click", function(){ openModal(null); });
+    document.getElementById("closeModal").addEventListener("click", closeModal);
+    document.getElementById("cancelModal").addEventListener("click", closeModal);
+    document.getElementById("modalBackdrop").addEventListener("click", function(e){
+      if (e.target.id === "modalBackdrop") closeModal();
+    });
+
+    document.getElementById("photoPick").addEventListener("click", function(){
+      document.getElementById("f-photo").click();
+    });
+    document.getElementById("f-photo").addEventListener("change", function(e){
+      var file = e.target.files[0];
+      if (!file) return;
+      compressImage(file, function(dataUrl){
+        pickedPhoto = dataUrl;
+        document.getElementById("photoPick").innerHTML = '<img src="'+dataUrl+'" alt="">';
+      });
+    });
+
+    document.getElementById("f-category").addEventListener("change", function(e){
+      document.getElementById("newCatField").style.display = e.target.value === "__nova__" ? "block" : "none";
+    });
+
+    document.getElementById("recipeForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      var title = document.getElementById("f-title").value.trim();
+      if (!title) return;
+      var catSel = document.getElementById("f-category").value;
+      var category, label;
+      if (catSel === "__nova__"){
+        var newCatName = document.getElementById("f-newcategory").value.trim() || "Outras";
+        category = slugify(newCatName);
+        label = newCatName;
+        CATEGORY_LABELS[category] = label;
+      } else {
+        category = catSel;
+      }
+      var ingredients = document.getElementById("f-ingredients").value.split("\n").map(function(s){ return s.trim(); }).filter(Boolean);
+      var steps = document.getElementById("f-steps").value.split("\n").map(function(s){ return s.trim(); }).filter(Boolean);
+
+      var list = loadCustom();
+      if (editingId){
+        var idx = list.findIndex(function(x){ return x.id === editingId; });
+        if (idx !== -1){
+          list[idx] = Object.assign({}, list[idx], { title:title, category:category, ingredients:ingredients, steps:steps, photo:pickedPhoto });
+          list[idx].search = buildSearchBlob(list[idx]);
+        }
+      } else {
+        var id = slugify(title) + "-" + Date.now().toString(36);
+        var rec = { id:id, title:title, category:category, ingredients:ingredients, steps:steps, photo:pickedPhoto, isCustom:true };
+        rec.search = buildSearchBlob(rec);
+        list.push(rec);
+      }
+      saveCustom(list);
+      state.custom = list.map(function(r){ r.isCustom = true; return r; });
+      mergeAll();
+      renderChips();
+      applyFilter();
+      closeModal();
+      closeDetail();
+    });
+  }
+
+  /* ---------------- Editar / excluir a partir do detalhe ---------------- */
+  function setupDetailActions(){
+    document.getElementById("closeDetail").addEventListener("click", closeDetail);
+    function startEdit(){
+      if (!currentRecipe) return;
+      openModal(currentRecipe);
+    }
+    document.getElementById("editRecipeBtn").addEventListener("click", startEdit);
+    document.getElementById("editBtn2").addEventListener("click", startEdit);
+    document.getElementById("deleteBtn").addEventListener("click", function(){
+      if (!currentRecipe) return;
+      if (!confirm('Excluir "'+currentRecipe.title+'"?')) return;
+      var list = loadCustom().filter(function(x){ return x.id !== currentRecipe.id; });
+      saveCustom(list);
+      state.custom = list.map(function(r){ r.isCustom = true; return r; });
+      mergeAll();
+      renderChips();
+      applyFilter();
+      closeDetail();
+    });
+  }
+
+  /* ---------------- Busca: input ---------------- */
+  function setupSearch(){
+    var input = document.getElementById("search");
+    var timer = null;
+    input.addEventListener("input", function(){
+      clearTimeout(timer);
+      timer = setTimeout(function(){
+        state.query = input.value;
+        applyFilter();
+      }, 90);
+    });
+  }
+
+  /* ---------------- Boot ---------------- */
+  function boot(){
+    initPalette();
+    setupSearch();
+    setupModalEvents();
+    setupDetailActions();
+    setupPhotoZoom();
+
+    state.custom = loadCustom().map(function(r){ r.isCustom = true; return r; });
+
+    fetch("data/recipes.json").then(function(r){ return r.json(); }).then(function(data){
+      state.builtin = data;
+      mergeAll();
+      renderChips();
+      applyFilter();
+    }).catch(function(){
+      state.builtin = [];
+      mergeAll();
+      renderChips();
+      applyFilter();
+    });
+
+    if ("serviceWorker" in navigator){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", boot);
+})();
+</script>
+</body>
+</html>
