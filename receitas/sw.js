@@ -1,4 +1,4 @@
-const CACHE = 'receitas-v1';
+const CACHE = 'receitas-v2';
 const CORE = [
   './',
   './index.html',
@@ -22,16 +22,16 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  // rede primeiro: sempre busca a versão mais nova quando há internet;
+  // só usa o que está guardado se estiver offline. Assim uma correção de
+  // dado ou foto aparece na hora, em vez de ficar presa no cache antigo.
   e.respondWith(
-    caches.match(e.request).then(cached => {
-      const fetchPromise = fetch(e.request).then(res => {
-        if (res && res.status === 200) {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(e.request, copy));
-        }
-        return res;
-      }).catch(() => cached);
-      return cached || fetchPromise;
-    })
+    fetch(e.request).then(res => {
+      if (res && res.status === 200) {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, copy));
+      }
+      return res;
+    }).catch(() => caches.match(e.request))
   );
 });
