@@ -1,5 +1,73 @@
 [
  {
+  "id": "mix-de-farinhas-1-universal",
+  "title": "Mix De Farinhas 1 - Universal",
+  "category": "bases",
+  "ingredients": [
+   "210g ou 1 e 3/4 xicaras de chá de farinha de arroz",
+   "280g ou 2 xícaras de chá de fécula de batata",
+   "150g ou 1 e 1/2 xícaras de chá de polvilho doce",
+   "20g ou 2 colheres de sopa de goma xantana."
+  ],
+  "steps": [
+   "Pode utilizar para todas as receitas"
+  ],
+  "photo": "images/bases/mix-de-farinhas-1-universal.jpg",
+  "search": "mix de farinhas 1 - universal 210g ou 1 e 3/4 xicaras de cha de farinha de arroz 280g ou 2 xicaras de cha de fecula de batata 150g ou 1 e 1/2 xicaras de cha de polvilho doce 20g ou 2 colheres de sopa de goma xantana. pode utilizar para todas as receitas"
+ },
+ {
+  "id": "mix-de-farinhas-2",
+  "title": "Mix De Farinhas 2",
+  "category": "bases",
+  "ingredients": [
+   "120g ou 1 xícara de chá de farinha de sorgo",
+   "120g ou 1 xicara de chá de farinha de painço",
+   "180g ou 1 e 1/2 xícaras de chá de farinha de arroz branca",
+   "200g ou 1 e 1/2 xícaras de chá de fécula de batata",
+   "20g ou 2 colheres de sopa de goma xantana."
+  ],
+  "steps": [
+   "Pode utilizar para pães, tortas, fogaccia, pizzas e etc.."
+  ],
+  "photo": "images/bases/mix-de-farinhas-2.jpg",
+  "search": "mix de farinhas 2 120g ou 1 xicara de cha de farinha de sorgo 120g ou 1 xicara de cha de farinha de painco 180g ou 1 e 1/2 xicaras de cha de farinha de arroz branca 200g ou 1 e 1/2 xicaras de cha de fecula de batata 20g ou 2 colheres de sopa de goma xantana. pode utilizar para paes, tortas, fogaccia, pizzas e etc.."
+ },
+ {
+  "id": "mix-de-farinhas-3",
+  "title": "Mix De Farinhas 3",
+  "category": "bases",
+  "ingredients": [
+   "180g ou 1 e 1/2 xícara de chá de farinha de arroz integral",
+   "100g ou 3/4 de xicara de chá de fécula de batata",
+   "120g ou 1 xícara de chá de polvilho doce",
+   "15g ou 1 e 1/2 colheres de sopa de goma xantana"
+  ],
+  "steps": [
+   "Pode utilizar para pão meio integral, cupcakes e bolos."
+  ],
+  "photo": "images/bases/mix-de-farinhas-3.jpg",
+  "search": "mix de farinhas 3 180g ou 1 e 1/2 xicara de cha de farinha de arroz integral 100g ou 3/4 de xicara de cha de fecula de batata 120g ou 1 xicara de cha de polvilho doce 15g ou 1 e 1/2 colheres de sopa de goma xantana pode utilizar para pao meio integral, cupcakes e bolos."
+ },
+ {
+  "id": "mix-de-farinhas-4",
+  "title": "Mix De Farinhas 4",
+  "category": "bases",
+  "ingredients": [
+   "110 g farinha de arroz integral",
+   "70 g farinha de grão-de-bico",
+   "60 g fécula de batata",
+   "30 g polvilho doce",
+   "20 g farinha de linhaça",
+   "5 g psyllium (opcional)",
+   "5 g goma xantana"
+  ],
+  "steps": [
+   "Pode utilizar para panquecas, bolos e pães."
+  ],
+  "photo": "images/bases/mix-de-farinhas-4.jpg",
+  "search": "mix de farinhas 4 110 g farinha de arroz integral 70 g farinha de grao-de-bico 60 g fecula de batata 30 g polvilho doce 20 g farinha de linhaca 5 g psyllium (opcional) 5 g goma xantana pode utilizar para panquecas, bolos e paes."
+ },
+ {
   "id": "paozinho-de-abobora-com-aveia",
   "title": "Pãozinho De Abóbora Com Aveia",
   "category": "paes",

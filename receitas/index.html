@@ -310,9 +310,9 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     </div>
     <ul class="ing-list" id="ingList"></ul>
 
-    <div class="section-title">
+    <div class="section-title" id="stepsTitle">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
-      Modo de preparo
+      <span id="stepsTitleText">Modo de preparo</span>
     </div>
     <ol class="step-list" id="stepList"></ol>
 
@@ -397,7 +397,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     { id:"fermento", name:"Fermento Vivo",   color:"#E8B84B" },
     { id:"manha",    name:"Manhã Clara",     color:"#C4552F" }
   ];
-  var CATEGORY_LABELS = { paes:"Pães" };
+  var CATEGORY_LABELS = { paes:"Pães", bases:"Bases (Mix de Farinhas)" };
   var LS_CUSTOM = "receitas.custom.v1";
   var LS_THEME = "receitas.theme.v1";
 
@@ -647,10 +647,13 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
       ingList.appendChild(li);
     });
 
+    document.getElementById("stepsTitleText").textContent = (r.category === "bases") ? "Finalidade" : "Modo de preparo";
     var stepList = document.getElementById("stepList");
     stepList.innerHTML = "";
     (r.steps||[]).forEach(function(line, i){
-      var li = el("li","", '<span class="step-num">'+(i+1)+'</span><span class="step-text">'+escapeHtml(line)+'</span>');
+      var li = (r.category === "bases")
+        ? el("li","", '<span class="step-text">'+escapeHtml(line)+'</span>')
+        : el("li","", '<span class="step-num">'+(i+1)+'</span><span class="step-text">'+escapeHtml(line)+'</span>');
       stepList.appendChild(li);
     });
 
