@@ -1,0 +1,11 @@
+{
+  "name": "receitas-pdftools",
+  "version": "1.0.0",
+  "description": "Ferramentas pra extrair texto e fotos de PDFs de receitas (Chef Carla Ramos e outros) e montar o data/recipes.json do app.",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.35.5"
+  }
+}
