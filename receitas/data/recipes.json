@@ -6769,7 +6769,7 @@
       "Mergulhe cada alfajor na cobertura de chocolate, garantindo que esteja completamente coberto.",
       "Deixe escorrer o excesso e coloque os alfajores em uma grade para que o chocolate seque.",
       "Leve os alfajores à geladeira por pelo menos 1 hora, ou até que o chocolate esteja completamente firme.",
-      "Sirva e aproveite esses deliciosos alfajores sem glúten com recheio de doce de leite! Conclusão Antes de tudo, quero expressar meu profundo agradecimento pela sua presença e por ter adquirido o meu e-book dedicado a doces e"
+      "Sirva e aproveite esses deliciosos alfajores sem glúten com recheio de doce de leite!"
     ],
     "photo": "images/doces/alfajor.jpg"
   },
@@ -8059,8 +8059,7 @@
       "Utilize uma carretilha ou faca para cortar a massa em retângulos. Em seguida, faça um corte ao meio em cada retângulo e enrole uma das laterais para dentro do corte, dando o formato característico da cueca virada.",
       "Em uma panela funda, aqueça o óleo em fogo médio-alto. Quando estiver quente o suficiente, frite as cuecas viradas até que estejam douradas e crocantes.",
       "Em um recipiente separado, misture o açúcar refinado e a canela em pó a gosto. Passe as cuecas viradas fritas nessa mistura para cobri-las uniformemente.",
-      "Sirva as cuecas viradas, elas podem ser armazenadas em um recipiente hermético por alguns dias.",
-      "Conclusão Antes de mais nada, quero expressar meu sincero agradecimento por sua presença e por adquirir meu e-book sobre massas. Agradeço profundamente pela confiança depositada em mim. Espero que tenha desfrutado do conteúdo e que este seja um recurso valioso para suas experiências culinárias. Não desanime na jornada de criar suas próprias massas sem glúten. Se, por acaso, ainda não alcançou o sucesso desejado, saiba que está próximo! Continue perseverando, cada esforço contribuirá para aprimorar suas habilidades na cozinha sem glúten."
+      "Sirva as cuecas viradas, elas podem ser armazenadas em um recipiente hermético por alguns dias."
     ],
     "photo": "images/massas/cueca-virada-ii.jpg"
   },
@@ -8794,7 +8793,25 @@
     "id": "chocotone",
     "title": "Chocotone",
     "category": "panetone",
-    "ingredients": [],
+    "ingredients": [
+      "Massa: 30g de açúcar",
+      "80g de farinha de arroz",
+      "20g de fécula de batata",
+      "50g de polvilho doce",
+      "50g de amido de milho",
+      "5g de goma xantana",
+      "10g de fermento biológico seco",
+      "30g de glucose de milho",
+      "1 pitada de sal",
+      "1 colher de chá de essência de panetone ou raspas de laranja",
+      "2 gotas de corante em gel (opcional)",
+      "No liquidificador: 50ml de óleo",
+      "50g de batata doce",
+      "170ml de água",
+      "1 ovo",
+      "Recheio: 100g de chocolate em gotas forneável",
+      "Forma de papel para panetones (tamanho 500g)"
+    ],
     "steps": [
       "Em uma tigela grande, misture a farinha de arroz, amido de milho, polvilho doce, fécula de batata, açúcar, glucose de milho, fermento biológico seco, goma xantana, sal, essência de panetone (ou raspas de laranja) e corante em gel (opcional).",
       "No liquidificador, bata a batata doce, ovo, óleo e água até obter uma mistura homogênea.",
@@ -8813,7 +8830,21 @@
     "id": "panetone-ii",
     "title": "Panetone II",
     "category": "panetone",
-    "ingredients": [],
+    "ingredients": [
+      "Massa: 30g de açúcar",
+      "80g de farinha de arroz",
+      "20g de fécula de batata",
+      "50g de amido de milho",
+      "50g de polvilho doce",
+      "4g de goma xantana",
+      "7g de fermento biológico seco",
+      "Pitada de sal",
+      "Raspas de laranja ou essência de panetone",
+      "1/2 xícara de mix com frutas cristalizadas e uvas passas hidratadas",
+      "1 ovo caipira ou ovo comum de granja",
+      "200ml de suco de laranja natural",
+      "20ml de óleo"
+    ],
     "steps": [
       "Em uma tigela grande, misture a farinha de arroz, amido de milho, fécula de batata, polvilho doce, açúcar, fermento biológico seco, goma xantana, pitada de sal e raspas de laranja ou essência de panetone.",
       "Adicione o ovo caipira e misture bem.",
@@ -9987,7 +10018,18 @@
     "id": "quiche",
     "title": "Quiche",
     "category": "lowcarb",
-    "ingredients": [],
+    "ingredients": [
+      "Massa: 1 xícara e meia de farinha de amêndoas (140g)",
+      "1 ovo",
+      "2 colheres de sopa de manteiga ou azeite",
+      "Pitada de sal",
+      "Recheio: 2 ovos",
+      "3 colheres de sopa de requeijão cremoso ou creme de leite ou iogurte natural",
+      "1/2 xícara de chá de brócolis cru picado",
+      "Sal a gosto",
+      "Queijo muçarela ralado",
+      "Tomatinhos picados"
+    ],
     "steps": [
       "Numa vasilha, coloque todos os ingredientes da massa.",
       "Misture com as mãos até obter uma massa homogênea.",
@@ -10055,18 +10097,24 @@
     "id": "bolinha-de-queijo",
     "title": "Bolinha de Queijo",
     "category": "lowcarb",
-    "ingredients": [],
+    "ingredients": [
+      "200g de muçarela ralada",
+      "50g de queijo parmesão ralado",
+      "40g de farinha de aveia",
+      "1 colher de chá de orégano",
+      "1 ovo",
+      "Farinha de linhaça para empanar (ou outra farinha low carb de sua preferência)"
+    ],
     "steps": [
-      "Em uma tigela, misture a farinha de aveia, o cacau em pó, o adoçante natural e o whey protein.",
-      "Adicione o leite desnatado aos poucos, mexendo bem, até obter uma massa homogênea. Acrescente o fermento em pó e misture delicadamente.",
-      "Transfira a massa para uma caneca ou outro recipiente próprio para micro-ondas, previamente untado.",
-      "Leve ao micro-ondas por 30 segundos na potência máxima.",
-      "Após esse tempo, verifique a consistência do bolinho. Se ainda estiver um pouco úmido no centro, volte ao micro-ondas por mais 30 segundos.",
-      "Enquanto o bolinho esfria um pouco, prepare a cobertura.",
-      "Em outra tigela, misture o whey protein com o leite em pó desnatado.",
-      "Adicione água aos poucos, mexendo bem, até obter uma consistência cremosa semelhante à de brigadeiro. Desenforme o bolinho do recipiente.",
-      "Espalhe a cobertura sobre o bolinho, cobrindo toda a superfície.",
-      "Se desejar, decore com um pouco de leite em pó desnatado polvilhado por cima."
+      "Pré-aqueça o forno a 180°C.",
+      "Em uma tigela grande, combine a muçarela ralada, o queijo parmesão ralado, a farinha de aveia e o orégano.",
+      "Adicione o ovo à mistura e misture bem com as mãos até formar uma massa homogênea. Se necessário, você pode adicionar um pouco mais de farinha de aveia para dar consistência à massa.",
+      "Forme bolinhas pequenas com a massa e reserve.",
+      "Coloque a farinha de linhaça (ou outra farinha de sua escolha) em um prato ou recipiente raso para empanar.",
+      "Passe cada bolinha na farinha de linhaça, garantindo que fiquem completamente cobertas.",
+      "Coloque as bolinhas em uma assadeira forrada com papel manteiga ou untada com um pouco de óleo de coco.",
+      "Leve ao forno preaquecido e asse os salgadinhos a 180°C por aproximadamente 10 minutos para uma textura mais cremosa, ou até 20 minutos para uma casquinha crocante.",
+      "Retire do forno e deixe esfriar um pouco antes de servir."
     ],
     "photo": "images/lowcarb/bolinha-de-queijo.jpg"
   },
@@ -10607,7 +10655,13 @@
     "id": "mousse-de-chocolate",
     "title": "Mousse de Chocolate",
     "category": "lowcarb",
-    "ingredients": [],
+    "ingredients": [
+      "1 garrafinha de leite de coco (200 ml), previamente refrigerado",
+      "1 lata de creme de leite, também previamente refrigerado",
+      "3 colheres (sopa) de cacau em pó",
+      "1/2 sachê de adoçante à base de estévia (ou adoçante de sua preferência)",
+      "Coco ralado ou canela em pó para decorar (opcional)"
+    ],
     "steps": [
       "Em uma tigela, misture a farinha de aveia, o cacau em pó, o adoçante natural e o whey protein.",
       "Adicione o leite desnatado aos poucos, mexendo bem, até obter uma massa homogênea. Acrescente o fermento em pó e misture delicadamente.",
@@ -11012,7 +11066,19 @@
     "id": "bolo-de-maca",
     "title": "Bolo de Maçã",
     "category": "bolos",
-    "ingredients": [],
+    "ingredients": [
+      "4 maçãs gala",
+      "4 ovos",
+      "100 ml de óleo",
+      "1/2 xícara de leite vegetal",
+      "160g de farinha de arroz",
+      "140g de farinha de castanha de caju",
+      "150g de açúcar mascavo",
+      "1 colher de sopa de canela",
+      "13g de fermento em pó",
+      "1 grama de goma xantana",
+      "Baunilha, cravo, canela e noz moscada a gosto"
+    ],
     "steps": [
       "Descasque as maçãs, pique duas e reserve. Separe as claras das gemas dos ovos.",
       "Bata as gemas no liquidificador com as outras maçãs, óleo e açúcar.",
@@ -11247,7 +11313,15 @@
     "id": "bolo-de-fuba",
     "title": "Bolo de Fubá",
     "category": "bolos",
-    "ingredients": [],
+    "ingredients": [
+      "3 ovos",
+      "3/4 de xícara de água ou leite vegetal",
+      "1/2 xícara de mel ou açúcar",
+      "1/2 xícara de óleo de coco",
+      "1 xícara de farinha de amêndoas",
+      "1 xícara de fubá sem glúten",
+      "1 colher (chá) de fermento em pó sem glúten"
+    ],
     "steps": [
       "Coloque os ovos, água, mel e óleo de coco no liquidificador, bata por 2 minutos;",
       "Abra e acrescente a farinha de amêndoas e fubá, então bata rapidamente até ficar homogêneo, acrescente o fermento e de algumas pulsadas;",
@@ -11305,18 +11379,20 @@
     "id": "bolo-de-cenoura",
     "title": "Bolo de Cenoura",
     "category": "bolos",
-    "ingredients": [],
+    "ingredients": [
+      "295g de cenoura picada",
+      "2 ovos grandes (140g)",
+      "120 ml de água morna",
+      "225g de açúcar",
+      "1 colher (sopa) de óleo",
+      "135g de farinha de arroz",
+      "13g de fermento em pó químico",
+      "27g de farinha de arroz, para polvilhar"
+    ],
     "steps": [
-      "Pré-aqueça o forno a 180 graus Celsius.",
-      "Em uma tigela, bata os ovos.",
-      "Adicione o açúcar, o suco de maracujá e o óleo à tigela. Misture bem.",
-      "Acrescente a farinha de arroz e o fermento em pó à mistura. Mexa até obter uma massa homogênea.",
-      "Despeje a massa em uma forma previamente untada.",
-      "Asse no forno pré-aquecido por aproximadamente 60 minutos ou até que um palito inserido no centro saia limpo.",
-      "Em uma panela, coloque o maracujá (com sementes), o açúcar e deixe ferver por 3 minutos.",
-      "Acrescente o amido de milho dissolvido em um pouco de água para engrossar a calda. Mexa até atingir a consistência desejada.",
-      "Desenforme o bolo e jogue a calda de maracujá por cima.",
-      "Sirva o Bolo de Maracujá em temperatura ambiente."
+      "No liquidificador, bata as cenouras, os ovos, a água, o açúcar e o óleo por 3 minutos.",
+      "Numa tigela, misture a farinha de arroz com o fermento, despeje a mistura de cenoura por cima e misture bem com uma colher.",
+      "Distribua a massa nas forminhas untadas com óleo e polvilhadas com farinha de arroz e leve para assar em forno preaquecido a 180°C por 30 minutos ou até ficar dourado por cima."
     ],
     "photo": "images/bolos/bolo-de-cenoura.jpg"
   },
@@ -11562,7 +11638,18 @@
     "id": "bolo-de-coco",
     "title": "Bolo de Coco",
     "category": "bolos",
-    "ingredients": [],
+    "ingredients": [
+      "130g de açúcar",
+      "200g de farinha de arroz",
+      "50g de polvilho doce",
+      "100 ml de óleo",
+      "200 ml de leite de coco (1 garrafinha)",
+      "1 colher de chá rasa de fermento Royal",
+      "4 ovos médios (gemas e claras separadas)",
+      "Calda: 1 colher de sopa de água",
+      "2 colheres de sopa de açúcar de confeiteiro",
+      "Coco ralado para decorar"
+    ],
     "steps": [
       "Pré-aqueça o forno a 190-200 graus Celsius.",
       "Em uma tigela, bata as claras em neve. Reserve.",
@@ -11583,7 +11670,17 @@
     "id": "bolo-de-chocolate",
     "title": "Bolo de Chocolate",
     "category": "bolos",
-    "ingredients": [],
+    "ingredients": [
+      "130g de açúcar",
+      "190g de farinha de arroz",
+      "60g de chocolate em pó 50% cacau",
+      "50g de polvilho doce",
+      "1 colher de chá de essência de baunilha",
+      "1/2 colher de chá de fermento Royal",
+      "200ml de água",
+      "100ml de óleo",
+      "4 ovos médios (gemas e claras separadas)"
+    ],
     "steps": [
       "Pré-aqueça o forno a 200 graus Celsius.",
       "Em uma tigela, bata as claras em neve. Reserve.",
