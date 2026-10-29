@@ -4498,7 +4498,7 @@
       "Deixe o pão esfriar na forma por alguns minutos antes de transferi-lo para uma grade de resfriamento.",
       "Após esfriar completamente, corte em fatias e aproveite!"
     ],
-    "photo": null
+    "photo": "images/veganas/pao-de-trigo-sarraceno-com-sementes.jpg"
   },
   {
     "id": "manteiga-vegana",
@@ -5356,7 +5356,7 @@
       "Achate a superfície das bolinhas com um garfo, formando os biscoitos. Outra opção é usar cortadores com formatos divertidos.",
       "Asse em forno moderado (170°) por cerca de 20 minutos ou até que dourem ligeiramente nas bordas."
     ],
-    "photo": null
+    "photo": "images/bolachas/bolacha-de-fuba.jpg"
   },
   {
     "id": "brigadeiro",
@@ -5696,7 +5696,7 @@
       "Deixe esfriar antes de cortar.",
       "Durabilidade Fora da geladeira: 2 a 3 dias. No freezer: 3 meses."
     ],
-    "photo": null
+    "photo": "images/doces/torta-de-banana.jpg"
   },
   {
     "id": "pudim-de-milho",
@@ -6060,7 +6060,7 @@
       "Se desejar, você pode congelar o brigadeiro em porções separadas. Certifique-se de armazenar em recipientes adequados para congelamento.",
       "Na hora de consumir, basta descongelar a quantidade desejada. Obs.: Prefira sempre utilizar chocolate em pó 50% cacau em vez de achocolatado, pois contém menos açúcar, sendo uma opção mais saudável. Quanto maior o teor de cacau, mais saudável e intenso será o sabor."
     ],
-    "photo": null
+    "photo": "images/doces/brigadeiro-de-colher.jpg"
   },
   {
     "id": "cinnamon-roll",
@@ -6144,7 +6144,7 @@
       "Passe cada trufa no chocolate em pó meio amargo, garantindo que fiquem totalmente cobertas.",
       "Guarde as trufas em um recipiente hermético na geladeira até o momento de servir. Obs.: Experimente personalizar suas trufas adicionando ingredientes como nozes picadas, cacau em pó, ou até mesmo cobrindo com uma camada fina de chocolate derretido antes de enrolar no chocolate em pó."
     ],
-    "photo": null
+    "photo": "images/doces/trufas-de-chocolate-meio-amargo.jpg"
   },
   {
     "id": "bolinho-de-chuva",
@@ -9354,7 +9354,7 @@
       "Leve ao forno preaquecido a 180°C por aproximadamente 30 minutos, ou até que a torta esteja dourada e firme ao toque.",
       "Retire do forno e deixe a torta descansar por alguns minutos antes de cortar e servir."
     ],
-    "photo": null
+    "photo": "images/lowcarb/torta-de-frango.jpg"
   },
   {
     "id": "torta-de-atum",
@@ -9464,7 +9464,7 @@
       "Retire do forno e sirva a lasanha quente.",
       "Essa lasanha de berinjela é uma opção deliciosa e diferente, ideal para quem busca uma refeição mais leve e saudável. Aproveite!"
     ],
-    "photo": null
+    "photo": "images/lowcarb/lasanha-de-berinjela.jpg"
   },
   {
     "id": "salada-de-frango",
@@ -9795,7 +9795,7 @@
       "Cozinhe por mais 5 minutos em fogo baixo, mexendo ocasionalmente para não grudar no fundo da panela. Retifique o tempero se necessário.",
       "Sirva a sopa quente, regada com um fio de azeite de oliva e polvilhada com mais queijo parmesão ralado por cima. Aproveite!"
     ],
-    "photo": null
+    "photo": "images/lowcarb/sopa-de-brocolis-com-queijo.jpg"
   },
   {
     "id": "abobrinha-recheada",
@@ -9890,7 +9890,7 @@
       "Adicione o restante da massa e cubra com queijo.",
       "Leve ao forno preaquecido a 180°C e asse por 15 minutos, ou asse na airfryer por 10 minutos."
     ],
-    "photo": null
+    "photo": "images/lowcarb/bolinho-de-cuscuz-assado.jpg"
   },
   {
     "id": "esfiha",
@@ -10298,7 +10298,7 @@
       "Retire do forno e deixe o pão esfriar um pouco antes de desenformar.",
       "Após esfriar completamente, corte em fatias. Dicas: Para congelar as fatias de pão, espere que esfriem completamente, embale em papel alumínio ou filme plástico e armazene no freezer. Para descongelar, basta deixar as fatias em temperatura ambiente por algumas horas ou aquecer no microondas por alguns segundos. Este pão low carb é uma opção deliciosa para quem busca reduzir o consumo de carboidratos, sendo rico em proteínas e gorduras saudáveis. Aproveite!"
     ],
-    "photo": null
+    "photo": "images/lowcarb/pao-caseiro.jpg"
   },
   {
     "id": "pao-de-queijo-de-forma",
@@ -10544,7 +10544,7 @@
       "Retire do forno e deixe esfriar um pouco antes de desenformar e servir.",
       "Essas queijadinhas low carb são uma ótima opção para um lanche ou café da manhã, pois são nutritivas e saborosas. Aproveite!"
     ],
-    "photo": null
+    "photo": "images/lowcarb/queijadinha.jpg"
   },
   {
     "id": "brigadeiro",
