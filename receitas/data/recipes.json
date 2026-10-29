@@ -3259,7 +3259,7 @@
       "Tofu Mexido com Vegetais: Tofu mexido com cebola, pimentão e espinafre. Cogumelos Salteados: Com alho e salsa.",
       "Guacamole e Feijão Preto: Uma mistura deliciosa e saudável. Banana com Chocolate: Fatias de banana e gotas de chocolate vegano."
     ],
-    "photo": ""
+    "photo": "images/veganas/massa-de-panqueca.jpg"
   },
   {
     "id": "torta-de-palmito-de-liquidificador",
@@ -3950,7 +3950,7 @@
       "Frite por alguns minutos até dourar.",
       "Sirva quente com molho de sua preferência. Usei uma mistura de abacate, suco de limão, sal e pimenta."
     ],
-    "photo": ""
+    "photo": "images/veganas/cubos-de-arroz-recheado.jpg"
   },
   {
     "id": "cream-cheese-de-castanha-de-caju",
@@ -4002,7 +4002,7 @@
       "Deixe o bolo esfriar por alguns minutos na forma e depois transfira para uma grade para esfriar completamente.",
       "Corte em fatias e sirva! Pode ser servido puro ou com uma cobertura de sua escolha."
     ],
-    "photo": ""
+    "photo": "images/veganas/bolo-de-maca-ii.jpg"
   },
   {
     "id": "queijo-vegano-ii",
@@ -4026,7 +4026,7 @@
       "Você pode usar esse queijo vegano como recheio de um lanche ou gratiná-lo em uma frigideira.",
       "Experimente diferentes formas de utilizar, como em sanduíches, pizzas, nachos ou qualquer receita que peça queijo derretido."
     ],
-    "photo": ""
+    "photo": "images/veganas/queijo-vegano-ii.jpg"
   },
   {
     "id": "almondegas-de-berinjela",
@@ -4189,7 +4189,7 @@
       "Retire do forno e deixe esfriar um pouco antes de cortar. Sirva e aproveite!",
       "Você pode adicionar outros vegetais ao recheio conforme sua preferência."
     ],
-    "photo": ""
+    "photo": "images/veganas/quiche-de-espinafre-com-tomate.jpg"
   },
   {
     "id": "torta-de-limao-vegana",
@@ -4851,7 +4851,7 @@
       "Pode ser feito na Airfryer asse á 200° graus por 3 minutos. Recheio: Enquanto estiverem no forno prepare o recheio.",
       "Espere os biscoitos esfriarem antes de passar o recheio em cada um deles e fechar com outro biscoito."
     ],
-    "photo": ""
+    "photo": "images/bolachas/biscoito-oreo.jpg"
   },
   {
     "id": "passatempo",
@@ -4905,7 +4905,7 @@
       "Cubra os biscoitos com o restante do merengue e coloque assar no forno, temperatura mínima, por 12 a 15 minutos.",
       "Fique atenta, assim que os biscoitos estiverem dourados em baixo está pronto."
     ],
-    "photo": ""
+    "photo": "images/bolachas/zimtsterne---estrela-de-canela.jpg"
   },
   {
     "id": "bolacha-recheada-de-chocolate",
@@ -5104,7 +5104,7 @@
       "Corte com cortador ou copo de dose.",
       "Leve ao forno pré-aquecido 180 graus entre 10 a 12 minutos."
     ],
-    "photo": ""
+    "photo": "images/bolachas/biscoito-de-banana.jpg"
   },
   {
     "id": "marinheiras",
@@ -5335,7 +5335,7 @@
       "Após a fritura, coloque os Doritos em papel toalha para escorrer o excesso de óleo.",
       "Deixe os Doritos caseiros esfriarem completamente antes de armazenar em um recipiente hermético."
     ],
-    "photo": ""
+    "photo": "images/bolachas/doritos-ii.jpg"
   },
   {
     "id": "bolacha-de-fuba",
@@ -5807,7 +5807,7 @@
       "Decore os cupcakes com o chantilly preparado.",
       "Leve os cupcakes à geladeira para gelar antes de servir."
     ],
-    "photo": ""
+    "photo": "images/doces/cupcake-de-laranja.jpg"
   },
   {
     "id": "pudim-de-leite-condensado",
@@ -5836,7 +5836,7 @@
       "Após esfriar, leve o pudim à geladeira por pelo menos 4 horas.",
       "Desenforme o pudim em um prato e sirva gelado."
     ],
-    "photo": ""
+    "photo": "images/doces/pudim-de-leite-condensado.jpg"
   },
   {
     "id": "cupcake-natalino",
@@ -6060,7 +6060,7 @@
       "Se desejar, você pode congelar o brigadeiro em porções separadas. Certifique-se de armazenar em recipientes adequados para congelamento.",
       "Na hora de consumir, basta descongelar a quantidade desejada. Obs.: Prefira sempre utilizar chocolate em pó 50% cacau em vez de achocolatado, pois contém menos açúcar, sendo uma opção mais saudável. Quanto maior o teor de cacau, mais saudável e intenso será o sabor."
     ],
-    "photo": ""
+    "photo": "images/doces/brigadeiro-de-colher.jpg"
   },
   {
     "id": "cinnamon-roll",
@@ -6122,7 +6122,7 @@
       "Deixe a torta esfriar antes de cortar e servir.",
       "Sirva a torta de banana com uma bola de sorvete ou chantilly para uma sobremesa irresistível."
     ],
-    "photo": ""
+    "photo": "images/doces/torta-de-banana-ii.jpg"
   },
   {
     "id": "trufas-de-chocolate-meio-amargo",
@@ -6611,7 +6611,7 @@
       "Transfira o doce de leite para potes de vidro esterilizados e deixe esfriar completamente antes de tampar. Armazene na geladeira.",
       "Sirva o doce de leite puro, como cobertura de sobremesas, ou utilize-o como ingrediente em diversas receitas sem glúten."
     ],
-    "photo": ""
+    "photo": "images/doces/doce-de-leite.jpg"
   },
   {
     "id": "pudim-de-chia",
