@@ -5651,5 +5651,1481 @@
       "Curitiba/PR - Brasil www.chefcarlaramos.online contato@chefcarlaramos.online"
     ],
     "photo": null
+  },
+  {
+    "id": "brigadeiro",
+    "title": "Brigadeiro",
+    "category": "doces",
+    "ingredients": [
+      "1 caixinha de leite condensado (395 g)",
+      "1 caixinha de creme de leite (200 g)",
+      "2 colheres de chocolate em pó 50% cacau (Finíssima ou Melken Harald) - sem glúten",
+      "1 colher de margarina ou manteiga"
+    ],
+    "steps": [
+      "Em uma panela, misture o leite condensado, o creme de leite, o chocolate em pó e a margarina ou manteiga.",
+      "Leve a mistura ao fogo médio, mexendo continuamente.",
+      "Quando a mistura começar a ferver, abaixe o fogo e continue mexendo e cozinhando por 7 a 8 minutos, até que a massa do brigadeiro atinja uma",
+      "consistência cremosa.",
+      "Retire a panela do fogo e transfira o brigadeiro para uma vasilha.",
+      "Deixe esfriar em temperatura ambiente e, em seguida, leve à geladeira por pelo menos 2 horas para que os brigadeiros endureçam."
+    ],
+    "photo": "images/doces/brigadeiro.jpg"
+  },
+  {
+    "id": "beijinho",
+    "title": "Beijinho",
+    "category": "doces",
+    "ingredients": [
+      "1 caixinha de leite condensado (395g)",
+      "1 caixinha de creme de leite (200g)",
+      "1 xícara de chá de coco ralado fino",
+      "1 colher de margarina ou manteiga"
+    ],
+    "steps": [
+      "Em uma panela, misture o leite condensado, o creme de leite, o coco ralado e a margarina ou manteiga.",
+      "Leve a mistura ao fogo médio, mexendo sempre.",
+      "Quando a mistura começar a ferver, abaixe o fogo e continue cozinhando por 5 minutos, mexendo constantemente.",
+      "Retire a panela do fogo e deixe a mistura esfriar.",
+      "Leve à geladeira até que a massa do beijinho esteja gelada e firme.",
+      "Opcional: Para aromatizar, você pode adicionar cravos à mistura enquanto ela esfria.",
+      "Após o resfriamento, faça bolinhas com a massa e, se desejar, decore com cravos."
+    ],
+    "photo": "images/doces/beijinho.jpg"
+  },
+  {
+    "id": "geleia-de-morango",
+    "title": "Geléia de Morango",
+    "category": "doces",
+    "ingredients": [
+      "500 g de morangos congelados ou frescos",
+      "1 xícara de chá de adoçante culinário Xilitol (ou adoce a gosto)",
+      "1 colher de sopa de suco de limão"
+    ],
+    "steps": [
+      "Em uma panela alta para evitar derramamentos durante a fervura, coloque os morangos, o adoçante Xilitol e o suco de limão.",
+      "Leve a mistura ao fogo médio, mexendo ocasionalmente para garantir que o adoçante seja bem incorporado aos morangos.",
+      "Deixe a mistura cozinhar por aproximadamente 15 minutos, ou até atingir o ponto de geleia. Para verificar o ponto, passe uma colher pela mistura; quando o",
+      "fundo da panela ficar visível, a geleia está pronta.",
+      "Retire a panela do fogo e deixe a geleia esfriar.",
+      "Enquanto a geleia esfria, esterilize potes de vidro e suas tampas. Isso pode ser feito fervendo os potes e as tampas em água quente por alguns minutos.",
+      "Certifique-se de que estejam totalmente secos antes de armazenar a geleia.",
+      "Depois que a geleia esfriar completamente, transfira-a para os potes de vidro esterilizados e tampe bem.",
+      "Armazene os potes na geladeira para garantir a conservação da geleia."
+    ],
+    "photo": "images/doces/geleia-de-morango.jpg"
+  },
+  {
+    "id": "pao-de-mel-sem-recheio",
+    "title": "Pão de Mel sem Recheio",
+    "category": "doces",
+    "ingredients": [
+      "10 g de fermento em pó Royal",
+      "70 g de açúcar",
+      "1 colher de chá de cravo em pó",
+      "200 g de farinha de arroz",
+      "50 g de fécula de batata",
+      "2 ovos",
+      "15 g de polvilho doce",
+      "1 colher de sopa de canela em pó",
+      "25 g de chocolate em pó",
+      "5 g de bicarbonato de sódio",
+      "300 ml de água morna",
+      "50 g de mel",
+      "50 ml de azeite ou óleo"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "Forre a forma retangular (19 x 28 cm) com papel manteiga.",
+      "Em uma tigela grande, misture os ovos, a farinha de arroz, o polvilho doce, o chocolate em pó, a fécula de batata, o açúcar, o fermento em pó, o bicarbonato",
+      "de sódio, a canela em pó, o cravo em pó, o mel, o azeite ou óleo, e a água morna. Misture bem até obter uma massa homogênea.",
+      "Despeje a massa na forma preparada.",
+      "Asse no forno pré-aquecido por 20 a 25 minutos, ou até que um palito inserido no centro saia limpo.",
+      "Enquanto o pão de mel estiver assando, prepare a cobertura: pique o chocolate fracionado em pedaços pequenos e derreta no microondas de 30 em 30",
+      "segundos, mexendo até que esteja completamente derretido.",
+      "Após retirar o pão de mel do forno, passe-o no chocolate derretido, garantindo uma cobertura uniforme.",
+      "Leve à geladeira até que o chocolate endureça. Decore com nozes ou castanhas conforme desejar.",
+      "Durabilidade: Sem recheio: 30 dia. Com recheio: 7 dias (depende do recheio)"
+    ],
+    "photo": "images/doces/pao-de-mel-sem-recheio.jpg"
+  },
+  {
+    "id": "bem-casado",
+    "title": "Bem Casado",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "1 colher de chá de fermento químico Royal",
+      "40 g de polvilho doce",
+      "180 g de farinha de arroz",
+      "100 ml de óleo",
+      "110 g de açúcar",
+      "5 ovos inteiros",
+      "1 colher de chá de essência de baunilha",
+      "200 ml de leite 0% lactose ou vegetal Recheio: Doce de leite Montagem e Decoração: Papel crepom especial para Bem Casados",
+      "Açúcar de confeiteiro"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180 graus Celsius.",
+      "Forre uma forma de 29 x 42 cm com papel manteiga.",
+      "Em uma tigela, bata os ovos inteiros até que fiquem homogêneos.",
+      "Adicione a farinha de arroz, o polvilho doce, o açúcar, o óleo, o leite, a essência de baunilha e o fermento químico. Misture bem até obter uma massa homogênea.",
+      "Despeje a massa na forma preparada.",
+      "Asse no forno pré-aquecido por 25 a 30 minutos, ou até que um palito inserido no centro saia limpo. Retire do forno e deixe esfriar.",
+      "Corte quadrados de 5 x 5 cm com o aro de corte.",
+      "Coloque uma porção de doce de leite em um dos quadrados e cubra com outro quadrado, formando um sanduíche.",
+      "Passe os Bem Casados no açúcar de confeiteiro para finalizar.",
+      "Corte tiras de papel crepom especial e envolva cada Bem Casado.",
+      "Estão prontos para servir ou embalar para encomendas."
+    ],
+    "photo": "images/doces/bem-casado.jpg"
+  },
+  {
+    "id": "pudim-de-leite-0-lactose",
+    "title": "Pudim de Leite 0% Lactose",
+    "category": "doces",
+    "ingredients": [
+      "Para o Pudim:",
+      "4 ovos",
+      "1 caixinha de leite condensado 0% lactose (395 g)",
+      "1 caixinha de creme de leite 0% lactose (200 g)",
+      "1 e 1/2 caixinha de leite 0% lactose (usei a medida do leite condensado) Para a Calda:",
+      "1 xícara de chá de açúcar (240 ml) (ou 1 xícara de adoçante culinário líquido ou em pó)",
+      "1/2 xícara de chá de água quente"
+    ],
+    "steps": [
+      "Coloque o açúcar ou adoçante em uma panela em fogo baixo.",
+      "Enquanto derrete, misture até que o açúcar derreta completamente.",
+      "Mesmo com a cor ainda clara, adicione a água quente aos poucos, mexendo até dissolver completamente o caramelo.",
+      "Deixe ferver por cerca de 4 minutos, até engrossar um pouco. Reserve.",
+      "Pré-aqueça o forno a 180 graus Celsius.",
+      "Cobrir a forma para pudim (20 x 8 cm) com o caramelo preparado.",
+      "Em um liquidificador, bata os ovos, o leite condensado 0% lactose, o creme de leite 0% lactose e o leite 0% lactose até obter uma mistura homogênea.",
+      "Despeje a mistura do pudim sobre a forma caramelizada.",
+      "Cubra a forma com papel alumínio.",
+      "Leve ao forno em banho-maria a 180 graus Celsius por 1 hora e 30 minutos, ou até que o pudim esteja firme. Para verificar, insira um palito; ele deve sair limpo.",
+      "Após assar, deixe o pudim esfriar à temperatura ambiente e, em seguida, leve à geladeira por no mínimo 4 horas para firmar.",
+      "Desenforme o pudim em um prato de servir. Sirva gelado."
+    ],
+    "photo": "images/doces/pudim-de-leite-0-lactose.jpg"
+  },
+  {
+    "id": "torta-suprema-de-chocolate",
+    "title": "Torta Suprema de Chocolate",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "1 ovo (aproximadamente 50g)",
+      "40g de açúcar",
+      "50g de margarina ou manteiga sem sal",
+      "50g de amido de milho Pitada de sal",
+      "70g de farinha de arroz",
+      "10g de polvilho doce Ganache de Chocolate:",
+      "30g de manteiga sem sal",
+      "130g de creme de leite",
+      "10ml de conhaque (opcional)",
+      "180g de chocolate nobre ao leite Espelhado de Chocolate:",
+      "10 ml de água fria para hidratar a gelatina",
+      "3g de gelatina sem sabor",
+      "30 ml de água",
+      "30 ml de leite",
+      "30g de chocolate em pó 50% cacau",
+      "50g de açúcar TORTA SUPREMA DE CHOCOLATE"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "Em uma tigela, misture a farinha de arroz, o amido de milho, o polvilho doce, a margarina ou manteiga sem sal, o açúcar, a pitada de sal e o ovo. Trabalhe os",
+      "ingredientes até obter uma massa homogênea.",
+      "Forre o fundo de uma forma redonda com fundo removível (18 cm de diâmetro) com a massa.",
+      "Asse no forno pré-aquecido por aproximadamente 35 minutos, ou até que a massa esteja dourada.",
+      "Após assar, deixe a massa esfriar completamente.",
+      "Ferva o creme de leite e despeje sobre o chocolate nobre picado. Misture até que o chocolate esteja completamente derretido.",
+      "Acrescente a manteiga e misture bem. Adicione o conhaque, se estiver usando.",
+      "Leve à geladeira por pelo menos 2 horas.",
+      "Misture o açúcar e o chocolate em pó em uma tigela.",
+      "Hidrate a gelatina em 10 ml de água fria.",
+      "Em uma panela, aqueça o leite e a água. Quando estiver quente, adicione a gelatina hidratada e misture até dissolver.",
+      "Despeje essa mistura sobre a mistura de açúcar e chocolate em pó. Misture bem.",
+      "Após a torta estar gelada, despeje o espelhado de chocolate sobre a ganache.",
+      "Leve à geladeira por mais 2 horas.",
+      "Sirva gelado e aproveite essa deliciosa Torta Suprema de Chocolate!",
+      "Essa torta certamente será uma explosão de sabor para os amantes de chocolate!"
+    ],
+    "photo": "images/doces/torta-suprema-de-chocolate.jpg"
+  },
+  {
+    "id": "torta-de-morango",
+    "title": "Torta de Morango",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "1 ovo (aproximadamente 50g)",
+      "50g de açúcar",
+      "50g de margarina ou manteiga",
+      "50g de creme de leite",
+      "100g de farinha de arroz",
+      "1 colher de chá de fermento Royal",
+      "80g de amido de milho",
+      "20g de polvilho doce Pitada de sal Creme Branco:",
+      "1 caixinha de creme de leite (200g)",
+      "5 colheres de sopa de água fria para hidratar a gelatina",
+      "1 sachê de gelatina sem sabor (12g)",
+      "1 caixinha de leite condensado (395g) Gelatina Vermelha:",
+      "150ml de água quente",
+      "1 pacotinho de gelatina sabor morango (marca sugerida: Royal, sem glúten)",
+      "150ml de água gelada TORTA DE MORANGO"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "Em uma tigela, misture a farinha de arroz, o amido de milho, o polvilho doce, o açúcar, a margarina ou manteiga, a pitada de sal, o creme de leite e o ovo.",
+      "Misture até obter uma massa homogênea.",
+      "Adicione o fermento Royal à massa e misture delicadamente.",
+      "Forre o fundo de uma forma redonda com fundo removível (20 cm de diâmetro e",
+      "6 cm de altura) com a massa.",
+      "Asse no forno pré-aquecido por aproximadamente 35 minutos, ou até que a massa esteja dourada.",
+      "Após assar, deixe a massa esfriar completamente.",
+      "Para o creme branco. No liquidificador, misture o leite condensado e o creme de leite até obter um creme homogêneo.",
+      "Hidrate a gelatina na água fria e leve ao micro-ondas por 20 segundos ou até dissolver completamente.",
+      "Misture a gelatina ainda quente no creme branco.",
+      "Com a massa da torta já fria, despeje esse creme e leve à geladeira por 15 a 30 minutos.",
+      "Para gelatina vermelha. Dissolva o pacotinho de gelatina sabor morango na água quente, mexendo até que não haja grumos.",
+      "Adicione a água gelada e misture bem.",
+      "Deixe a gelatina esfriar.",
+      "Despeje a gelatina vermelha sobre a torta que já está com o creme branco e os morangos decorados.",
+      "Leve à geladeira por 2 horas até que a torta esteja totalmente firme.",
+      "Sirva e aproveite essa colorida e deliciosa Torta de Morango!",
+      "Essa torta é uma ótima opção para ocasiões festivas e com certeza irá encantar os seus convidados."
+    ],
+    "photo": "images/doces/torta-de-morango.jpg"
+  },
+  {
+    "id": "torta-de-limao-com-merengue-suico",
+    "title": "Torta de Limão com Merengue Suíço",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "1 ovo",
+      "50g de açúcar",
+      "50g de margarina gelada",
+      "100g de farinha de arroz",
+      "80g de amido de milho",
+      "20g de polvilho doce Raspas de limão Pitada de sal",
+      "1 colher de chá de fermento Royal",
+      "50g de creme de leite Mousse de Limão:",
+      "1 caixinha de creme de leite (200g)",
+      "1 caixinha de leite condensado (395g)",
+      "2 limões Taiti espremidos e coados Merengue Suíço:",
+      "1/2 xícara de chá de açúcar (90g)",
+      "3 claras TORTA DE LIMÃO COM MERENGUE SUÍÇO"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "Em uma tigela, misture a farinha de arroz, o amido de milho, o polvilho doce, o açúcar, a margarina gelada, o ovo, o fermento Royal, a pitada de sal, e o creme de",
+      "leite. Misture até formar uma massa homogênea.",
+      "Adicione as raspas de limão à massa e misture.",
+      "Forre o fundo de uma forma redonda com fundo removível (22 cm de diâmetro) com a massa.",
+      "Asse no forno pré-aquecido por aproximadamente 35 minutos ou até dourar. Espere esfriar.",
+      "Para o Mousse. Misture bem o leite condensado, o creme de leite e o suco de limão.",
+      "Despeje a mousse de limão sobre a base da torta já fria.",
+      "Leve à geladeira por no mínimo 1 hora.",
+      "Para o Merengue Suíço. Em uma panela, misture as claras e o açúcar. Leve ao fogo baixo, mexendo sempre até que os granulados do açúcar desapareçam. Isso",
+      "levará aproximadamente 3 minutos.",
+      "Retire a mistura do fogo ocasionalmente para evitar que as claras cozinhem.",
+      "Transfira a mistura para a batedeira e bata por cerca de 5 minutos, até obter um merengue firme com picos duros.",
+      "Coloque o merengue suíço sobre a torta já com a mousse de limão.",
+      "Para dourar o merengue, utilize um maçarico ou leve ao forno com a função grill pré-aquecido por 8 minutos ou até dourar.",
+      "Após pronto, leve de volta à geladeira por mais 1 a 2 horas para facilitar o corte.",
+      "Após pode servir."
+    ],
+    "photo": "images/doces/torta-de-limao-com-merengue-suico.jpg"
+  },
+  {
+    "id": "banoffee-de-banana",
+    "title": "Banoffee de Banana",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "50g de açúcar",
+      "50g de margarina bem gelada",
+      "10g de polvilho doce",
+      "50 a 100g de creme de leite",
+      "1 ovo médio",
+      "1 colher de chá de fermento Royal Pitada de sal",
+      "180g de farinha de arroz Recheio: Bananas bem maduras em rodelas a gosto",
+      "1 pote de doce de leite (400g) Canela para polvilhar Chantilly:",
+      "1 pote de nata (400g) gelada",
+      "3 colheres de sopa de açúcar BANOFFEE DE BANANA"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "Em uma tigela, misture a farinha de arroz, o polvilho doce, o açúcar, a margarina gelada, o ovo, o creme de leite e o fermento Royal. Misture até formar uma",
+      "massa homogênea.",
+      "Forre o fundo de uma forma redonda com fundo removível (22 cm de diâmetro) com a massa.",
+      "Asse no forno pré-aquecido por aproximadamente 25 minutos ou até dourar. Espere esfriar.",
+      "Para o recheio. Espalhe o doce de leite sobre a massa já fria.",
+      "Distribua as rodelas de bananas sobre o doce de leite.",
+      "Polvilhe canela sobre as bananas.",
+      "Para o chantilly. Em uma tigela, bata a nata gelada e o açúcar até obter um chantilly firme.",
+      "Cubra a torta com o chantilly, espalhando uniformemente sobre as bananas.",
+      "Leve à geladeira por no mínimo 2 horas para gelar por completo.",
+      "Sirva gelado e aproveite essa deliciosa Banoffee de Bananas!"
+    ],
+    "photo": "images/doces/banoffee-de-banana.jpg"
+  },
+  {
+    "id": "torta-de-banana",
+    "title": "Torta de Banana",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "110 g de açúcar",
+      "100 g de margarina ou manteiga bem gelada",
+      "1 ovo médio",
+      "200 g de creme de leite Pitada de sal",
+      "20 g de polvilho doce",
+      "1 colher de sopa rasa de fermento Royal",
+      "350 g de farinha de arroz Recheio: Canela e açúcar a gosto Bananas bem maduras a gosto (aproximadamente 4 unidades)"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "Em uma tigela, misture a farinha de arroz, o polvilho doce, o açúcar, a margarina ou manteiga gelada, o ovo, o creme de leite, a pitada de sal e o fermento Royal.",
+      "Misture até formar uma massa homogênea.",
+      "Forre o fundo de uma forma redonda com fundo removível (22 cm de diâmetro) com a massa.",
+      "Asse no forno pré-aquecido por aproximadamente 35 minutos ou até dourar. Se seu forno tiver duas grades, use a parte de cima.",
+      "Para o recheio. Descasque as bananas e corte-as em rodelas.",
+      "Em um recipiente, misture as rodelas de banana com canela e açúcar a gosto.",
+      "Após assar a massa e enquanto ainda estiver quente, despeje as bananas preparadas sobre a torta.",
+      "Espalhe uniformemente as bananas sobre a massa.",
+      "Deixe esfriar antes de cortar.",
+      "Durabilidade Fora da geladeira: 2 a 3 dias. No freezer: 3 meses."
+    ],
+    "photo": null
+  },
+  {
+    "id": "pudim-de-milho",
+    "title": "Pudim de Milho",
+    "category": "doces",
+    "ingredients": [
+      "Para o Pudim:",
+      "4 ovos",
+      "650 ml de leite",
+      "1 lata de milho em conserva (drenado, 170 g)",
+      "1 caixinha de leite condensado (395 g) - coado para retirar resíduos do milho Para a Calda:",
+      "1 xícara de chá de açúcar (ou 1 xícara de adoçante culinário líquido ou em pó)",
+      "1/2 xícara de água quente"
+    ],
+    "steps": [
+      "Em uma panela, derreta o açúcar ou adoçante até obter um caramelo dourado.",
+      "Adicione a água quente ao caramelo derretido e misture bem até formar uma calda homogênea.",
+      "Despeje a calda na forma de pudim, espalhando uniformemente pelo fundo e laterais.",
+      "Pré-aqueça o forno a 200 graus Celsius. Escorra e lave o milho em conserva.",
+      "No liquidificador, bata os ovos, o leite condensado (já coado para retirar resíduos do milho), o milho escorrido e o leite até obter uma mistura homogênea.",
+      "Despeje a mistura na forma caramelizada. Leve ao forno pré-aquecido a 200 graus Celsius.",
+      "Asse por aproximadamente 1 hora e 30 minutos, ou até que o pudim esteja firme e dourado. Após o tempo de assar, você pode optar por duas opções:",
+      "Deixe assar por 1 hora e 15 minutos, desligue o forno e deixe o pudim lá dentro até o forno esfriar. Ou asse por 1 hora e 30 minutos diretamente.",
+      "Depois de frio, leve o pudim à geladeira por pelo menos 3 horas antes de desenformar.",
+      "Para verificar se o pudim está pronto, faça o teste do palito. Insira um palito no centro do pudim, e se ele sair limpo, o pudim está assado. O pudim de milho é",
+      "uma variação deliciosa do pudim tradicional, com um toque especial e sabor diferenciado. Aproveite!"
+    ],
+    "photo": "images/doces/pudim-de-milho.jpg"
+  },
+  {
+    "id": "queijadinha",
+    "title": "Queijadinha",
+    "category": "doces",
+    "ingredients": [
+      "3 ovos inteiros",
+      "1 caixa de leite condensado",
+      "2 colheres de sopa de manteiga",
+      "40 g de queijo ralado parmesão",
+      "1 1/2 xícara de coco ralado"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "Em uma tigela, misture os ovos inteiros, o leite condensado, a manteiga, o queijo ralado parmesão e o coco ralado.",
+      "Misture bem todos os ingredientes até obter uma massa homogênea.",
+      "Despeje a mistura em uma forma untada ou forrada com papel manteiga. Pode fazer em forminhas ou em uma forma retangular grande.",
+      "Leve ao forno pré-aquecido e asse por aproximadamente 30 minutos, ou até que a parte superior esteja completamente dourada.",
+      "Retire do forno e deixe esfriar antes de cortar em porções.",
+      "Sirva e aproveite essas deliciosas queijadinhas!"
+    ],
+    "photo": "images/doces/queijadinha.jpg"
+  },
+  {
+    "id": "cupcake-de-chocolate",
+    "title": "Cupcake de Chocolate",
+    "category": "doces",
+    "ingredients": [
+      "60 g de açúcar",
+      "4 ovos",
+      "1 colher de chá de essência de baunilha (opcional)",
+      "80 g de farinha de arroz",
+      "30 g de chocolate em pó 50% cacau",
+      "200 g de creme de leite (1 caixinha)",
+      "50 ml de azeite ou óleo CHANTILLY:",
+      "1 colher de sopa de chocolate em pó",
+      "3 colheres de açúcar ou Chantilly de sua preferência",
+      "1 pote de Nata (300 g)"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180-200 graus Celsius.",
+      "Coloque forminhas de papel para cupcake de 7 cm de diâmetro em uma assadeira.",
+      "Separe as claras das gemas.",
+      "Bata as claras em neve, adicionando o açúcar gradualmente, até obter um merengue com picos moles. Reserve.",
+      "Em outra vasilha, misture as gemas, o azeite, a farinha de arroz, o chocolate em pó e o creme de leite até obter uma mistura homogênea.",
+      "Acrescente as claras batidas aos poucos, incorporando com delicadeza.",
+      "Coloque a massa nas forminhas de papel para cupcake, preenchendo até 2/3 da capacidade. Asse no forno pré-aquecido por 30 minutos.",
+      "Enquanto os cupcakes assam, prepare o chantilly misturando a nata, o chocolate em pó e o açúcar até obter uma consistência firme. Reserve.",
+      "Após os cupcakes esfriarem, decore com o chantilly preparado e morangos.",
+      "Finalize com chocolate derretido por cima.",
+      "Leve os cupcakes à geladeira para gelar antes de servir.",
+      "Utilize sua criatividade para decorar conforme desejado."
+    ],
+    "photo": "images/doces/cupcake-de-chocolate.jpg"
+  },
+  {
+    "id": "cupcake-de-laranja",
+    "title": "Cupcake de Laranja",
+    "category": "doces",
+    "ingredients": [
+      "200 g de creme de leite (1 caixinha)",
+      "80 g de farinha de arroz",
+      "4 ovos Raspas de laranja",
+      "60 g de açúcar",
+      "50 ml de azeite ou óleo CALDA DE LARANJA:",
+      "5 colheres de sopa de açúcar (ou a gosto)",
+      "1 colher de sopa de amido de milho (Maizena)",
+      "200 ml de suco de laranja natural CHANTILLY: Chantilly de sua preferência"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180 graus Celsius.",
+      "Bata as claras com o açúcar até obter um merengue com picos moles. Reserve.",
+      "Em outra vasilha, bata as gemas, o azeite, o creme de leite e a farinha de arroz. Acrescente as raspas de laranja.",
+      "Adicione, aos poucos, as claras batidas à mistura, incorporando delicadamente.",
+      "Coloque a massa em forminhas de papel para cupcake dentro da forma própria para cupcake.",
+      "Asse no forno pré-aquecido por aproximadamente 25 minutos ou até que fiquem dourados. Após assar, deixe os cupcakes esfriarem.",
+      "Em uma panela, misture o suco de laranja, o açúcar e o amido de milho.",
+      "Leve ao fogo e, após começar a ferver, espere a calda engrossar (cerca de 2 minutos). Deixe a calda esfriar e reserve.",
+      "Bata a nata com o açúcar até obter um chantilly firme. Reserve.",
+      "Faça furos leves nos cupcakes com um palito.",
+      "Despeje a calda de laranja sobre os cupcakes, permitindo que ela seja absorvida.",
+      "Decore os cupcakes com o chantilly preparado.",
+      "Leve os cupcakes à geladeira para gelar antes de servir."
+    ],
+    "photo": "images/doces/cupcake-de-laranja.jpg"
+  },
+  {
+    "id": "pudim-de-leite-condensado",
+    "title": "Pudim de Leite Condensado",
+    "category": "doces",
+    "ingredients": [
+      "Para a Calda:",
+      "1 xícara de açúcar (medida de 240 ml) (ou 1 xícara de adoçante culinário líquido ou em pó)",
+      "1/2 xícara de água fria ou quente (medida de 240 ml) Para o Pudim:",
+      "4 ovos",
+      "1 e 1/2 caixinha de leite condensado",
+      "1 e 1/2 caixinha de leite comum (utilize a caixinha como medida)",
+      "1 colher de sopa de essência de baunilha"
+    ],
+    "steps": [
+      "Em uma forma de pudim de 20 cm de diâmetro, coloque 1 xícara de açúcar ou adoçante. Adicione 1/2 xícara de água fria ou quente.",
+      "Leve ao fogo e deixe ferver até caramelizar, desligando o fogo quando atingir a cor desejada.",
+      "Dica importante: Desligue o fogo quando o caramelo estiver mais claro, pois ele continua a escurecer mesmo após desligado. Reserve.",
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "No liquidificador, bata os ovos, o leite condensado, o leite comum e a essência de baunilha até obter uma mistura homogênea.",
+      "Despeje essa mistura na forma de pudim, que já deve ter a calda fria.",
+      "Coloque a forma dentro de uma assadeira maior e adicione água quente ao redor da forma, criando um banho-maria.",
+      "Asse no forno pré-aquecido em banho-maria a 200 graus Celsius por 1 hora.",
+      "Nos primeiros 30 minutos, cubra a forma com papel alumínio.",
+      "Nos últimos 30 minutos, retire o papel alumínio e deixe assar até completar 1 hora. Desligue o forno e deixe o pudim lá dentro até esfriar, ou aguarde 30",
+      "minutos para economizar gás.",
+      "Após esfriar, leve o pudim à geladeira por pelo menos 4 horas.",
+      "Desenforme o pudim em um prato e sirva gelado."
+    ],
+    "photo": "images/doces/pudim-de-leite-condensado.jpg"
+  },
+  {
+    "id": "cupcake-natalino",
+    "title": "Cupcake Natalino",
+    "category": "doces",
+    "ingredients": [
+      "1 colher de chá de essência de baunilha",
+      "60 g de manteiga derretida",
+      "80 g de açúcar",
+      "120 g de farinha de arroz",
+      "4 ovos Recheio: Geléia de morangos ou morangos frescos Cobertura: Granulados coloridos para decorar",
+      "Chantilly de sua preferência (na cor verde)"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180 graus Celsius. Em uma batedeira, coloque os ovos inteiros e o açúcar. Bata por 5 minutos ou até que fiquem esbranquiçados e",
+      "aerados.",
+      "Adicione aos poucos a farinha de arroz e a essência de baunilha. Bata brevemente, com cuidado para não perder a aeração.",
+      "À parte, coloque um pouco da massa na manteiga derretida, misture com delicadeza e depois despeje tudo de volta na massa. Esse processo ajuda a",
+      "incorporar a manteiga gradualmente sem perder a leveza.",
+      "Coloque a massa em forminhas de cupcake e leve ao forno pré-aquecido por 25 minutos. Após assar, deixe os cupcakes esfriarem. Reserve.",
+      "Faça buracos no centro de cada cupcake e recheie com geléia de morangos ou morangos frescos.",
+      "Em uma tigela, bata a nata gelada com o açúcar até obter um chantilly firme. Reserve.",
+      "Ou utilize chantilly de sua preferência, preferencialmente na cor verde para dar um toque natalino. Cubra os cupcakes com a cobertura de nata ou chantilly",
+      "verde.",
+      "Decore com granulados coloridos. Sirva os Cupcakes Natalinos sem Glúten e aproveite a praticidade e o sabor festivo!"
+    ],
+    "photo": "images/doces/cupcake-natalino.jpg"
+  },
+  {
+    "id": "bolotone",
+    "title": "Bolotone",
+    "category": "doces",
+    "ingredients": [
+      "80 g de frutas cristalizadas Raspas de laranja (opcional)",
+      "50 g de açúcar",
+      "120 g de farinha de arroz",
+      "3 ovos",
+      "50 ml de óleo",
+      "200 ml de leite de amêndoas, coco, castanhas, ou leite comum Cobertura: Leite de amêndoas (quantidade necessária para atingir o ponto desejado)",
+      "Frutas cristalizadas e nozes para decorar Açúcar de confeiteiro (glaçúcar)"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180 graus Celsius.",
+      "Em uma tigela, bata as claras com açúcar até obter um merengue com picos moles. Reserve.",
+      "Em outra vasilha, bata as gemas, o óleo, o leite e a farinha de arroz.",
+      "Misture as claras batidas aos poucos na massa e, por último, adicione as frutas cristalizadas.",
+      "Se desejar, acrescente raspas de laranja para aromatizar.",
+      "Despeje a massa em uma forma de pudim previamente untada e enfarinhada.",
+      "Asse no forno pré-aquecido por aproximadamente 40 minutos a 180 graus.",
+      "Após o bolotone esfriar, prepare a cobertura misturando açúcar de confeiteiro (glaçúcar) com leite de amêndoas aos poucos até atingir o ponto desejado.",
+      "Despeje a cobertura sobre o bolotone frio.",
+      "Decore a superfície com frutas cristalizadas e nozes.",
+      "Corte em fatias e sirva. Este bolotone sem glúten é uma opção deliciosa para qualquer ocasião, especialmente durante as celebrações."
+    ],
+    "photo": "images/doces/bolotone.jpg"
+  },
+  {
+    "id": "carolinas",
+    "title": "Carolinas",
+    "category": "doces",
+    "ingredients": [
+      "1 colher de chá de goma xantana",
+      "25 g de amido de milho (Maizena)",
+      "100 g de farinha de arroz",
+      "10 g de açúcar",
+      "1 pitada de sal",
+      "25 g de polvilho doce",
+      "100 g de manteiga",
+      "300 ml de água",
+      "7 ovos Para o Recheio: Patês salgados de sua preferência Doce de leite, nata, creme de confeiteiro, Nutella, etc. (a gosto) ou"
+    ],
+    "steps": [
+      "Em uma vasilha, misture a farinha de arroz, polvilho doce, amido de milho, goma xantana, açúcar e uma pitada de sal. Reserve.",
+      "Em uma panela, leve para ferver a água e a manteiga.",
+      "Quando a mistura estiver fervendo, adicione os ingredientes secos reservados de uma só vez, mexendo constantemente até que a massa se desprenda da",
+      "panela. Deixe a massa esfriar.",
+      "Transfira a massa para uma batedeira e, enquanto bate, adicione os ovos um por um até que a massa fique homogênea.",
+      "Com a massa pronta, coloque-a em um saco de confeiteiro e modele carolinas do tamanho desejado (aqui foram feitas de 4 cm e renderam aproximadamente",
+      "40 unidades). Disponha as carolinas em uma forma com papel manteiga.",
+      "Pré-aqueça o forno a 200 graus Celsius.",
+      "Asse as carolinas no forno pré-aquecido por cerca de 30 minutos ou até que fiquem douradas. Espere esfriar completamente antes de rechear.",
+      "Escolha o recheio de sua preferência, seja doce (doce de leite, nata, creme de confeiteiro, Nutella, etc.) ou salgado (patês salgados).",
+      "Corte as carolinas ao meio e recheie com o creme escolhido após pode servir."
+    ],
+    "photo": "images/doces/carolinas.jpg"
+  },
+  {
+    "id": "rabanadas",
+    "title": "Rabanadas",
+    "category": "doces",
+    "ingredients": [
+      "2 ovos batidos",
+      "1 xícara de chá de leite (medida de 200 ml)",
+      "2 colheres de sopa de açúcar (para um doce suave, aumente para 4 colheres) Raspas de laranja, limão ou baunilha",
+      "6 fatias de pão sem glúten amanhecido Para Fritar: Manteiga com sal Para Polvilhar : Açúcar e canela (opcional)"
+    ],
+    "steps": [
+      "Em uma tigela, bata os ovos, açúcar, leite e adicione as raspas de laranja, limão ou baunilha. Misture bem.",
+      "Passe as fatias de pão sem glúten na mistura preparada, garantindo que estejam bem embebidas.",
+      "Em uma frigideira, coloque manteiga com sal.",
+      "Frite as fatias de pão em fogo baixo, regando com um pouco da mistura de ovos e leite para dar mais sabor. Vire as rabanadas para fritar ambos os lados.",
+      "Frite por cerca de 2 a 3 minutos de cada lado ou até que fiquem douradas.",
+      "Após fritar, coloque as rabanadas em uma travessa bonita.",
+      "Polvilhar (opcional):",
+      "Se desejar, polvilhe açúcar e canela sobre as rabanadas para um toque extra de sabor.",
+      "Sirva as rabanadas sem glúten enquanto ainda estão quentes. Elas são perfeitas para as festas de fim de ano!"
+    ],
+    "photo": "images/doces/rabanadas.jpg"
+  },
+  {
+    "id": "churros",
+    "title": "Churros",
+    "category": "doces",
+    "ingredients": [
+      "750 ml de água",
+      "50 g de manteiga",
+      "20 g de açúcar",
+      "300 g de farinha de arroz Pitada de sal",
+      "5 g de goma xantana Para Polvilhar : Açúcar e canela (opcional)"
+    ],
+    "steps": [
+      "Misture todos os ingredientes secos (farinha de arroz, goma xantana, açúcar e sal) em uma tigela e reserve.",
+      "Em uma panela, coloque a água e a manteiga. Deixe ferver.",
+      "Assim que começar a ferver, adicione as farinhas misturadas rapidamente, mexendo bem para evitar grumos. Continue mexendo até obter uma massa lisa.",
+      "Modele os churros. Você pode usar um aparelho próprio para churros ou um bico de confeiteiro grande. Se estiver usando o bico de confeiteiro, coloque a",
+      "massa aos poucos e empurre com os dedos para formar os churros.",
+      "Aqueça óleo em uma panela ou frigideira. Quando o óleo estiver quente, frite os churros até que fiquem dourados. Quando não houver mais espuma ao redor",
+      "dos churros, eles estarão prontos.",
+      "Retire os churros fritos e escorra em papel toalha.",
+      "Enquanto os churros ainda estão quentes, passe-os em uma mistura de açúcar com canela para que a mistura grude bem.",
+      "Se você estiver vendendo os churros, faça tamanhos pequenos, como mostrado no vídeo. Você pode fazer um furo no meio com um palito de churrasco e",
+      "rechear com doce de leite.",
+      "Sirva os churros quentes e aproveite! Obs.: Você poderá fazer tamanhos pequenos. Você pode fazer um furo no meio com",
+      "um palito de churrasco e rechear com doce de leite."
+    ],
+    "photo": "images/doces/churros.jpg"
+  },
+  {
+    "id": "pao-de-mel",
+    "title": "Pão de Mel",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "50 g de fécula de batata",
+      "150 g de farinha de arroz",
+      "1 colher de chá de bicarbonato de sódio",
+      "10 g de fermento em pó Royal",
+      "3 ovos",
+      "90 g de mel",
+      "1 colher de sobremesa de canela em pó",
+      "50 g de açúcar mascavo",
+      "50 g de chocolate em pó 50% cacau",
+      "15 g de polvilho doce",
+      "50 ml de óleo",
+      "250 ml de água em temperatura ambiente",
+      "1 colher de chá de cravo em pó Recheio:",
+      "1 pote de doce de leite Cobertura: Chocolate meio amargo PÃO DE MEL"
+    ],
+    "steps": [
+      "Misture todos os ingredientes da massa em uma tigela até obter uma massa homogênea.",
+      "Coloque a massa em forminhas para pão de mel de 5 cm de diâmetro, untadas e enfarinhadas, enchendo apenas até a metade.",
+      "Asse em forno pré-aquecido a 190 graus Celsius por 25 minutos.",
+      "Desenforme enquanto ainda estiver quente e deixe esfriar.",
+      "Corte os pães de mel ao meio e recheie com o doce de leite. Não exagere no recheio para manter a delicadeza.",
+      "Pique o chocolate meio amargo fracionado e derreta em banho-maria ou no microondas, mexendo a cada 30 segundos até derreter completamente.",
+      "Banhe os pães de mel no chocolate derretido, escorrendo o excesso com uma colher.",
+      "Deixe secar sobre papel alumínio e decore a gosto.",
+      "Para vender, utilize ingredientes de primeira qualidade.",
+      "Embale os pães de mel em sacos plásticos usando luvas para evitar marcas de temperatura nas mãos e contaminação.",
+      "Calcule os custos desde os ingredientes até a embalagem e decoração. Dê o seu melhor para que os clientes voltem a comprar com você.",
+      "No saco plástico, o pão de mel tem durabilidade de 1 semana. Coloque etiquetas com a data de fabricação.",
+      "Dica e Sugestão:",
+      "Ótimo para presentear em diversas ocasiões, como Dia do Professor, Páscoa, Natal, chá de bebê, casamentos, etc.",
+      "Varie o recheio com cocada, Nutella, ganache, etc., ajustando o preço conforme a variação do recheio.",
+      "Lembre-se de usar a criatividade na decoração e apresentação para atrair ainda mais os clientes. Aproveite a versatilidade desses pães de mel para diferentes",
+      "ocasiões especiais!"
+    ],
+    "photo": "images/doces/pao-de-mel.jpg"
+  },
+  {
+    "id": "fatias-hungaras",
+    "title": "Fatias Húngaras",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "2 ovos",
+      "220 ml de leite (pode ser sem lactose, leite de coco, leite de amêndoa, etc.)",
+      "100 g de amido de milho",
+      "30 ml de óleo",
+      "40 g de açúcar",
+      "10 g de fermento biológico seco",
+      "150 g de farinha de arroz",
+      "1 pitada de sal",
+      "5 g de goma xantana",
+      "90 g de polvilho doce",
+      "7 g de fermento em pó Royal Recheio de Coco:",
+      "3 colheres de sopa de manteiga ou margarina",
+      "60 g de açúcar",
+      "50 g de coco ralado Cobertura: Leite condensado e coco ralado quantidade desejada FATIAS HÚNGARAS"
+    ],
+    "steps": [
+      "Misture os ingredientes secos em uma tigela: farinha de arroz, amido de milho, polvilho doce, açúcar, sal, goma xantana, fermento em pó Royal e fermento",
+      "biológico seco.",
+      "Adicione os ovos e o leite à mistura seca, mexendo bem.",
+      "Por último, adicione o óleo após bater um pouco a massa. A massa deve ficar grudenta.",
+      "Abra a massa, polvilhando com farinha de arroz para evitar que grude.",
+      "Preparação do Recheio de Coco:",
+      "Misture a manteiga ou margarina com o coco ralado e o açúcar até formar uma pasta.",
+      "Espalhe o recheio de coco sobre a massa estendida.",
+      "Enrole a massa como um rocambole e corte em fatias de aproximadamente 1,5 cm.",
+      "Coloque as fatias em uma forma untada, de preferência 20 x 26 ou um pouco maior para permitir espaço para crescer.",
+      "Deixe a massa crescer por 30 minutos.",
+      "Leve ao forno pré-aquecido a 200 graus Celsius por 30 minutos na parte superior do forno para evitar que as fatias ressequem muito na parte inferior.",
+      "Após assar, espere esfriar ou amornar, e cubra com leite condensado e coco ralado a gosto.",
+      "Sirva as Fatias Húngaras de Coco e aproveite!"
+    ],
+    "photo": "images/doces/fatias-hungaras.jpg"
+  },
+  {
+    "id": "brigadeiro-de-colher",
+    "title": "Brigadeiro de Colher",
+    "category": "doces",
+    "ingredients": [
+      "1 caixa de leite condensado",
+      "1 caixa de creme de leite",
+      "2 colheres de sopa de chocolate 50% cacau em pó",
+      "1 colher de sopa de margarina"
+    ],
+    "steps": [
+      "Em uma panela, coloque o leite condensado, o creme de leite, o chocolate em pó e a margarina.",
+      "Cozinhe em fogo médio, mexendo constantemente para evitar que grude no fundo da panela.",
+      "Continue mexendo até que a mistura atinja o ponto desejado de cremosidade. Isso geralmente leva alguns minutos, e o brigadeiro ficará mais espesso à",
+      "medida que esfria.",
+      "Após atingir a consistência desejada, retire do fogo e deixe esfriar por alguns minutos.",
+      "Sirva o brigadeiro de colher cremoso como sobremesa, ou utilize como recheio para bolos, tortas ou outros doces.",
+      "Se desejar, você pode congelar o brigadeiro em porções separadas. Certifique-se de armazenar em recipientes adequados para congelamento.",
+      "Na hora de consumir, basta descongelar a quantidade desejada. Obs.: Prefira sempre utilizar chocolate em pó 50% cacau em vez de achocolatado,",
+      "pois contém menos açúcar, sendo uma opção mais saudável. Quanto maior o teor de cacau, mais saudável e intenso será o sabor."
+    ],
+    "photo": null
+  },
+  {
+    "id": "cinnamon-roll",
+    "title": "Cinnamon Roll",
+    "category": "doces",
+    "ingredients": [
+      "1 pitada de sal",
+      "220 ml de leite morno",
+      "5 g de goma xantana",
+      "7 g de fermento em pó Royal",
+      "150 g de farinha de arroz",
+      "10 g de fermento biológico seco",
+      "2 ovos",
+      "100 g de amido de milho",
+      "30 ml de óleo",
+      "90 g de polvilho doce",
+      "40 g de açúcar"
+    ],
+    "steps": [
+      "Misture os ingredientes secos em uma tigela: farinha de arroz, amido de milho, polvilho doce, açúcar, sal, goma xantana, fermento em pó Royal e fermento",
+      "biológico seco.",
+      "Adicione os ovos e o leite morno à mistura seca, mexendo bem.",
+      "Por último, adicione o óleo após bater um pouco a massa. Bata bem na batedeira com o acessório gancho por 5 minutos ou à mão por 10 minutos. A",
+      "massa ficará pesada no início, mas se tornará mais elástica e leve conforme for batendo.",
+      "Após bater, abra a massa com um rolo. Passe manteiga derretida sobre a massa.",
+      "Espalhe uma mistura de canela com açúcar demerara ou açúcar branco comum sobre a massa.",
+      "Enrole a massa e corte em rodelas de aproximadamente 1 dedo de espessura.",
+      "Deixe as rodelas crescerem por 30 minutos. Pré-aqueça o forno a 200 graus Celsius. Antes de assar, passe manteiga derretida sobre os cinnamon rolls.",
+      "Leve ao forno por 20 a 25 minutos.",
+      "Depois de assado, você pode cobrir os Cinnamon Rolls com uma mistura de açúcar de confeiteiro e um pouco de água ou chocolate, a critério.",
+      "Obs.: Adicione uma cobertura de fondant de açúcar de confeiteiro ou chocolate após o cozimento para um toque extra de sabor."
+    ],
+    "photo": "images/doces/cinnamon-roll.jpg"
+  },
+  {
+    "id": "torta-de-banana-ii",
+    "title": "Torta de Banana II",
+    "category": "doces",
+    "ingredients": [
+      "Massa:",
+      "300 g de farinha de arroz",
+      "100 g de creme de leite",
+      "110 g de açúcar",
+      "1 ovo",
+      "1 colher de sopa de fermento em pó",
+      "100 g de manteiga gelada Recheio: Bananas Açúcar Canela Acabamento (pincelar):",
+      "1 ovo Trançado: Parte reservada da massa para trança TORTA DE BANANA II"
+    ],
+    "steps": [
+      "Em uma tigela, coloque a farinha de arroz.",
+      "Adicione a manteiga gelada cortada em cubos e misture até formar uma textura de farofa.",
+      "Acrescente o ovo, o creme de leite, o açúcar e o fermento em pó.",
+      "Misture bem até obter uma massa homogênea.",
+      "Forre uma forma de torta com parte da massa, cobrindo o fundo e as laterais.",
+      "Corte as bananas em rodelas e distribua sobre a massa na forma.",
+      "Polvilhe canela e açúcar sobre as bananas, a gosto.",
+      "Reserve uma parte da massa para fazer o trançado.",
+      "Abra essa parte da massa em tiras e faça um trançado sobre a torta, criando um padrão decorativo.",
+      "Pincele a massa trançada com um ovo batido para dar brilho.",
+      "Leve ao forno pré-aquecido a 180 graus Celsius por aproximadamente 35 minutos ou até que a torta esteja dourada.",
+      "Deixe a torta esfriar antes de cortar e servir.",
+      "Sirva a torta de banana com uma bola de sorvete ou chantilly para uma sobremesa irresistível."
+    ],
+    "photo": "images/doces/torta-de-banana-ii.jpg"
+  },
+  {
+    "id": "trufas-de-chocolate-meio-amargo",
+    "title": "Trufas de Chocolate Meio Amargo",
+    "category": "doces",
+    "ingredients": [
+      "300 g de chocolate meio amargo nobre",
+      "100 g de creme de leite",
+      "1 colher de sobremesa de essência de rum ou conhaque Chocolate em pó meio amargo (para enrolar)"
+    ],
+    "steps": [
+      "Pique o chocolate meio amargo em pedaços pequenos para facilitar a fusão.",
+      "Em uma tigela, coloque o chocolate picado e adicione o creme de leite.",
+      "Leve a mistura de chocolate e creme de leite ao microondas por 30 segundos de cada vez, mexendo entre cada intervalo.",
+      "Repita esse processo até que o chocolate esteja completamente derretido e a mistura esteja homogênea.",
+      "Misture a essência de rum ou conhaque ao chocolate derretido e creme de leite. Certifique-se de que a essência esteja bem incorporada.",
+      "Leve a mistura à geladeira por pelo menos 2 horas para que a ganache fique firme o suficiente para ser moldada.",
+      "Após a refrigeração, retire a mistura da geladeira e, com as mãos levemente untadas, modele pequenas porções da ganache em trufas do tamanho",
+      "desejado.",
+      "Passe cada trufa no chocolate em pó meio amargo, garantindo que fiquem totalmente cobertas.",
+      "Guarde as trufas em um recipiente hermético na geladeira até o momento de servir. Obs.: Experimente personalizar suas trufas adicionando ingredientes como nozes",
+      "picadas, cacau em pó, ou até mesmo cobrindo com uma camada fina de chocolate derretido antes de enrolar no chocolate em pó."
+    ],
+    "photo": null
+  },
+  {
+    "id": "bolinho-de-chuva",
+    "title": "Bolinho de Chuva",
+    "category": "doces",
+    "ingredients": [
+      "1 ovo",
+      "1 xícara de chá de açúcar",
+      "1 xícara de chá de água",
+      "1/2 colher de chá de fermento em pó Royal",
+      "1 pitada de sal",
+      "3 xícaras de farinha de arroz (aproximadamente) Açúcar e Canela (para polvilhar, opcional)"
+    ],
+    "steps": [
+      "Em uma tigela, bata o ovo. Adicione o açúcar e a água à tigela. Misture bem até obter uma consistência homogênea.",
+      "Adicione o fermento em pó Royal e uma pitada de sal à mistura. Mexa novamente para garantir que os ingredientes estejam bem incorporados.",
+      "Acrescente a farinha de arroz aos poucos, mexendo continuamente. A quantidade exata pode variar, portanto, adicione a farinha até obter uma",
+      "consistência de massa de bolinho de chuva.",
+      "Aqueça o óleo em uma panela para fritura.",
+      "Com uma colher, pegue porções da massa e coloque no óleo quente. Frite até que os bolinhos estejam dourados por todos os lados.",
+      "Retire os bolinhos do óleo e coloque sobre papel absorvente para escorrer o excesso de óleo.",
+      "Enquanto ainda estiverem quentes, polvilhe-os com uma mistura de açúcar e canela.",
+      "Sirva os bolinhos de chuva sem glúten ainda quentes e aproveite! Obs.: Você pode ajustar a quantidade de farinha de arroz conforme necessário para",
+      "obter a consistência desejada da massa. A textura pode variar dependendo da marca da farinha de arroz utilizada."
+    ],
+    "photo": "images/doces/bolinho-de-chuva.jpg"
+  },
+  {
+    "id": "canjica",
+    "title": "Canjica",
+    "category": "doces",
+    "ingredients": [
+      "400 g de canjica branca (pesada crua)",
+      "650 ml de leite de coco ou de castanha (de beber)",
+      "1,5 litros de água filtrada",
+      "7 colheres de sopa de açúcar demerara",
+      "3/4 a 1 xícara de leite condensado",
+      "50 g de coco em flocos"
+    ],
+    "steps": [
+      "Deixe a canjica de molho em água de um dia para o outro.",
+      "Coloque a canjica para cozinhar na panela de pressão com 1,5 litros de água e o açúcar.",
+      "Cozinhe por 30 minutos (ou mais, se preferir a canjica mais mole) na panela de pressão elétrica. Certifique-se de que há água suficiente para não secar.",
+      "Após o cozimento, retire a pressão e deixe a água reduzir, mas não totalmente.",
+      "Quando a água estiver quase secando, acrescente o leite e mexa em fogo médio.",
+      "Mexa por cerca de 10 minutos até que a canjica fique mais grossa.",
+      "Adicione o coco em flocos e o leite condensado. Continue mexendo.",
+      "Ajuste o sabor de acordo com seu gosto. Se preferir mais doce, adicione mais açúcar.",
+      "Continue mexendo até atingir a consistência desejada. Se quiser menos caldo, deixe mais tempo no fogo, mexendo sempre.",
+      "Sirva a canjica cremosa quente e aproveite! Obs.: Você pode decorar com mais coco em flocos ou canela antes de servir.",
+      "Experimente e ajuste os ingredientes de acordo com suas preferências pessoais."
+    ],
+    "photo": "images/doces/canjica.jpg"
+  },
+  {
+    "id": "bombom-chokito",
+    "title": "Bombom Chokito",
+    "category": "doces",
+    "ingredients": [
+      "200g de biscoito tipo maisena sem glúten e vegano (ex: Naturallife)",
+      "3 colheres de sopa de achocolatado sem glúten e vegano (ex: 3 Corações)",
+      "1 colher de sopa de óleo de coco (ex: Copra)",
+      "1/4 de xícara de leite vegetal Chocolate em barra sem glúten e vegano (ex: Gobeche Chocolates)",
+      "Flocos de arroz"
+    ],
+    "steps": [
+      "Em um processador, triture os biscoitos sem glúten, o achocolatado e o óleo de coco até obter uma mistura homogênea, sem pedaços de biscoito.",
+      "Adicione o leite vegetal à mistura e processe novamente até formar uma pasta.",
+      "Coloque o creme em um recipiente forrado com filme plástico, formando um rolo. Leve ao congelador até que fique firme.",
+      "Derreta o chocolate em barra no microondas, parando a cada 30 segundos para mexer até que esteja completamente derretido.",
+      "Misture os flocos de arroz ao chocolate derretido, garantindo uma cobertura crocante.",
+      "Retire o rolo de massa do congelador e corte em discos, com cerca de um dedo de espessura ou no tamanho desejado.",
+      "Banhe cada pedaço na mistura de chocolate e flocos de arroz, garantindo uma cobertura completa.",
+      "Forre um recipiente com filme plástico e coloque os bombons. Leve ao congelador até que fiquem completamente firmes.",
+      "Retire do congelador e sirva os bombons Chokito sem glúten e veganos. Obs.: Certifique-se de utilizar ingredientes rotulados como sem glúten e veganos",
+      "para atender a requisitos alimentares específicos. A marca dos produtos pode variar conforme a disponibilidade na sua região."
+    ],
+    "photo": "images/doces/bombom-chokito.jpg"
+  },
+  {
+    "id": "sorvete-de-flocos",
+    "title": "Sorvete de Flocos",
+    "category": "doces",
+    "ingredients": [
+      "200g (1 caixinha) de creme vegetal de amêndoas (tipo creme de leite)",
+      "6 colheres de sopa de açúcar demerara pulverizado",
+      "1 colher de sopa de óleo de coco",
+      "1 colher de sopa de emulsificante (ex: Arcolor)",
+      "1/2 colher de chá de essência de baunilha Raspas de chocolate sem glúten e vegano"
+    ],
+    "steps": [
+      "Na batedeira, coloque o açúcar, o creme vegetal de amêndoas e o óleo de coco. Bata até obter uma mistura homogênea.",
+      "Adicione o emulsificante e continue batendo por 3 a 5 minutos, ou até que a mistura dobre de volume.",
+      "Acrescente a essência de baunilha e as raspas de chocolate. Misture bem até incorporar todos os ingredientes.",
+      "Transfira a massa do sorvete para um recipiente e tampe.",
+      "Leve ao congelador por, no mínimo, oito horas, idealmente deixe durante a noite.",
+      "Retire do congelador, aguarde alguns minutos para que amoleça um pouco, e sirva seu delicioso sorvete de flocos vegano.",
+      "Obs.: Certifique-se de utilizar ingredientes sem glúten e veganos para atender a requisitos alimentares específicos. A marca dos produtos pode variar conforme a",
+      "disponibilidade na sua região."
+    ],
+    "photo": "images/doces/sorvete-de-flocos.jpg"
+  },
+  {
+    "id": "crumble-de-maca",
+    "title": "Crumble de Maçã",
+    "category": "doces",
+    "ingredients": [
+      "2 maçãs, picadas grosseiramente",
+      "1 xícara de açúcar Suco de meio limão Canela em pó a gosto Para Cozinhar:",
+      "1/2 xícara de farinha de arroz",
+      "1 colher de sopa de açúcar",
+      "1/2 colher de sopa de banha ou creme vegetal Farofa: 2 paçoquinhas esfareladas Decoração: Canela em pó a gosto"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180°C. Em uma tigela, misture a farinha de arroz, 1 xícara de açúcar e suco de meio limão.",
+      "Adicione as maçãs picadas e misture bem.",
+      "Acrescente a banha ou creme vegetal e misture novamente.",
+      "Leve a mistura ao fogo médio e cozinhe por cerca de 20 minutos, mexendo ocasionalmente até que as maçãs estejam macias e a mistura tenha engrossado.",
+      "Enquanto as maçãs estão cozinhando, faça a farofa. Em uma tigela, esfarele as paçoquinhas até obter uma textura de farofa.",
+      "Após os 20 minutos de cozimento, desligue o fogo.",
+      "Em uma assadeira, coloque as maçãs cozidas.",
+      "Cubra as maçãs com a farofa de paçoquinhas, pressionando levemente para que ela absorva a calda da maçã.",
+      "Leve ao forno médio preaquecido por mais 20 minutos ou até que a farofa esteja dourada.",
+      "Retire do forno e decore com canela em pó a gosto.",
+      "Sirva quente ou frio, acompanhado, se desejar, de sorvete."
+    ],
+    "photo": "images/doces/crumble-de-maca.jpg"
+  },
+  {
+    "id": "paleta-mexicana-de-banana",
+    "title": "Paleta Mexicana de Banana",
+    "category": "doces",
+    "ingredients": [
+      "Para a mistura de banana:",
+      "3 bananas maduras",
+      "1/2 xícara de açúcar Suco de 1 limão Para a cobertura de chocolate:",
+      "1 xícara de chocolate meio amargo, picado",
+      "2 colheres de sopa de óleo de coco"
+    ],
+    "steps": [
+      "Descasque as bananas e coloque-as em um liquidificador ou processador de alimentos.",
+      "Adicione o açúcar e o suco de limão. Triture até obter uma mistura homogênea.",
+      "Despeje a mistura de banana em moldes para picolé. Insira os palitos de picolé em cada molde.",
+      "Leve ao congelador por pelo menos 4 horas ou até que as paletas estejam completamente congeladas.",
+      "Em banho-maria, derreta o chocolate meio amargo com o óleo de coco, mexendo até obter uma mistura lisa.",
+      "Deixe a cobertura esfriar por alguns minutos. Retire as paletas do congelador.",
+      "Mergulhe cada paleta na cobertura de chocolate, garantindo uma cobertura uniforme.",
+      "Imediatamente, polvilhe a cobertura crocante de amêndoas sobre o chocolate.",
+      "Coloque as paletas de volta no congelador por mais 2 horas ou até que a cobertura esteja firme. Sirva as paletas mexicanas de banana e aproveite!",
+      "Obs.: Essas paletas são uma deliciosa combinação de banana doce, chocolate cremoso e uma camada crocante de amêndoas. Ideal para se refrescar em dias",
+      "quentes!"
+    ],
+    "photo": "images/doces/paleta-mexicana-de-banana.jpg"
+  },
+  {
+    "id": "arroz-doce",
+    "title": "Arroz Doce",
+    "category": "doces",
+    "ingredients": [
+      "1 xícara de arroz (arroz arbóreo ou arroz branco comum)",
+      "2 xícaras de água",
+      "2 xícaras de leite sem lactose ou leite de amêndoas (ou outro leite sem glúten de sua escolha)",
+      "1 lata de leite condensado sem glúten",
+      "1 colher de chá de essência de baunilha",
+      "1/2 colher de chá de canela em pó (opcional) Cascas de 1 limão (certifique-se de usar um limão sem cera)",
+      "Uma pitada de sal Canela em pó para polvilhar (opcional)"
+    ],
+    "steps": [
+      "Lave bem o arroz sob água corrente.",
+      "Em uma panela, coloque o arroz e adicione as 2 xícaras de água.",
+      "Leve ao fogo médio até ferver, depois reduza o fogo para baixo e cozinhe até que a água seja absorvida.",
+      "Adicione o leite sem lactose ou leite de amêndoas à panela com o arroz cozido.",
+      "Acrescente as cascas de limão, a essência de baunilha e a pitada de sal.",
+      "Cozinhe em fogo baixo, mexendo ocasionalmente para evitar que o arroz grude no fundo da panela.",
+      "Quando o arroz estiver quase completamente cozido e o líquido estiver espesso, adicione o leite condensado sem glúten.",
+      "Continue cozinhando até atingir a consistência desejada e o arroz esteja bem cremoso. Remova as cascas de limão e descarte-as.",
+      "Desligue o fogo e deixe o arroz doce descansar por alguns minutos.",
+      "Transfira para tigelas individuais ou um recipiente grande.",
+      "Deixe esfriar um pouco antes de levar à geladeira.",
+      "Sirva o arroz doce gelado, polvilhado com canela em pó, se desejar."
+    ],
+    "photo": "images/doces/arroz-doce.jpg"
+  },
+  {
+    "id": "mousse-de-chocolate",
+    "title": "Mousse de Chocolate",
+    "category": "doces",
+    "ingredients": [
+      "200g de chocolate meio amargo sem glúten, picado",
+      "3 colheres de sopa de água",
+      "3 ovos, separados (gemas e claras)",
+      "2 colheres de sopa de açúcar",
+      "1 colher de chá de extrato de baunilha Uma pitada de sal",
+      "1 xícara de creme de leite fresco (ou creme de leite de soja sem glúten)"
+    ],
+    "steps": [
+      "Coloque o chocolate picado e a água em uma tigela resistente ao calor.",
+      "Derreta o chocolate em banho-maria ou no micro-ondas, mexendo ocasionalmente até obter uma mistura lisa. Reserve para esfriar um pouco.",
+      "Adicione as gemas ao chocolate derretido e misture bem.",
+      "Acrescente o extrato de baunilha e mexa até incorporar completamente.",
+      "Em uma tigela limpa e seca, bata as claras em neve com uma pitada de sal até formar picos firmes.",
+      "Adicione gradualmente o açúcar enquanto continua a bater até que as claras fiquem brilhantes e formem picos ainda mais firmes.",
+      "Delicadamente, incorpore um terço das claras em neve à mistura de chocolate para aliviar a textura.",
+      "Em seguida, adicione o restante das claras e dobre suavemente até que não haja mais listras visíveis.",
+      "Em outra tigela, bata o creme de leite fresco até formar picos médios.",
+      "Incorpore o creme de leite à mistura de chocolate e claras em neve, dobrando cuidadosamente até que esteja homogêneo.",
+      "Distribua a mousse em tigelas individuais ou em uma única travessa.",
+      "Leve à geladeira por pelo menos 4 horas ou até que a mousse esteja firme.",
+      "Sirva a mousse de chocolate gelada.",
+      "Decore com raspas de chocolate ou frutas, se desejar."
+    ],
+    "photo": "images/doces/mousse-de-chocolate.jpg"
+  },
+  {
+    "id": "pudim-de-tapioca",
+    "title": "Pudim de Tapioca",
+    "category": "doces",
+    "ingredients": [
+      "Pudim:",
+      "1 xícara de tapioca granulada sem glúten",
+      "2 xícaras de leite sem lactose ou leite de coco (sem glúten)",
+      "1 lata de leite condensado sem glúten",
+      "3 ovos",
+      "1 colher de chá de extrato de baunilha Uma pitada de sal Calda: 1 xícara de açúcar (ou 1 xícara de adoçante culinário líquido ou em pó)"
+    ],
+    "steps": [
+      "Coloque a tapioca em uma tigela e despeje o leite sem lactose ou leite de coco sobre ela.",
+      "Deixe a tapioca hidratar por pelo menos 2 horas ou até que esteja completamente inchada.",
+      "Em uma panela, derreta o açúcar ou o adoçante em fogo médio, mexendo constantemente até obter um caramelo dourado.",
+      "Despeje o caramelo em uma forma para pudim, espalhando-o uniformemente pelo fundo da forma. Pré-aqueça o forno a 180°C.",
+      "No liquidificador, combine a tapioca hidratada, o leite condensado, os ovos, o extrato de baunilha e uma pitada de sal. Bata até obter uma mistura homogênea",
+      "e cremosa. Despeje a mistura na forma caramelizada.",
+      "Coloque a forma do pudim dentro de uma assadeira maior.",
+      "Adicione água quente na assadeira para criar um banho-maria.",
+      "Asse no forno preaquecido por aproximadamente 1 hora, ou até que o pudim esteja firme no centro.",
+      "Retire do forno e deixe esfriar. Depois de esfriar, leve o pudim à geladeira por pelo menos 4 horas ou durante a noite.",
+      "Para desenformar, passe uma faca ao redor das bordas da forma e vire o pudim sobre um prato de servir.",
+      "Sirva o pudim de tapioca gelado. Se desejar, decore com coco ralado ou frutas frescas."
+    ],
+    "photo": "images/doces/pudim-de-tapioca.jpg"
+  },
+  {
+    "id": "quindim",
+    "title": "Quindim",
+    "category": "doces",
+    "ingredients": [
+      "200g de coco ralado sem glúten (fresco ou desidratado)",
+      "1 xícara de açúcar",
+      "6 gemas de ovos",
+      "1/4 de xícara de manteiga sem sal derretida",
+      "1/2 xícara de leite de coco (sem glúten)",
+      "1 colher de chá de essência de baunilha Margarina ou manteiga sem sal para untar as forminhas"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180°C.",
+      "Unte forminhas para quindim com margarina ou manteiga e reserve.",
+      "Em uma tigela, misture o coco ralado com o açúcar.",
+      "Adicione as gemas, a manteiga derretida, o leite de coco e a essência de baunilha.",
+      "Mexa bem até obter uma mistura homogênea.",
+      "Distribua a mistura igualmente nas forminhas untadas.",
+      "Leve ao forno preaquecido e asse em banho-maria por aproximadamente 25 a",
+      "30 minutos, ou até que os quindins estejam dourados na superfície.",
+      "Deixe os quindins esfriarem completamente antes de tentar desenformá-los.",
+      "Para desenformar, passe uma faca ao redor das bordas e vire cada quindim sobre um prato.",
+      "Sirva os quindins em temperatura ambiente.",
+      "Eles podem ser armazenados na geladeira por alguns dias."
+    ],
+    "photo": "images/doces/quindim.jpg"
+  },
+  {
+    "id": "pave-de-morango",
+    "title": "Pavê de Morango",
+    "category": "doces",
+    "ingredients": [
+      "Para o Creme:",
+      "2 latas de leite condensado sem glúten",
+      "2 latas de creme de leite sem soro (deixe na geladeira por algumas horas antes de usar)",
+      "1 colher de chá de essência de baunilha Para o Pavê:",
+      "1 pacote de biscoitos sem glúten (tipo maisena)",
+      "1 xícara de leite sem glúten",
+      "500g de morangos frescos, lavados e fatiados Para a Decoração (opcional): Morangos inteiros",
+      "Chantilly sem glúten"
+    ],
+    "steps": [
+      "Em uma tigela grande, misture o leite condensado sem glúten, o creme de leite sem soro e a essência de baunilha.",
+      "Bata a mistura até obter um creme homogêneo e reserve na geladeira.",
+      "Mergulhe rapidamente os biscoitos no leite sem glúten.",
+      "Em uma travessa, faça uma camada de biscoitos umedecidos.",
+      "Despeje uma porção do creme sobre os biscoitos.",
+      "Adicione uma camada de morangos fatiados.",
+      "Repita o processo, criando camadas alternadas até acabar com uma camada de creme por cima.",
+      "Decore a parte superior do pavê com morangos inteiros.",
+      "Se desejar, adicione toques de chantilly sem glúten para um acabamento mais elegante.",
+      "Leve o pavê à geladeira por pelo menos 4 horas ou deixe durante a noite para que os sabores se misturem e o pavê fique firme.",
+      "Corte em porções e sirva gelado."
+    ],
+    "photo": "images/doces/pave-de-morango.jpg"
+  },
+  {
+    "id": "petit-gateu",
+    "title": "Petit Gateu",
+    "category": "doces",
+    "ingredients": [
+      "200g de chocolate meio amargo sem glúten, picado",
+      "1/2 xícara de manteiga sem sal",
+      "1/2 xícara de açúcar",
+      "3 ovos inteiros",
+      "3 gemas de ovos",
+      "1/4 de xícara de farinha de amêndoas (ou outra farinha sem glúten de sua escolha)",
+      "1 colher de chá de essência de baunilha Pitada de sal Manteiga e farinha sem glúten para untar e polvilhar as forminhas"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 200°C. Derreta o chocolate meio amargo e a manteiga em banho-maria ou no micro-ondas, mexendo até obter uma mistura homogênea.",
+      "Em uma tigela, bata os ovos, as gemas e o açúcar até obter uma mistura clara e fofa.",
+      "Adicione a essência de baunilha e uma pitada de sal. Continue batendo.",
+      "Gradualmente, despeje a mistura de chocolate derretido na tigela, mexendo constantemente.",
+      "Adicione a farinha de amêndoas e misture até incorporar completamente.",
+      "Unte e polvilhe com farinha as forminhas para petit gateau.",
+      "Despeje a massa nas forminhas, preenchendo até cerca de 3/4 da capacidade.",
+      "Asse no forno preaquecido por 10 a 12 minutos, ou até que as bordas estejam firmes, mas o centro ainda esteja macio.",
+      "Retire as forminhas do forno e deixe descansar por 1 minuto.",
+      "Passe uma faca ao redor do Petit Gateau e vire-os sobre os pratos de servir.",
+      "Sirva imediatamente enquanto o centro ainda está líquido.",
+      "Opcional: Polvilhe com açúcar de confeiteiro ou sirva com uma bola de sorvete sem glúten."
+    ],
+    "photo": "images/doces/petit-gateu.jpg"
+  },
+  {
+    "id": "manjar",
+    "title": "Manjar",
+    "category": "doces",
+    "ingredients": [
+      "Para o Manjar:",
+      "1 litro de leite sem lactose ou leite de coco (sem glúten)",
+      "1 xícara de leite de coco (sem glúten)",
+      "1 xícara de açúcar",
+      "1 xícara de coco ralado sem glúten",
+      "1/2 xícara de amido de milho (maisena) sem glúten",
+      "1 colher de chá de essência de baunilha Para a Calda de Ameixa:",
+      "1 xícara de ameixas secas sem caroço",
+      "1 xícara de água",
+      "1/2 xícara de açúcar (ou 1/2 xícara de adoçante culinário líquido ou em pó) Suco de meio limão"
+    ],
+    "steps": [
+      "Em uma panela, misture o leite, o leite de coco, o açúcar, o coco ralado e o amido de milho.",
+      "Leve ao fogo médio, mexendo constantemente para evitar que grude no fundo da panela.",
+      "Continue mexendo até que a mistura engrosse e comece a soltar do fundo da panela. Retire do fogo e adicione a essência de baunilha. Mexa bem.",
+      "Despeje a mistura em uma forma para pudim untada com óleo.",
+      "Deixe esfriar à temperatura ambiente e, em seguida, leve à geladeira por pelo menos 4 horas, ou até que esteja completamente firme.",
+      "Em uma panela, coloque as ameixas secas, a água, o açúcar e o suco de limão.",
+      "Cozinhe em fogo médio até que as ameixas estejam macias e a calda tenha engrossado um pouco. Deixe esfriar antes de usar.",
+      "Passe uma faca ao redor da forma para soltar o manjar.",
+      "Desenforme em um prato de servir.",
+      "Regue com a calda de ameixa antes de servir.",
+      "Dica de Decoração (opcional): Decore o manjar com ameixas frescas ou polvilhe coco ralado por cima."
+    ],
+    "photo": "images/doces/manjar.jpg"
+  },
+  {
+    "id": "pudim-de-pacoca",
+    "title": "Pudim de Paçoca",
+    "category": "doces",
+    "ingredients": [
+      "Para o Pudim:",
+      "1 lata de leite condensado (verifique se não contém glúten na composição)",
+      "1 lata de leite (use a lata de leite condensado como medida)",
+      "3 ovos",
+      "5 paçocas sem glúten (certifique-se de que são isentas de glúten)",
+      "1 colher de chá de essência de baunilha (opcional) Para a Calda:",
+      "1 xícara de açúcar (ou 1 xícara de adoçante culinário líquido ou em pó)"
+    ],
+    "steps": [
+      "Em uma forma para pudim, derreta o açúcar ou o adoçante em fogo médio até obter um caramelo dourado. Mexa a forma para distribuir o caramelo",
+      "uniformemente no fundo e nas laterais. Reserve.",
+      "Pré-aqueça o forno a 180°C. No liquidificador, adicione o leite condensado, o leite, os ovos, as paçocas e a essência de baunilha.",
+      "Bata tudo até obter uma mistura homogênea.",
+      "Despeje a mistura do pudim na forma caramelizada. Cubra a forma com papel- alumínio.",
+      "Coloque a forma em uma assadeira maior e adicione água quente na assadeira para criar um banho-maria.",
+      "Asse em forno preaquecido a 180°C por aproximadamente 1 hora. Faça o teste do palito para verificar se está cozido. Insira um palito no centro do pudim; se",
+      "sair limpo, está pronto.",
+      "Retire do forno e deixe esfriar completamente antes de levar à geladeira por, pelo menos, 4 horas ou até que esteja bem firme.",
+      "Para desenformar, passe uma faca ao redor das bordas do pudim e vire em um prato grande. Sirva gelado e aproveite!"
+    ],
+    "photo": "images/doces/pudim-de-pacoca.jpg"
+  },
+  {
+    "id": "palha-italiana",
+    "title": "Palha Italiana",
+    "category": "doces",
+    "ingredients": [
+      "1 lata de leite condensado sem glúten",
+      "2 colheres de sopa de cacau em pó sem glúten",
+      "2 colheres de sopa de margarina sem glúten",
+      "200g de biscoitos sem glúten (pode ser de chocolate ou maisena) Açúcar de confeiteiro (opcional, para polvilhar)"
+    ],
+    "steps": [
+      "Coloque os biscoitos sem glúten em um saco plástico e triture-os com um rolo de massa até obter migalhas grossas.",
+      "Em uma panela, coloque o leite condensado, o cacau em pó e a margarina. Cozinhe em fogo baixo, mexendo sempre, até obter uma mistura homogênea e",
+      "que comece a desgrudar do fundo da panela.",
+      "Retire a panela do fogo e misture as migalhas de biscoito na massa de chocolate. Certifique-se de que todos os biscoitos estejam bem incorporados.",
+      "Em uma forma forrada com papel-manteiga, despeje a mistura e nivele-a com uma colher ou espátula.",
+      "Deixe a mistura esfriar em temperatura ambiente por alguns minutos e, em seguida, leve à geladeira por pelo menos 2 horas para firmar.",
+      "Após a palha italiana estar bem firme, retire da geladeira e corte em quadrados do tamanho desejado.",
+      "Se desejar, polvilhe açúcar de confeiteiro sobre os pedaços de palha italiana para decorar.",
+      "Sirva os quadrados de palha italiana e aproveite essa delícia sem glúten!"
+    ],
+    "photo": "images/doces/palha-italiana.jpg"
+  },
+  {
+    "id": "cocada",
+    "title": "Cocada",
+    "category": "doces",
+    "ingredients": [
+      "2 xícaras de coco ralado (sem glúten)",
+      "1 xícara de açúcar",
+      "1/2 xícara de água",
+      "1 colher de sopa de margarina sem glúten",
+      "1 colher de chá de essência de baunilha (opcional) Pitada de sal"
+    ],
+    "steps": [
+      "Certifique-se de que todos os ingredientes, especialmente o coco ralado, sejam sem glúten.",
+      "Em uma panela, misture o coco ralado e o açúcar.",
+      "Adicione a água à mistura de coco e açúcar, mexendo bem.",
+      "Leve a panela ao fogo baixo e adicione a margarina e a essência de baunilha (se estiver usando). Adicione uma pitada de sal.",
+      "Cozinhe, mexendo constantemente, até a mistura começar a desgrudar do fundo da panela e atingir uma consistência mais firme.",
+      "Retire do fogo e, enquanto ainda estiver quente, modele a cocada em pequenos montes ou coloque em forminhas individuais.",
+      "Deixe a cocada esfriar completamente antes de servir. Você pode colocá-la na geladeira para acelerar o processo.",
+      "Sirva as cocadas frias e delicie-se com essa opção sem glúten."
+    ],
+    "photo": "images/doces/cocada.jpg"
+  },
+  {
+    "id": "nutella-caseira",
+    "title": "Nutella Caseira",
+    "category": "doces",
+    "ingredients": [
+      "2 xícaras de avelãs torradas (sem glúten)",
+      "1/2 xícara de cacau em pó sem glúten",
+      "1 xícara de açúcar de coco (ou outro adoçante sem glúten)",
+      "1/2 colher de chá de extrato de baunilha",
+      "1/4 colher de chá de sal",
+      "1/4 xícara de óleo de coco derretido"
+    ],
+    "steps": [
+      "Espalhe as avelãs em uma assadeira e leve ao forno preaquecido a 180°C por cerca de 10 minutos, mexendo ocasionalmente, até que fiquem levemente",
+      "douradas. Deixe esfriar.",
+      "Coloque as avelãs em um pano de prato limpo e esfregue para remover as cascas. Não se preocupe se algumas cascas ainda permanecerem.",
+      "Em um processador de alimentos, triture as avelãs torradas até formar uma pasta lisa.",
+      "Adicione o cacau em pó, o açúcar de coco, o extrato de baunilha, o sal e o óleo de coco derretido às avelãs processadas.",
+      "Processe novamente até obter uma mistura homogênea e cremosa.",
+      "Se a mistura estiver muito espessa, adicione mais óleo de coco, uma colher de sopa de cada vez, até atingir a consistência desejada.",
+      "Transfira a Nutella caseira sem glúten para um pote de vidro hermético e armazene em temperatura ambiente ou na geladeira.",
+      "Sirva a Nutella caseira com frutas, pães sem glúten ou use como recheio em receitas."
+    ],
+    "photo": "images/doces/nutella-caseira.jpg"
+  },
+  {
+    "id": "doce-de-leite",
+    "title": "Doce de Leite",
+    "category": "doces",
+    "ingredients": [
+      "1 litro de leite desnatado",
+      "1 xícara de açúcar (200 g)",
+      "1 colher de chá de essência de baunilha (opcional)"
+    ],
+    "steps": [
+      "Em uma panela grande, despeje o leite integral.",
+      "Acrescente o açúcar ao leite.",
+      "Leve a mistura ao fogo médio-alto, mexendo constantemente até que o açúcar se dissolva completamente.",
+      "Reduza o fogo para médio-baixo e continue mexendo ocasionalmente para evitar que o leite grude no fundo da panela.",
+      "Cozinhe por aproximadamente 1 hora e meia a 2 horas, ou até que o doce de leite atinja a consistência desejada. O tempo pode variar, dependendo da",
+      "potência do fogão.",
+      "Para verificar a consistência, coloque uma pequena quantidade de doce de leite em um prato frio. Se ele ficar firme ao toque, estará pronto.",
+      "Se desejar, adicione a essência de baunilha e misture bem. Essa etapa é opcional, mas confere um sabor extra ao doce de leite.",
+      "Retire a panela do fogo e deixe o doce de leite esfriar por alguns minutos.",
+      "Transfira o doce de leite para potes de vidro esterilizados e deixe esfriar completamente antes de tampar. Armazene na geladeira.",
+      "Sirva o doce de leite puro, como cobertura de sobremesas, ou utilize-o como ingrediente em diversas receitas sem glúten."
+    ],
+    "photo": "images/doces/doce-de-leite.jpg"
+  },
+  {
+    "id": "pudim-de-chia",
+    "title": "Pudim de Chia",
+    "category": "doces",
+    "ingredients": [
+      "Para o pudim de chia:",
+      "1/2 xícara de sementes de chia",
+      "2 xícaras de leite de amêndoas (ou outro leite vegetal)",
+      "1 colher de chá de extrato de baunilha",
+      "2-3 colheres de sopa de mel ou xarope de bordo, a gosto Para o recheio de frutas:",
+      "1 xícara de morangos, cortados em fatias",
+      "1/2 xícara de mirtilos",
+      "1/2 xícara de kiwi, cortado em cubos"
+    ],
+    "steps": [
+      "Em uma tigela, misture as sementes de chia, o leite de amêndoas, o extrato de baunilha e o mel. Mexa bem para garantir que as sementes de chia estejam bem",
+      "distribuídas. Deixe descansar por pelo menos 30 minutos, mexendo ocasionalmente para evitar a formação de grumos.",
+      "Enquanto o pudim de chia repousa, prepare as frutas cortando os morangos, mirtilos e kiwis.",
+      "Em potinhos individuais ou em um recipiente maior, faça camadas alternadas de pudim de chia e frutas. Comece com uma camada de pudim de chia, seguida por",
+      "uma camada de morangos, outra camada de pudim, uma camada de mirtilos, e assim por diante.",
+      "Termine com uma camada de pudim de chia e decore com algumas frutas por cima. Cubra e leve à geladeira por, pelo menos, 2 horas ou durante a noite para",
+      "permitir que as sementes de chia absorvam completamente o líquido.",
+      "Antes de servir, decore com algumas frutas frescas adicionais, se desejar. Este pudim de chia com frutas é uma opção saudável e deliciosa para o café da",
+      "manhã ou sobremesa."
+    ],
+    "photo": "images/doces/pudim-de-chia.jpg"
+  },
+  {
+    "id": "pudim-de-coco-sem-acucar",
+    "title": "Pudim de Coco sem Açúcar",
+    "category": "doces",
+    "ingredients": [
+      "Para o pudim:",
+      "1 lata de leite de coco (400ml)",
+      "1 lata de leite de amêndoas (ou outro leite vegetal) sem açúcar (400ml)",
+      "4 ovos",
+      "1 colher de chá de essência de baunilha Adoçante sem calorias a gosto (stévia, eritritol, ou outro de sua escolha).",
+      "Para a Calda (opcional):",
+      "1/4 xícara de coco ralado sem açúcar (opção colocar 1/2 de adoçante culinário líquido ou em pó mais 1/2 de água)"
+    ],
+    "steps": [
+      "Se desejar uma calda, leve o coco ralado a uma frigideira em fogo médio até dourar levemente. Reserve. Pré-aqueça o forno a 180°C.",
+      "No liquidificador, combine o leite de coco, o leite de amêndoas, os ovos, a essência de baunilha e adoçante a gosto. Bata bem até obter uma mistura",
+      "homogênea.",
+      "Se optar pela calda, distribua o coco ralado no fundo de uma forma para pudim.",
+      "Despeje a mistura do liquidificador na forma sobre o coco ralado.",
+      "Coloque a forma em uma assadeira maior e adicione água quente na assadeira para criar um banho-maria.",
+      "Asse em forno preaquecido a 180°C por aproximadamente 50-60 minutos, ou até que o pudim esteja firme e dourado.",
+      "Retire do forno e deixe esfriar antes de refrigerar por algumas horas ou durante a noite.",
+      "Desenforme quando estiver completamente frio.",
+      "Sirva gelado e aproveite o delicioso pudim de coco sem açúcar."
+    ],
+    "photo": "images/doces/pudim-de-coco-sem-acucar.jpg"
+  },
+  {
+    "id": "ganache-de-chocolate-light",
+    "title": "Ganache de Chocolate Light",
+    "category": "doces",
+    "ingredients": [
+      "100g de chocolate amargo (70% cacau ou mais), picado",
+      "1/2 xícara de leite desnatado",
+      "1 colher de sopa de mel ou adoçante a gosto",
+      "1 colher de chá de extrato de baunilha (opcional)"
+    ],
+    "steps": [
+      "Pique finamente o chocolate amargo para facilitar a fusão.",
+      "Em uma panela, aqueça o leite desnatado em fogo médio até começar a borbulhar nas bordas, mas evite ferver.",
+      "Retire o leite do fogo e adicione o chocolate picado à panela. Deixe descansar por um minuto para permitir que o calor do leite derreta o chocolate.",
+      "Mexa a mistura de chocolate e leite até obter um creme suave e homogêneo.",
+      "Adicione o mel ou adoçante a gosto. Se desejar, inclua o extrato de baunilha para dar um toque de sabor.",
+      "Deixe o ganache esfriar à temperatura ambiente por alguns minutos e, em seguida, leve à geladeira por cerca de 1 hora para ganhar consistência.",
+      "Se preferir uma textura mais leve, você pode bater o ganache com um mixer ou batedeira até obter uma consistência mais aerada.",
+      "Sirva o ganache de chocolate light sobre frutas frescas, como morangos ou bananas, ou utilize como cobertura para bolos ou sobremesas."
+    ],
+    "photo": "images/doces/ganache-de-chocolate-light.jpg"
+  },
+  {
+    "id": "tiramisu",
+    "title": "Tiramisú",
+    "category": "doces",
+    "ingredients": [
+      "Para o Creme:",
+      "4 gemas de ovos",
+      "1/2 xícara de açúcar",
+      "1 xícara de mascarpone (certifique-se de que seja sem glúten)",
+      "1 xícara de creme de leite sem glúten, batido em ponto de chantilly Para a Montagem:",
+      "1 xícara de café forte, frio",
+      "2 colheres de sopa de rum (opcional) Biscoitos sem glúten (pode ser pão de ló ou biscoitos específicos sem glúten)",
+      "Cacau em pó para polvilhar Chocolate amargo ralado (opcional)"
+    ],
+    "steps": [
+      "Prepare o café forte e deixe esfriar. Adicione o rum ao café, se estiver usando.",
+      "Em uma tigela, bata as gemas com o açúcar até obter uma mistura clara e fofa.",
+      "Adicione o mascarpone à mistura de gemas e açúcar, misturando bem até ficar homogêneo.",
+      "Em outra tigela, bata o creme de leite até obter picos firmes. Delicadamente, incorpore o creme de leite batido à mistura de mascarpone.",
+      "Mergulhe os biscoitos sem glúten rapidamente no café com rum, certificando-se de não deixá-los encharcados.",
+      "Disponha uma camada de biscoitos no fundo de uma travessa ou copos individuais.",
+      "Cubra os biscoitos com metade do creme de mascarpone.",
+      "Adicione outra camada de biscoitos embebidos e cubra com o restante do creme de mascarpone.",
+      "Polvilhe cacau em pó sobre a última camada de creme.",
+      "Leve à geladeira por pelo menos 4 horas ou idealmente durante a noite para permitir que os sabores se desenvolvam.",
+      "Antes de servir, decore com chocolate amargo ralado, se desejar. Corte em porções e sirva o tiramisu frio."
+    ],
+    "photo": "images/doces/tiramisu.jpg"
+  },
+  {
+    "id": "bombom-sonho-de-valsa",
+    "title": "Bombom Sonho de Valsa",
+    "category": "doces",
+    "ingredients": [
+      "Para o Recheio:",
+      "1 lata de leite condensado (sem glúten)",
+      "1 colher de sopa de manteiga (sem sal)",
+      "100g de coco ralado sem glúten Para a Casquinha:",
+      "300g de chocolate ao leite sem glúten (picado)",
+      "1 colher de sopa de óleo de coco ou manteiga de cacau"
+    ],
+    "steps": [
+      "Em uma panela, misture o leite condensado, a manteiga e o coco ralado. Leve ao fogo baixo, mexendo sempre, até a mistura começar a desgrudar do fundo da",
+      "panela. Deixe esfriar.",
+      "Com as mãos levemente untadas com óleo de coco, pegue pequenas porções do recheio e modele bolinhas. Reserve em uma assadeira forrada com papel-",
+      "manteiga.",
+      "Derreta o chocolate ao leite em banho-maria ou no micro-ondas em intervalos curtos, mexendo entre cada intervalo para garantir que o chocolate derreta",
+      "uniformemente.",
+      "Adicione o óleo de coco ou manteiga de cacau ao chocolate derretido, mexendo bem para obter uma consistência mais suave.",
+      "Com o auxílio de um garfo, mergulhe cada bolinha de recheio no chocolate derretido, garantindo que fiquem completamente cobertas. Escorra o excesso",
+      "de chocolate.",
+      "Coloque os bombons na assadeira forrada e leve à geladeira por pelo menos 2 horas, ou até que o chocolate esteja completamente firme.",
+      "Retire os bombons da geladeira e, se desejar, decore com drageados ou faça detalhes adicionais com chocolate derretido."
+    ],
+    "photo": "images/doces/bombom-sonho-de-valsa.jpg"
+  },
+  {
+    "id": "alfajor",
+    "title": "Alfajor",
+    "category": "doces",
+    "ingredients": [
+      "Para o Alfajor:",
+      "1 xícara de amido de milho",
+      "1 xícara de farinha de arroz",
+      "1/2 xícara de açúcar de confeiteiro",
+      "1 colher de chá de fermento em pó",
+      "1/2 colher de chá de bicarbonato de sódio",
+      "150g de manteiga sem sal (em temperatura ambiente)",
+      "1 colher de chá de essência de baunilha",
+      "2 gemas de ovo Para o Recheio: Doce de leite sem glúten (compre pronto ou faça o seu) Para a Cobertura:",
+      "200g de chocolate meio amargo sem glúten (picado)",
+      "1 colher de sopa de óleo de coco ou manteiga de cacau ALFAJOR"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180°C e forre uma assadeira com papel-manteiga.",
+      "Em uma tigela, misture o amido de milho, a farinha de arroz, o açúcar de confeiteiro, o fermento em pó e o bicarbonato de sódio.",
+      "Em outra tigela, bata a manteiga até ficar cremosa. Adicione as gemas e a essência de baunilha, batendo bem.",
+      "Gradualmente, adicione a mistura de ingredientes secos à mistura de manteiga e gemas, mexendo até formar uma massa homogênea.",
+      "Leve a massa à geladeira por 30 minutos.",
+      "Abra a massa em uma superfície enfarinhada até atingir uma espessura de aproximadamente 0,5 cm.",
+      "Corte discos com um cortador ou use um copo. Transfira para a assadeira preparada.",
+      "Asse por 10-12 minutos ou até que as bordas fiquem levemente douradas.",
+      "Deixe esfriar completamente.",
+      "Una os discos com doce de leite, formando os alfajores.",
+      "Derreta o chocolate meio amargo em banho-maria ou no micro-ondas, mexendo a cada 30 segundos para evitar que o chocolate queime.",
+      "Adicione o óleo de coco ou manteiga de cacau ao chocolate derretido, misturando bem para obter uma textura mais suave.",
+      "Mergulhe cada alfajor na cobertura de chocolate, garantindo que esteja completamente coberto.",
+      "Deixe escorrer o excesso e coloque os alfajores em uma grade para que o chocolate seque.",
+      "Leve os alfajores à geladeira por pelo menos 1 hora, ou até que o chocolate esteja completamente firme.",
+      "Sirva e aproveite esses deliciosos alfajores sem glúten com recheio de doce de leite! Conclusão",
+      "Antes de tudo, quero expressar meu profundo agradecimento pela sua presença e por ter adquirido o meu e-book dedicado a doces e",
+      "sobremesas. Agradeço sinceramente pela confiança que depositou em mim. Espero que tenha desfrutado",
+      "do conteúdo e que este recurso seja valioso para suas experiências culinárias no mundo dos doces.",
+      "Não desanime na sua jornada de criar sobremesas irresistíveis sem glúten. Se, porventura, ainda não alcançou o sucesso",
+      "desejado, saiba que está bem próximo! Continue perseverando, pois cada esforço contribuirá para",
+      "aprimorar suas habilidades na arte da confeitaria sem glúten. Desejo a você não apenas boa sorte, mas",
+      "também momentos verdadeiramente deliciosos à mesa! Beijinhos..!! KNED TECH © Copyright - Todos os direitos reservados",
+      "Curitiba/PR - Brasil www.chefcarlaramos.online contato@chefcarlaramos.online"
+    ],
+    "photo": "images/doces/alfajor.jpg"
   }
 ]
