@@ -4874,5 +4874,782 @@
       "Curitiba/PR - Brasil www.chefcarlaramos.online contato@chefcarlaramos.online"
     ],
     "photo": "images/veganas/pave-com-chocolate.jpg"
+  },
+  {
+    "id": "biscoito-de-cafe",
+    "title": "Biscoito de Café",
+    "category": "bolachas",
+    "ingredients": [
+      "150g de farinha (eu usei 90g de farinha de arroz + 60g de farinha de amêndoas).",
+      "80g de açúcar de coco ou o de sua preferência (pode ser adoçante natural em pó 80 g)",
+      "75g de manteiga (pode ser qualquer óleo de sua preferência (como sugestão indico acrescentar no final até a massa dar liga).",
+      "30g de amido de milho (pode não colocar o amido e aumentar mais 30g na farinha, mas o amido vai deixar o biscoito com uma consistência mais",
+      "interessante)",
+      "1 gema de ovo",
+      "2 colheres de cacau em pó",
+      "1 colher (sopa) de café solúvel diluído em 1 colher (sopa) de água quente"
+    ],
+    "steps": [
+      "Comece diluindo o café solúvel na água quente, reserve.",
+      "Misture o açúcar, o ovo e a manteiga.",
+      "Acrescente o café diluído e os demais ingredientes.",
+      "Mexa até virar uma massa uniforme.",
+      "Molde os biscoitinhos e leve para assar á 180 graus por 15 minutos."
+    ],
+    "photo": "images/bolachas/biscoito-de-cafe.jpg"
+  },
+  {
+    "id": "rosquinha-de-cacau",
+    "title": "Rosquinha de Cacau",
+    "category": "bolachas",
+    "ingredients": [
+      "60 g de farinha de aveia sem glúten",
+      "30 g de chocolate em pó cacau 50%",
+      "2 colheres de pasta de amendoim",
+      "50 ml de leite vegetal",
+      "1 colher (sopa) de café solúvel diluído em 1 colher (sopa) de água quente"
+    ],
+    "steps": [
+      "Misture a farinha, cacau e a pasta e vá adicionando o leite aos poucos e mexendo, pode usar as mãos para ir incorporando a massa.",
+      "A massa fica bem pegajosa, mas aos poucos vai dando ponto que não gruda nas mãos.",
+      "Abra a massa sobre uma superfície, pode ser em papel manteiga se tiver ou até mesmo na mesa.",
+      "Para modelar, usei uma tampinha de fermento e uma tampa menorzinha para o furinho de dentro (pode ser a de adoçante).",
+      "Asse em forno pré aquecido a 180°, por uns 25 minutos ou até que fique dourados, fique de olho para não queimar.",
+      "Pode ser feito em Airfryer por 15 minutos a 180° graus ou até que fique dourados. Elas ficam com um cheirinho incrível, você pode armazenar em um",
+      "pote vedado e consumir ao longo dos dias."
+    ],
+    "photo": "images/bolachas/rosquinha-de-cacau.jpg"
+  },
+  {
+    "id": "bolacha-de-macadamia-com-limao",
+    "title": "Bolacha de Macadâmia com Limão",
+    "category": "bolachas",
+    "ingredients": [
+      "1 ovo",
+      "2 colheres (sopa) de gordura de coco",
+      "250g de farinha de macadâmia",
+      "50g de fibra de bambu",
+      "40g de eritritol pulverizado",
+      "1 colher (chá) de baunilha",
+      "1 pitada de sal"
+    ],
+    "steps": [
+      "Coloque a gordura de coco, o ovo e o eritritol em uma vasilha e mexa bem misturando com uma colher ou use um mix para misturar, acrescente o",
+      "restante dos ingredientes.",
+      "Leve à massa a geladeira para ficar bem firme (30 minutos) e divida a massa em",
+      "2 partes, uma parte você corta as bolachinhas outra parte permanece na geladeira para ser cortada na sequência.",
+      "Abra a massa em cima de um papel manteiga coberta com um papel filme. O papel filme é para a massa não colar no pau de macarrão ou no copo (pode",
+      "abrir com um copo).",
+      "Abra a massa na mesma espessura 2cm mais ou menos. Corte com o cortador de bolachinhas e coloque a bolachinha depois de cortada em uma forma",
+      "forrada com papel manteiga.",
+      "Leve à geladeira mais uma vez depois de cortadas para ficarem geladas antes de assar. Levar para assar em forno pré-aquecido.",
+      "Assar a 180 graus por 10-12 minuto."
+    ],
+    "photo": "images/bolachas/bolacha-de-macadamia-com-limao.jpg"
+  },
+  {
+    "id": "biscoito-de-canela",
+    "title": "Biscoito de Canela",
+    "category": "bolachas",
+    "ingredients": [
+      "1 xícara de farinha de aveia",
+      "2 ou 3 colheres (sopa) de açúcar ou adoçante (usei açúcar de coco mas pode ser mascavo, demerara ou o que preferir)",
+      "Canela em pó a gosto (usei 2 colheres de sopa rasas)",
+      "2 colheres (sopa) de óleo ou manteiga (usei azeite mas pode ser qualquer um)",
+      "1 ovo"
+    ],
+    "steps": [
+      "Apenas junte todos os ingredientes, faça bolinhas e amasse-as com garfo.",
+      "Leve para o forno em uma forma antiaderente a 200 graus por cerca de 12 minutos.",
+      "Após assado conservar em um pote hermético em temperatura ambiente por até 1 semana ou geladeira por até 2 semanas."
+    ],
+    "photo": "images/bolachas/biscoito-de-canela.jpg"
+  },
+  {
+    "id": "biscoito-de-laranja",
+    "title": "Biscoito de Laranja",
+    "category": "bolachas",
+    "ingredients": [
+      "1 xícara (160g) farinha de arroz",
+      "½ xícara (60g) amido de milho",
+      "5 colheres (sp) ­ 63g - manteiga temperatura ambiente (ou ghee sem lactose)",
+      "4 colheres (sp) - 55g - açúcar demerara (ou adoçante) Suco de 2 laranjas pera",
+      "1 colher(chá) fermento químico"
+    ],
+    "steps": [
+      "Coloque em uma tigela os secos e a manteiga, misture bem até formar uma farofa.",
+      "Depois acrescente o suco de laranja aos poucos até dar ponto de modelar a massa. Deixe descansar por 20 minutos.",
+      "Depois abra a massa com um rolo entre dois plásticos.",
+      "Não deixe uma espessura muito fina nem muito grossa, use cortador ou copinho dose para cortar os biscoitos.",
+      "Coloque em uma assadeira e leve ao forno pré aquecido 180 graus entre 12 a 15 minutos, ou até estarem levemente douradas."
+    ],
+    "photo": "images/bolachas/biscoito-de-laranja.jpg"
+  },
+  {
+    "id": "biscoito-de-maca-e-canela",
+    "title": "Biscoito de Maça e Canela",
+    "category": "bolachas",
+    "ingredients": [
+      "200g de farinha de aveia",
+      "50g de nozes (pode substituir por amêndoas, amendoim, avelã, castanha de caju)",
+      "100g de maçã descascada (1 maçã e meia aproximadamente)",
+      "120g de tâmaras (pode substituir por uvas passas ou outra fruta seca).",
+      "1 colher (sopa) de canela em pó",
+      "3 colheres de sopa de óleo (qualquer tipo de óleo)",
+      "1/2 colher (sopa) fermento em pó"
+    ],
+    "steps": [
+      "Em um processador bata todos os ingredientes até se tornar uma massa que desgrude das mãos.",
+      "Abra a massa e corte em formato circular com ajuda da tampinha do fermento.",
+      "Leve em forno pré-aquecido a 180°C por 15 minutos ou até que estejam dourados.",
+      "Pode ser feito em Airfryer leve a 180 °C por 5 minutos, ou até que estejam dourados"
+    ],
+    "photo": "images/bolachas/biscoito-de-maca-e-canela.jpg"
+  },
+  {
+    "id": "biscoito-recheado",
+    "title": "Biscoito Recheado",
+    "category": "bolachas",
+    "ingredients": [
+      "Massa:",
+      "100 g de manteiga sem glúten ou manteiga clarificada cortada em cubos",
+      "1 xícara de farinha sem glúten",
+      "½ xícara de farinha de amêndoas Baunilha a gosto",
+      "½ xícara de açúcar ou adoçante natural",
+      "1 ovo Água gelada se necessário para dar o ponto Recheio:",
+      "100 g de manteiga em ponto de pomada",
+      "¾ de xícara de açúcar demerara fino ou xilitol se quiser sem açúcar",
+      "1 col copa de essência de baunilha Corante vermelho (pode ser da cor que preferir)"
+    ],
+    "steps": [
+      "Massa:",
+      "Numa tigela misture os ingredientes secos, acrescente a manteiga e vá dissolvendo com as pontas dos dedos até obter uma farofa grossa.",
+      "Depois acrescente o ovo.",
+      "A massa precisa desgrudar das mãos, se necessário acrescente água.",
+      "Abra sob tapete de silicone ou papel dover (assa fácil), ou use uma assadeira específica (Wilton).",
+      "Leve para assar em forno quente 180 graus por uns 15 minutos ou até dourar levemente. Recheio:",
+      "Bata todos os ingredientes numa batedeira até obter um creme fofo.",
+      "Use um saco de confeitar para rechear. Rechear os biscoitos e leva para a geladeira para firma"
+    ],
+    "photo": "images/bolachas/biscoito-recheado.jpg"
+  },
+  {
+    "id": "biscoito-de-gengibre",
+    "title": "Biscoito de Gengibre",
+    "category": "bolachas",
+    "ingredients": [
+      "150 g de farinha de arroz",
+      "1 ovo",
+      "10g de gengibre em pó ou ralado",
+      "1 colher (sopa) mel",
+      "50g de açúcar mascavo (ou o que preferir",
+      "50g de manteiga (ou comum)",
+      "2 colheres (sopa) de canela"
+    ],
+    "steps": [
+      "Misture todos os ingredientes, abra a massa e corte os biscoitinhos, pode ser no formato que desejar, utilize o molde.",
+      "Asse a 200° graus por cerca de 15 minutos ou até que estejam levemente dourados."
+    ],
+    "photo": "images/bolachas/biscoito-de-gengibre.jpg"
+  },
+  {
+    "id": "bolacha-crocante-facil",
+    "title": "Bolacha Crocante Fácil",
+    "category": "bolachas",
+    "ingredients": [
+      "100g (1 xícara de 250ml) farinha de amêndoas",
+      "70ml ( pouco mais que 1/3 xícara) mel"
+    ],
+    "steps": [
+      "Em uma tigela coloque a farinha e o mel, misture muito bem, depois amasse bem com as mãos.",
+      "Lave as mãos e amasse novamente, veja se estiver grudando ainda coloque um pouquinho mais de farinha. Abra a massa entre dois plásticos, não deixe",
+      "nem muito grossa nem muito fina.",
+      "Use um cortador de biscoitos ou um copinho de dose. Espalhe sobre um forma antiaderente e leve ao forno pré-aquecido 180 graus entre 12 a 15",
+      "minutos.",
+      "ATENÇÃO: fique de olho pois assa muito rápido, pode deixar mais clarinha a minha passou um pouco mas fica mais crocante.",
+      "Espere esfriar e desenforme com cuidado. De um dia para o outro fica mais crocante. Obs: se não usar forma antiaderente unte com manteiga mas ainda pode correr o",
+      "risco de grudar, devido ao mel."
+    ],
+    "photo": "images/bolachas/bolacha-crocante-facil.jpg"
+  },
+  {
+    "id": "biscoito-nesfit",
+    "title": "Biscoito Nesfit",
+    "category": "bolachas",
+    "ingredients": [
+      "85g de chocolate 60% (pode ser mais ou menos % porém quanto mais, menos doce ficará)",
+      "90 gramas de farinha de aveia (ou farinha de arroz)",
+      "50 ml de leite (ou até dar o ponto) pode ser de vaca ou vegetal, usei de vaca desnatado",
+      "2 colheres (sopa) cheias de aveia em flocos"
+    ],
+    "steps": [
+      "Derreta o chocolate, uma opção é derreter no micro-ondas (deixe 30 segundos e depois mais 30 segundos, caso não derreta coloque mais 30",
+      "segundos, pois varia de micro-ondas)",
+      "Adicione a farinha de aveia aos poucos e o leite intercalando os dois.",
+      "Vai virar uma massa muito boa de mexer que não gruda nas mãos.",
+      "Adicione a aveia em flocos.",
+      "Abra a massa com ajuda de um rolo ou garrafa.",
+      "Use a tampinha de um fermento como molde.",
+      "Asse em forno pré aquecido a 180°, por uns 25 minutos ou até que fique dourados, fique de olho para não queimar.",
+      "Pode ser feito em Airfryer por 11 minutos a 180° graus ou até que fique dourados."
+    ],
+    "photo": "images/bolachas/biscoito-nesfit.jpg"
+  },
+  {
+    "id": "biscoito-oreo",
+    "title": "Biscoito Oreo",
+    "category": "bolachas",
+    "ingredients": [
+      "1 xícara farinha aveia (ou em flocos finos)",
+      "50g de cacau em pó",
+      "50g de leite em pó",
+      "1 colher (sopa) de açúcar ou adoçante de sua preferência (pode ser mel)",
+      "1 colher (sopa) manteiga ou óleo de coco Água ou leite para dar o ponto na massa (em torno de 70ml)",
+      "Recheio:",
+      "30g de whey de baunilha (pode usar o de sua preferência) Água até dar o ponto cremoso porém consistente (pode substituir por leite",
+      "em pó)"
+    ],
+    "steps": [
+      "Misture a farinha aveia, cacau, leite, manteiga e a água aos poucos até atingir o ponto de uma massa modelável.",
+      "Abra a massa nem tão fina e nem tão grossa e corte em formato circular.",
+      "Asse no forno pré aquecido, 180° graus por 20 minutos virando os biscoitos na metade do tempo para assarem dos dois lados.",
+      "Pode ser feito na Airfryer asse á 200° graus por 3 minutos. Recheio:",
+      "Enquanto estiverem no forno prepare o recheio.",
+      "Espere os biscoitos esfriarem antes de passar o recheio em cada um deles e fechar com outro biscoito."
+    ],
+    "photo": "images/bolachas/biscoito-oreo.jpg"
+  },
+  {
+    "id": "passatempo",
+    "title": "Passatempo",
+    "category": "bolachas",
+    "ingredients": [
+      "6 colheres de sopa de farinha de arroz",
+      "4 colheres de sopa de açúcar demerara pulverizado",
+      "3 colheres de sopa de farinha de castanha de caju",
+      "2 colheres de sopa de amido de milho",
+      "1/2 colheres de sobremesa de goma xantana",
+      "2 e 1/2 colheres de sopa de óleo vegetal",
+      "1 colher de sopa rasa de mel",
+      "3 colheres de sopa de leite vegetal",
+      "15 gotas de essência de baunilha",
+      "1 colher de sobremesa de fermento em pó"
+    ],
+    "steps": [
+      "Junte todos os ingredientes secos, menos o fermento.",
+      "Coloque o óleo e mexa até virar uma farofinha.",
+      "Ponha o leite vegetal, mexa e após coloque o mel e a baunilha.",
+      "Por último, junte o fermento. O ponto é igual massa de modelar.",
+      "Abra a massa em uma superfície com plástico filme ou silicone. A espessura da massa não pode ser muito fina, deixe 1 a 1,5 cm.",
+      "Deixe o forno pré-aquecendo a 180°C por 5 minutos.",
+      "Unte uma forma com óleo e coloque os biscoitos já cortados no formato que desejar.",
+      "Leve para assar a 180°C por cerca de 8 a 10 minutos, no máximo. Ele não pode dourar demais.",
+      "Recheie quando estiver frio.",
+      "Após rechear pode ser feito decoração, utilizando corante em caneta culinária é bem simples de utilizar, uma ótima opção para a criançada."
+    ],
+    "photo": "images/bolachas/passatempo.jpg"
+  },
+  {
+    "id": "zimtsterne---estrela-de-canela",
+    "title": "Zimtsterne - Estrela de Canela",
+    "category": "bolachas",
+    "ingredients": [
+      "3 claras",
+      "200g de açúcar",
+      "300g de farinha de amêndoas",
+      "1 colher de sopa de canela em pó",
+      "10 a 12 gotas de essência de amêndoas (opcional)"
+    ],
+    "steps": [
+      "Bata as claras, bater em neve até formar espuma e depois adicione lentamente 200g de açúcar. Bata até ficar bem firme e reserve.",
+      "No bowl, coloque a farinha de amêndoas, a canela, as gotas de essência de amêndoas. Misture.",
+      "Adicione 2/3 do merengue sobre a farinha e Misture até formar uma massa mais consistente.",
+      "Utilize farinha de amêndoas até obter o ponto, para não grudar nas mãos. Abra a massa cerca de 3 a 4cm de espessura. Use 2 cortadores no formato de",
+      "estrela de 2 tamanhos.",
+      "Utilize açúcar de confeiteiro no cortador para não grudar.",
+      "Retire os excesso e forme novamente bolinhas, abra novamente até finalizar toda a massa.",
+      "Coloque os biscoitos na assadeira.",
+      "Cubra os biscoitos com o restante do merengue e coloque assar no forno, temperatura mínima, por 12 a 15 minutos.",
+      "Fique atenta, assim que os biscoitos estiverem dourados em baixo está pronto."
+    ],
+    "photo": "images/bolachas/zimtsterne---estrela-de-canela.jpg"
+  },
+  {
+    "id": "bolacha-recheada-de-chocolate",
+    "title": "Bolacha Recheada de Chocolate",
+    "category": "bolachas",
+    "ingredients": [
+      "Massa:",
+      "1/2 xícara de açúcar",
+      "3 colheres (sopa) de óleo",
+      "1/4 xícara de leite vegetal (usei de amêndoas)",
+      "1/4 xícara de cacau ou chocolate em pó",
+      "1/2 xícara de farinha de amêndoas (ou de outra oleaginosa)",
+      "1/2 xícara de polvilho doce (ou fécula de batata)",
+      "1 xícara de farinha de arroz",
+      "1 colher (chá) de fermento químico Recheio:",
+      "150g chocolate branco derretido (pode ser chocolate ao leite ou meio amargo)",
+      "1 colher (sopa) de leite vegetal (usei de amêndoas)"
+    ],
+    "steps": [
+      "Massa:",
+      "Coloque e uma vasilha o açucar, farinha de amêndoas, polvilho doce, farinha arroz, chocolate em pó, óleo, leite, fermento e misture até dar ponto (não",
+      "gruda na mão).",
+      "Cubra com um plástico de deixe na geadeira por 30 min.",
+      "Tire a massa, coloque ela entre dois plásticos para abrir (assim não vai ressecar).",
+      "Abra a massa com cerca de 2cm e corte em rodelas.",
+      "Coloque um papel manteiga na forma para não grudar as bolachas.",
+      "Coloque as bolachas na forma e leve ao forno em 180º de 10 a 15min.",
+      "Fique de olho para não deixar o biscoito torrado, pois depois de sair do forno ele pode ficar super ressecado.",
+      "Recheio:",
+      "Derreta o chocolate e adicione 2 colheres de leite vegetal para não endurecer, mecha e recheie suas bolachas."
+    ],
+    "photo": "images/bolachas/bolacha-recheada-de-chocolate.jpg"
+  },
+  {
+    "id": "bolacha-de-chocolate",
+    "title": "Bolacha de Chocolate",
+    "category": "bolachas",
+    "ingredients": [
+      "1 copo de amêndoa moída (100g)",
+      "2/3 de copo de açúcar (140g)",
+      "1/3 de copo de cacau (40g)",
+      "1/3 de copo de aquafaba (80ml) (água do cozimento do grão de bico)",
+      "1/3 de copo de manteiga de amendoim (80g)",
+      "100g chocolate sem glúten",
+      "1/2 c. de chá de bicarbonato de sódio",
+      "1/4 c. chá de sal"
+    ],
+    "steps": [
+      "Coloque o chocolate em banho maria, derreta e reserve, enquanto prepara sua aquafaba.",
+      "Bata a aquafaba até criar espuma, adicione o açúcar aos pontos, até ficar em ponto de merengue.",
+      "Depois adicione o chocolate derretido na aquafaba em neve, Misture e adicione a amêndoa, misture novamente e adicione o bicarbonato e a",
+      "manteiga de amendoim e o cacau e misture.",
+      "Sua massa irá ficar pastosa e pegajosa, está tudo certo.",
+      "Pegue uma colher e faça bolinhas, e já vai colocando na forma com papel manteiga.",
+      "Se quiser pode enrolar as bolinhas nas mãos, deixe suas mãos molhadas com água para não grudar o bolinhos.",
+      "De uma leve achatadinha neles e se quiser pode colocar um pouquinho de sal, para realçar o sabor.",
+      "Leve ao forno pre aquecido em 180º por 10 a 12 minutos, fique atenta para não queimar.",
+      "Deixe esfriar e pronto."
+    ],
+    "photo": "images/bolachas/bolacha-de-chocolate.jpg"
+  },
+  {
+    "id": "biscoito-de-nozes-com-coco",
+    "title": "Biscoito de Nozes com Coco",
+    "category": "bolachas",
+    "ingredients": [
+      "120 g de farinha de arroz branca (se for utilizar parte de farinha de arroz integral, utilize apenas 100 g)",
+      "70 g de polvilho doce",
+      "50 g de nozes trituradas no liquidificador (quase uma farinha)",
+      "60 g de açúcar mascavo",
+      "20 g de coco ralado integral (pode ser o seco ou o fresco) de preferencia sem açúcar",
+      "1 ovo (de 50 g)",
+      "1 pitada de sal",
+      "1 colher de chá (5 g) de fermento químico",
+      "35 g de creme vegetal aproximadamente"
+    ],
+    "steps": [
+      "Misture todos os ingredientes secos em um bowl e depois abra um buraco nesta mistura e adicione o ovo e misture.",
+      "Depois que estiver uniforme, acrescente o creme vegetal gelado aos poucos e vá misturando com as mãos. Até ficar uma massa única sem grudar nas mãos.",
+      "Chegando neste ponto não adicione mais o creme vegetal.",
+      "Aqueça o forno em 180º.",
+      "Vá pegando bolinhas da massa, boleie e de uma achatadinha, coloque na forma com papel manteiga.",
+      "Leve ao forno para assar por cerca de 20min, Fique atenta para não queimar.",
+      "Assim que estiver mais dourado em baixo, retire."
+    ],
+    "photo": "images/bolachas/biscoito-de-nozes-com-coco.jpg"
+  },
+  {
+    "id": "bolacha-de-natal",
+    "title": "Bolacha de Natal",
+    "category": "bolachas",
+    "ingredients": [
+      "1 ovo",
+      "2 colheres (sp) rasa de manteiga ghee (ou comum se preferir)",
+      "2 colheres (sp) açúcar demerara (ou adoçante forno e fogão)",
+      "2 colheres (sp) água",
+      "½ xícara (70g) farinha de arroz",
+      "½ xícara (75g) amido de milho (ou fécula de batata) Cobertura:",
+      "1 colher (chá) fermento em pó 100g chocolate meio amargo (para intolerantes usar sem glúten/sem lactose, pode usar chocolate branco se preferir)."
+    ],
+    "steps": [
+      "Bata o ovo e adicione o açúcar, bata novamente. Acrescente a manteiga e a água..bata até dissolver bem. Coloque então a farinha de arroz e misture até",
+      "ficar bem incorporada depois junte o amido e o fermento.",
+      "Polvilhe a bancada com amido e sove a massa... ( vai acrescentando amido até desgrudar das mãos e da bancada).",
+      "Polvilhe a bancada com amido e coloque a massa, coloque um plástico sobre a massa e abra com um rolo. Corte as bolachinhas com auxílio de um",
+      "cortador.",
+      "Leve para o forno pré-aquecido 180 graus ente 15 a 20minutos. Obs: fique de olho pois as bolachinhas não ficam douradas deve tirar entre este tempo para",
+      "não ficar duras..",
+      "Derreta 50g de chocolate meio amargo no micro de 30 em 30seg. até derreter por completo.",
+      "Junte mais 50g de chocolate meio amargo picado. Misture bem até derreter. Corte a pontinha de saquinho de plástico e coloque dentro o chocolate.",
+      "Decore as bolachinhas como desejar."
+    ],
+    "photo": "images/bolachas/bolacha-de-natal.jpg"
+  },
+  {
+    "id": "bolacha-de-mel-para-o-natal",
+    "title": "Bolacha de Mel para o Natal",
+    "category": "bolachas",
+    "ingredients": [
+      "80 g de óleo de coco",
+      "400 g de mel",
+      "350 g de açúcar demerara",
+      "3 ovos",
+      "1 colher (sopa) de canela em pó",
+      "1 colher (sopa) de gengibre fresco picado",
+      "1 colher (sopa) de cravo Noz-moscada ralada",
+      "1/4 colher (chá) de sal",
+      "2 colheres (chá) de bicarbonato de sódio dissolvido em 1/4 xícara de água morna"
+    ],
+    "steps": [
+      "Bata tudo com a batedeira e acrescente aos poucos 1 kg de Mix de Farinhas sem Glúten.",
+      "Abra em superfície enfarinhada com farinha especial, com auxílio do rolo, com cerca de 5mm de espessura.",
+      "Corte com cortadores com motivos natalinos.",
+      "Asse em forno quente (180 ºC) durante 12 minutos, em assadeira untada com óleo e enfarinhada com farinha de arroz, ou até que comecem a dourar.",
+      "Após esfriar caso goste pode polvilhar açucar de confeiteiro ou coco ralado por cima."
+    ],
+    "photo": "images/bolachas/bolacha-de-mel-para-o-natal.jpg"
+  },
+  {
+    "id": "cookie-de-micro-ondas",
+    "title": "Cookie de Micro-ondas",
+    "category": "bolachas",
+    "ingredients": [
+      "1 col de sopa de açúcar demerara",
+      "1 col de sopa de açúcar mascavo",
+      "1 e 1/2 de sopa de óleo",
+      "1 col de sopa de leite vegetal",
+      "3 col de sopa de farinha de arroz",
+      "5 gotas de essência de baunilha Gotas de chocolate a gosto"
+    ],
+    "steps": [
+      "Junte os açúcares, o óleo, o leite e a essência e mexa bem.",
+      "Coloque a farinha e misture até chegar no ponto que solte das mãos.",
+      "Finalize com as gotas de chocolate.",
+      "Faça uma bola com a massa.",
+      "Forre um prato com papel manteiga, achate a bolinha como se fosse um hambúrguer e deixe na altura de um dedo.",
+      "Leve ao micro-ondas por 45 segundos.",
+      "Deixe esfriar completamente e retire o papel para consumir."
+    ],
+    "photo": "images/bolachas/cookie-de-micro-ondas.jpg"
+  },
+  {
+    "id": "rosca-de-cacau-e-aveia",
+    "title": "Rosca de Cacau e Aveia",
+    "category": "bolachas",
+    "ingredients": [
+      "1/4 xícara - 60ml - água quente (não fervendo)",
+      "3 a 4 colheres (sp) - 45g - açúcar mascavo ou de coco",
+      "2 colheres (sp) 40g - manteiga temperatura ambiente",
+      "1 colher (sp) - 7g - cacau em pó 100%",
+      "1 xícara + 1/3 xícara (140g) - farinha de aveia",
+      "1 colher (chá) fermento em pó"
+    ],
+    "steps": [
+      "Coloque a água, o açúcar, cacau e a manteiga e misture bem. Depois acrescente a farinha de aveia aos poucos, coloque um pouco e junte o",
+      "fermento misture, depois acrescente o restante da farinha e sove a massa até desprender das mãos.",
+      "Forre a bancada com plástico, coloque a massa e cubra com outro plástico depois passe o rolo de macarrão abrindo a massa, mas não deixe muito fina.",
+      "Com o auxílio da tampinha de essência de baunilha ( ou tampa de adoçante) + um cortador ou copinho \"dose\" corte os biscoitos primeiro o arco maior",
+      "depois o central, formando as roscas.",
+      "Coloque em uma forma (não precisa untar) e leve ao forno pré-aquecido 180 graus entre 20 a 25 minutos.",
+      "Retire do forno, deixe esfriar e coloque em um pote com tampa para armazenar e continuar crocante."
+    ],
+    "photo": "images/bolachas/rosca-de-cacau-e-aveia.jpg"
+  },
+  {
+    "id": "biscoito-de-banana",
+    "title": "Biscoito de Banana",
+    "category": "bolachas",
+    "ingredients": [
+      "1 ovo",
+      "1 banana amassada (80g)",
+      "1 colher (sp) mel ( pode acrescentar mais se preferir mais doce)",
+      "1 colher chá manteiga (temperatura ambiente)",
+      "1/4 xíc. (25g) aveia em flocos",
+      "1 xícara + 1/4 xic. de farinha de aveia (120g) canela a gosto",
+      "1/2 colher (chá) fermento em pó Farinha de aveia para polvilhar a bancada"
+    ],
+    "steps": [
+      "Bata o ovo e acrescente o mel e a manteiga.",
+      "Depois acrescente a aveia em flocos e a canela e misture bem.",
+      "Adicione um pouco da farinha de aveia e junte o fermento misture e continue colocando o restante da farinha de aveia.",
+      "Sove bem a massa até desgrudar das mãos.",
+      "Polvilhe a bancada com farinha de aveia e coloque a massa, polvilhe por cima da massa também e abra com um rolo, numa espessura aprox. 0.5cm.",
+      "Polvilhe canela e passe o rolo novamente.",
+      "Corte com cortador ou copo de dose.",
+      "Leve ao forno pré-aquecido 180 graus entre 10 a 12 minutos."
+    ],
+    "photo": "images/bolachas/biscoito-de-banana.jpg"
+  },
+  {
+    "id": "marinheiras",
+    "title": "Marinheiras",
+    "category": "bolachas",
+    "ingredients": [
+      "½ xicara farinha de aveia sem glúten",
+      "½ xicara farinha de arroz",
+      "2 colheres (sopa) gergelim (ou linhaça, pode ser moída)",
+      "1 colheres (sopa) chia",
+      "½ colher (chá) sal",
+      "1 colher (chá) cúrcuma (açafrão)",
+      "4 colher (sopa) azeite Quase ½ xicara água morna"
+    ],
+    "steps": [
+      "Adicione todos os ingredientes secos em um bowl e misture.",
+      "Depois adicione o azeite e misture.",
+      "Vá adicionando água até que fique no ponto, neste momento mecha com as mãos. Até não grudar nas mãos.",
+      "Para abrir a massa utilize papel manteiga em cima e baixo da massa, pois assim não vai grudar massa no seu rolo.",
+      "Deixe a massa cerca de 1 cm e vá cortando seus biscoitos use um molde redondo, e tenha cuidado para transportar seus biscoitos para a assadeira,",
+      "pois é uma massa bem quebradiça.",
+      "Pré-aquecido em 180ºC, por 20-25 minutos.",
+      "Muito cuidado para não queimar, fique de olho.",
+      "Assim que começar a dourar retire, armazene em um pote para não perder a crocância. Obs: Coma puro ou com algum creme ou geleia, fica uma delícia!"
+    ],
+    "photo": "images/bolachas/marinheiras.jpg"
+  },
+  {
+    "id": "beliscao---biscoito-com-goiabada",
+    "title": "Beliscão - Biscoito com Goiabada",
+    "category": "bolachas",
+    "ingredients": [
+      "1 xícara de farinha de arroz",
+      "1 xícara de fécula de batata",
+      "1 xícara de polvilho doce",
+      "1 xícara de açúcar",
+      "1/4 colher (chá) de sal",
+      "1 colher (chá) de bicarbonato de sódio",
+      "1 colher (chá) de goma xantana",
+      "1 colher (chá) de essência de baunilha (opcional)",
+      "100 g de manteiga (vegana ou comum) derretida",
+      "1 ovo",
+      "400 g de goiabada",
+      "1 xicara de água quente Mix de farinhas sem glúten para dar o ponto de abrir com rolo"
+    ],
+    "steps": [
+      "Comece colocando os ingredientes secos e misture.",
+      "Adicione a essência de baunilha.",
+      "Adicione a água bem quente e misture.",
+      "Depois de deixar homogêneo adicione a manteiga derretida e o ovo e misture.",
+      "Sua farinha estará mole por isso vá adicionando a farinha sem glúten e deixe no ponto.",
+      "Solte a farinha na bancada e sove até ficar uma massa macia e que solta da mão.",
+      "Polvilhe a bancada e pegue pequenas porções de massa e abra com um rolo, deixe a massa fina e corte em quadrados com cerca de 5x5cm.",
+      "Faça isso com toda a massa.",
+      "Corte a goiabada em retângulos, fino e cumprido, mas menor que massa cortada, para que a goiaba não derreta depois e caia da massa.",
+      "Coloque a goiabada na diagonal e feche a massa. unindo as pontas em cima.",
+      "Coloque os biscoitos na asseira untada.",
+      "Pré aqueça o forno a 225º C por 10 min e asse por 20 min ou até que fique douradinhos."
+    ],
+    "photo": "images/bolachas/beliscao---biscoito-com-goiabada.jpg"
+  },
+  {
+    "id": "biscoito-amanteigado",
+    "title": "Biscoito Amanteigado",
+    "category": "bolachas",
+    "ingredients": [
+      "1 gema de ovo",
+      "50g manteiga normal ou com sal",
+      "100g farinha de arroz",
+      "40g açúcar Obs: bata bem a manteiga com o açúcar por 1 minuto ou mais e depois acrescente a gema de ovo e bata bem novamente.",
+      "Obs: Use manteiga em temperatura ambiente ou amolecida. Se for usar margarina, use gelada."
+    ],
+    "steps": [
+      "Misture a margarina e o açúcar e misture bem.",
+      "Depois adicione uma gema e misture até ficar homogêneo.",
+      "Adicione a farinha e misture até formar uma massa e comece a amassar com a mão.",
+      "Se precisar polvilhe com farinha para não grudar na mão.",
+      "Depois cubra com papel filme papel manteiga e leve ao freezer por 30 minutos.",
+      "Polvilhe a bancada coloque a massa e sobre ela o papel manteiga para passar o rolo e afinar a massa, sem grudar ou quebrar a massa.",
+      "Depois de amassada corte a massa como desejar e leve a uma forma untada.",
+      "Pré aqueça o forno em 180ºC e asse por 15 minutos, ou até começar a dourar."
+    ],
+    "photo": "images/bolachas/biscoito-amanteigado.jpg"
+  },
+  {
+    "id": "cookies-de-chocolate",
+    "title": "Cookies de Chocolate",
+    "category": "bolachas",
+    "ingredients": [
+      "150 gramas de farinha de arroz integral",
+      "100 gramas de açúcar",
+      "75 gramas de açúcar mascavo claro",
+      "75 gramas de manteiga",
+      "1 colher (sopa) de cacau em pó",
+      "½ colher (chá) de bicarbonato de sódio",
+      "1 ovo batido Gotas de chocolate amargo sem glúten"
+    ],
+    "steps": [
+      "Reserve as gotas de chocolate.",
+      "Forre uma assadeira grande com papel manteiga. Reserve.",
+      "Pré aqueça o forno a 180ºC.",
+      "No processador ou manualmente, bata os demais ingredientes até obter uma massa homogênea.",
+      "Adicione as gotas e, com as mãos, forme uma bola com a massa.",
+      "Modele os cookies e coloque-os na assadeira deixando espaço entre eles.",
+      "Pressione-os delicadamente com o auxílio de um garfo.",
+      "Leve para assar por aproximadamente 10 minutos.",
+      "Retire a assadeira do forno, espere alguns minutos (aproximadamente 10) para que os cookies se solidifiquem.",
+      "Desenforme."
+    ],
+    "photo": "images/bolachas/cookies-de-chocolate.jpg"
+  },
+  {
+    "id": "rosquinha-fit",
+    "title": "Rosquinha Fit",
+    "category": "bolachas",
+    "ingredients": [
+      "1 Banana prata amassada",
+      "2 colheres de sopa rasas de mel",
+      "1 colher de chá de Azeite",
+      "1 Ovo",
+      "1 colher de café cheia de Canela em pó",
+      "1 xícara e 1/2 (150g) Farinha de aveia sem glúten",
+      "1 colher de sobremesa de Fermento em pó"
+    ],
+    "steps": [
+      "Juntar todos ingredientes em um bowl e mexer até incorporar todos os ingredientes (caso necessário acrescente mais farinha até que desgrude das",
+      "mãos);",
+      "Espalhar farinha na bancada e então começar a moldar as rosquinhas;",
+      "Colocar na forma levemente untada com azeite;",
+      "Levar para assar em forno pré-aquecido a 180° por cerca de 20 minutos, virando para dourar os dois lados e pronto!",
+      "Obs: Pode polvilhar as rosquinhas com xilitol e canela depois de prontas."
+    ],
+    "photo": "images/bolachas/rosquinha-fit.jpg"
+  },
+  {
+    "id": "biscoito-champagne",
+    "title": "Biscoito Champagne",
+    "category": "bolachas",
+    "ingredients": [
+      "1 ovo",
+      "50g - 3 colheres (sp) açúcar demerara",
+      "50g- 1/2 xícara (não cheia) de amido de milho açúcar demerara para polvilhar óleo de coco para untar a forma"
+    ],
+    "steps": [
+      "Bata a clara na batedeira até ficar bem branquinha, aos poucos vai acrescentando o açúcar e bata até dissolver bem.",
+      "Agora passe o amido por uma peneira e vai colocando aos poucos na massa e mexendo delicadamente com uma espátula.",
+      "Obs: não pode ficar com pelotas de amido, mas não pode bater a massa para não ficar líquida, ela deve permanecer aerada.",
+      "Com o auxílio de saco de confeitar modele os biscoitos sobre uma forma untada com óleo de coco (se a forma for antiaderente melhor ainda, mas",
+      "mesmo assim deve unta-la).",
+      "Polvilhe o açúcar sobre os biscoitos e leve ao forno média 180 graus entre 15 a 20 minutos (os biscoitos são bem delicados então fique de olho pois o",
+      "tempo pode mudar conforme seu forno).",
+      "Retire com cuidado da forma assim que sair do forno.",
+      "Deixe esfriar e coloque em um pote fechado para manter crocante."
+    ],
+    "photo": "images/bolachas/biscoito-champagne.jpg"
+  },
+  {
+    "id": "biscoito-de-queijo",
+    "title": "Biscoito de Queijo",
+    "category": "bolachas",
+    "ingredients": [
+      "3 Xícaras de polvilho doce",
+      "2 xícaras de queijo minas sem glúten",
+      "3 colheres de sopa de manteiga",
+      "3 Ovos sal a gosto",
+      "1/2 colher de chá de fermento em pó"
+    ],
+    "steps": [
+      "Adicione a manteiga, os ovos, o queijo ralado e o sal a gosto e o polvilho doce.",
+      "Mecha tudo.",
+      "Depois adicione o fermento e comece a mexer com as mãos.",
+      "Depois que a massa estiver única, comece a sovar por cerca de 5 minutos, até que ela não esteja quebradiça e grudando.",
+      "Pegue uma colher e boleie em formado de cobrinha. Achate o meio com um garfo e una as pontas.",
+      "Este biscoito não pode ficar duro por isso fique de olho.",
+      "Pré aqueça o forno em 200ºC e deixe assando por cerca de 30 minutos.",
+      "Não deixe dourar, pois vai ficar duro."
+    ],
+    "photo": "images/bolachas/biscoito-de-queijo.jpg"
+  },
+  {
+    "id": "doritos",
+    "title": "Doritos",
+    "category": "bolachas",
+    "ingredients": [
+      "150g Fubá sem glúten",
+      "90g amido de milho",
+      "130g farinha de arroz",
+      "30g polvilho azedo",
+      "120g ovos (dois ovos médios)",
+      "35g azeite",
+      "8g goma xantana",
+      "12g sal",
+      "10g Páprica defumada, picante ou doce",
+      "5g Cúrcuma Água (até atingir o ponto da massa)"
+    ],
+    "steps": [
+      "Coloque todos os ingredientes secos na tigela da batedeira.",
+      "Acrescente os ovos.",
+      "Misture acrescentando água até obter a consistência da massa. que fica homogênea e não grudar nas mãos, a massa pode ser feita na batedeira ou a",
+      "mão.",
+      "Abra a massa na espessura desejada (quanto mais fina mais crocante, salpique sal grosso (se gostar), Páprica e lemon pepper, após corte em",
+      "triângulos.",
+      "Asse em forno pré-aquecido 200°C até dourar."
+    ],
+    "photo": "images/bolachas/doritos.jpg"
+  },
+  {
+    "id": "doritos-ii",
+    "title": "Doritos II",
+    "category": "bolachas",
+    "ingredients": [
+      "1 colher de chá de páprica defumada",
+      "1 ovo",
+      "50 g de amido de milho",
+      "1 colher de sopa de vinagre de maçã",
+      "50 g de farinha de arroz",
+      "4 g de goma xantana",
+      "5 g de fermento em pó Royal",
+      "1 colher de sopa de óleo",
+      "90 g de polvilho doce",
+      "100 ml de água",
+      "50 g de fubá",
+      "1 colher de chá rasa de sal DORITOS II"
+    ],
+    "steps": [
+      "Separe e meça todos os ingredientes conforme as quantidades mencionadas na lista.",
+      "Em uma tigela grande, misture o polvilho doce, a farinha de arroz, o fubá, o amido de milho, a goma xantana e o fermento em pó Royal.",
+      "Adicione o ovo à mistura de ingredientes secos e misture bem.",
+      "Em seguida, acrescente o sal, a páprica defumada, o vinagre de maçã e o óleo. Misture novamente.",
+      "Gradualmente, adicione a água à mistura, mexendo continuamente para evitar grumos. Continue adicionando água até obter uma massa homogênea e",
+      "ligeiramente pegajosa.",
+      "Transfira a massa para uma superfície enfarinhada e amasse por alguns minutos até que fique lisa e maleável.",
+      "Divida a massa em porções pequenas e abra cada uma com um rolo até obter uma espessura bem fina. O objetivo é deixar a massa o mais fina possível para",
+      "obter a textura crocante desejada.",
+      "Utilize um cortador ou uma faca afiada para cortar a massa em triângulos, imitando o formato clássico dos Doritos.",
+      "Aqueça o óleo em uma panela funda ou fritadeira até atingir a temperatura de fritura ideal (aproximadamente 170-180°C).",
+      "Frite os triângulos de massa em lotes, até que fiquem dourados e crocantes. Isso deve levar apenas alguns minutos. Certifique-se de virar os Doritos",
+      "durante o processo para garantir uma fritura uniforme.",
+      "Após a fritura, coloque os Doritos em papel toalha para escorrer o excesso de óleo.",
+      "Deixe os Doritos caseiros esfriarem completamente antes de armazenar em um recipiente hermético."
+    ],
+    "photo": "images/bolachas/doritos-ii.jpg"
+  },
+  {
+    "id": "bolacha-de-fuba",
+    "title": "Bolacha de Fubá",
+    "category": "bolachas",
+    "ingredients": [
+      "1 xícara de açúcar (pode substituir pelo doçante de sua preferência)",
+      "1/4 de xícara de leite",
+      "2 xícaras de amido de milho",
+      "1 e 1/2 xícara de fubá",
+      "1 gema",
+      "1 xícara de manteiga em temperatura ambiente"
+    ],
+    "steps": [
+      "Misture bem os ingredientes secos: fubá, amido e açúcar.",
+      "Junte a manteiga, a gema e o leite e amasse com as mãos até obter uma massa lisa e uniforme.",
+      "Modele bolinhas com a massa, dispondo-as em assadeiras untadas (se forem antiaderentes não precisa).",
+      "Achate a superfície das bolinhas com um garfo, formando os biscoitos. Outra opção é usar cortadores com formatos divertidos.",
+      "Asse em forno moderado (170°) por cerca de 20 minutos ou até que dourem ligeiramente nas bordas.",
+      "Conclusão Antes de tudo, quero expressar meu sincero agradecimento por sua presença e por escolher",
+      "meu e-book sobre biscoitos e bolachas. Agradeço imensamente pela confiança depositada em mim. Espero que tenha apreciado",
+      "o conteúdo e que este seja um recurso valioso para suas experiências na arte de fazer biscoitos.",
+      "Não desista de aprimorar suas habilidades na confecção dessas delícias. Se, por acaso, ainda não obteve o resultado",
+      "desejado, saiba que está próximo! Continue experimentando, cada esforço contribuirá para aperfeiçoar suas criações na cozinha.",
+      "Desejo a você boa sorte e momentos deliciosos com seus biscoitos e bolachas à mesa! KNED TECH © Copyright - Todos os direitos reservados",
+      "Curitiba/PR - Brasil www.chefcarlaramos.online contato@chefcarlaramos.online"
+    ],
+    "photo": null
   }
 ]
