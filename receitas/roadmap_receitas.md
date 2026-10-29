@@ -22,6 +22,18 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
 - **69 Veganas** (`+70 Receitas Veganas Sem Glúten - Chef Carla Ramos.pdf`) — mesma técnica,
   68 com foto própria confirmada, 1 (Pão de Trigo Sarraceno) sem foto porque o livro não tem
   uma foto dedicada pra ela (decidimos deixar sem, em vez de roubar a foto de outra receita).
+- **31 Bolachas e Biscoitos** (`+30 Bolachas e Biscoitos Sem Glúten - Chef Carla Ramos.pdf`)
+  — offset +4, 30/31 com foto (Bolacha de Fubá sem foto no PDF).
+- **51 Doces e Sobremesas** (`+50 Doces e Sobremesas Sem Glúten - Chef Carla Ramos.pdf`)
+  — offset +5, multi-page support, 48/51 com foto (3 receitas sem foto no PDF).
+- **44 Massas** (`f17054208_Chef_Carla_Ramos_Massas.pdf`)
+  — offset +5, 37/44 com foto (7 páginas sem imagem no PDF).
+- **10 Pães Trançados** (`f17205760_Chef_Carla_Ramos_P_es_Tran_ados.pdf`)
+  — offset +4, 10/10 com foto.
+- **15 Panetone** (`f17312512_Chef_Carla_Ramos_Panetone.pdf`)
+  — offset +5, 15/15 com foto.
+- **4 Fermentação Natural** (`f17008896_Chef_Carla_Ramos_Fermenta_o_Natural.pdf`)
+  — guia teórico com 4 receitas ao final, offset +5, 4/4 com foto.
 - App: zoom infinito, busca 100% (todo campo, acento/maiúscula não importa), categorias
   dinâmicas, cadastro de receita própria (com foto e categoria nova), tema/paleta de cores,
   PWA instalável com ícone próprio.
@@ -46,18 +58,12 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
 
 ## próximo
 
-Montgomery tem **mais PDFs da Chef Carla Ramos** pra processar, com a mesma técnica. Na
-pasta `C:\mc\MontyReceitas\` já tem, além dos dois usados:
+Todos os PDFs da Chef Carla Ramos foram processados (312 receitas no ar). PDFs restantes
+que ainda precisam de análise:
 
-- `+30 Bolachas e Biscoitos Sem Glúten - Chef Carla Ramos.pdf`
-- `+50 Doces e Sobremesas Sem Glúten - Chef Carla Ramos.pdf`
-- `f17054208_Chef_Carla_Ramos_Massas.pdf`
-- `f17205760_Chef_Carla_Ramos_P_es_Tran_ados.pdf` (pães trançados)
-- `f17312512_Chef_Carla_Ramos_Panetone.pdf`
-- `f17008896_Chef_Carla_Ramos_Fermenta_o_Natural.pdf`
-- `f17328128_Chef_Carla_Ramos_Substitui_o_Ingredientes.pdf` (pode ser referência, não receitas)
-- `f17026560_Chef_Carla_Ramos_Introdu_o.pdf` / `f17050624_Aplicativo_Chef_Carla_Ramos.pdf`
-  (prováveis textos de introdução/manual do app da Chef, não receitas — conferir antes)
+- `f17328128_Chef_Carla_Ramos_Substitui_o_Ingredientes.pdf` — pode ser referência/tabela, não receitas
+- `f17026560_Chef_Carla_Ramos_Introdu_o.pdf` — provavelmente texto introdutório, não receitas
+- `f17050624_Aplicativo_Chef_Carla_Ramos.pdf` — manual do app da Chef, não receitas
 
 E ele disse que tem **muitos outros livros/PDFs de receita fora desses** que também quer
 colocar no app, aos poucos. Cada PDF novo vira uma categoria nova (igual "veganas").
