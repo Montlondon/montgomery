@@ -8,6 +8,9 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
 - **Vercel (projeto):** `receitas` (conta montgomery-s-projects)
 - **Link curto no ar:** https://montgomery-receitas.vercel.app
 - **PDFs fonte:** `C:\mc\MontyReceitas\`
+- **Senha de retorno:** "Pão Fresco" — ao ouvir essa frase numa janela nova, ler este
+  roadmap inteiro e perguntar se é pra tocar a varredura de texto sujo (seção "vivo")
+  ou processar o próximo PDF da fila (seção "próximo").
 
 ---
 
