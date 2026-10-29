@@ -479,7 +479,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     var all = el("button","chip"); all.textContent = "Todas"; all.setAttribute("aria-pressed", String(state.activeCategory==="todas"));
     all.addEventListener("click", function(){ state.activeCategory="todas"; renderChips(); applyFilter(); });
     chips.appendChild(all);
-    Object.keys(cats).sort(function(a,b){ return cats[a].localeCompare(cats[b],'pt'); }).forEach(function(cid){
+    Object.keys(cats).forEach(function(cid){
       var b = el("button","chip"); b.textContent = cats[cid];
       b.setAttribute("aria-pressed", String(state.activeCategory===cid));
       b.addEventListener("click", function(){ state.activeCategory=cid; renderChips(); applyFilter(); });
@@ -496,7 +496,6 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
       if (!tokens.length) return true;
       return tokens.every(function(t){ return r.search.indexOf(t) !== -1; });
     });
-    list.sort(function(a,b){ return a.title.localeCompare(b.title,'pt'); });
     state.filtered = list;
     renderGrid(tokens);
     var countEl = document.getElementById("resultCount");
