@@ -27,7 +27,7 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
 - **51 Doces e Sobremesas** (`+50 Doces e Sobremesas Sem Glúten - Chef Carla Ramos.pdf`)
   — offset +5, multi-page support, 48/51 com foto (3 receitas sem foto no PDF).
 - **44 Massas** (`f17054208_Chef_Carla_Ramos_Massas.pdf`)
-  — offset +5, 37/44 com foto (7 páginas sem imagem no PDF).
+  — offset +4 na foto (página da foto é sumário−1+5), 44/44 com foto.
 - **10 Pães Trançados** (`f17205760_Chef_Carla_Ramos_P_es_Tran_ados.pdf`)
   — offset +4, 10/10 com foto.
 - **15 Panetone** (`f17312512_Chef_Carla_Ramos_Panetone.pdf`)
@@ -46,15 +46,13 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
 
 ## vivo
 
-- **Varredura de texto sujo no "modo de preparo"**: o Montgomery notou que pelo menos uma
-  receita tem informação que não deveria estar ali (provavelmente sobra de rodapé ou de
-  parsing). Falta rodar uma varredura automática nas 157 receitas procurando por:
-  - fragmentos de rodapé grudados ("Chef Carla Ramos", "Pag. |", números soltos de página);
-  - passos muito curtos ou cortados no meio;
-  - ingredientes ou passos duplicados;
-  - qualquer coisa que pareça não ser parte da receita de fato.
-  Depois da varredura automática, revisar manualmente os suspeitos (não precisa ler as 157
-  uma por uma — só a lista curta que a varredura apontar).
+- **Varredura de texto sujo — CONCLUÍDA (29/10/2026)**: varredura completa nas 407 receitas.
+  Corrigidos: texto de fechamento de livro (Alfajor, Cueca Virada II, Ciabatta), conteúdo
+  errado (Bolinha de Queijo lowcarb tinha outra receita; Bolo de Cenoura bolos tinha Maracujá),
+  ingredientes faltantes em 9 receitas (Quiche lowcarb, Bolo de Fubá, Bolo de Coco, Chocotone,
+  Panetone II, Mousse de Chocolate lowcarb, Bolo de Maçã, Bolo de Chocolate). Fragmentos de
+  passos quebrados na quebra de página fundidos em 270+ receitas. Resultado final: 0 receitas
+  sem ingredientes, 0 texto de livro nos passos.
 
 ## próximo
 
