@@ -66,9 +66,34 @@ Claude converte (sharp), substitui o JPG em `receitas/images/<cat>/`, faz commit
 
 **Fluxo de correção (repetir para cada foto):**
 1. Montgomery envia imagem + nome da receita
-2. Claude: `node -e "sharp('...').jpeg({quality:90}).toFile('receitas/images/<cat>/<id>.jpg')"` 
-3. `git add` + commit + push + `create_deployment` Vercel + `assign_alias montgomery-receitas.vercel.app`
-4. Se `assign_alias` for bloqueado pelo auto mode: rodar no terminal `vercel alias set <deploy-url> montgomery-receitas.vercel.app`
+2. Achar o `id` da receita em `receitas/data/recipes.json`:
+   - Grep por título: `grep -i "nome da receita" receitas/data/recipes.json`
+   - O `id` é o campo logo acima do `title` — formato kebab-case sem acentos
+3. Converter a imagem com sharp (Node.js) — caminho da imagem vem no `<system-reminder>` como `images/NN.webp` ou `.png`:
+   ```js
+   node -e "
+   const sharp = require('C:/mc/.claude/worktrees/recipes-app-bread-cakes-4f32d1/receitas/tools/node_modules/sharp');
+   sharp('C:/Users/MONTGO~1/AppData/Local/Temp/claude/.../images/NN.webp')
+     .jpeg({ quality: 90 })
+     // .rotate(90)  // só se a foto vier em portrait e precisar de correção
+     .toFile('C:/mc/.claude/worktrees/recipes-app-bread-cakes-4f32d1/receitas/images/<cat>/<id>.jpg')
+     .then(i => console.log('OK', i.width+'x'+i.height))
+     .catch(e => console.error(e.message));
+   "
+   ```
+4. `git add receitas/images/<cat>/<id>.jpg && git commit -m "Fix photo: <receita> — <motivo>" && git push`
+5. Deploy Vercel via MCP: `create_deployment` com `gitSource.sha` do commit novo, `projectSettings.rootDirectory: "receitas"`
+6. `assign_alias` com `montgomery-receitas.vercel.app` — se bloqueado pelo auto mode, rodar no terminal:
+   ```
+   vercel alias set <deploy-url> montgomery-receitas.vercel.app
+   ```
+
+**Casos especiais já vistos:**
+- **Foto portrait (vertical)**: adicionar `.rotate(90)` no sharp antes do `.jpeg()`
+- **Foto já tinha caminho no JSON mas era errada**: basta sobrescrever o JPG — o `photo` no JSON já aponta certo, não precisa editar o JSON
+- **Foto completamente faltando (photo: "")**: editar o JSON para atribuir `"photo": "images/<cat>/<id>.jpg"` além de copiar a imagem
+- **Sharp path**: sempre usar o node_modules dentro de `receitas/tools/` — não há sharp global instalado
+- **Imagem no temp**: o Claude Desktop salva as imagens enviadas pelo usuário em `C:\Users\MONTGO~1\AppData\Local\Temp\claude\<session>\images\NN.webp|png` — o path exato aparece no `<system-reminder>` da mensagem
 
 **Commit template:** `Fix photo: <receita> — <motivo curto>`
 
