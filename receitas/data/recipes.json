@@ -6796,7 +6796,7 @@
       "Coloque as mini pizzas de volta ao forno por mais alguns minutos, apenas o suficiente para derreter o queijo e aquecer a cobertura.",
       "Retire as mini pizzas do forno, deixe esfriar um pouco e sirva enquanto ainda estão quentes."
     ],
-    "photo": "images/massas/mini-pizza.jpg"
+    "photo": "images/massas/macarrao-de-espinafre.jpg"
   },
   {
     "id": "macarrao-de-espinafre",
@@ -6825,7 +6825,7 @@
       "Cozinhe o macarrão em água fervente com sal por aproximadamente 2 MINUTOS.",
       "Escorra o macarrão e sirva com o molho de sua escolha."
     ],
-    "photo": "images/massas/macarrao-de-espinafre.jpg"
+    "photo": "images/massas/pizza-de-frigideira.jpg"
   },
   {
     "id": "pizza-de-frigideira",
@@ -6857,7 +6857,7 @@
       "Quando a massa estiver cozida e o queijo derretido, retire a pizza da frigideira.",
       "Corte em pedaços e sirva enquanto está quente."
     ],
-    "photo": "images/massas/pizza-de-frigideira.jpg"
+    "photo": "images/massas/esfirra-aberta.jpg"
   },
   {
     "id": "esfirra-aberta",
@@ -6888,7 +6888,7 @@
       "Retire as esfirras do forno quando estiverem douradas e cozidas.",
       "Sirva quente e aproveite suas esfirras abertas sem glúten!"
     ],
-    "photo": "images/massas/esfirra-aberta.jpg"
+    "photo": "images/massas/salgados-assados.jpg"
   },
   {
     "id": "salgados-assados",
@@ -6921,7 +6921,7 @@
       "Para reaquecer, leve os salgados ao forno pré-aquecido até ficarem quentes.",
       "Sirva os salgados assados quentes e aproveite!"
     ],
-    "photo": "images/massas/salgados-assados.jpg"
+    "photo": "images/massas/esfiha-fechada-com-massa-de-batata.jpg"
   },
   {
     "id": "esfiha-fechada-com-massa-de-batata",
@@ -6952,7 +6952,7 @@
       "Asse as esfihas em forno pré-aquecido por 35 minutos na grade superior, até que fiquem douradas.",
       "Obs.: Use batatas amassadas e frias para evitar que a massa fique muito mole. Após assadas, as esfihas podem ser congeladas por até 1 mês, desde que estejam bem embaladas."
     ],
-    "photo": "images/massas/esfiha-fechada-com-massa-de-batata.jpg"
+    "photo": "images/massas/crepes.jpg"
   },
   {
     "id": "crepes",
@@ -6981,7 +6981,7 @@
       "essa massa de crepe é versátil e pode ser adaptada a diferentes recheios doces ou salgados.",
       "Ajuste a quantidade de açúcar de acordo com sua preferência de doçura. Obs.: Experimente com diferentes combinações de recheios para variar o sabor dos crepes. (Chantilly com pêssegos, Banana com doce de leite)"
     ],
-    "photo": "images/massas/crepes.jpg"
+    "photo": "images/massas/rondelli.jpg"
   },
   {
     "id": "rondelli",
@@ -7012,7 +7012,7 @@
       "Se desejar, adicione queijo por cima dos rondellis nos últimos minutos de cozimento e leve ao forno para gratinar.",
       "Retire do forno e sirva enquanto está quente."
     ],
-    "photo": "images/massas/rondelli.jpg"
+    "photo": "images/massas/croissants.jpg"
   },
   {
     "id": "croissants",
@@ -7064,7 +7064,7 @@
       "Pincele os croissants com ovo batido antes de assar.",
       "Asse no forno pré-aquecido por cerca de 30 minutos ou até que fiquem dourados. Obs.: Após assar, corte as bordas dos croissants para liberar o folhado."
     ],
-    "photo": "images/massas/croissants.jpg"
+    "photo": "images/massas/massa-folhada.jpg"
   },
   {
     "id": "massa-folhada",
@@ -7094,7 +7094,7 @@
       "Escolha seu recheio preferido, podendo ser salgado (queijo, presunto) ou doce (frutas, chocolate).",
       "Desfrute da sua massa folhada caseira e deliciosa!"
     ],
-    "photo": "images/massas/massa-folhada.jpg"
+    "photo": "images/massas/torta-salgada.jpg"
   },
   {
     "id": "torta-salgada",
@@ -7120,7 +7120,7 @@
       "Deixe a torta esfriar por alguns minutos antes de cortar em porções.",
       "Sirva a torta salgada quente ou em temperatura ambiente, conforme sua preferência."
     ],
-    "photo": "images/massas/torta-salgada.jpg"
+    "photo": "images/massas/coxinha-de-batata-doce.jpg"
   },
   {
     "id": "coxinha-de-batata-doce",
@@ -7145,7 +7145,7 @@
       "Retire as coxinhas do forno e deixe esfriar por alguns minutos antes de servir.",
       "Sirva as coxinhas de batata doce como um delicioso petisco ou acompanhamento."
     ],
-    "photo": "images/massas/coxinha-de-batata-doce.jpg"
+    "photo": "images/massas/nhoque.jpg"
   },
   {
     "id": "nhoque",
@@ -7169,7 +7169,7 @@
       "Salpique generosamente com queijo parmesão ralado sobre os nhoques com molho.",
       "Sirva os nhoques quentes, aproveitando o sabor do molho e do queijo derretido. Obs.: Se desejar, você pode gratinar os nhoques no forno por alguns minutos para dourar o queijo."
     ],
-    "photo": "images/massas/nhoque.jpg"
+    "photo": "images/massas/empanadas-argentinas.jpg"
   },
   {
     "id": "empanadas-argentinas",
@@ -7201,7 +7201,7 @@
       "Asse em forno preaquecido a 180 graus Celsius por aproximadamente 20 a 25 minutos, ou até que as empanadas estejam douradas.",
       "Sirva as empanadas quentes. Obs.: Se desejar, você pode pincelar as empanadas com ovo batido antes de assar para obter um acabamento dourado. Varie o recheio conforme seu gosto pessoal."
     ],
-    "photo": "images/massas/empanadas-argentinas.jpg"
+    "photo": "images/massas/pizza.jpg"
   },
   {
     "id": "pizza",
@@ -7230,7 +7230,7 @@
       "Asse a pizza no forno pré-aquecido por aproximadamente 20-25 minutos ou até que a borda esteja dourada. Retire a pizza do forno e sirva imediatamente.",
       "Obs.: Você pode adicionar seus ingredientes favoritos, como queijo, presunto, cogumelos, etc., antes de assar. Personalize a pizza de acordo com suas preferências."
     ],
-    "photo": "images/massas/pizza.jpg"
+    "photo": "images/massas/panquecas.jpg"
   },
   {
     "id": "panquecas",
@@ -7254,7 +7254,7 @@
       "Empilhe as panquecas cozidas e sirva conforme sua preferência. Sugestões de Recheios: Doce: mel, frutas, geleia, chocolate derretido.",
       "Salgado: queijo, presunto, frango desfiado, cogumelos, vegetais refogados. Obs.: Você pode manter as panquecas aquecidas em um forno pré-aquecido enquanto prepara o restante da massa."
     ],
-    "photo": "images/massas/panquecas.jpg"
+    "photo": "images/massas/macarrao-ii.jpg"
   },
   {
     "id": "macarrao-ii",
@@ -7280,7 +7280,7 @@
       "Cozinhe a massa fresca por 2-4 minutos, ou até que fique al dente.",
       "Escorra a massa e sirva imediatamente com o molho de sua escolha."
     ],
-    "photo": "images/massas/macarrao-ii.jpg"
+    "photo": "images/massas/pizza-integral.jpg"
   },
   {
     "id": "pizza-integral",
@@ -7309,7 +7309,7 @@
       "Coloque queijo muçarela, tomate seco e orégano sobre o molho.",
       "Leve ao forno por aproximadamente 20 minutos, preferencialmente na grade da parte de baixo do forno. Após assar, coloque folhas de rúcula a gosto sobre a pizza. Sirva a pizza integral enquanto está quente e aproveite! Obs.: Não é necessário pré-assar a massa, pois a temperatura elevada do forno garantirá que ela asse completamente durante o tempo indicado."
     ],
-    "photo": "images/massas/pizza-integral.jpg"
+    "photo": "images/massas/donuts.jpg"
   },
   {
     "id": "donuts",
@@ -7346,7 +7346,7 @@
       "Cobertura de Açúcar: Misture açúcar de confeiteiro com leite até obter uma consistência desejada e cubra os donuts.",
       "Obs.: Lembre-se de ajustar as coberturas conforme o seu gosto pessoal."
     ],
-    "photo": "images/massas/donuts.jpg"
+    "photo": "images/massas/empada.jpg"
   },
   {
     "id": "empada",
@@ -7370,7 +7370,7 @@
       "Retire as empadinhas do forno e das forminhas enquanto ainda estão quentes.",
       "Deixe-as esfriar completamente antes de servir."
     ],
-    "photo": "images/massas/empada.jpg"
+    "photo": "images/massas/macarrao.jpg"
   },
   {
     "id": "macarrao",
@@ -7400,7 +7400,7 @@
       "Se você tiver um desidratador de alimentos, coloque as peças de massa nele seguindo as instruções do aparelho. O tempo de secagem pode variar.",
       "Armazene a massa seca em um recipiente hermético até o momento de cozinhar."
     ],
-    "photo": "images/massas/macarrao.jpg"
+    "photo": "images/massas/calzone.jpg"
   },
   {
     "id": "calzone",
@@ -7424,7 +7424,7 @@
       "Pincele uma gema com um pouco de água e leve para assar em forno 180 por aproximadamente 20 minutos.",
       "Coloque uma assadeira com água no fundo do forno. Esta água vai fazer vapor no forno para seu calzone fica macio."
     ],
-    "photo": "images/massas/calzone.jpg"
+    "photo": "images/massas/panqueca-de-banana.jpg"
   },
   {
     "id": "panqueca-de-banana",
@@ -7445,7 +7445,7 @@
       "Retire as panquecas da frigideira e repita o processo até usar toda a massa. Sirva as panquecas quentes.",
       "Sirva suas panquecas de banana com uma variedade de coberturas, como mais bananas fatiadas, mel, xarope de bordo, iogurte ou frutas frescas."
     ],
-    "photo": "images/massas/panqueca-de-banana.jpg"
+    "photo": "images/massas/pastel.jpg"
   },
   {
     "id": "pastel",
@@ -7475,7 +7475,7 @@
       "Aqueça o óleo a uma temperatura de aproximadamente 180 graus Celsius.",
       "Frite os pastéis até que fiquem dourados e crocantes."
     ],
-    "photo": "images/massas/pastel.jpg"
+    "photo": "images/massas/nhoque-de-abobora.jpg"
   },
   {
     "id": "nhoque-de-abobora",
@@ -7495,7 +7495,7 @@
       "Escolha um molho de sua preferência. Um molho de tomate caseiro é uma ótima opção. Aqueça o molho em uma panela e adicione os nhoques cozidos.",
       "Sirva os nhoques quentes com molho por cima. Se desejar, polvilhe com queijo parmesão ralado e decore com folhas de manjericão fresco."
     ],
-    "photo": "images/massas/nhoque-de-abobora.jpg"
+    "photo": "images/massas/coxinha-facil.jpg"
   },
   {
     "id": "coxinha-facil",
@@ -7523,7 +7523,7 @@
       "Aqueça o óleo para fritura. Frite as coxinhas até ficarem douradas. Retire as coxinhas e deixe escorrer o excesso de óleo em papel absorvente.",
       "Sirva quente. Obs.: Certifique-se de que o recheio de frango esteja bem temperado para garantir sabor às coxinhas. A farinha de rosca sem glúten pode ser preparada usando pão sem glúten processado em um processador de alimentos."
     ],
-    "photo": "images/massas/coxinha-facil.jpg"
+    "photo": "images/massas/quiche-lorraine.jpg"
   },
   {
     "id": "quiche-lorraine",
@@ -7555,7 +7555,7 @@
       "Leve a quiche ao forno a 180 graus Celsius por mais 30 minutos, ou até que o recheio esteja firme e dourado.",
       "Retire do forno e deixe esfriar um pouco antes de cortar e servir. Obs.: Experimente servir a quiche morna ou em temperatura ambiente para melhor apreciação."
     ],
-    "photo": "images/massas/quiche-lorraine.jpg"
+    "photo": "images/massas/focaccia.jpg"
   },
   {
     "id": "focaccia",
@@ -7594,7 +7594,7 @@
       "Corte a focaccia em pedaços e sirva quente. Obs.: Experimente variar os ingredientes do recheio conforme seu gosto pessoal.",
       "A focaccia é deliciosa servida como acompanhamento ou como aperitivo."
     ],
-    "photo": "images/massas/focaccia.jpg"
+    "photo": "images/massas/coxinha.jpg"
   },
   {
     "id": "coxinha",
@@ -7622,7 +7622,7 @@
       "Retire as coxinhas da panela e coloque sobre papel absorvente para remover o excesso de óleo.",
       "Sirva as coxinhas sem glúten enquanto estão quentes."
     ],
-    "photo": "images/massas/coxinha.jpg"
+    "photo": "images/massas/pastel-de-forno.jpg"
   },
   {
     "id": "pastel-de-forno",
@@ -7649,7 +7649,7 @@
       "Deixe os pasteis esfriarem um pouco antes de servir.",
       "A massa ficará mais macia depois de esfriar. Obs.: O recheio pode ser variado conforme sua preferência. Experimente diferentes combinações para criar pastéis de forno deliciosos!"
     ],
-    "photo": "images/massas/pastel-de-forno.jpg"
+    "photo": "images/massas/empada-de-batata-doce.jpg"
   },
   {
     "id": "empada-de-batata-doce",
@@ -7670,7 +7670,7 @@
       "Deixe as empadas esfriarem nas formas por alguns minutos. Em seguida, remova-as das formas e deixe esfriar completamente em uma grade.",
       "As empadas de batata doce sem glúten estão prontas para serem servidas. Você pode desfrutar delas como estão ou rechear conforme sua preferência. Se não for consumir imediatamente, armazene em um recipiente hermético na geladeira."
     ],
-    "photo": "images/massas/empada-de-batata-doce.jpg"
+    "photo": "images/massas/lasanha.jpg"
   },
   {
     "id": "lasanha",
@@ -7700,7 +7700,7 @@
       "Asse no forno preaquecido a 180 graus Celsius por aproximadamente 30-40 minutos, ou até que a lasanha esteja dourada e borbulhante.",
       "Deixe a lasanha descansar por alguns minutos antes de cortar e servir."
     ],
-    "photo": "images/massas/lasanha.jpg"
+    "photo": "images/massas/pastel-facil.jpg"
   },
   {
     "id": "pastel-facil",
@@ -7726,7 +7726,7 @@
       "Para fritar: Aqueça óleo em uma panela e frite os pastéis até ficarem dourados. Escorra em papel toalha.",
       "Sirva os pastéis quentes, acompanhados de molho de sua escolha."
     ],
-    "photo": "images/massas/pastel-facil.jpg"
+    "photo": "images/massas/pizza-com-fermentacao-natural.jpg"
   },
   {
     "id": "pizza-com-fermentacao-natural",
@@ -7757,7 +7757,7 @@
       "Asse no forno preaquecido por 15-20 minutos, ou até que a borda da massa esteja dourada.",
       "Retire do forno, adicione folhas de manjericão fresco e sirva imediatamente."
     ],
-    "photo": "images/massas/pizza-com-fermentacao-natural.jpg"
+    "photo": "images/massas/nhoque-de-batata-doce.jpg"
   },
   {
     "id": "nhoque-de-batata-doce",
@@ -7777,7 +7777,7 @@
       "Escolha um molho de sua preferência. Um molho de tomate caseiro é uma ótima opção. Aqueça o molho em uma panela e adicione os nhoques cozidos.",
       "Sirva os nhoques quentes com molho por cima. Se desejar, polvilhe com queijo parmesão ralado e decore com folhas de manjericão fresco."
     ],
-    "photo": "images/massas/nhoque-de-batata-doce.jpg"
+    "photo": "images/massas/focaccia-com-fermentacao-natural.jpg"
   },
   {
     "id": "focaccia-com-fermentacao-natural",
@@ -7811,7 +7811,7 @@
       "Retire do forno e deixe esfriar antes de cortar.",
       "Sirva a focaccia cortada em quadrados, regada com mais azeite de oliva, se desejar."
     ],
-    "photo": "images/massas/focaccia-com-fermentacao-natural.jpg"
+    "photo": "images/massas/quiche-de-alho-poro.jpg"
   },
   {
     "id": "quiche-de-alho-poro",
@@ -7839,7 +7839,7 @@
       "Retire a massa pré-assada do forno e despeje o recheio sobre ela.",
       "Leve novamente ao forno a 200 graus Celsius por mais 30 minutos, ou até que o recheio esteja firme e dourado. Deixe esfriar um pouco antes de cortar e servir."
     ],
-    "photo": "images/massas/quiche-de-alho-poro.jpg"
+    "photo": "images/massas/empadao---massa-podre.jpg"
   },
   {
     "id": "empadao---massa-podre",
@@ -7869,7 +7869,7 @@
       "Leve ao forno preaquecido por aproximadamente 40 a 45 minutos, ou até que a massa esteja dourada.",
       "Retire do forno e deixe esfriar um pouco antes de desenformar e servir."
     ],
-    "photo": "images/massas/empadao---massa-podre.jpg"
+    "photo": "images/massas/quiche-de-frango-com-bacon.jpg"
   },
   {
     "id": "quiche-de-frango-com-bacon",
@@ -7905,7 +7905,7 @@
       "Leve a quiche ao forno por aproximadamente 30 a 35 minutos, ou até que o recheio esteja firme e dourado.",
       "Retire do forno e deixe esfriar um pouco antes de cortar e servir."
     ],
-    "photo": "images/massas/quiche-de-frango-com-bacon.jpg"
+    "photo": "images/massas/guioza.jpg"
   },
   {
     "id": "guioza",
@@ -7951,7 +7951,7 @@
       "Molho: Misture alho amassado, pimenta do reino, molho shoyu, molho de pimenta vermelha, óleo de gergelim e vinagre branco em uma tigela.",
       "Sirva os guiozás quentes, acompanhados do molho."
     ],
-    "photo": "images/massas/guioza.jpg"
+    "photo": "images/massas/macarrao---miojo---lamen.jpg"
   },
   {
     "id": "macarrao---miojo---lamen",
@@ -7980,7 +7980,7 @@
       "Escorra os macarrões e passe-os por água fria para interromper o cozimento (choque térmico).",
       "Sirva os macarrões em um caldo de galinha de preferência caseiro."
     ],
-    "photo": "images/massas/macarrao---miojo---lamen.jpg"
+    "photo": "images/massas/sonho.jpg"
   },
   {
     "id": "sonho",
@@ -8011,7 +8011,7 @@
       "Recheie os sonhos com creme confeiteiro, goiabada, nata, brigadeiro, o recheio de sua preferência.",
       "Polvilhe os sonhos com açúcar de confeiteiro antes de servir."
     ],
-    "photo": "images/massas/sonho.jpg"
+    "photo": "images/massas/cueca-virada.jpg"
   },
   {
     "id": "cueca-virada",
@@ -8037,7 +8037,7 @@
       "Em uma panela funda, aqueça óleo suficiente para fritar as cuecas viradas. Quando o óleo estiver quente (aproximadamente 180°C), coloque as cuecas na panela, cuidadosamente, evitando aglomeração. Frite cada lado até que fiquem dourados e crocantes. Isso geralmente leva cerca de 2-3 minutos de cada lado.",
       "Retire as cuecas viradas da panela e coloque-as sobre papel toalha para absorver o excesso de óleo. Deixe esfriar, pode polvilhar açucar e canela caso goste antes de servir."
     ],
-    "photo": "images/massas/cueca-virada.jpg"
+    "photo": "images/massas/cueca-virada-ii.jpg"
   },
   {
     "id": "cueca-virada-ii",
