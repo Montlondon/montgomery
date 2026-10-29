@@ -85,6 +85,29 @@ depois de `npm install` ali dentro uma vez):
      mesma linha do título (em vez de sozinho), tem que ancorar a busca de página pela
      linha do TÍTULO, não pela linha "ingredientes" — senão pula o marcador e erra a página.
 
+### Como evitamos texto que não pertence à receita (rodapé grudado no meio do passo)
+
+Cada página do livro tem um rodapé repetido ("Chef Carla Ramos" + "Pag. | NN") que o
+`pdftotext` extrai junto com o texto normal, muitas vezes bem no meio de um ingrediente ou
+passo que atravessa a quebra de página. O `tools/1_parse_recipes.js` filtra isso em duas
+camadas:
+
+- `isFooterLine(linha)`: descarta a linha inteira se ela for só o rodapé (regex pra
+  `"Chef Carla Ramos"` sozinho, `"Pag. | NN"` sozinho, ou os dois grudados na mesma linha).
+- `stripFooterFragment(linha)`: quando o rodapé vem GRUDADO no fim de uma linha de
+  conteúdo de verdade (ex.: `"...até dourar.Chef Carla Ramos Pag. | 42"`), corta só o
+  pedaço do rodapé e mantém o resto da frase.
+- `mergeContinuations(...)`: depois de limpar o rodapé, uma frase que ficou cortada no
+  meio (porque a quebra de página caiu ali) é colada de novo na linha anterior, usando uma
+  heurística simples (a linha seguinte começa com minúscula/parêntese e não com número de
+  passo nem marcador de lista).
+
+**Isso reduz bastante o lixo, mas não é garantia de 100%** — variações que o regex não
+previu (rodapé com espaçamento diferente, abreviação diferente, nota de rodapé que não é
+"Chef Carla Ramos") passam direto. Foi assim que uma receita ficou com informação que não
+era dela (achado pelo Montgomery) — daí a varredura automática da seção "vivo" ser
+necessária como segunda camada de conferência, e não só confiar no parser.
+
 4. **Conferir contra o sumário** — adaptar `tools/5_audit_vs_sumario_template.js` pro novo
    livro. Normalizar títulos (maiúsculo, sem acento, só alfanumérico) antes de comparar, e
    não se assustar com "FALTANDO" falso-positivo: título quebrado em duas linhas no sumário
