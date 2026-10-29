@@ -46,6 +46,34 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
 
 ## vivo
 
+### Correção manual de fotos erradas — EM ANDAMENTO (29/10/2026)
+
+Método: Montgomery abre cada categoria no app, envia a foto correta com o nome da receita,
+Claude converte (sharp), substitui o JPG em `receitas/images/<cat>/`, faz commit+push+deploy.
+
+**Categorias já conferidas e corrigidas:**
+- **veganas** — 10 fotos trocadas/corrigidas (incluindo rotação de Cubos de Arroz Recheado)
+- **bolachas** — 4 fotos trocadas (Biscoito Oreo, Zimtsterne, Biscoito de Banana, Doritos II)
+- **doces** — 5 fotos trocadas (Cupcake de Laranja, Pudim, Brigadeiro, Torta de Banana II, Doce de Leite)
+
+**Categorias ainda pendentes de conferência:**
+- **lowcarb** — não conferida
+- **trancados** — não conferida
+- **fermentacao** — não conferida
+
+**Categorias confirmadas corretas (não tocar):**
+- pães, massas, panetone
+
+**Fluxo de correção (repetir para cada foto):**
+1. Montgomery envia imagem + nome da receita
+2. Claude: `node -e "sharp('...').jpeg({quality:90}).toFile('receitas/images/<cat>/<id>.jpg')"` 
+3. `git add` + commit + push + `create_deployment` Vercel + `assign_alias montgomery-receitas.vercel.app`
+4. Se `assign_alias` for bloqueado pelo auto mode: rodar no terminal `vercel alias set <deploy-url> montgomery-receitas.vercel.app`
+
+**Commit template:** `Fix photo: <receita> — <motivo curto>`
+
+---
+
 - **Varredura de texto sujo — CONCLUÍDA (29/10/2026)**: varredura completa nas 407 receitas.
   Corrigidos: texto de fechamento de livro (Alfajor, Cueca Virada II, Ciabatta), conteúdo
   errado (Bolinha de Queijo lowcarb tinha outra receita; Bolo de Cenoura bolos tinha Maracujá),
