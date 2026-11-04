@@ -46,7 +46,7 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
 
 ## vivo
 
-### Correção manual de fotos erradas — EM ANDAMENTO (29/10/2026)
+### Correção manual de fotos — CONCLUÍDA (04/11/2026)
 
 Método: Montgomery abre cada categoria no app, envia a foto correta com o nome da receita,
 Claude converte (sharp), substitui o JPG em `receitas/images/<cat>/`, faz commit+push+deploy.
@@ -58,8 +58,9 @@ Claude converte (sharp), substitui o JPG em `receitas/images/<cat>/`, faz commit
 - **lowcarb** — 82/82 com foto; corrigidos 39 campos vazios no JSON (imagens existiam no disco mas photo field estava vazio); bug de ID duplicado resolvido (pao-doce e pao-integral colidiam com categoria paes — renomeados para pao-doce-trancado e pao-integral-trancado em trancados)
 - **trancados** — 10/10 com foto; Pão Integral foto enviada pelo usuário; Técnicas de Tranças (10 grids extraídos do PDF) adicionadas como aba nova
 
-**Categorias ainda pendentes de conferência:**
-- **fermentacao** — não conferida
+- **fermentacao** — 4/4 com foto; aba renomeada para "Pães de Fermentação Natural"; banner no topo com link para o PDF do guia completo (levain)
+
+**Todas as categorias conferidas e corrigidas.**
 
 **Categorias confirmadas corretas (não tocar):**
 - pães, massas, panetone
