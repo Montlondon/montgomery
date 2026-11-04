@@ -55,10 +55,10 @@ Claude converte (sharp), substitui o JPG em `receitas/images/<cat>/`, faz commit
 - **veganas** — 10 fotos trocadas/corrigidas (incluindo rotação de Cubos de Arroz Recheado)
 - **bolachas** — 4 fotos trocadas (Biscoito Oreo, Zimtsterne, Biscoito de Banana, Doritos II)
 - **doces** — 5 fotos trocadas (Cupcake de Laranja, Pudim, Brigadeiro, Torta de Banana II, Doce de Leite)
+- **lowcarb** — 82/82 com foto; corrigidos 39 campos vazios no JSON (imagens existiam no disco mas photo field estava vazio); bug de ID duplicado resolvido (pao-doce e pao-integral colidiam com categoria paes — renomeados para pao-doce-trancado e pao-integral-trancado em trancados)
+- **trancados** — 10/10 com foto; Pão Integral foto enviada pelo usuário; Técnicas de Tranças (10 grids extraídos do PDF) adicionadas como aba nova
 
 **Categorias ainda pendentes de conferência:**
-- **lowcarb** — não conferida
-- **trancados** — não conferida
 - **fermentacao** — não conferida
 
 **Categorias confirmadas corretas (não tocar):**
