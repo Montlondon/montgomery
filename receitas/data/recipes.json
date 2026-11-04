@@ -8064,7 +8064,7 @@
     "photo": "images/massas/cueca-virada-ii.jpg"
   },
   {
-    "id": "pao-doce",
+    "id": "pao-doce-trancado",
     "title": "Pão Doce",
     "category": "trancados",
     "ingredients": [
@@ -8097,7 +8097,7 @@
       "Depois de aguardar o seu pão crescer coloque ele no forno na mesma temperatura e deixe por 25 minutos.",
       "Após assar, desenforme o pão ainda quente e deixe esfriar sobre uma grade. Certifique-se de cortar o pão apenas quando estiver completamente frio para manter a umidade. TRANÇA DE 4 TIRAS - MODELO 1"
     ],
-    "photo": "images/trancados/pao-doce.jpg"
+    "photo": "images/trancados/pao-doce-trancado.jpg"
   },
   {
     "id": "pao-trancado-challah",
@@ -8310,7 +8310,7 @@
     "photo": "images/trancados/pao-com-nutella.jpg"
   },
   {
-    "id": "pao-integral",
+    "id": "pao-integral-trancado",
     "title": "Pão Integral",
     "category": "trancados",
     "ingredients": [
