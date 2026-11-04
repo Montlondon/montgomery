@@ -1,4 +1,4 @@
-﻿# ROADMAP — Receitas (app pessoal de receitas)
+# ROADMAP — Receitas (app pessoal de receitas)
 
 Livro de receitas pessoal, vindo de PDFs comprados da Chef Carla Ramos (sem glúten),
 com zoom infinito, busca 100% e foto conferida de cada receita.
@@ -49,8 +49,11 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
   após cada merge que queira aparecer no link curto.
 - **Aba 500 Receitas Low Carb** (04/11/2026): 499 receitas extraídas do PDF de duas colunas
   (`500 Receitas Low Carb-1_1.pdf`, 308 páginas) em 13 subcategorias, com `pdfreader` +
-  separação por coordenada x. Dados em `receitas/data/recipes_500lowcarb.json`. Fotos
-  sem extração por ora (campo `photo: ""`).
+  separação por coordenada x. Dados em `receitas/data/recipes_500lowcarb.json`.
+- **Fotos 500 Low Carb** (04/11/2026): script `tools/7_extract_photos_500lowcarb.js` extrai
+  imagens JPEG do PDF via `pdf-lib`, faz matching por título via `pdfreader` e salva em
+  `images/livro500/`. Das 499 receitas, 49 têm foto no PDF; as demais ficam sem foto
+  (preferível a foto errada). Foto de farinha-de-frango enviada pelo usuário foi preservada.
 - **Upload de foto por receita** (04/11/2026): botão câmera no detalhe de cada receita;
   função serverless `receitas/api/upload-photo.js` faz PUT da imagem no GitHub e atualiza o
   JSON — sem precisar da Claude para adicionar foto. Funciona para `recipes.json` e
