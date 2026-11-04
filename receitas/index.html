@@ -401,7 +401,19 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     { id:"fermento", name:"Fermento Vivo",   color:"#E8B84B" },
     { id:"manha",    name:"Manhã Clara",     color:"#C4552F" }
   ];
-  var CATEGORY_LABELS = { paes:"Pães", bases:"Bases (Mix de Farinhas)", veganas:"Veganas", bolachas:"Bolachas e Biscoitos", doces:"Doces e Sobremesas", massas:"Massas", trancados:"Pães Trançados", panetone:"Panetone", fermentacao:"Fermentação Natural", lowcarb:"Low Carb Sem Glúten", bolos:"Bolos Sem Glúten" };
+  var CATEGORY_LABELS = { paes:"Pães", bases:"Bases (Mix de Farinhas)", veganas:"Veganas", bolachas:"Bolachas e Biscoitos", doces:"Doces e Sobremesas", massas:"Massas", trancados:"Pães Trançados", panetone:"Panetone", fermentacao:"Fermentação Natural", lowcarb:"Low Carb Sem Glúten", bolos:"Bolos Sem Glúten", tecnicas:"Técnicas de Tranças" };
+  var TECNICAS = [
+    { id:"tranca-4-tiras-modelo-1", title:"Trança de 4 Tiras — Modelo 1", category:"tecnicas", photo:"images/tecnicas/tranca-4-tiras-modelo-1.jpg", ingredients:[], steps:[], search:"tranca 4 tiras modelo 1" },
+    { id:"tranca-1-tira-modelo-1",  title:"Trança de 1 Tira — Modelo 1",  category:"tecnicas", photo:"images/tecnicas/tranca-1-tira-modelo-1.jpg",  ingredients:[], steps:[], search:"tranca 1 tira modelo 1" },
+    { id:"tranca-3-tiras",          title:"Trança de 3 Tiras",             category:"tecnicas", photo:"images/tecnicas/tranca-3-tiras.jpg",          ingredients:[], steps:[], search:"tranca 3 tiras" },
+    { id:"tranca-4-tiras-modelo-2", title:"Trança de 4 Tiras — Modelo 2", category:"tecnicas", photo:"images/tecnicas/tranca-4-tiras-modelo-2.jpg", ingredients:[], steps:[], search:"tranca 4 tiras modelo 2" },
+    { id:"tranca-4-tiras-modelo-3", title:"Trança de 4 Tiras — Modelo 3", category:"tecnicas", photo:"images/tecnicas/tranca-4-tiras-modelo-3.jpg", ingredients:[], steps:[], search:"tranca 4 tiras modelo 3" },
+    { id:"tranca-2-tiras",          title:"Trança de 2 Tiras",             category:"tecnicas", photo:"images/tecnicas/tranca-2-tiras.jpg",          ingredients:[], steps:[], search:"tranca 2 tiras" },
+    { id:"tranca-1-tira-modelo-2",  title:"Trança de 1 Tira — Modelo 2",  category:"tecnicas", photo:"images/tecnicas/tranca-1-tira-modelo-2.jpg",  ingredients:[], steps:[], search:"tranca 1 tira modelo 2" },
+    { id:"tranca-6-tiras-modelo-1", title:"Trança de 6 Tiras — Modelo 1", category:"tecnicas", photo:"images/tecnicas/tranca-6-tiras-modelo-1.jpg", ingredients:[], steps:[], search:"tranca 6 tiras modelo 1" },
+    { id:"tranca-6-tiras-modelo-2", title:"Trança de 6 Tiras — Modelo 2", category:"tecnicas", photo:"images/tecnicas/tranca-6-tiras-modelo-2.jpg", ingredients:[], steps:[], search:"tranca 6 tiras modelo 2" },
+    { id:"tranca-5-tiras",          title:"Trança de 5 Tiras",             category:"tecnicas", photo:"images/tecnicas/tranca-5-tiras.jpg",          ingredients:[], steps:[], search:"tranca 5 tiras" }
+  ];
   var LS_CUSTOM = "receitas.custom.v1";
   var LS_THEME = "receitas.theme.v1";
 
@@ -459,7 +471,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
   }
 
   function mergeAll(){
-    state.all = state.builtin.concat(state.custom);
+    state.all = state.builtin.concat(state.custom).concat(TECNICAS);
     state.all.forEach(function(r){ if (!r.search) r.search = buildSearchBlob(r); });
   }
 
@@ -492,6 +504,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     var q = stripAccents(state.query.trim());
     var tokens = q.length ? q.split(/\s+/).filter(Boolean) : [];
     var list = state.all.filter(function(r){
+      if (r.category === "tecnicas" && state.activeCategory !== "tecnicas") return false;
       if (state.activeCategory !== "todas" && r.category !== state.activeCategory) return false;
       if (!tokens.length) return true;
       return tokens.every(function(t){ return r.search.indexOf(t) !== -1; });
@@ -504,7 +517,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     } else {
       countEl.textContent = "";
     }
-    document.getElementById("subcount").textContent = state.all.length + " receitas no livro";
+    document.getElementById("subcount").textContent = state.all.filter(function(r){ return r.category !== "tecnicas"; }).length + " receitas no livro";
   }
 
   function highlight(text, tokens){
@@ -649,9 +662,13 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
       ingList.appendChild(li);
     });
 
-    document.getElementById("stepsTitleText").textContent = (r.category === "bases") ? "Finalidade" : "Modo de preparo";
+    document.getElementById("stepsTitleText").textContent = (r.category === "bases") ? "Finalidade" : (r.category === "tecnicas") ? "Passo a passo" : "Modo de preparo";
     var stepList = document.getElementById("stepList");
     stepList.innerHTML = "";
+    if (r.category === "tecnicas") {
+      var hint = el("li","", '<span class="step-text" style="color:var(--muted);font-style:italic">Toque na imagem acima para ampliar e ver cada passo.</span>');
+      stepList.appendChild(hint);
+    }
     (r.steps||[]).forEach(function(line, i){
       var li = (r.category === "bases")
         ? el("li","", '<span class="step-text">'+escapeHtml(line)+'</span>')
