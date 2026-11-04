@@ -172,6 +172,15 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
   background:linear-gradient(145deg, var(--surface-2) 0%, var(--surface) 100%); }
 #photoPlaceholder svg{ width:30%; height:30%; color:var(--accent-soft); opacity:.7; }
 #photoPlaceholder .ph-label{ font-size:.8rem; color:var(--text-soft); letter-spacing:.04em; opacity:.8; }
+#uploadPhotoBtn{
+  position:absolute; bottom:10px; right:10px; z-index:10;
+  width:36px; height:36px; border-radius:50%; border:none; cursor:pointer;
+  background:rgba(0,0,0,.45); color:#fff; display:flex; align-items:center; justify-content:center;
+  opacity:.7; transition:opacity .2s;
+}
+#uploadPhotoBtn:hover{ opacity:1; }
+#uploadPhotoBtn svg{ width:18px; height:18px; }
+#uploadPhotoBtn.loading{ opacity:.5; pointer-events:none; }
 .zoom-hint{
   position:absolute; bottom:10px; right:12px; background:rgba(0,0,0,.45); color:#fff;
   font-size:.74rem; padding:5px 10px; border-radius:999px; pointer-events:none;
@@ -323,6 +332,10 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
   <div class="photo-zoom-wrap" id="photoZoomWrap">
     <div class="placeholder-icon" id="photoPlaceholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;"></div>
     <img id="detailPhoto" alt="" draggable="false">
+    <button id="uploadPhotoBtn" title="Adicionar foto" aria-label="Adicionar foto">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+    </button>
+    <input type="file" id="uploadPhotoInput" accept="image/*" style="display:none">
   </div>
   <div class="detail-body">
     <h1 class="detail-title" id="detailTitle"></h1>
@@ -955,6 +968,61 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     }
     document.getElementById("editRecipeBtn").addEventListener("click", startEdit);
     document.getElementById("editBtn2").addEventListener("click", startEdit);
+
+    // Upload de foto via GitHub API
+    document.getElementById("uploadPhotoBtn").addEventListener("click", function(){
+      document.getElementById("uploadPhotoInput").click();
+    });
+    document.getElementById("uploadPhotoInput").addEventListener("change", function(e){
+      var file = e.target.files[0];
+      if (!file || !currentRecipe) return;
+      e.target.value = "";
+      var ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+      if (ext === "jpeg") ext = "jpg";
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        var base64 = ev.target.result.split(",")[1];
+        var btn = document.getElementById("uploadPhotoBtn");
+        btn.classList.add("loading");
+        btn.title = "Enviando…";
+        fetch("/api/upload-photo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            recipeId:    currentRecipe.id,
+            category:    currentRecipe.category,
+            imageBase64: base64,
+            extension:   ext
+          })
+        })
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          btn.classList.remove("loading");
+          btn.title = "Adicionar foto";
+          if (data.ok) {
+            // Atualiza receita em memória
+            currentRecipe.photo = data.photo;
+            var target = currentRecipe.category === "livro500" ? state.builtin500 : state.builtin;
+            var idx = target ? target.findIndex(function(r){ return r.id === currentRecipe.id; }) : -1;
+            if (idx !== -1) target[idx].photo = data.photo;
+            mergeAll();
+            // Mostra a nova foto no detalhe
+            var img = document.getElementById("detailPhoto");
+            img.src = data.photo + "?v=" + Date.now();
+            img.style.display = "block";
+            document.getElementById("photoPlaceholder").style.display = "none";
+          } else {
+            alert("Erro: " + (data.error || "desconhecido"));
+          }
+        })
+        .catch(function(err){
+          btn.classList.remove("loading");
+          btn.title = "Adicionar foto";
+          alert("Erro de rede: " + err.message);
+        });
+      };
+      reader.readAsDataURL(file);
+    });
     document.getElementById("deleteBtn").addEventListener("click", function(){
       if (!currentRecipe) return;
       if (!confirm('Excluir "'+currentRecipe.title+'"?')) return;
