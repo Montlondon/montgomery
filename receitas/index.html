@@ -86,6 +86,17 @@ h1,h2,h3,p,ul,ol{ margin:0; }
 .search-icon{ position:absolute; right:16px; top:50%; transform:translateY(-50%); width:22px; height:22px; color:var(--text-soft); pointer-events:none; }
 .search-count{ font-size:.82rem; color:var(--text-soft); margin-top:8px; padding-left:6px; }
 
+/* ---------- Book tabs ---------- */
+.book-tabs{ display:flex; gap:6px; margin-bottom:10px; }
+.book-tab{
+  flex:none; border:1px solid var(--border); background:var(--surface);
+  color:var(--text-soft); border-radius:var(--radius-sm); padding:6px 14px;
+  font-size:.84rem; font-family:inherit; cursor:pointer; font-weight:600;
+}
+.book-tab[aria-pressed="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+[data-theme="fermento"] .book-tab[aria-pressed="true"],
+[data-theme="noturna"]  .book-tab[aria-pressed="true"]{ background:transparent; color:var(--accent); border-color:var(--accent); }
+
 .chips{ display:flex; gap:8px; margin-top:10px; overflow-x:auto; padding-bottom:2px; }
 .chip{
   flex:none; border:1px solid var(--border); background:var(--surface);
@@ -284,6 +295,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
       <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path>
     </svg>
   </div>
+  <div class="book-tabs" id="bookTabs"></div>
   <div class="search-count" id="resultCount"></div>
   <div class="chips" id="chips"></div>
 </header>
@@ -410,6 +422,11 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     { id:"manha",    name:"Manhã Clara",     color:"#C4552F" }
   ];
   var CATEGORY_LABELS = { paes:"Pães", bases:"Bases (Mix de Farinhas)", veganas:"Veganas", bolachas:"Bolachas e Biscoitos", doces:"Doces e Sobremesas", massas:"Massas", trancados:"Pães Trançados", panetone:"Panetone", fermentacao:"Pães de Fermentação Natural", lowcarb:"Low Carb Sem Glúten", bolos:"Bolos Sem Glúten", tecnicas:"Técnicas de Tranças" };
+  var LIVRO500_LABELS = { farinhas:"Farinhas e Leites", pates:"Patês", molhos:"Molhos", cafe:"Café da Manhã", aves:"Aves", carnes:"Carnes", peixes:"Peixes", legumes:"Legumes e Vegetais", saladas:"Saladas", sopas:"Sopas e Cremes", tortas:"Tortas e Suflês", doces:"Doces e Sobremesas", bebidas:"Bebidas" };
+  var BOOKS = [
+    { id:"receitas", name:"Receitas" },
+    { id:"livro500", name:"500 Low Carb" }
+  ];
   var TECNICAS = [
     { id:"tranca-4-tiras-modelo-1", title:"Trança de 4 Tiras — Modelo 1", category:"tecnicas", photo:"images/tecnicas/tranca-4-tiras-modelo-1.jpg", ingredients:[], steps:[], search:"tranca 4 tiras modelo 1" },
     { id:"tranca-1-tira-modelo-1",  title:"Trança de 1 Tira — Modelo 1",  category:"tecnicas", photo:"images/tecnicas/tranca-1-tira-modelo-1.jpg",  ingredients:[], steps:[], search:"tranca 1 tira modelo 1" },
@@ -425,7 +442,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
   var LS_CUSTOM = "receitas.custom.v1";
   var LS_THEME = "receitas.theme.v1";
 
-  var state = { builtin:[], custom:[], all:[], filtered:[], activeCategory:"todas", query:"" };
+  var state = { builtin:[], builtin500:[], custom:[], all:[], filtered:[], activeCategory:"todas", query:"", book:"receitas" };
 
   function stripAccents(s){ return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase(); }
 
@@ -479,17 +496,50 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
   }
 
   function mergeAll(){
-    state.all = state.builtin.concat(state.custom).concat(TECNICAS);
+    if (state.book === "livro500") {
+      state.all = state.builtin500.slice();
+    } else {
+      state.all = state.builtin.concat(state.custom).concat(TECNICAS);
+    }
     state.all.forEach(function(r){ if (!r.search) r.search = buildSearchBlob(r); });
+  }
+
+  function categoryLabel(cid){
+    if (state.book === "livro500") return LIVRO500_LABELS[cid] || cid;
+    return CATEGORY_LABELS[cid] || cid;
+  }
+
+  function recipeFilterKey(r){
+    return state.book === "livro500" ? (r.subcategory || r.category) : r.category;
   }
 
   function categoriesInUse(){
     var map = {};
     state.all.forEach(function(r){
-      var label = CATEGORY_LABELS[r.category] || r.category;
-      map[r.category] = label;
+      var key = recipeFilterKey(r);
+      map[key] = categoryLabel(key);
     });
     return map;
+  }
+
+  function renderBookTabs(){
+    var el2 = document.getElementById("bookTabs");
+    el2.innerHTML = "";
+    BOOKS.forEach(function(b){
+      var btn = el("button","book-tab");
+      btn.textContent = b.name;
+      btn.setAttribute("aria-pressed", String(state.book === b.id));
+      btn.addEventListener("click", function(){
+        if (state.book === b.id) return;
+        state.book = b.id;
+        state.activeCategory = "todas";
+        mergeAll();
+        renderBookTabs();
+        renderChips();
+        applyFilter();
+      });
+      el2.appendChild(btn);
+    });
   }
 
   function renderChips(){
@@ -513,7 +563,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     var tokens = q.length ? q.split(/\s+/).filter(Boolean) : [];
     var list = state.all.filter(function(r){
       if (r.category === "tecnicas" && state.activeCategory !== "tecnicas") return false;
-      if (state.activeCategory !== "todas" && r.category !== state.activeCategory) return false;
+      if (state.activeCategory !== "todas" && recipeFilterKey(r) !== state.activeCategory) return false;
       if (!tokens.length) return true;
       return tokens.every(function(t){ return r.search.indexOf(t) !== -1; });
     });
@@ -525,7 +575,8 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     } else {
       countEl.textContent = "";
     }
-    document.getElementById("subcount").textContent = state.all.filter(function(r){ return r.category !== "tecnicas"; }).length + " receitas no livro";
+    var total = state.book === "livro500" ? state.builtin500.length : state.builtin.concat(state.custom).filter(function(r){ return r.category !== "tecnicas"; }).length;
+    document.getElementById("subcount").textContent = total + (state.book === "livro500" ? " receitas low carb" : " receitas no livro");
   }
 
   function highlight(text, tokens){
@@ -620,7 +671,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
       var title = el("div","card-title", titleHtml);
       body.appendChild(title);
 
-      var tag = el("div","card-tag", (CATEGORY_LABELS[r.category]||r.category) + (r.isCustom ? " · sua receita" : ""));
+      var tag = el("div","card-tag", categoryLabel(recipeFilterKey(r)) + (r.isCustom ? " · sua receita" : ""));
       body.appendChild(tag);
 
       var snip = findSnippet(r, tokens || []);
@@ -653,7 +704,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     currentRecipe = r;
 
     document.getElementById("detailTitle").textContent = r.title;
-    document.getElementById("detailTagText").textContent = (CATEGORY_LABELS[r.category]||r.category) + (r.isCustom ? " · sua receita" : "");
+    document.getElementById("detailTagText").textContent = categoryLabel(recipeFilterKey(r)) + (r.isCustom ? " · sua receita" : "");
 
     var img = document.getElementById("detailPhoto");
     var placeholder = document.getElementById("photoPlaceholder");
@@ -940,13 +991,11 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
 
     state.custom = loadCustom().map(function(r){ r.isCustom = true; return r; });
 
-    fetch("data/recipes.json").then(function(r){ return r.json(); }).then(function(data){
-      state.builtin = data;
-      mergeAll();
-      renderChips();
-      applyFilter();
-    }).catch(function(){
-      state.builtin = [];
+    renderBookTabs();
+
+    var p1 = fetch("data/recipes.json").then(function(r){ return r.json(); }).then(function(data){ state.builtin = data; }).catch(function(){ state.builtin = []; });
+    var p2 = fetch("data/recipes_500lowcarb.json").then(function(r){ return r.json(); }).then(function(data){ state.builtin500 = data; }).catch(function(){ state.builtin500 = []; });
+    Promise.all([p1, p2]).then(function(){
       mergeAll();
       renderChips();
       applyFilter();
