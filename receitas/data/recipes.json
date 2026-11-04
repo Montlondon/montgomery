@@ -10427,7 +10427,7 @@
       "Leve ao forno médio, pré-aquecido a 180 graus Celsius, por aproximadamente 10 a 15 minutos, ou até que os biscoitos estejam levemente dourados.",
       "Sirva e aproveite!"
     ],
-    "photo": ""
+    "photo": "images/lowcarb/biscoitinhos-de-amendoim.jpg"
   },
   {
     "id": "waffle",
@@ -10625,7 +10625,7 @@
       "Se desejar, decore com raspas de chocolate ou coco ralado.",
       "Sirva o Bolo de Chocolate Sem Glúten Low Carb em fatias e aproveite!"
     ],
-    "photo": ""
+    "photo": "images/lowcarb/bolo-de-chocolate.jpg"
   },
   {
     "id": "leite-condensado",
@@ -11724,5 +11724,625 @@
       "Sirva o Bolo de Maracujá em temperatura ambiente."
     ],
     "photo": "images/bolos/bolo-de-maracuja.jpg"
+  },
+  {
+    "id": "bolo-de-caneca",
+    "title": "BOLO DE CANECA",
+    "category": "lowcarb",
+    "ingredients": [
+      "4 colheres (sopa) de leite",
+      "1 ovo",
+      "1 colher (chá) de óleo de coco",
+      "3 colheres (sopa) de farinha de coco",
+      "3 colheres (sopa) de adoçante de sua preferência (ou substitua por 3",
+      "colheres de sopa de fermento culinário, conforme indicado na receita",
+      "original)",
+      "3 colheres (sopa) de cacau em pó 100% (ou chocolate em pó sem açúcar)",
+      "1 colher (café) de fermento em pó químico"
+    ],
+    "steps": [
+      "Em um recipiente, misture bem os ingredientes molhados: leite, ovo e óleo de coco.",
+      "Acrescente a farinha de coco, o adoçante (ou fermento culinário, se preferir), o cacau em pó e o fermento em pó químico.",
+      "Transfira a massa para uma caneca grande ou outro recipiente próprio para micro-ondas.",
+      "Leve ao micro-ondas em potência alta por aproximadamente 3 minutos. O tempo pode variar de acordo com a potência do seu micro-ondas; verifique se o bolo está cozido antes de retirar.",
+      "Decore o bolo como desejar, utilizando coberturas low carb, granulados sem açúcar, ou simplesmente aproveite assim mesmo. Dicas: A farinha de coco e o adoçante são essenciais para manter a receita low carb. Certifique-se de usar um adoçante que seja adequado para cozimento, se preferir uma versão mais doce. O óleo de coco pode ser substituído por manteiga derretida, se preferir. Este bolo é ideal para uma porção individual, perfeito para um lanche rápido e saudável."
+    ],
+    "photo": "images/lowcarb/bolo-de-caneca.jpg",
+    "search": ""
+  },
+  {
+    "id": "pudim-de-chia",
+    "title": "PUDIM DE CHIA",
+    "category": "lowcarb",
+    "ingredients": [
+      "1 colher (chá) de Spirulina em pó",
+      "3 gotas de extrato concentrado de baunilha",
+      "200ml de leite de coco",
+      "1 colher (chá) de açúcar de maçã (ou outro adoçante de sua preferência)",
+      "4 colheres (chá) de sementes de chia",
+      "Frutas vermelhas para decorar"
+    ],
+    "steps": [
+      "Em uma tigela, misture a Spirulina em pó, o extrato de baunilha, o leite de coco e o açúcar de maçã até que todos os ingredientes estejam bem incorporados.",
+      "Acrescente as sementes de chia à mistura e mexa bem para distribuí-las uniformemente.",
+      "Transfira a mistura para uma forminha de silicone ou uma caneca grande previamente untada, se optar por fazer no micro-ondas.",
+      "Deixe descansar por cerca de 10 minutos para que as sementes de chia absorvam o líquido e comecem a gelificar.",
+      "Leve ao forno preaquecido a baixa temperatura (cerca de 150°C) por aproximadamente 10 minutos. O tempo pode variar dependendo do seu forno, então verifique se o pudim está firme.",
+      "Para fazer no micro-ondas, coloque a mistura em uma caneca grande untada e aqueça por 2 minutos e meio em potência alta. Verifique se o pudim está firme antes de retirar.",
+      "Retire do forno ou do micro-ondas e deixe esfriar um pouco.",
+      "Decore com frutas vermelhas ou outra fruta de sua preferência.",
+      "Sirva o pudim de chia como uma sobremesa saudável e nutritiva, ideal para uma dieta low carb e vegana.",
+      "Este pudim de chia não apenas é delicioso, mas também oferece uma boa dose de nutrientes essenciais. Aproveite esta receita fácil e rápida para incluir mais variedade e benefícios à sua alimentação"
+    ],
+    "photo": "images/lowcarb/pudim-de-chia.jpg",
+    "search": ""
+  },
+  {
+    "id": "trufas-de-chocolate",
+    "title": "TRUFAS DE CHOCOLATE",
+    "category": "lowcarb",
+    "ingredients": [
+      "1 lata de creme de leite (sem soro)",
+      "200 g de chocolate amargo 70% cacau (ou chocolate low carb de sua",
+      "escolha), em pedaços pequenos",
+      "1 colher de chá de essência de baunilha",
+      "Cacau em pó 100% para enrolar as trufas"
+    ],
+    "steps": [
+      "Quebre o chocolate em pedaços pequenos e coloque em um recipiente de vidro resistente ao calor.",
+      "Em uma panela pequena, aqueça o creme de leite em fogo baixo, mexendo constantemente para evitar queimar ou ferver. Aqueça apenas até começar a formar bolhas ao redor das bordas da panela.",
+      "Despeje o creme de leite aquecido sobre o chocolate picado. Aguarde alguns minutos para que o calor do creme de leite derreta o chocolate. Mexa suavemente até obter uma mistura cremosa e homogênea.",
+      "Acrescente a essência de baunilha à mistura de chocolate derretido e creme de leite. Mexa bem para incorporar.",
+      "Deixe a mistura esfriar um pouco em temperatura ambiente. Depois, cubra o recipiente com filme plástico diretamente sobre a superfície do chocolate para evitar a formação de uma película dura. Leve à geladeira por pelo menos 2 horas para firmar.",
+      "Após a mistura estar firmada, retire da geladeira e, com as mãos levemente untadas com óleo de coco ou manteiga, faça bolinhas com cerca de 2 cm de diâmetro.",
+      "Passe cada trufa no cacau em pó 100% para revestir uniformemente. O cacau em pó dará um acabamento elegante e evitará que as trufas grudem.",
+      "Coloque as trufas em uma forma forrada com papel manteiga e leve à geladeira por pelo menos mais 3 horas antes de servir. Isso permitirá que elas firmem completamente e desenvolvam seu sabor.",
+      "Sirva as trufas de chocolate low carb diretamente da geladeira para melhor textura e sabor. Aproveite!"
+    ],
+    "photo": "images/lowcarb/trufas-de-chocolate.jpg",
+    "search": ""
+  },
+  {
+    "id": "manjar-de-coco",
+    "title": "MANJAR DE COCO",
+    "category": "lowcarb",
+    "ingredients": [
+      "1 pacote de gelatina sem sabor",
+      "1 pacote de gelatina com sabor diet (sabor de sua escolha)",
+      "100 ml de água (1/2 copo)",
+      "1 garrafa de leite de coco (300 ml)",
+      "1 lata de creme de leite (300 g)",
+      "1/2 a 3/4 de xícara de sucralose para forno e fogão (ou outro adoçante",
+      "de sua preferência, ajuste conforme o seu gosto)",
+      "100 g de coco ralado não adoçado e não desengordurado",
+      "Manteiga para untar a forma",
+      "Essência de baunilha a gosto (opcional)"
+    ],
+    "steps": [
+      "Em um liquidificador, adicione a água e o pacote de gelatina sem sabor. Bata até a gelatina dissolver completamente. Acrescente ao liquidificador o leite de coco, o creme de leite, a sucralose (ou outro adoçante) e a essência de baunilha (se estiver usando). Bata novamente até todos os ingredientes estarem bem misturados.",
+      "Adicione o coco ralado à mistura no liquidificador e bata apenas o suficiente para incorporar o coco. Não é necessário bater por muito tempo para que o coco não se despedace completamente.",
+      "Unte uma forma de bolo com manteiga, garantindo que esteja bem espalhada para facilitar o desenformar depois. Espalhe a gelatina com sabor (do pacote diet) no fundo da forma. Esta gelatina será a cobertura do manjar.",
+      "Despeje cuidadosamente a mistura do liquidificador sobre a gelatina com sabor na forma. Tome cuidado para não misturar as camadas.",
+      "Leve ao forno preaquecido em banho-maria a 250-270°C por 45 a 50 minutos. O banho-maria ajuda a cozinhar de maneira uniforme e suave. Após o tempo de cozimento, retire do forno e deixe o manjar esfriar em temperatura ambiente.",
+      "Depois, leve à geladeira por algumas horas até que a gelatina endureça completamente. Após o manjar estar completamente firme, desenforme com cuidado. Você pode passar uma faca pelas bordas da forma para ajudar a soltar.",
+      "Sirva o manjar de coco low carb gelado, acompanhado ou não de frutas vermelhas e ameixa para decorar."
+    ],
+    "photo": "images/lowcarb/manjar-de-coco.jpg",
+    "search": ""
+  },
+  {
+    "id": "bolo-de-morango-no-micro-ondas",
+    "title": "BOLO DE MORANGO NO MICRO-ONDAS",
+    "category": "lowcarb",
+    "ingredients": [
+      "1 clara de ovo",
+      "1 colher (sopa) de aveia",
+      "1 colher (sopa) de farinha de coco",
+      "1 colher (sopa) de leite sem lactose",
+      "1 colher (sobremesa) de gelatina zero sabor morango"
+    ],
+    "steps": [
+      "Em um recipiente, bata a clara de ovo até ficar espumosa.",
+      "Dissolva a gelatina de morango no leite sem lactose até que esteja bem incorporada.",
+      "Adicione a aveia e a farinha de coco à mistura de gelatina e leite. Mexa bem para integrar todos os ingredientes.",
+      "Com cuidado, incorpore a clara em neve à massa. Misture delicadamente até obter uma massa homogênea.",
+      "Despeje a massa em uma tigela que possa ir ao micro-ondas. Leve ao micro- ondas em potência alta por aproximadamente 1 minuto, ou até que o bolo esteja cozido e firme.",
+      "Retire do micro-ondas com cuidado. Deixe o bolo esfriar um pouco antes de servir.",
+      "Este bolo de morango low carb é uma opção rápida e prática para quem está buscando uma sobremesa ou lanche saudável. Aproveite!"
+    ],
+    "photo": "",
+    "search": ""
+  },
+  {
+    "id": "mousse-de-limao",
+    "title": "MOUSSE DE LIMÃO",
+    "category": "lowcarb",
+    "ingredients": [
+      "Suco de 2 limões",
+      "200 ml de leite de coco",
+      "5 colheres de sopa de leite de coco em pó",
+      "3 colheres de sopa de adoçante xilitol"
+    ],
+    "steps": [
+      "No liquidificador, bata todos os ingredientes até obter uma mistura homogênea.",
+      "Coloque a mistura numa vasilha.",
+      "Decore com raspas de limão.",
+      "Leve à geladeira por 2 horas e pronto."
+    ],
+    "photo": "images/lowcarb/mousse-de-limao.jpg",
+    "search": ""
+  },
+  {
+    "id": "pudim-facil",
+    "title": "PUDIM FACÍL",
+    "category": "lowcarb",
+    "ingredients": [
+      "Para a Calda:",
+      "1 colher de sopa de adoçante xilitol",
+      "1 colher de sopa de açúcar de coco",
+      "1 colher de sopa de água",
+      "Pudim:",
+      "1 ovo",
+      "4 colheres de sopa de leite de coco",
+      "4 colheres de sopa de creme de leite",
+      "1 colher de sopa de adoçante xilitol"
+    ],
+    "steps": [
+      "Calda:",
+      "Numa panela, coloque todos os ingredientes.",
+      "Leve ao fogo, misture até ferver e engrossar.",
+      "Coloque a calda na forminha e reserve. Pudim:",
+      "Numa vasilha, misture todos os ingredientes.",
+      "Coloque o pudim na forminha caramelizada.",
+      "Cubra com papel alumínio.",
+      "Leve ao forno preaquecido a 200 graus em banho-maria e asse por 40-50 minutos.",
+      "Espere esfriar, desenforme e pronto.",
+      "Guarde na geladeira.",
+      "Aproveite seu pudim fácil e delicioso!"
+    ],
+    "photo": "images/lowcarb/pudim-facil.jpg",
+    "search": ""
+  },
+  {
+    "id": "mousse-de-chocolate-ii",
+    "title": "MOUSSE DE CHOCOLATE II",
+    "category": "lowcarb",
+    "ingredients": [
+      "200g de leite de coco (de caixinha ou de garrafinha)",
+      "100g de chocolate meio amargo derretido (72% cacau)"
+    ],
+    "steps": [
+      "Derreta o chocolate meio amargo em banho-maria ou no micro-ondas, mexendo de vez em quando até que esteja completamente derretido e liso. Deixe esfriar um pouco.",
+      "Em um mixer ou liquidificador, coloque o leite de coco e o chocolate derretido.",
+      "Bata bem até obter uma mistura homogênea e cremosa.",
+      "Despeje o mousse em potinhos individuais ou em uma tigela grande, cobrindo com filme plástico se preferir.",
+      "Leve à geladeira por pelo menos 30 minutos para firmar.",
+      "Após esse tempo, o mousse estará pronto para servir. Se desejar, decore com raspas de chocolate meio amargo por cima antes de servir.",
+      "Esse mousse de chocolate low carb é uma sobremesa rápida, saudável e muito gostosa, ideal para quem está seguindo uma dieta com restrição de carboidratos. Aproveite!"
+    ],
+    "photo": "images/lowcarb/mousse-de-chocolate-ii.jpg",
+    "search": ""
+  },
+  {
+    "id": "petit-gateau",
+    "title": "PETIT GATEAU",
+    "category": "lowcarb",
+    "ingredients": [
+      "1 ovo",
+      "1 colher de sopa de manteiga de coco, óleo de coco ou manteiga",
+      "30g de chocolate meio amargo (eu usei 85% cacau)",
+      "1 colher de sopa de adoçante xilitol",
+      "1 colher de sopa de farinha de amêndoas"
+    ],
+    "steps": [
+      "Em uma vasilha, coloque a manteiga de coco (ou óleo de coco ou manteiga) e o chocolate meio amargo quebrado em pedaços. Leve ao microondas por cerca de 30 segundos, mexendo a cada 10 segundos até que a manteiga e o chocolate estejam derretidos e bem misturados.",
+      "Acrescente o adoçante xilitol, o ovo e a farinha de amêndoas à mistura derretida. Mexa bem até obter uma massa homogênea.",
+      "Unte levemente um ramekin (ou uma forminha pequena) com óleo de coco ou manteiga.",
+      "Despeje a massa do petit gateau no ramekin untado.",
+      "Preaqueça o forno a 200°C.",
+      "Asse o petit gateau no forno preaquecido por aproximadamente 8 minutos. O tempo pode variar dependendo do seu forno e da consistência desejada (se preferir mais molinho por dentro, reduza o tempo de cozimento).",
+      "Retire do forno e, se desejar, sirva quente acompanhado de uma bola de sorvete low carb ou creme de leite fresco batido.",
+      "Essa receita é uma ótima opção para quem quer saborear um petit gateau com menos carboidratos, mantendo o sabor e a textura característicos dessa sobremesa. Aproveite!"
+    ],
+    "photo": "images/lowcarb/petit-gateau.jpg",
+    "search": ""
+  },
+  {
+    "id": "pudim-de-chocolate",
+    "title": "PUDIM DE CHOCOLATE",
+    "category": "lowcarb",
+    "ingredients": [
+      "600 ml de leite de coco",
+      "5 colheres de sopa de adoçante xilitol",
+      "5 colheres de sopa de cacau em pó",
+      "24 g de gelatina incolor, sem sabor (2 pacotinhos)"
+    ],
+    "steps": [
+      "Em uma xícara, coloque a gelatina incolor e adicione 1/2 xícara de água fervente. Misture bem até a gelatina dissolver completamente. Reserve.",
+      "No liquidificador, coloque o leite de coco, o adoçante xilitol, o cacau em pó e a gelatina dissolvida.",
+      "Bata tudo em velocidade alta por cerca de 4 minutos, garantindo que todos os ingredientes estejam bem incorporados e a mistura fique homogênea.",
+      "Despeje o pudim em uma forma de silicone (não precisa untar) ou em potinhos individuais.",
+      "Leve à geladeira e deixe o pudim gelar por pelo menos 3 horas, ou até que esteja firme.",
+      "Após esse tempo, desenforme o pudim com cuidado.",
+      "Sirva o pudim gelado e aproveite essa sobremesa deliciosa!",
+      "Esse pudim de chocolate low carb é uma opção leve e saborosa para quem está buscando uma alternativa sem açúcar e com baixo teor de carboidratos. Aproveite!"
+    ],
+    "photo": "images/lowcarb/pudim-de-chocolate.jpg",
+    "search": ""
+  },
+  {
+    "id": "bombom-de-prestigio",
+    "title": "BOMBOM DE PRESTÍGIO",
+    "category": "lowcarb",
+    "ingredients": [
+      "2 barras de chocolate meio amargo (cada barra dividida em 3 partes)",
+      "1 xícara de chá de leite em pó (100g)",
+      "1/2 xícara de chá de xylitol (adoçante natural)",
+      "70 ml de água morna",
+      "4 colheres de sopa de óleo de coco",
+      "3/4 xícara de chá de coco seco ralado sem açúcar",
+      "6 colheres de sopa de creme de leite",
+      "BOMBOM DE PRESTÍGIO"
+    ],
+    "steps": [
+      "Temperagem do Chocolate:",
+      "Pegue cada barra de chocolate meio amargo e divida em 3 partes. Reserve 2 partes de cada barra.",
+      "Derreta 2 partes de chocolate no micro-ondas ou em banho-maria, aquecendo em intervalos de 30 segundos e mexendo entre cada intervalo até derreter completamente.",
+      "Enquanto o chocolate derrete, pique a terceira parte restante de cada barra em pedaços pequenos.",
+      "Assim que o chocolate derreter, retire do micro-ondas ou do banho-maria e adicione os pedaços de chocolate picado. Mexa até que todo o chocolate esteja derretido e a mistura esteja homogênea. Isso é importante para a temperagem do chocolate, garantindo um acabamento brilhante e textura firme. Preparo do recheio (beijinho):",
+      "Em um liquidificador ou batedeira, combine o leite em pó, o xylitol e a água morna. Bata até obter um creme homogêneo.",
+      "Transfira essa mistura para uma panela antiaderente e adicione o óleo de coco e o coco ralado sem açúcar.",
+      "Cozinhe em fogo baixo, mexendo constantemente, até que a mistura comece a desgrudar do fundo da panela.",
+      "Quando estiver bem misturado e começar a desgrudar, adicione o creme de leite e continue mexendo até obter uma textura cremosa. Reserve o recheio. Montagem:",
+      "Utilize forminhas de silicone ou copos plásticos pequenos para fazer as casquinhas dos bombons.",
+      "Coloque uma camada fina de chocolate derretido no fundo de cada forminha. Leve ao congelador por alguns minutos para firmar.",
+      "Repita o processo mais duas vezes, fazendo camadas finas de chocolate e levando ao congelador entre cada camada.",
+      "Após a última camada de chocolate, recheie cada casquinha com o beijinho preparado, deixando um pequeno espaço na parte superior para cobrir com mais chocolate.",
+      "Cubra o recheio com mais uma camada de chocolate derretido para fechar os bombons.",
+      "Leve novamente ao congelador por alguns minutos até que os bombons estejam firmes. Finalização:",
+      "Retire os bombons das forminhas de silicone com cuidado.",
+      "Sirva os seus bombons de prestígio low carb com menos açúcar e desfrute dessa deliciosa sobremesa!",
+      "Esses bombons são uma ótima opção para quem busca uma versão mais saudável e com menos açúcar de um clássico doce. Aproveite!"
+    ],
+    "photo": "images/lowcarb/bombom-de-prestigio.jpg",
+    "search": ""
+  },
+  {
+    "id": "petit-gateau-de-amendoim",
+    "title": "PETIT GATEAU DE AMENDOIM",
+    "category": "lowcarb",
+    "ingredients": [
+      "40g de chocolate amargo picado",
+      "10g de óleo de coco",
+      "20g de adoçante xylitol",
+      "1 ovo",
+      "25g de farinha de aveia (peneirada)",
+      "Recheio:",
+      "30g de pasta de amendoim",
+      "1 colher de café de óleo de coco"
+    ],
+    "steps": [
+      "Misture a pasta de amendoim com o óleo de coco derretido até obter uma consistência homogênea. Modele pequenas bolinhas de pasta de amendoim e coloque em uma bandeja forrada com papel manteiga. Leve ao freezer por cerca de 40 minutos para firmar.",
+      "Pré-aqueça o forno a 200°C. Em um recipiente, derreta o chocolate amargo picado junto com o óleo de coco no micro-ondas ou em banho-maria, mexendo até que fique completamente derretido e homogêneo.",
+      "Adicione o adoçante xylitol ao chocolate derretido e misture bem.",
+      "Em seguida, adicione o ovo e misture até incorporar completamente.",
+      "Acrescente a farinha de aveia peneirada à mistura e mexa até obter uma massa homogênea. Unte um ramekin com óleo de coco.",
+      "Coloque metade da massa do petit gateau no fundo do ramekin.",
+      "Coloque uma bolinha da pasta de amendoim congelada no centro da massa.",
+      "Cubra com o restante da massa do petit gateau, certificando-se de cobrir completamente a pasta de amendoim.",
+      "Leve ao forno pré-aquecido por 13 a 16 minutos. O tempo pode variar dependendo da potência do seu forno e do ponto desejado do petit gateau.",
+      "O meio do petit gateau deve ficar mais mole e a lateral firme quando estiver pronto. Retire do forno e deixe esfriar por cerca de 2 minutos.",
+      "Desenforme o petit gateau com cuidado."
+    ],
+    "photo": "images/lowcarb/petit-gateau-de-amendoim.jpg",
+    "search": ""
+  },
+  {
+    "id": "bombom-de-amendoim",
+    "title": "BOMBOM DE AMENDOIM",
+    "category": "lowcarb",
+    "ingredients": [
+      "2 colheres de sopa de óleo de coco",
+      "2 colheres de sopa de pasta de amendoim",
+      "6 colheres de sopa de farinha de castanha (ou de qualquer oleaginosa,",
+      "como amêndoas, castanha-do-pará, etc.)",
+      "90g de chocolate 70% cacau sem açúcar (para cobertura)"
+    ],
+    "steps": [
+      "Em um recipiente, misture o óleo de coco com a pasta de amendoim. Você pode aquecer essa mistura no microondas ou em banho-maria até que fique bem homogênea. Se desejar, adicione um adoçante de sua escolha neste ponto, se sentir necessidade de mais doçura.",
+      "Adicione a farinha de castanha (ou outra oleaginosa escolhida) à mistura de óleo de coco e pasta de amendoim. Misture bem até obter uma massa que possa ser facilmente moldada em bolinhas. A quantidade de farinha pode variar um pouco, dependendo da textura da pasta de amendoim utilizada.",
+      "Modele pequenas bolinhas com a massa e disponha-as em uma assadeira forrada com papel manteiga. Leve a assadeira ao freezer e deixe as bolinhas endurecerem por aproximadamente 1 hora.",
+      "Enquanto as bolinhas estão no freezer, derreta o chocolate 70% cacau sem açúcar em banho-maria ou no microondas, mexendo frequentemente para garantir que derreta uniformemente e não queime. Retire as bolinhas endurecidas do freezer. Com o auxílio de um garfo ou um palito, mergulhe cada bolinha no chocolate derretido, garantindo que fiquem completamente cobertas.",
+      "Coloque os bombons novamente na assadeira forrada com papel manteiga e leve à geladeira por mais alguns minutos, até que o chocolate endureça completamente.",
+      "Após endurecer, seus bombons de amendoim low carb estão prontos para serem degustados! Se desejar, você pode rechear com pedacinhos de morango antes de cobrir com chocolate.",
+      "Esses bombons são uma opção deliciosa e saudável para quem busca uma sobremesa sem açúcar, vegana e com baixo teor de carboidratos. Aproveite!"
+    ],
+    "photo": "images/lowcarb/bombom-de-amendoim.jpg",
+    "search": ""
+  },
+  {
+    "id": "fudge",
+    "title": "FUDGE",
+    "category": "lowcarb",
+    "ingredients": [
+      "Primeira camada:",
+      "120g de chocolate amargo picado",
+      "150g de pasta de amendoim",
+      "40g de óleo de coco",
+      "Segunda camada:",
+      "200g de pasta de amendoim",
+      "70g de óleo de coco derretido",
+      "40g de mel ou xylitol"
+    ],
+    "steps": [
+      "Em uma tigela resistente ao calor, coloque o chocolate amargo picado, a pasta de amendoim e o óleo de coco.",
+      "Derreta no microondas em intervalos de 30 segundos, mexendo bem a cada intervalo, até que tudo esteja derretido e misturado de forma homogênea.",
+      "Despeje essa mistura em uma forma quadrada ou retangular forrada com papel manteiga, espalhando uniformemente. Reserve.",
+      "Em outra tigela, combine a pasta de amendoim, o óleo de coco derretido e o mel (ou xylitol), mexendo até obter uma mistura cremosa e homogênea.",
+      "Despeje essa mistura sobre a primeira camada na forma, espalhando cuidadosamente para cobrir completamente.",
+      "Leve a forma à geladeira ou ao freezer e deixe os fudges endurecerem por pelo menos 2 horas, ou até ficarem firmes.",
+      "Após endurecer, retire da forma usando o papel manteiga para ajudar a levantar.",
+      "Corte em pequenos quadrados para formar os fudges.",
+      "Os fudges podem ser armazenados na geladeira ou no freezer. Eles ficam cremosos rapidamente em temperatura ambiente devido ao óleo de coco.",
+      "A receita rende aproximadamente 18 fudges, dependendo do tamanho do corte.",
+      "Esses fudges são uma delícia cremosa e indulgente, perfeitos para satisfazer o desejo por doce sem abrir mão da qualidade dos ingredientes. Aproveite!"
+    ],
+    "photo": "images/lowcarb/fudge.jpg",
+    "search": ""
+  },
+  {
+    "id": "brigadeiro-de-colher",
+    "title": "BRIGADEIRO DE COLHER",
+    "category": "lowcarb",
+    "ingredients": [
+      "600 ml de leite vegetal bem concentrado (como leite de coco e castanha",
+      "de caju)",
+      "2 colheres de sopa de xilitol (ou substitua por açúcar de coco, mascavo",
+      "ou demerara, se preferir)",
+      "2 colheres de sopa de cacau em pó 100%",
+      "Essência de baunilha"
+    ],
+    "steps": [
+      "Em uma panela, coloque o leite vegetal bem concentrado, o xilitol e algumas gotas de essência de baunilha. Leve ao fogo médio-baixo.",
+      "Mexa constantemente enquanto o leite reduz e fica mais espesso. Isso pode levar aproximadamente 30 minutos. É importante mexer para evitar que o leite queime no fundo da panela e para alcançar a consistência desejada.",
+      "Quando o leite estiver reduzido a um ponto firme e consistente, adicione o cacau em pó peneirado. Mexa bem para incorporar o cacau à mistura.",
+      "Continue cozinhando por mais alguns minutos, mexendo sempre, até que a mistura esteja bem homogênea e comece a desgrudar do fundo da panela.",
+      "Desligue o fogo e transfira a massa do brigadeiro para um prato untado ou para uma tigela. Deixe esfriar completamente.",
+      "Quando a massa estiver fria o suficiente para ser manuseada, unte as mãos com um pouco de óleo de coco ou use luvas para enrolar pequenas porções da massa em bolinhas.",
+      "Passe as bolinhas de brigadeiro no cacau em pó ou em chocolate sem açúcar ralado.",
+      "Coloque os brigadeiros em forminhas e sirva.",
+      "Este brigadeiro low carb, sem açúcar, sem lactose e vegano é uma opção deliciosa para quem quer desfrutar de um docinho mais saudável. Aproveite!"
+    ],
+    "photo": "images/lowcarb/brigadeiro-de-colher.jpg",
+    "search": ""
+  },
+  {
+    "id": "mousse-de-chocolate-fit",
+    "title": "MOUSSE DE CHOCOLATE FIT",
+    "category": "lowcarb",
+    "ingredients": [
+      "3 abacates maduros",
+      "3 colheres de sopa de cacau em pó (100% cacau)",
+      "3 bananas maduras"
+    ],
+    "steps": [
+      "Descasque os abacates e as bananas, retirando os caroços das bananas.",
+      "Coloque os abacates, as bananas e o cacau em pó no liquidificador ou processador de alimentos.",
+      "Bata tudo até obter uma mistura cremosa e homogênea. Se necessário, pare o liquidificador e raspe as laterais para garantir que todos os ingredientes estejam bem misturados.",
+      "Transfira o mousse para tigelas individuais ou para uma tigela grande de servir.",
+      "Se desejar, decore com raspas de chocolate amargo ou lascas de amêndoas antes de servir.",
+      "Sirva imediatamente ou leve à geladeira por algumas horas para gelar antes de servir.",
+      "Este mousse de chocolate fit é uma opção deliciosa para uma sobremesa saudável, pois utiliza ingredientes naturais e não contém açúcar adicionado. Aproveite!"
+    ],
+    "photo": "images/lowcarb/mousse-de-chocolate-fit.jpg",
+    "search": ""
+  },
+  {
+    "id": "mini-panquecas",
+    "title": "MINI PANQUECAS",
+    "category": "lowcarb",
+    "ingredients": [
+      "1 banana amassada",
+      "1 xícara (240ml) de leite em pó",
+      "Canela em pó a gosto",
+      "Gotas de chocolate 70% cacau (opcional)"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 180°C. Unte levemente uma forma pequena com azeite ou utilize forminhas de silicone.",
+      "Em uma tigela, amasse bem a banana até obter um purê.",
+      "Adicione o leite em pó à banana amassada e misture até formar uma massa homogênea. A consistência deve ser como uma massa de panqueca, nem muito líquida nem muito grossa.",
+      "Se desejar, adicione canela em pó à massa e misture bem.",
+      "Com uma colher, pegue pequenas porções da massa e coloque na forma preparada, formando mini panquecas. Deixe um espaço entre elas.",
+      "Se optar por usar, coloque algumas gotas de chocolate 70% cacau sobre cada mini panqueca.",
+      "Leve a frigideira ou ao forno preaquecido e asse por aproximadamente 10 minutos, ou até que as mini panquecas estejam douradas e firmes ao toque.",
+      "Retire do forno e deixe esfriar um pouco antes de servir. Dicas: O tempo de forno pode variar conforme o seu forno e o tamanho das mini panquecas. Fique de olho para não deixar assar demais. Você pode servir estas mini panquecas simplesmente como estão ou acompanhadas de frutas frescas, iogurte, ou outro complemento de sua preferência. A banana naturalmente doce deve ser suficiente para dar um sabor agradável às mini panquecas, mas você pode ajustar o adoçante conforme seu gosto."
+    ],
+    "photo": "images/lowcarb/mini-panquecas.jpg",
+    "search": ""
+  },
+  {
+    "id": "bolo-de-chocolate-ii",
+    "title": "BOLO DE CHOCOLATE II",
+    "category": "lowcarb",
+    "ingredients": [
+      "1 abobrinha grande ou 2 médias",
+      "2 ovos",
+      "2 colheres de sopa de adoçante de sua preferência",
+      "1 xícara de cacau 100% em pó",
+      "1 xícara de farinha de aveia",
+      "1 colher de sopa de fermento em pó"
+    ],
+    "steps": [
+      "Preaqueça o forno a 180°C. Unte uma forma redonda de aproximadamente 20- 25 cm de diâmetro com óleo ou manteiga e farinha de aveia, ou utilize papel manteiga no fundo.",
+      "Rale a abobrinha (com casca) em um ralador fino e reserve.",
+      "Em uma tigela grande, bata os ovos com o adoçante até obter uma mistura cremosa.",
+      "Adicione o cacau em pó e a farinha de aveia à mistura de ovos, e mexa bem até que esteja totalmente incorporado.",
+      "Acrescente a abobrinha ralada à massa e misture novamente.",
+      "Por último, adicione o fermento em pó e misture delicadamente até que esteja bem distribuído na massa.",
+      "Despeje a massa na forma preparada e leve ao forno preaquecido por aproximadamente 30 minutos, ou até que um palito inserido no centro do bolo saia limpo.",
+      "Retire do forno e deixe o bolo esfriar completamente antes de desenformar. Para a ganache: Você pode preparar uma ganache simples misturando 100g de chocolate 70% cacau derretido com 100ml de creme de leite ou leite de coco. Deixe esfriar um pouco e depois cubra o bolo com a ganache. (opcional) Dicas: Se preferir, pode adicionar nozes, amêndoas ou gotas de chocolate à massa antes de assar. O bolo pode ser armazenado em um recipiente fechado na geladeira por até 3 dias. Este bolo de abobrinha é uma ótima opção para quem procura uma sobremesa mais saudável e com um toque de vegetal que não compromete o sabor!"
+    ],
+    "photo": "images/lowcarb/bolo-de-chocolate-ii.jpg",
+    "search": ""
+  },
+  {
+    "id": "bolo-de-banana",
+    "title": "BOLO DE BANANA",
+    "category": "lowcarb",
+    "ingredients": [
+      "3 ovos",
+      "4 bananas bem maduras amassadas (usei prata)",
+      "1 xícara de aveia em flocos",
+      "1/2 xícara de uvas passas, frutas cristalizadas ou chocolate meio amargo",
+      "picado (ou em gotas)",
+      "1 colher (sopa) de fermento em pó",
+      "Para o fundo da forma: 1 banana cortada em fatias + Mel + canela a gosto"
+    ],
+    "steps": [
+      "Preaqueça o forno a 180°C. Unte uma forma pequena (20 x 10 x 7 cm) com óleo ou manteiga e polvilhe com um pouco de aveia ou farinha de trigo.",
+      "No fundo da forma, espalhe um pouco de mel e canela a gosto. Distribua as fatias de banana sobre o mel.",
+      "Em uma tigela grande, bata os ovos até ficarem bem misturados.",
+      "Adicione as bananas amassadas e misture bem.",
+      "Acrescente a aveia e misture até ficar homogêneo.",
+      "Por último, adicione as uvas passas, frutas cristalizadas ou chocolate meio amargo picado (ou em gotas) e o fermento em pó. Mexa delicadamente até incorporar.",
+      "Despeje a massa na forma preparada, espalhando uniformemente sobre as fatias de banana.",
+      "Leve ao forno preaquecido e asse por aproximadamente 35 minutos, ou até que um palito inserido no centro do bolo saia limpo.",
+      "Retire do forno e deixe esfriar um pouco antes de desenformar. Dicas: Você pode substituir as uvas passas, frutas cristalizadas ou chocolate por outros ingredientes de sua preferência, como nozes, castanhas, ou até mesmo deixar sem adicionais. Se preferir, pode adicionar canela em pó à massa para um sabor extra. Armazene o bolo em um recipiente fechado em temperatura ambiente por até 3 dias, ou na geladeira por até uma semana."
+    ],
+    "photo": "images/lowcarb/bolo-de-banana.jpg",
+    "search": ""
+  },
+  {
+    "id": "cookie-fit",
+    "title": "COOKIE FIT",
+    "category": "lowcarb",
+    "ingredients": [
+      "2 bananas maduras",
+      "1 xícara de aveia em flocos grossos",
+      "Gotas de chocolate amargo ou passas a gosto"
+    ],
+    "steps": [
+      "Pré-aqueça o forno a 190°C e forre uma assadeira com papel manteiga ou untada com óleo.",
+      "Em uma tigela, amasse as bananas maduras até obter um purê.",
+      "Adicione a aveia em flocos grossos e misture bem até formar uma massa homogênea. Se desejar, adicione as gotas de chocolate amargo ou as passas e misture novamente.",
+      "Com uma colher, forme pequenos montinhos de massa e coloque-os na assadeira preparada, deixando espaço entre eles.",
+      "Leve ao forno pré-aquecido e asse por aproximadamente 12 minutos, ou até que os cookies estejam dourados nas bordas.",
+      "Retire do forno e deixe esfriar na assadeira por alguns minutos antes de transferir para uma grade para esfriar completamente.",
+      "Após esfriar, os cookies estarão prontos para serem saboreados! Dicas: Certifique-se de usar bananas maduras para obter um sabor doce natural. Você pode adicionar outros ingredientes à massa, como nozes picadas, sementes ou coco ralado. Armazene os cookies em um recipiente hermético por alguns dias em temperatura ambiente, ou na geladeira para conservar por mais tempo."
+    ],
+    "photo": "images/lowcarb/cookie-fit.jpg",
+    "search": ""
+  },
+  {
+    "id": "bolo-de-maca",
+    "title": "BOLO DE MAÇA",
+    "category": "lowcarb",
+    "ingredients": [
+      "2 maçãs",
+      "2 ovos",
+      "1/4 xícara de óleo da sua preferência",
+      "1 punhado de uvas passas",
+      "1/2 xícara de farinha de aveia",
+      "Essência de baunilha a gosto",
+      "1 colher de sopa de fermento em pó",
+      "Canela a gosto"
+    ],
+    "steps": [
+      "Preaqueça o forno a 180°C. Unte forminhas individuais para muffins ou uma forma pequena com óleo ou utilize forminhas de silicone.",
+      "Descasque e pique as maçãs em pedaços pequenos. Reserve.",
+      "Em uma tigela grande, bata os ovos um garfo. Adicione o óleo e misture.",
+      "Acrescente as maçãs picadas e as uvas passas na mistura de ovos e óleo.",
+      "Em seguida, adicione a farinha de aveia, a essência de baunilha e a canela. Misture bem até obter uma massa homogênea.",
+      "Por último, adicione o fermento em pó e incorpore delicadamente na massa.",
+      "Distribua a massa nas forminhas preparadas, enchendo cerca de 3/4 de cada uma. Leve para assar no forno preaquecido por aproximadamente 25 minutos, ou até que estejam dourados e firmes. Faça o teste do palito para verificar se estão assados - o palito deve sair limpo quando inserido no centro dos bolinhos.",
+      "Retire do forno e deixe esfriar por alguns minutos antes de desenformar.",
+      "Sirva os bolinhos de maçã mornos ou em temperatura ambiente.",
+      "Eles são ótimos para um lanche saudável! Dicas: Você pode substituir as uvas passas por outras frutas secas, como cranberry ou damascos picados. Se preferir, adicione nozes ou castanhas picadas para dar mais textura aos bolinhos. Armazene os bolinhos em um recipiente hermético em temperatura ambiente por até 3 dias, ou na geladeira por até uma semana. Espero que goste dessa receita leve e deliciosa!"
+    ],
+    "photo": "images/lowcarb/bolo-de-maca.jpg",
+    "search": ""
+  },
+  {
+    "id": "bolo-de-coco",
+    "title": "BOLO DE COCO",
+    "category": "lowcarb",
+    "ingredients": [
+      "3 ovos",
+      "1 xícara de coco ralado",
+      "1/2 xícara de leite de coco",
+      "4 colheres de sopa de eritritol (adoçante)",
+      "1 colher de chá de fermento em pó",
+      "1/2 xícara de leite em pó ou whey protein (opcional)"
+    ],
+    "steps": [
+      "Preaqueça o forno a 180°C. Unte uma forma de aproximadamente 18 x 6 cm (ou outra forma de 20 cm) com óleo ou manteiga e reserve.",
+      "Em uma tigela grande, bata os ovos até ficarem homogêneos.",
+      "Adicione o coco ralado, o leite de coco e o eritritol. Misture bem até todos os ingredientes estarem incorporados.",
+      "Se estiver usando, adicione o leite em pó ou whey protein e misture novamente.",
+      "Por último, adicione o fermento em pó e misture delicadamente até incorporar na massa.",
+      "Despeje a massa na forma preparada e leve ao forno preaquecido por cerca de 25 minutos, ou até que um palito inserido no centro do bolo saia limpo.",
+      "Retire do forno e deixe o bolo esfriar na forma por alguns minutos antes de desenformar.",
+      "Após esfriar completamente, corte em fatias e sirva. Dicas: Se preferir um bolo mais doce, ajuste a quantidade de eritritol conforme seu gosto. Você pode decorar o bolo com coco ralado por cima antes de assar, para dar um toque extra de sabor e textura. Armazene o bolo em um recipiente fechado em temperatura ambiente por até 3 dias, ou na geladeira por até uma semana."
+    ],
+    "photo": "images/lowcarb/bolo-de-coco.jpg",
+    "search": ""
+  },
+  {
+    "id": "bombom-de-uva",
+    "title": "BOMBOM DE UVA",
+    "category": "lowcarb",
+    "ingredients": [
+      "1 dose de whey protein (usei de chocolate branco)",
+      "3 colheres de sopa de leite em pó desnatado",
+      "Uvas sem semente",
+      "2 quadradinhos de chocolate grandes (ou 4 pequenos)"
+    ],
+    "steps": [
+      "Derreta os quadradinhos de chocolate no microondas em intervalos de 30 segundos, mexendo entre cada intervalo, até que esteja completamente derretido.",
+      "Espalhe o chocolate derretido em forminhas de silicone, cobrindo o fundo e as laterais. Leve as forminhas ao congelador para endurecer enquanto prepara o recheio. Em uma tigela, misture o whey protein com o leite em pó desnatado.",
+      "Adicione água aos poucos, mexendo bem, até obter um creme consistente. A consistência deve ser suficiente para formar um recheio firme.",
+      "Se necessário, leve o recheio ao congelador por alguns minutos para firmar mais.",
+      "Retire as forminhas de chocolate do congelador.",
+      "Coloque uma camada do recheio preparado sobre o chocolate endurecido.",
+      "Adicione uvas sem semente cortadas ao meio ou em pedaços sobre o recheio.",
+      "Cubra as uvas com mais uma camada do recheio, garantindo que fiquem bem cobertas.",
+      "Cubra o recheio com mais uma camada de chocolate derretido, fechando os bombons. Leve os bombons de volta ao congelador por alguns minutos para firmar completamente.",
+      "Retire os bombons das forminhas de silicone com cuidado.",
+      "Sirva os bombons proteicos de uva como uma opção deliciosa e nutritiva de sobremesa ou lanche. Dicas: Você pode usar outras frutas no lugar das uvas, como morangos, mirtilos ou pedaços de banana. Certifique-se de que o recheio fique firme o suficiente para não escorrer ao cortar os bombons. Armazene os bombons proteicos em um recipiente fechado no congelador para manter a consistência e o frescor."
+    ],
+    "photo": "images/lowcarb/bombom-de-uva.jpg",
+    "search": ""
+  },
+  {
+    "id": "bolinho-de-micro-ondas",
+    "title": "BOLINHO DE MICRO-ONDAS",
+    "category": "lowcarb",
+    "ingredients": [
+      "2 colheres de sopa de farinha de aveia (20g)",
+      "1 colher de sopa de cacau em pó (10g)",
+      "2 colheres de sopa de adoçante natural (como xilitol ou eritritol)",
+      "1/2 scoop de whey protein sabor baunilha ou cookies (cerca de 15g)",
+      "Leite desnatado aos poucos, cerca de 30ml",
+      "1 pitada de fermento em pó",
+      "Para a cobertura:",
+      "1/2 scoop de whey protein sabor baunilha ou cookies (cerca de 15g)",
+      "1 colher de sopa de leite em pó desnatado (10g)",
+      "Água aos poucos"
+    ],
+    "steps": [
+      "Em uma tigela, misture a farinha de aveia, o cacau em pó, o adoçante natural e o whey protein.",
+      "Adicione o leite desnatado aos poucos, mexendo bem, até obter uma massa homogênea. Acrescente o fermento em pó e misture delicadamente.",
+      "Transfira a massa para uma caneca ou outro recipiente próprio para micro- ondas, previamente untado.",
+      "Leve ao micro-ondas por 30 segundos na potência máxima.",
+      "Após esse tempo, verifique a consistência do bolinho. Se ainda estiver um pouco úmido no centro, volte ao micro-ondas por mais 30 segundos.",
+      "Enquanto o bolinho esfria um pouco, prepare a cobertura.",
+      "Em outra tigela, misture o whey protein com o leite em pó desnatado.",
+      "Adicione água aos poucos, mexendo bem, até obter uma consistência cremosa semelhante à de brigadeiro. Desenforme o bolinho do recipiente.",
+      "Espalhe a cobertura sobre o bolinho, cobrindo toda a superfície.",
+      "Se desejar, decore com um pouco de leite em pó desnatado polvilhado por cima.",
+      "O bolinho de micro-ondas está pronto para ser servido. Aproveite enquanto está quentinho e macio! CONCLUSÃO Antes de tudo, agradeço sinceramente por sua presença aqui e por ter dedicado tempo ao meu manual de receitas low carb. Sinto-me extremamente grata pela confiança que depositou em mim. Espero que tenha apreciado o conteúdo e encorajo você a fazer valer a pena, não desistindo de experimentar suas próprias receitas low carb. Se ainda não obteve sucesso, saiba que está próximo! Continue tentando, pois cada tentativa contribuirá para aprimorar suas habilidades na culinária low carb. Desejo-lhe boa sorte e uma refeição deliciosa! Beijinhos!!.. KNED TECH © Copyright - Todos os direitos reservados Delicias Sem Glúten"
+    ],
+    "photo": "images/lowcarb/bolinho-de-micro-ondas.jpg",
+    "search": ""
   }
 ]
