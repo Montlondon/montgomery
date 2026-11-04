@@ -1,4 +1,4 @@
-# ROADMAP — Receitas (app pessoal de receitas)
+﻿# ROADMAP — Receitas (app pessoal de receitas)
 
 Livro de receitas pessoal, vindo de PDFs comprados da Chef Carla Ramos (sem glúten),
 com zoom infinito, busca 100% e foto conferida de cada receita.
