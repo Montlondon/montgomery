@@ -106,6 +106,9 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
 }
 .card:hover{ transform:translateY(-2px); box-shadow:0 10px 22px -12px rgba(var(--shadow),.45); }
 .card:active{ transform:scale(.97); }
+.pdf-banner{ grid-column:1/-1; margin-bottom:4px; }
+.pdf-banner-link{ display:block; padding:14px 18px; background:var(--accent-soft); color:var(--accent); border-radius:14px; text-decoration:none; font-size:.92rem; font-weight:600; text-align:center; }
+.pdf-banner-link:active{ opacity:.8; }
 .card-photo{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--surface-2); }
 .card-photo.placeholder{ display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
   background:linear-gradient(145deg, var(--surface-2) 0%, var(--surface) 100%); }
@@ -579,6 +582,13 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     var grid = document.getElementById("grid");
     var empty = document.getElementById("emptyState");
     grid.innerHTML = "";
+
+    // Banner do guia PDF para fermentação natural
+    if (state.activeCategory === "fermentacao" && !state.query) {
+      var banner = el("div","pdf-banner");
+      banner.innerHTML = '<a href="pdfs/fermentacao-natural.pdf" target="_blank" rel="noopener" class="pdf-banner-link">📖 Ver guia completo — Como fazer o Fermento Natural (PDF)</a>';
+      grid.appendChild(banner);
+    }
     if (!state.filtered.length){
       empty.style.display = "block";
       return;
