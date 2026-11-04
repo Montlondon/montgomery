@@ -43,63 +43,30 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
   atrás do teclado no celular (agora rola a tela até ele e foca sozinho).
 - Deploy público sem exigir login da Vercel (`ssoProtection` desligada nos dois projetos:
   `recipes-app-bread-cakes-4f32d1` antigo e `receitas` atual).
-
-## vivo
-
-### Correção manual de fotos — CONCLUÍDA (04/11/2026)
-
-Método: Montgomery abre cada categoria no app, envia a foto correta com o nome da receita,
-Claude converte (sharp), substitui o JPG em `receitas/images/<cat>/`, faz commit+push+deploy.
-
-**Categorias já conferidas e corrigidas:**
-- **veganas** — 10 fotos trocadas/corrigidas (incluindo rotação de Cubos de Arroz Recheado)
-- **bolachas** — 4 fotos trocadas (Biscoito Oreo, Zimtsterne, Biscoito de Banana, Doritos II)
-- **doces** — 5 fotos trocadas (Cupcake de Laranja, Pudim, Brigadeiro, Torta de Banana II, Doce de Leite)
-- **lowcarb** — 82/82 com foto; corrigidos 39 campos vazios no JSON (imagens existiam no disco mas photo field estava vazio); bug de ID duplicado resolvido (pao-doce e pao-integral colidiam com categoria paes — renomeados para pao-doce-trancado e pao-integral-trancado em trancados)
-- **trancados** — 10/10 com foto; Pão Integral foto enviada pelo usuário; Técnicas de Tranças (10 grids extraídos do PDF) adicionadas como aba nova
-
-- **fermentacao** — 4/4 com foto; aba renomeada para "Pães de Fermentação Natural"; banner no topo com link para o PDF do guia completo (levain)
-
-**Todas as categorias conferidas e corrigidas.**
-
-**Categorias confirmadas corretas (não tocar):**
-- pães, massas, panetone
-
-**Fluxo de correção (repetir para cada foto):**
-1. Montgomery envia imagem + nome da receita
-2. Achar o `id` da receita em `receitas/data/recipes.json`:
-   - Grep por título: `grep -i "nome da receita" receitas/data/recipes.json`
-   - O `id` é o campo logo acima do `title` — formato kebab-case sem acentos
-3. Converter a imagem com sharp (Node.js) — caminho da imagem vem no `<system-reminder>` como `images/NN.webp` ou `.png`:
-   ```js
-   node -e "
-   const sharp = require('C:/mc/.claude/worktrees/recipes-app-bread-cakes-4f32d1/receitas/tools/node_modules/sharp');
-   sharp('C:/Users/MONTGO~1/AppData/Local/Temp/claude/.../images/NN.webp')
-     .jpeg({ quality: 90 })
-     // .rotate(90)  // só se a foto vier em portrait e precisar de correção
-     .toFile('C:/mc/.claude/worktrees/recipes-app-bread-cakes-4f32d1/receitas/images/<cat>/<id>.jpg')
-     .then(i => console.log('OK', i.width+'x'+i.height))
-     .catch(e => console.error(e.message));
-   "
-   ```
-4. `git add receitas/images/<cat>/<id>.jpg && git commit -m "Fix photo: <receita> — <motivo>" && git push`
-5. Deploy Vercel via MCP: `create_deployment` com `gitSource.sha` do commit novo, `projectSettings.rootDirectory: "receitas"`
-6. `assign_alias` com `montgomery-receitas.vercel.app` — se bloqueado pelo auto mode, rodar no terminal:
-   ```
-   vercel alias set <deploy-url> montgomery-receitas.vercel.app
-   ```
-
-**Casos especiais já vistos:**
-- **Foto portrait (vertical)**: adicionar `.rotate(90)` no sharp antes do `.jpeg()`
-- **Foto já tinha caminho no JSON mas era errada**: basta sobrescrever o JPG — o `photo` no JSON já aponta certo, não precisa editar o JSON
-- **Foto completamente faltando (photo: "")**: editar o JSON para atribuir `"photo": "images/<cat>/<id>.jpg"` além de copiar a imagem
-- **Sharp path**: sempre usar o node_modules dentro de `receitas/tools/` — não há sharp global instalado
-- **Imagem no temp**: o Claude Desktop salva as imagens enviadas pelo usuário em `C:\Users\MONTGO~1\AppData\Local\Temp\claude\<session>\images\NN.webp|png` — o path exato aparece no `<system-reminder>` da mensagem
-
-**Commit template:** `Fix photo: <receita> — <motivo curto>`
-
----
-
+- **GitHub conectado ao Vercel** (04/11/2026): projeto `receitas` auto-deploya a cada push
+  no `main`. O alias `montgomery-receitas.vercel.app` **não** segue o deploy novo
+  automaticamente — reatribuir via MCP `assign_alias` (ou terminal `vercel alias set`)
+  após cada merge que queira aparecer no link curto.
+- **Aba 500 Receitas Low Carb** (04/11/2026): 499 receitas extraídas do PDF de duas colunas
+  (`500 Receitas Low Carb-1_1.pdf`, 308 páginas) em 13 subcategorias, com `pdfreader` +
+  separação por coordenada x. Dados em `receitas/data/recipes_500lowcarb.json`. Fotos
+  sem extração por ora (campo `photo: ""`).
+- **Upload de foto por receita** (04/11/2026): botão câmera no detalhe de cada receita;
+  função serverless `receitas/api/upload-photo.js` faz PUT da imagem no GitHub e atualiza o
+  JSON — sem precisar da Claude para adicionar foto. Funciona para `recipes.json` e
+  `recipes_500lowcarb.json`. Token em variável de ambiente `GITHUB_TOKEN` no Vercel
+  (server-side, nunca exposto no cliente).
+- **Fotos corrigidas — bolos sem glúten** (04/11/2026): bolo-cremoso-de-mandioca (pág. 7),
+  bolo-salgado (pág. 24) e bolo-castella-de-limao (pág. 38) extraídos do PDF
+  `Bolos Sem Glúten.pdf`. Os três estavam com fotos antigas do commit anterior.
+- Correção manual de fotos em todas as categorias — CONCLUÍDA (04/11/2026).
+  - veganas: 10 fotos trocadas (incluindo rotação de Cubos de Arroz Recheado)
+  - bolachas: 4 fotos trocadas
+  - doces: 5 fotos trocadas
+  - lowcarb: 82/82 com foto; 39 campos vazios corrigidos; bug de ID duplicado resolvido
+  - trancados: 10/10 com foto; aba Técnicas de Tranças adicionada
+  - fermentacao: 4/4 com foto; aba renomeada; banner com link pro PDF do guia
+  - pães, massas, panetone: confirmados corretos, não tocados
 - **Varredura de texto sujo — CONCLUÍDA (29/10/2026)**: varredura completa nas 407 receitas.
   Corrigidos: texto de fechamento de livro (Alfajor, Cueca Virada II, Ciabatta), conteúdo
   errado (Bolinha de Queijo lowcarb tinha outra receita; Bolo de Cenoura bolos tinha Maracujá),
@@ -211,13 +178,14 @@ necessária como segunda camada de conferência, e não só confiar no parser.
 12. **Testar no preview** (`vercel`/`npx serve`) antes de subir: abrir uma receita da
     categoria nova, testar a busca, conferir que a foto bate.
 
-13. **Subir**: `git add` + commit + push no branch; depois `cd receitas && vercel --prod
-    --yes`; e **sempre reatribuir o alias curto** depois (`montgomery-receitas.vercel.app`)
-    porque cada deploy novo gera uma URL própria e o alias não segue sozinho:
+13. **Subir**: `git add` + commit + push no branch de trabalho; merge pro `main`; a Vercel
+    detecta o push e faz deploy automático. Depois do deploy, **sempre reatribuir o alias
+    curto** (`montgomery-receitas.vercel.app`) porque o alias não segue sozinho:
     ```
     vercel alias set <url-do-deployment-novo> montgomery-receitas.vercel.app
     ```
     (ou usar a ferramenta MCP da Vercel `assign_alias` com o `id` do deployment)
+    Para pegar a URL do deployment mais recente: MCP `list_deployments` no projeto `receitas`.
 
 ### Coisas que já travaram antes (pra não perder tempo de novo)
 
