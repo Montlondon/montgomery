@@ -13,6 +13,7 @@ const path   = require('path');
 const crypto = require('crypto');
 const { PDFDocument, PDFName, PDFRawStream } = require('./node_modules/pdf-lib');
 const { PdfReader } = require('./node_modules/pdfreader');
+const pako   = require('./node_modules/pako');
 
 const TOOLS_DIR = __dirname;
 const WORKTREE  = path.resolve(TOOLS_DIR, '..');
@@ -67,11 +68,20 @@ async function extractImages(pdfBytes) {
       }
       if (!filters.includes('/DCTDecode') && !filters.includes('/JPXDecode')) continue;
 
-      // Converte para sRGB via sharp (resolve CMYK/ICCBased → preto no browser)
+      // Descomprimir FlateDecode+DCTDecode se necessário
+      let jpegBytes = Buffer.from(xobj.contents);
+      if (filters.includes('/FlateDecode')) {
+        try { jpegBytes = Buffer.from(pako.inflate(jpegBytes)); }
+        catch (e) { continue; }
+      }
+
+      // PDF CMYK usa convenção Adobe invertida (0=max tinta).
+      // .negate() inverte os canais antes da conversão CMYK→sRGB.
       const sharp = require('./node_modules/sharp');
       let buf;
       try {
-        buf = await sharp(Buffer.from(xobj.contents))
+        buf = await sharp(jpegBytes)
+          .negate({ alpha: false })
           .toColorspace('srgb')
           .jpeg({ quality: 88 })
           .toBuffer();
