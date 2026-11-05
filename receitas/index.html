@@ -190,6 +190,8 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
 .detail-title{ font-size:1.6rem; font-weight:700; line-height:1.2; margin-bottom:6px; }
 .detail-tag{ display:inline-flex; align-items:center; gap:6px; font-size:.82rem; color:var(--accent); font-weight:700; margin-bottom:22px; }
 .detail-tag .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); }
+.photo-credit{ font-size:.82rem; line-height:1.4; color:var(--text-soft); margin:-12px 0 22px; overflow-wrap:anywhere; }
+.photo-credit a{ color:inherit; }
 
 .section-title{ font-size:1.02rem; font-weight:700; margin:28px 0 12px; display:flex; align-items:center; gap:8px; }
 .section-title svg{ width:20px; height:20px; color:var(--accent); }
@@ -340,6 +342,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
   <div class="detail-body">
     <h1 class="detail-title" id="detailTitle"></h1>
     <div class="detail-tag" id="detailTag"><span class="dot"></span><span id="detailTagText"></span></div>
+    <p class="photo-credit" id="photoCredit" style="display:none"></p>
 
     <div class="section-title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
@@ -719,10 +722,32 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     document.getElementById("photoZoomWrap").style.aspectRatio = wide ? img.naturalWidth + " / " + img.naturalHeight : "";
   }
 
+  function renderPhotoCredit(r){
+    var box = document.getElementById("photoCredit");
+    var c = r.photoCredit;
+    box.textContent = "";
+    box.style.display = c ? "block" : "none";
+    if (!c) return;
+    box.appendChild(document.createTextNode("Foto ilustrativa" + (c.autor ? " de " + c.autor : "") + ". "));
+    function creditLink(href, text){
+      var link = document.createElement("a");
+      link.href = href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = text;
+      box.appendChild(link);
+    }
+    creditLink(c.pagina, "Ver original");
+    box.appendChild(document.createTextNode(" · "));
+    if (c.licencaUrl) creditLink(c.licencaUrl, c.licenca);
+    else box.appendChild(document.createTextNode(c.licenca));
+  }
+
   function openDetail(id, cardEl){
     var r = state.all.find(function(x){ return x.id === id; });
     if (!r) return;
     currentRecipe = r;
+    renderPhotoCredit(r);
     document.getElementById("photoZoomWrap").style.aspectRatio = "";
 
     document.getElementById("detailTitle").textContent = r.title;
@@ -1013,9 +1038,16 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
           if (data.ok) {
             // Atualiza receita em memória
             currentRecipe.photo = data.photo;
+            delete currentRecipe.photoCredit;
+            delete currentRecipe.photoFocus;
             var target = currentRecipe.category === "livro500" ? state.builtin500 : state.builtin;
             var idx = target ? target.findIndex(function(r){ return r.id === currentRecipe.id; }) : -1;
-            if (idx !== -1) target[idx].photo = data.photo;
+            if (idx !== -1) {
+              target[idx].photo = data.photo;
+              delete target[idx].photoCredit;
+              delete target[idx].photoFocus;
+            }
+            renderPhotoCredit(currentRecipe);
             mergeAll();
             // Mostra a nova foto no detalhe
             var img = document.getElementById("detailPhoto");

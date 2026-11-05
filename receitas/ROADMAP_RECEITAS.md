@@ -87,13 +87,23 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
 
 ## próximo
 
-### Fotos da web para as 434 receitas sem foto (decisão pendente)
+### Fotos da web nas 434 receitas sem foto (feito em 05/11/2026)
 
-Teste de 04/11/2026 com 24 receitas escolhidas à mão, misturando fáceis e difíceis, só com licença
-livre (Openverse e Wikimedia Commons): 11 com foto boa, 5 aceitáveis e 8 sem nada útil. Funciona em
-pratos universais e falha nos brasileiros ou muito específicos (Beijinho, Chuchu, Jiló). Sites de
-receita ficam de fora: as fotos têm dono e o app está em link público. As licenças CC BY e CC BY-SA
-exigem crédito na tela. O Openverse limita consultas anônimas, então a busca completa é demorada.
+No ar: 93 fotos da web somadas às 66 do livro, 159 de 500 receitas com foto. As outras 341 ficaram
+com "Sem foto", de propósito: sem foto é melhor que foto errada. Só licença livre (Openverse e
+Wikimedia Commons). Sites de receita ficam de fora: as fotos têm dono e o app está em link público.
+
+- **Funil:** 3.253 candidatas para 426 receitas (8 sem nenhuma). 16 juízes escolheram 144. Duas
+  lentes tentaram derrubar cada uma: identidade do prato, às cegas, e qualidade da foto. 48 passaram
+  nas duas. Das reprovadas por uma lente só, 45 voltaram no olho do Claude, porque o revisor reprovou
+  por rigor demais (um garfo azul, uma mesa ao fundo). Todas as 93 foram conferidas em quadro inteiro.
+- **Crédito:** `photoCredit` no JSON (autor, licença, página de origem), mostrado na tela da receita.
+  CC BY e CC BY-SA exigem esse crédito. Trocar a foto pela câmera apaga o crédito antigo.
+- **Proteção:** `7_rebuild_500lowcarb.js` não sobrescreve foto com `photoCredit`.
+- **Lições:** funciona em pratos universais e falha nos brasileiros ou muito específicos (Beijinho,
+  Chuchu, Jiló). O Commons limita o download de originais: baixar um por vez, com pausa, e preferir a
+  miniatura de 1280px. O Openverse limita consultas anônimas, então a busca completa é demorada.
+- **Próximo possível:** segunda rodada de busca com consultas mais simples para as 341 sem foto.
 
 Todos os PDFs da Chef Carla Ramos foram processados (312 receitas no ar). PDFs restantes
 que ainda precisam de análise:

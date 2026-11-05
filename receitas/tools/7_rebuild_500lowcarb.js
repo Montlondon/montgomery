@@ -312,10 +312,8 @@ async function imageToJpeg(stream, doc) {
   const output = [];
   for (const { recipe, col } of records) {
     const file = `${recipe.id}.jpg`;
-    let photo = '';
-    if (MANUAL_PHOTOS.has(recipe.id)) {
-      photo = recipe.photo;
-    } else if (photoOf.has(recipe.id)) {
+    let photo = recipe.photo || '';
+    if (!MANUAL_PHOTOS.has(recipe.id) && !recipe.photoCredit && photoOf.has(recipe.id)) {
       fs.writeFileSync(path.join(IMG_DIR, file), await imageToJpeg(photoOf.get(recipe.id).stream, doc));
       photo = `images/livro500/${file}`;
       written++;

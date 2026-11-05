@@ -75,6 +75,8 @@ module.exports = async function handler(req, res) {
     var idx = jsonContent.findIndex(function(r){ return r.id === recipeId; });
     if (idx === -1) throw new Error('Receita não encontrada: ' + recipeId);
     jsonContent[idx].photo = photoRelPath;
+    delete jsonContent[idx].photoCredit;
+    delete jsonContent[idx].photoFocus;
 
     // 5. Salva JSON atualizado
     var updatedB64 = Buffer.from(JSON.stringify(jsonContent, null, 2), 'utf8').toString('base64');
