@@ -67,7 +67,17 @@ async function extractImages(pdfBytes) {
       }
       if (!filters.includes('/DCTDecode') && !filters.includes('/JPXDecode')) continue;
 
-      const buf  = Buffer.from(xobj.contents);
+      // Converte para sRGB via sharp (resolve CMYK/ICCBased → preto no browser)
+      const sharp = require('./node_modules/sharp');
+      let buf;
+      try {
+        buf = await sharp(Buffer.from(xobj.contents))
+          .toColorspace('srgb')
+          .jpeg({ quality: 88 })
+          .toBuffer();
+      } catch (e) {
+        continue; // imagem corrompida, pula
+      }
       const hash = md5(buf);
       hashes[hash] = (hashes[hash] || 0) + 1;
 
@@ -152,8 +162,14 @@ function savePhotos(recipes, byPage, hashes, pageMap) {
   let saved = 0;
   const updated = [];
 
+  const regen = process.argv.includes('--regen');
+  // fotos enviadas manualmente pelo usuário — nunca sobrescrever
+  const manualPhotos = new Set(['lc500-farinha-de-frango-low-carb']);
+
   for (const r of recipes) {
-    if (r.photo && r.photo.trim()) { updated.push(r); continue; }
+    const hasPhoto = r.photo && r.photo.trim() && r.photo.startsWith('images/livro500/');
+    if (hasPhoto && (!regen || manualPhotos.has(r.id))) { updated.push(r); continue; }
+    if (!hasPhoto && (!r.photo || !r.photo.trim())) { /* sem foto — tenta extrair */ }
 
     const page = pageMap[r.id];
     if (!page || !byPage[page]) { updated.push(r); continue; }
