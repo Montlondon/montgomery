@@ -47,13 +47,16 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
   no `main`. O alias `montgomery-receitas.vercel.app` **não** segue o deploy novo
   automaticamente — reatribuir via MCP `assign_alias` (ou terminal `vercel alias set`)
   após cada merge que queira aparecer no link curto.
-- **Aba 500 Receitas Low Carb** (04/11/2026): 499 receitas extraídas do PDF de duas colunas
-  (`500 Receitas Low Carb-1_1.pdf`, 308 páginas) em 13 subcategorias, com `pdfreader` +
-  separação por coordenada x. Dados em `receitas/data/recipes_500lowcarb.json`.
-- **Fotos 500 Low Carb** (04/11/2026): script `tools/7_extract_photos_500lowcarb.js` extrai
-  imagens JPEG do PDF via `pdf-lib`, faz matching por título via `pdfreader` e salva em
-  `images/livro500/`. Das 499 receitas, 49 têm foto no PDF; as demais ficam sem foto
-  (preferível a foto errada). Foto de farinha-de-frango enviada pelo usuário foi preservada.
+- **Aba 500 Receitas Low Carb** (04/11/2026): 500 receitas em 13 subcategorias, em
+  `receitas/data/recipes_500lowcarb.json`, com 66 fotos do livro em `images/livro500/`.
+  Tudo sai do PDF (`D:/PDFs/500 Receitas Low Carb-1_1.pdf`, 308 páginas) pelo script
+  `tools/7_rebuild_500lowcarb.js`. A foto da Farinha de Frango foi enviada pelo Montgomery e
+  o script nunca a sobrescreve.
+- **Reconstrução do 500 Low Carb** (04/11/2026): a primeira extração tinha defeitos, corrigidos
+  de uma vez comparando cada receita com o PDF: 393 títulos com pedaços de ingrediente colados,
+  394 listas de ingredientes com linhas cortadas ou perdidas (o Cabrito no Leite de Coco tinha
+  7 de 13), 281 preparos corrigidos (274 com lixo como "8 RENDIMENTO"), 8 fotos na receita errada, cor lavada
+  em todas as fotos, a receita Trufa de Morango faltando e a busca olhando só o título.
 - **Upload de foto por receita** (04/11/2026): botão câmera no detalhe de cada receita;
   função serverless `receitas/api/upload-photo.js` faz PUT da imagem no GitHub e atualiza o
   JSON — sem precisar da Claude para adicionar foto. Funciona para `recipes.json` e
@@ -191,6 +194,18 @@ necessária como segunda camada de conferência, e não só confiar no parser.
     Para pegar a URL do deployment mais recente: MCP `list_deployments` no projeto `receitas`.
 
 ### Coisas que já travaram antes (pra não perder tempo de novo)
+
+- **PDF diagramado: ancorar pela fonte, não por palavra solta.** No 500 Low Carb o título é a
+  fonte 28, os rótulos são a 22 e o corpo é a 20, com uma receita por coluna. Procurar "a página
+  que contém as palavras do título" acerta a maioria e erra em silêncio: "Frango ao Alho" pegou
+  a foto da Coxinha porque aquela página citava frango e alho.
+- **Foto CMYK em PDF: inverter os canais antes do perfil de cor.** O `.negate()` do sharp roda
+  depois da conversão para sRGB e deixa a foto pálida, sem parecer erro. O certo é ler o CMYK
+  cru, inverter e aplicar o perfil ICC do próprio PDF (ver `imageToJpeg` no script).
+- **Conferir contra a fonte antes de confiar no JSON**: comparar ingredientes e preparo com o
+  PDF, palavra por palavra, e olhar as fotos ao lado dos títulos numa folha de contato.
+- **O campo `search` no JSON desliga a busca completa**: o app só monta a busca em título,
+  ingredientes e preparo quando esse campo não existe.
 
 - **Push pro branch feature** e **`vercel --prod --yes`** às vezes são bloqueados
   automaticamente pelo classificador do Claude Code (mesmo não sendo pro `main`). Quando
