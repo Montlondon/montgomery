@@ -673,6 +673,7 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
       if (r.photo){
         photo = el("img","card-photo");
         photo.src = r.photo; photo.loading = "lazy"; photo.alt = r.title;
+        if (typeof r.photoFocus === "number") photo.style.objectPosition = r.photoFocus + "% 50%";
       } else {
         photo = el("div","card-photo placeholder", placeholderIconSVG());
       }
@@ -711,10 +712,18 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
     img.style.cursor = "zoom-in";
   }
 
+  // foto em faixa aparece inteira no detalhe; no formato 4:3 ela perderia o prato e a nitidez
+  function fitPhotoWrap(){
+    var img = document.getElementById("detailPhoto");
+    var wide = img.naturalWidth && img.naturalWidth / img.naturalHeight > 1.6;
+    document.getElementById("photoZoomWrap").style.aspectRatio = wide ? img.naturalWidth + " / " + img.naturalHeight : "";
+  }
+
   function openDetail(id, cardEl){
     var r = state.all.find(function(x){ return x.id === id; });
     if (!r) return;
     currentRecipe = r;
+    document.getElementById("photoZoomWrap").style.aspectRatio = "";
 
     document.getElementById("detailTitle").textContent = r.title;
     document.getElementById("detailTagText").textContent = categoryLabel(recipeFilterKey(r)) + (r.isCustom ? " · sua receita" : "");
@@ -774,6 +783,8 @@ main{ padding:18px 16px 40px; max-width:1100px; margin:0 auto; }
   function setupPhotoZoom(){
     var wrap = document.getElementById("photoZoomWrap");
     var dragging = false, lastX=0, lastY=0;
+
+    document.getElementById("detailPhoto").addEventListener("load", fitPhotoWrap);
 
     wrap.addEventListener("wheel", function(e){
       if (!currentRecipe || !currentRecipe.photo) return;

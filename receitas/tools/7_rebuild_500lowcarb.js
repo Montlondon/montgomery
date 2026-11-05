@@ -18,6 +18,36 @@ const EXPECTED_RECIPES = 500;
 // fotos enviadas pelo Montgomery: nunca sobrescrever
 const MANUAL_PHOTOS = new Set(['lc500-farinha-de-frango-low-carb']);
 const TITLE_FIXES = { 'Requeijão de Castanhade Caju': 'Requeijão de Castanha de Caju' };
+// posição horizontal (0 a 100) do corte 4:3 no card, conferida a olho; sem entrada = centro
+const PHOTO_FOCUS = {
+  'Pão Low Carb': 66,
+  'Pão Nuvem Low Carb': 79,
+  'Omelete Basca': 23,
+  'Coxinha com Cream Cheese Low Carb': 44,
+  'Frango Assado': 69,
+  'Hambúrguer de Frango': 34,
+  'Costela Assada no Forno': 34,
+  'Lombo de Porco com Berinjelas': 55,
+  'Lombo de Porco Recheado': 63,
+  'Filé de Peixe ao Molho de Alcaparras': 70,
+  'Camarão ao Leite de Coco': 29,
+  'Molho de Tomate Fresco': 37,
+  'Abacate ao Forno Recheado com Ovo': 37,
+  'Pimentão Recheado com Carne Moída': 75,
+  'Aspargos Enrolados com Bacon': 26,
+  'Salada Asian Slaw': 18,
+  'Salada de Salmão e Folhas': 62,
+  'Arroz Doce de Couve-flor Low Carb': 77,
+  'Bolo de Chocolate Fácil': 77,
+  'Crème brûlée': 85,
+  'Leite Condensado Low Carb': 61,
+  'Leite de Gergelim Caseiro': 100,
+  'Leite de Amendoim Caseiro': 20,
+  'Suco de Couve, Maracujá e Gengibre': 80,
+  'Suco Verde': 80,
+  'Suco de Limão Siciliano e Hortelã': 20,
+  'Suco de Casca de Limão': 20,
+};
 const TITLE_SIZE = 28;
 const LABEL_SIZE = 22;
 
@@ -290,9 +320,20 @@ async function imageToJpeg(stream, doc) {
       photo = `images/livro500/${file}`;
       written++;
     }
-    const { search, ...rest } = recipe;
-    output.push({ ...rest, title: TITLE_FIXES[col.title] || col.title, ingredients: col.ingredients, steps: col.steps, photo });
+    const { search, photoFocus, ...rest } = recipe;
+    const title = TITLE_FIXES[col.title] || col.title;
+    const focus = photo ? PHOTO_FOCUS[title] : undefined;
+    output.push({
+      ...rest,
+      title,
+      ingredients: col.ingredients,
+      steps: col.steps,
+      photo,
+      ...(focus === undefined ? {} : { photoFocus: focus }),
+    });
   }
+  const unknownFocus = Object.keys(PHOTO_FOCUS).filter(t => !output.some(r => r.title === t && r.photo));
+  if (unknownFocus.length) throw new Error('Foco para receita sem foto: ' + unknownFocus.join(', '));
 
   const referenced = new Set(output.map(r => r.photo).filter(Boolean).map(p => path.basename(p)));
   const stale = fs.readdirSync(IMG_DIR).filter(f => !referenced.has(f));

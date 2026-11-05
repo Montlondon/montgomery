@@ -57,6 +57,10 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
   394 listas de ingredientes com linhas cortadas ou perdidas (o Cabrito no Leite de Coco tinha
   7 de 13), 281 preparos corrigidos (274 com lixo como "8 RENDIMENTO"), 8 fotos na receita errada, cor lavada
   em todas as fotos, a receita Trufa de Morango faltando e a busca olhando só o título.
+- **Corte das fotos em faixa do 500 Low Carb** (04/11/2026): as fotos do livro são faixas largas
+  (1024x290). No card elas ficam em 4:3 com o foco no prato (campo `photoFocus`, tabela conferida
+  a olho no script; o corte automático por atenção do sharp errava o prato). No detalhe aparecem
+  inteiras, sem corte.
 - **Upload de foto por receita** (04/11/2026): botão câmera no detalhe de cada receita;
   função serverless `receitas/api/upload-photo.js` faz PUT da imagem no GitHub e atualiza o
   JSON — sem precisar da Claude para adicionar foto. Funciona para `recipes.json` e
@@ -82,6 +86,14 @@ com zoom infinito, busca 100% e foto conferida de cada receita.
   sem ingredientes, 0 texto de livro nos passos.
 
 ## próximo
+
+### Fotos da web para as 434 receitas sem foto (decisão pendente)
+
+Teste de 04/11/2026 com 24 receitas escolhidas à mão, misturando fáceis e difíceis, só com licença
+livre (Openverse e Wikimedia Commons): 11 com foto boa, 5 aceitáveis e 8 sem nada útil. Funciona em
+pratos universais e falha nos brasileiros ou muito específicos (Beijinho, Chuchu, Jiló). Sites de
+receita ficam de fora: as fotos têm dono e o app está em link público. As licenças CC BY e CC BY-SA
+exigem crédito na tela. O Openverse limita consultas anônimas, então a busca completa é demorada.
 
 Todos os PDFs da Chef Carla Ramos foram processados (312 receitas no ar). PDFs restantes
 que ainda precisam de análise:

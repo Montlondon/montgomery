@@ -195,7 +195,8 @@
       "Coe o leite de gergelim em uma peneira fina. Conserve na geladeira.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-leite-de-gergelim-caseiro.jpg"
+    "photo": "images/livro500/lc500-leite-de-gergelim-caseiro.jpg",
+    "photoFocus": 100
   },
   {
     "id": "lc500-leite-de-amendoim-caseiro-cru-sem-sal-e-sem-casca-baunilha",
@@ -213,7 +214,8 @@
       "Escorra o amendoim e lave novamente em água corrente. Leve o amemdoim ao liquidificador com um litro água filtrada e o extrato de baunilha e bata bem até ficar bem homogêneo.",
       "Coe o leite de amemdoim em uma peneira fina. Conserve na geladeira. Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-leite-de-amendoim-caseiro-cru-sem-sal-e-sem-casca-baunilha.jpg"
+    "photo": "images/livro500/lc500-leite-de-amendoim-caseiro-cru-sem-sal-e-sem-casca-baunilha.jpg",
+    "photoFocus": 20
   },
   {
     "id": "lc500-pate-de-atum-caseira",
@@ -687,7 +689,8 @@
       "Leve ao forno à 200ªC, por 30 minutos ou até dourar.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-pao-low-carb-amendoas-fino-leite-sem-soro.jpg"
+    "photo": "images/livro500/lc500-pao-low-carb-amendoas-fino-leite-sem-soro.jpg",
+    "photoFocus": 66
   },
   {
     "id": "lc500-pao-oopsie-linhaca",
@@ -948,7 +951,8 @@
       "Retire do forno e deixe esfriar.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-pao-nuvem-low-carb-parmesao-ralado-quimico-em-po.jpg"
+    "photo": "images/livro500/lc500-pao-nuvem-low-carb-parmesao-ralado-quimico-em-po.jpg",
+    "photoFocus": 79
   },
   {
     "id": "lc500-pao-low-carb-com-psyllium-amendoas-po-po-maca-fervente",
@@ -1204,7 +1208,8 @@
       "Enrole a omelete e Sirva em Seguida.",
       "Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-omelete-basca-oliva.jpg"
+    "photo": "images/livro500/lc500-omelete-basca-oliva.jpg",
+    "photoFocus": 23
   },
   {
     "id": "lc500-omelete-com-rucula-cottage-picado",
@@ -1968,7 +1973,8 @@
       "Leve ao forno pré-aquecido a 180ºC por aproximadamente 20 minutos.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-coxinha-com-cream-cheese-low-carb.jpg"
+    "photo": "images/livro500/lc500-coxinha-com-cream-cheese-low-carb.jpg",
+    "photoFocus": 44
   },
   {
     "id": "lc500-biscoito-de-abobrinha-e-queijo-low-carb-amendoas-ralado-picado-pimenta-do-reino-a-gosto",
@@ -2549,7 +2555,8 @@
       "Após se passarem 30 minutos retire o frango do forno e pincele com a manteiga. Coloque novamente o frango no forno sem o papel alumínio e deixe assar até que fique macio e bem dourado.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-frango-assado.jpg"
+    "photo": "images/livro500/lc500-frango-assado.jpg",
+    "photoFocus": 69
   },
   {
     "id": "lc500-frango-na-mostarda-dijon",
@@ -2810,7 +2817,8 @@
       "Modele os hambúrgueres e grelhe dos dois lados em uma frigideira untada com azeite de oliva. Repita o processo com todos os hambúrgueres.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-hamburguer-de-frango-berinjela.jpg"
+    "photo": "images/livro500/lc500-hamburguer-de-frango-berinjela.jpg",
+    "photoFocus": 34
   },
   {
     "id": "lc500-tiras-de-frango-com-repolho-cremoso-cortados-em-tiras-pedacinhos",
@@ -4163,7 +4171,8 @@
       "Retire do forno e sirva em seguida.",
       "Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-costela-assada-no-forno-aproximadamente-1-5kg.jpg"
+    "photo": "images/livro500/lc500-costela-assada-no-forno-aproximadamente-1-5kg.jpg",
+    "photoFocus": 34
   },
   {
     "id": "lc500-costelas-com-repolho-rodelas-finas-coco",
@@ -4980,7 +4989,8 @@
       "Disponha as berinjelas por cima e sirva em seguida.",
       "Boa Refeição!"
     ],
-    "photo": "images/livro500/lc500-lombo-de-porco-com-berinjelas-amassada-verdes.jpg"
+    "photo": "images/livro500/lc500-lombo-de-porco-com-berinjelas-amassada-verdes.jpg",
+    "photoFocus": 55
   },
   {
     "id": "lc500-bisteca-com-tomate-oliva-sementes-picados",
@@ -5195,7 +5205,8 @@
       "Retire o papel alumínio e deixe dourar por cerca de 15 minutos.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-lombo-de-porco-recheado-picada-finamente.jpg"
+    "photo": "images/livro500/lc500-lombo-de-porco-recheado-picada-finamente.jpg",
+    "photoFocus": 63
   },
   {
     "id": "lc500-pernil-ao-molho-vinagrete",
@@ -5853,7 +5864,8 @@
       "Acomode os filés em um prato e coloque sobre ele o molho de alcaparras. Polvilhe com a salsinha por cima.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-file-de-peixe-ao-molho-de-alcaparras-aproximadamente-200g-cada-picadas.jpg"
+    "photo": "images/livro500/lc500-file-de-peixe-ao-molho-de-alcaparras-aproximadamente-200g-cada-picadas.jpg",
+    "photoFocus": 70
   },
   {
     "id": "lc500-cacao-com-mostarda-oliva",
@@ -6516,7 +6528,8 @@
       "Finalize acrescentando a cebolinha verde, a salsinha e o coentro.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-camarao-ao-leite-de-coco.jpg"
+    "photo": "images/livro500/lc500-camarao-ao-leite-de-coco.jpg",
+    "photoFocus": 29
   },
   {
     "id": "lc500-mexilhoes-ao-vinagrete-maca",
@@ -7161,7 +7174,8 @@
       "Acrescente as folhas de manjericão picadas e retire o alho.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-molho-de-tomate-fresco-e-sem-sementes-coco-pequenos-fresco-picadas.jpg"
+    "photo": "images/livro500/lc500-molho-de-tomate-fresco-e-sem-sementes-coco-pequenos-fresco-picadas.jpg",
+    "photoFocus": 37
   },
   {
     "id": "lc500-abobrinha-marinada-vinho-branco",
@@ -7410,7 +7424,8 @@
       "Pré-aqueça o forno a 200°C e asse os abacates por cerca de 15 minutos ou até que os ovos alcancem o ponto de cozimento.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-abacate-ao-forno-recheado-com-ovo.jpg"
+    "photo": "images/livro500/lc500-abacate-ao-forno-recheado-com-ovo.jpg",
+    "photoFocus": 37
   },
   {
     "id": "lc500-cenoura-recheada-com-ricota-verde-cubinhos-oliva",
@@ -7677,7 +7692,8 @@
       "Leve para assar em uma assadeira antiaderente no forno pré-aquecido a 200Cº por aproximadamente 20 a 30 minutos.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-pimentao-recheado-com-carne-moida-picada.jpg"
+    "photo": "images/livro500/lc500-pimentao-recheado-com-carne-moida-picada.jpg",
+    "photoFocus": 75
   },
   {
     "id": "lc500-jilo-recheado-tomate-caseiro",
@@ -8841,7 +8857,8 @@
       "Tempere com o sal e a pimenta do reino a gosto.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-aspargos-enrolados-com-bacon.jpg"
+    "photo": "images/livro500/lc500-aspargos-enrolados-com-bacon.jpg",
+    "photoFocus": 26
   },
   {
     "id": "lc500-farofa-low-carb-coco-amendoas-para-trituradas",
@@ -9005,7 +9022,8 @@
       "Polvilhe com a pimenta calabresa por cima da salada e coloque um fio de azeite de oliva.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-salada-asian-slaw-ralada-maca.jpg"
+    "photo": "images/livro500/lc500-salada-asian-slaw-ralada-maca.jpg",
+    "photoFocus": 18
   },
   {
     "id": "lc500-salada-de-abacate-cortados-ao-meio",
@@ -9275,7 +9293,8 @@
       "Regue com o suco de limão e o azeite de oliva por cima.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-salada-de-salmao-e-folhas.jpg"
+    "photo": "images/livro500/lc500-salada-de-salmao-e-folhas.jpg",
+    "photoFocus": 62
   },
   {
     "id": "lc500-salada-de-folhas-verdes-com-ovos-mole",
@@ -10253,7 +10272,8 @@
       "Deixe no fogo até engrossar (Cuidado para não queimar). Retire do fogo, disponha o arroz doce em taças e polivilhe a canela em pó por cima.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-arroz-doce-de-couve-flor-low-carb-xilitol.jpg"
+    "photo": "images/livro500/lc500-arroz-doce-de-couve-flor-low-carb-xilitol.jpg",
+    "photoFocus": 77
   },
   {
     "id": "lc500-beijinho-de-colher-low-carb-sem-acucar-baunilha",
@@ -10495,7 +10515,8 @@
       "Espere amornar e desenforme.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-bolo-de-chocolate-facil-sem-acucar-po-baunilha.jpg"
+    "photo": "images/livro500/lc500-bolo-de-chocolate-facil-sem-acucar-po-baunilha.jpg",
+    "photoFocus": 77
   },
   {
     "id": "lc500-bolo-de-cafe-culinario-amendoas-quimico",
@@ -10748,7 +10769,8 @@
       "Deixe assar por 45 minutos ou até chegar ao ponto desejado.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-creme-brulee-de-baunilha.jpg"
+    "photo": "images/livro500/lc500-creme-brulee-de-baunilha.jpg",
+    "photoFocus": 85
   },
   {
     "id": "lc500-creme-de-chocolate-low-carb-baunilha-culinario",
@@ -11243,7 +11265,8 @@
       "Retire do fogo e mexa mais um pouco.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-leite-condensado-low-carb-baunilha-pontinha-da-colher.jpg"
+    "photo": "images/livro500/lc500-leite-condensado-low-carb-baunilha-pontinha-da-colher.jpg",
+    "photoFocus": 61
   },
   {
     "id": "lc500-leite-condensado-de-coco-baunilha-xantana-so-a-pontinha-da-colher",
@@ -11669,7 +11692,8 @@
       "Corte a couve, junte com o gengibre, o suco de limão e o suco de maracujá bata bem e coe.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-suco-de-couve-maracuja-e-gengibre-cortadas-limao.jpg"
+    "photo": "images/livro500/lc500-suco-de-couve-maracuja-e-gengibre-cortadas-limao.jpg",
+    "photoFocus": 80
   },
   {
     "id": "lc500-suco-de-maracuja-com-menta-maracuja-natural",
@@ -11710,7 +11734,8 @@
       "Coe o suco de limão e adicione o gelo e o adoçante a gosto.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-suco-de-limao-siciliano-e-hortela.jpg"
+    "photo": "images/livro500/lc500-suco-de-limao-siciliano-e-hortela.jpg",
+    "photoFocus": 20
   },
   {
     "id": "lc500-suco-de-casca-de-limao",
@@ -11730,7 +11755,8 @@
       "Coe com uma peneira, passe água no liquidificador e coloque nele o suco coado, o adoçante e o gelo. Bata bem.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-suco-de-casca-de-limao.jpg"
+    "photo": "images/livro500/lc500-suco-de-casca-de-limao.jpg",
+    "photoFocus": 20
   },
   {
     "id": "lc500-limonada-com-leite-de-coco-coco",
@@ -11772,6 +11798,7 @@
       "Coe o suco verde e adicione o gelo e o adoçante.",
       "Sirva em seguida e Boa Refeição."
     ],
-    "photo": "images/livro500/lc500-suco-verde.jpg"
+    "photo": "images/livro500/lc500-suco-verde.jpg",
+    "photoFocus": 80
   }
 ]
