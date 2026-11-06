@@ -2369,7 +2369,8 @@ function updatePlayButton(){
   playPauseBtn.innerHTML = audioEl.paused ? ICON_PLAY : ICON_PAUSE;
 }
 function streamUrlFor(st){
-  return st.url || ('https://radio.garden/api/ara/content/listen/'+st.id+'/channel.mp3');
+  const raw = st.url || ('https://radio.garden/api/ara/content/listen/'+st.id+'/channel.mp3');
+  return raw.replace(/^http:\/\//i, 'https://');
 }
 // marca "tocando agora" em qualquer lista aberta na tela (cidade, busca) —
 // não só no dock — mesmo quando a troca veio do botão anterior/próxima,
