@@ -19,13 +19,16 @@ self.addEventListener('activate', (event) => {
 
 // sempre tenta buscar a versão mais nova da página primeiro; só usa o cache se estiver offline
 self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  if (request.method !== 'GET') return;
+  if (!request.url.startsWith('http')) return;
   event.respondWith(
-    fetch(event.request)
+    fetch(request)
       .then((res) => {
         const copy = res.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
         return res;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(request))
   );
 });
