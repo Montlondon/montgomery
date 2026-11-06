@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1">
+﻿<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <title>Montgomery Rádio</title>
@@ -299,7 +299,7 @@
 
   /* modo "só o globo" — some com toda a interface, fica só a esfera girando */
   body.globe-only header, body.globe-only #hint, body.globe-only #dock,
-  body.globe-only #labels, body.globe-only #npPopup, body.globe-only #versionTag{
+  body.globe-only #labels, body.globe-only #versionTag{
     display:none !important;
   }
   #exitGlobeOnly{
@@ -390,7 +390,7 @@
   #dock{
     position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
     width:min(640px, 97vw);
-    display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:4px 4px;
+    display:flex; align-items:center; flex-wrap:nowrap; justify-content:center; gap:4px 4px; overflow:hidden;
     padding:8px 10px;
     background:var(--panel); border:1px solid var(--line); border-radius:24px;
     box-shadow:0 8px 28px rgba(0,0,0,0.45);
@@ -438,7 +438,19 @@
   #dockPlayer .np-info{flex:1; min-width:0;}
   #dockPlayer .np-name{
     font-size:0.85rem; font-weight:600; color:var(--ink);
-    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    overflow:hidden; white-space:nowrap;
+  }
+  #dockPlayer .np-name .marquee-inner{
+    display:inline-block;
+    white-space:nowrap;
+    padding-right:40px;
+  }
+  #dockPlayer .np-name.scrolling .marquee-inner{
+    animation:marquee-scroll 12s linear infinite;
+  }
+  @keyframes marquee-scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
   }
   #dockPlayer .np-city{
     font-size:0.68rem; color:var(--ink-dim);
@@ -447,26 +459,7 @@
   #dockPlayer.reconnecting .np-city::after{content:" · reconectando…"; color:var(--gold);}
   #dockPlayer.reconnecting .np-name{animation:reconnectPulse 1.2s ease-in-out infinite;}
   @keyframes reconnectPulse{0%,100%{opacity:1;} 50%{opacity:.45;}}
-  #npPopup{
-    position:fixed; left:50%; bottom:84px; transform:translateX(-50%);
-    max-width:min(380px, 92vw);
-    display:flex; flex-direction:column; align-items:center; gap:1px;
-    padding:9px 18px;
-    background:var(--panel); border:1px solid var(--line); border-radius:14px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.4);
-    z-index:11; pointer-events:none;
-  }
-  #npPopup[hidden]{display:none;}
-  #npPopup .popup-name{
-    font-size:0.86rem; font-weight:600; color:var(--ink);
-    max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-  }
-  #npPopup .popup-city{
-    font-size:0.7rem; color:var(--gold); letter-spacing:0.02em;
-    max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-  }
   @media (max-width: 480px){
-    #npPopup{bottom:76px; padding:7px 14px;}
   }
   #dockPlayer .np-stop{
     background:none; border:none; color:var(--ink-dim);
@@ -781,10 +774,7 @@
   arraste para girar &middot; toque num ponto dourado
 </div>
 
-<div id="npPopup" hidden>
-  <div class="popup-name" id="npPopupName"></div>
-  <div class="popup-city" id="npPopupCity"></div>
-</div>
+
 <div id="dock">
   <button id="dockFav" aria-label="Abrir favoritos" title="Favoritos">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -2340,11 +2330,9 @@ const toast = document.getElementById('toast');
 // ---------- tocador embutido — a rádio toca aqui dentro, sem abrir aba nova ----------
 const dockPlayer = document.getElementById('dockPlayer');
 const dockIdleHint = document.getElementById('dockIdleHint');
-const npPopup = document.getElementById('npPopup');
 function setDockPlaying(isPlaying){
   dockPlayer.hidden = !isPlaying;
   dockIdleHint.hidden = isPlaying;
-  npPopup.hidden = !isPlaying;
   if (!isPlaying) dockPlayer.classList.remove('reconnecting');
 }
 function setDockReconnecting(isReconnecting){
@@ -2352,8 +2340,6 @@ function setDockReconnecting(isReconnecting){
 }
 const npName = document.getElementById('npName');
 const npCity = document.getElementById('npCity');
-const npPopupName = document.getElementById('npPopupName');
-const npPopupCity = document.getElementById('npPopupCity');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const npStop = document.getElementById('npStop');
 const audioEl = document.getElementById('radioAudio');
@@ -2398,10 +2384,25 @@ function playStation(place, st, li, queue, queueIndex){
   // place é só o próprio nome da rádio usado como preenchimento — nesse
   // caso mostra o país em vez de repetir o nome duas vezes
   const npCityText = (place.city === st.title) ? (place.country || '') : place.city;
-  npName.textContent = st.title;
+  // marquee: duplicar o texto para animação contínua quando longo
+  const nameEl = npName;
+  const inner = document.createElement('span');
+  inner.className = 'marquee-inner';
+  nameEl.innerHTML = '';
+  nameEl.appendChild(inner);
+  // medir depois de um frame
+  requestAnimationFrame(() => {
+    const fits = inner.scrollWidth <= nameEl.clientWidth;
+    if(!fits){
+      inner.textContent = st.title + '   ' + st.title;
+      nameEl.classList.add('scrolling');
+    } else {
+      inner.textContent = st.title;
+      nameEl.classList.remove('scrolling');
+    }
+  });
+  inner.textContent = st.title;
   npCity.textContent = npCityText;
-  npPopupName.textContent = st.title;
-  npPopupCity.textContent = npCityText;
   setDockPlaying(true);
   audioStuck = false;
   reconnectAttempts = 0;
