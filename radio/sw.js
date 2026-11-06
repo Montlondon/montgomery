@@ -1,4 +1,4 @@
-const CACHE_NAME = 'montgomery-radio-v2';
+const CACHE_NAME = 'montgomery-radio-v3';
 const CORE_ASSETS = ['/', '/manifest.json', '/icon-192.png', '/icon-512.png'];
 
 self.addEventListener('install', (event) => {
