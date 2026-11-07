@@ -447,13 +447,6 @@
     font-size:0.85rem; font-weight:600; color:var(--ink);
     overflow:hidden; white-space:nowrap;
   }
-  #visitorBadge{
-    position:fixed; bottom:72px; left:10px; z-index:110;
-    font-size:0.6rem; color:var(--ink-dim); opacity:0.5;
-    pointer-events:none; letter-spacing:0.03em;
-    display:none;
-  }
-  #visitorBadge.loaded{ display:block; }
   #dockPlayer .np-name .marquee-inner{
     display:inline-block;
     white-space:nowrap;
@@ -939,8 +932,7 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.63</div>
-<div id="visitorBadge" title="Visitantes únicos"></div>
+<div id="versionTag">v1.65</div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -3400,16 +3392,25 @@ const BR_STYLE_SEED = [
 function seedBrazilStyleFavorites(){
   return seedCategoryFavorites(BR_STYLE_SEED, {country: 'Brazil', toastLabel: 'estilos brasileiros'});
 }
-// remove Sleep Music do controle se foi marcada sem estações (bug anterior)
-(function migrateSleepMusicSeed(){
+// garante Sleep Music nos favoritos com estações hardcodadas (SomaFM HTTPS)
+(function ensureSleepMusic(){
   try {
-    const key = typeof MOOD_SEED_KEY !== 'undefined' ? MOOD_SEED_KEY : 'mundoAoVivo_moodSeedFeitas';
-    const seeded = JSON.parse(localStorage.getItem(key) || '[]');
-    const sleepIdx = seeded.indexOf('Sleep Music');
-    if (sleepIdx !== -1 && !favStations.some(s => s.category === 'Sleep Music')){
-      seeded.splice(sleepIdx, 1);
-      localStorage.setItem(key, JSON.stringify(seeded));
-    }
+    if (favStations.some(s => s.category === 'Sleep Music')) return;
+    const stations = [
+      {title:'SomaFM Drone Zone',    url:'https://ice6.somafm.com/dronezone-128-mp3',     country:'USA'},
+      {title:'SomaFM Deep Space One',url:'https://ice6.somafm.com/deepspaceone-128-mp3',  country:'USA'},
+      {title:'SomaFM Lush',          url:'https://ice6.somafm.com/lush-128-mp3',          country:'USA'},
+      {title:'SomaFM Suburbs of Goa',url:'https://ice6.somafm.com/suburbsofgoa-128-mp3',  country:'USA'},
+    ];
+    stations.forEach(s => {
+      if (!favStations.some(f => f.url === s.url))
+        favStations = [{...s, category:'Sleep Music'}, ...favStations];
+    });
+    if (!categories.includes('Sleep Music')) categories = [...categories, 'Sleep Music'];
+    saveFavStations(favStations);
+    saveCategories(categories);
+    renderFavStationsList();
+    syncFavoritosNaNuvem();
   } catch(e){}
 })();
 seedMoodFavorites();
@@ -4064,11 +4065,8 @@ animate();
     const r = await fetch('/api/ping');
     if (!r.ok) return;
     const { total } = await r.json();
-    const badge = document.getElementById('visitorBadge');
-    if (badge) {
-      badge.textContent = total + (total === 1 ? ' visitante' : ' visitantes');
-      badge.classList.add('loaded');
-    }
+    const tag = document.getElementById('versionTag');
+    if (tag) tag.textContent = tag.textContent + ' · ' + total + (total === 1 ? ' visitante' : ' visitantes');
   } catch(e) {}
 })();
 
