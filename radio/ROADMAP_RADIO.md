@@ -38,5 +38,8 @@ URL oficial: https://radiomontgomery.vercel.app
       rÃ¡dios tocadas) sem precisar pedir pra consultar via SQL.
 
 ## Ideias em aberto (sem compromisso ainda)
-- [ ] Avaliar monetizaÃ§Ã£o (anÃºncio discreto, assinatura pra recursos
+- [ ] Avaliar monetização (anúncio discreto, assinatura pra recursos
       extras) depois que houver uso real medido.
+- [ ] **Modo noturno — tocar a noite toda:** volume noturno automático
+      (abaixa ao chegar num horário definido, volta de manhã) OU botão
+      manual na dock que abaixa o volume + escurece a tela do app.
