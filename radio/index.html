@@ -2953,7 +2953,7 @@ citySearchInput.addEventListener('input', ()=>{
   const matches = PLACES.filter(p =>
     stripAccentsSafe(p.city.toLowerCase()).includes(qNorm) ||
     stripAccentsSafe(p.country.toLowerCase()).includes(qNorm)
-  ).slice(0, 12);
+  ).slice(0, 20);
   if (!matches.length){
     citySearchResults.innerHTML = '<li class="sr-empty" style="padding:14px; color:var(--ink-dim); font-size:0.82rem;">nenhuma cidade encontrada</li>';
   } else {
