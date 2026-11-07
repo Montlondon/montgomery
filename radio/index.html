@@ -147,8 +147,14 @@
     border-bottom:none; color:var(--gold); font-size:0.75rem; letter-spacing:0.04em;
     text-transform:uppercase; padding:14px 2px 4px; opacity:0.85;
     cursor:pointer; transition:opacity .15s, color .15s;
+    display:flex; align-items:center; justify-content:space-between; user-select:none;
   }
   #favStationsList .fav-cat-header:hover{opacity:1; color:#e8c87a;}
+  #favStationsList .fav-cat-header .cat-toggle{
+    font-size:0.65rem; opacity:0.6; transition:transform .2s ease; display:inline-block;
+  }
+  #favStationsList .fav-cat-header.collapsed .cat-toggle{ transform:rotate(-90deg); }
+  #favStationsList .fav-cat-items.collapsed{ display:none; }
   .fav-cat-dropdown{position:relative; flex:none;}
   .fav-cat-btn{
     max-width:108px; background:none; border:1px solid var(--line); color:var(--ink-dim);
@@ -2796,20 +2802,30 @@ function renderFavStationsList(){
   const order = [...groups.keys()].filter(c => c !== 'Sem categoria').sort((a,b)=> a.localeCompare(b, 'pt-BR'));
   if (groups.has('Sem categoria')) order.push('Sem categoria');
 
+  let collapsedCats = {}; try { collapsedCats = JSON.parse(localStorage.getItem('favCatsCollapsed') || '{}'); } catch(e){}
   order.forEach(cat=>{
     const catList = groups.get(cat);
+    const isCollapsed = !!collapsedCats[cat];
+
     const header = document.createElement('li');
-    header.className = 'fav-cat-header';
-    header.textContent = cat;
-    header.title = 'Tocar esta categoria';
-    header.addEventListener('click', ()=>{
-      const queue = catList.map(s => ({place: {city: s.title, country: s.country || 'mundo'}, st: {title: s.title, url: s.url}}));
-      playStation({city: catList[0].title, country: catList[0].country || 'mundo'}, {title: catList[0].title, url: catList[0].url}, null, queue, 0);
+    header.className = 'fav-cat-header' + (isCollapsed ? ' collapsed' : '');
+    header.innerHTML = '<span>'+cat+'</span><span class="cat-toggle">▼</span>';
+    header.addEventListener('click', (e)=>{
+      // clique no toggle — abre/fecha
+      const nowCollapsed = header.classList.toggle('collapsed');
+      itemsWrapper.classList.toggle('collapsed', nowCollapsed);
+      collapsedCats[cat] = nowCollapsed;
+      try { localStorage.setItem('favCatsCollapsed', JSON.stringify(collapsedCats)); } catch(e){}
     });
     favStationsList.appendChild(header);
 
+    const itemsWrapper = document.createElement('ul');
+    itemsWrapper.className = 'fav-cat-items' + (isCollapsed ? ' collapsed' : '');
+    itemsWrapper.style.cssText = 'list-style:none;padding:0;margin:0;';
+    favStationsList.appendChild(itemsWrapper);
+
     catList.forEach(st=>{
-      const li = document.createElement('li');
+      const li = itemsWrapper.appendChild(document.createElement('li'));
       if (activeStation && activeStation.url === st.url) li.classList.add('playing');
       const btn = document.createElement('button');
       btn.className = 'fav-station-btn';
@@ -2830,7 +2846,6 @@ function renderFavStationsList(){
       li.appendChild(btn);
       li.appendChild(catDropdown);
       li.appendChild(unfav);
-      favStationsList.appendChild(li);
     });
   });
 }
