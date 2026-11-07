@@ -447,6 +447,13 @@
     font-size:0.85rem; font-weight:600; color:var(--ink);
     overflow:hidden; white-space:nowrap;
   }
+  #visitorBadge{
+    position:fixed; bottom:72px; left:10px; z-index:110;
+    font-size:0.6rem; color:var(--ink-dim); opacity:0.5;
+    pointer-events:none; letter-spacing:0.03em;
+    display:none;
+  }
+  #visitorBadge.loaded{ display:block; }
   #dockPlayer .np-name .marquee-inner{
     display:inline-block;
     white-space:nowrap;
@@ -932,7 +939,8 @@
 
 <audio id="radioAudio" preload="none"></audio>
 <div id="toast"></div>
-<div id="versionTag">v1.62</div>
+<div id="versionTag">v1.63</div>
+<div id="visitorBadge" title="Visitantes únicos"></div>
 
 <script>
 // ---------- dados reais, colhidos do catálogo público do radio.garden ----------
@@ -4021,6 +4029,20 @@ function animate(){
   renderer.render(scene, camera);
 }
 animate();
+
+// ---------- contador de visitantes únicos ----------
+(async function pingVisitor(){
+  try {
+    const r = await fetch('/api/ping');
+    if (!r.ok) return;
+    const { total } = await r.json();
+    const badge = document.getElementById('visitorBadge');
+    if (badge) {
+      badge.textContent = total + (total === 1 ? ' visitante' : ' visitantes');
+      badge.classList.add('loaded');
+    }
+  } catch(e) {}
+})();
 
 // ---------- service worker, necessário pro Chrome oferecer "Instalar app" ----------
 if ('serviceWorker' in navigator){
