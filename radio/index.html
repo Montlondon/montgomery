@@ -3264,8 +3264,19 @@ const MOOD_SHORTCUTS = [
   {label:'Estudar', tags:['study','study music','focus']},
   {label:'Natureza', tags:['nature sounds','rain','ambient nature']},
   {label:'Piano suave', tags:['piano','instrumental']},
-  {label:'Sleep Music', tags:['sleep music','deep sleep','sleep','ambient sleep','sleep sounds']},
-  {label:'Minueto', tags:['minuet','baroque','classical','chamber music','harpsichord']},
+  {label:'Sleep Music', tags:['sleep music','deep sleep','sleep','ambient sleep','sleep sounds'], fallback:[
+    {title:'SomaFM Drone Zone', url:'https://ice6.somafm.com/dronezone-128-mp3', country:'USA'},
+    {title:'SomaFM Deep Space One', url:'https://ice6.somafm.com/deepspaceone-128-mp3', country:'USA'},
+    {title:'SomaFM Lush', url:'https://ice6.somafm.com/lush-128-mp3', country:'USA'},
+    {title:'SomaFM Suburbs of Goa', url:'https://ice6.somafm.com/suburbsofgoa-128-mp3', country:'USA'},
+    {title:'Sleep Radio', url:'https://stream.rcs.revma.com/an1ugyygkk8uv', country:'USA'},
+  ]},
+  {label:'Minueto', tags:['minuet','baroque','classical','chamber music','harpsichord'], fallback:[
+    {title:'Radio Baroque', url:'https://stream.srg-ssr.ch/m/rsmusique/mp3_128', country:'Switzerland'},
+    {title:'France Musique', url:'https://icecast.radiofrance.fr/francemusique-hifi.aac', country:'France'},
+    {title:'Český rozhlas Vltava', url:'https://icecast9.play.cz/vltava128.mp3', country:'Czech Republic'},
+    {title:'Venice Classic Radio', url:'https://audio.veniceclassicradio.eu/vcr128.mp3', country:'Italy'},
+  ]},
 ];
 async function runMoodSearch(tags, label){
   searchResults.innerHTML = '';
@@ -3338,22 +3349,27 @@ async function seedCategoryFavorites(list, opts){
           .then(r=>r.json()).catch(()=>[]);
       }));
       const seen = new Set();
-      const picked = lists.flat().filter(st=>{
+      let picked = lists.flat().filter(st=>{
         if (!st.url_resolved && !st.url) return false;
         if (seen.has(st.stationuuid)) return false;
         seen.add(st.stationuuid);
         return true;
       }).slice(0, 5);
-      picked.forEach(st=>{
+      // se a API não retornou nada, usa estações hardcodadas de fallback
+      const usedFallback = !picked.length && m.fallback && m.fallback.length;
+      const toAdd = usedFallback
+        ? m.fallback.map(f => ({name: f.title, url_resolved: f.url, country: f.country}))
+        : picked;
+      toAdd.forEach(st=>{
         const url = st.url_resolved || st.url;
         if (favStations.some(s => s.url === url)) return;
-        favStations = [{title: st.name, url, country: st.country, category: m.label}, ...favStations];
+        favStations = [{title: st.name || st.title, url, country: st.country, category: m.label}, ...favStations];
         added++;
       });
-      if (picked.length && !categories.includes(m.label)){
-        categories = [...categories, m.label];
+      if (toAdd.length){
+        if (!categories.includes(m.label)) categories = [...categories, m.label];
+        seeded.push(m.label); // só marca como semeado se de fato encontrou estações
       }
-      seeded.push(m.label);
     }
     if (added){
       saveFavStations(favStations);
@@ -3384,6 +3400,18 @@ const BR_STYLE_SEED = [
 function seedBrazilStyleFavorites(){
   return seedCategoryFavorites(BR_STYLE_SEED, {country: 'Brazil', toastLabel: 'estilos brasileiros'});
 }
+// remove Sleep Music do controle se foi marcada sem estações (bug anterior)
+(function migrateSleepMusicSeed(){
+  try {
+    const key = typeof MOOD_SEED_KEY !== 'undefined' ? MOOD_SEED_KEY : 'mundoAoVivo_moodSeedFeitas';
+    const seeded = JSON.parse(localStorage.getItem(key) || '[]');
+    const sleepIdx = seeded.indexOf('Sleep Music');
+    if (sleepIdx !== -1 && !favStations.some(s => s.category === 'Sleep Music')){
+      seeded.splice(sleepIdx, 1);
+      localStorage.setItem(key, JSON.stringify(seeded));
+    }
+  } catch(e){}
+})();
 seedMoodFavorites();
 seedBrazilStyleFavorites();
 
