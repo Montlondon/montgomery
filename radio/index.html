@@ -2761,6 +2761,21 @@ async function puxarFavoritosDaNuvem(){
       const remoto = rows[0].dados;
       if (Array.isArray(remoto.favStations)){ favStations = remoto.favStations; saveFavStations(favStations); }
       if (Array.isArray(remoto.categories)){ categories = remoto.categories; saveCategories(categories); }
+      // se veio vazio do Supabase, limpa o controle de semeadura pra re-semear tudo
+      if (!favStations.length){
+        try { localStorage.removeItem(MOOD_SEED_KEY); } catch(e){}
+      }
+      // garante Sleep Music após carregar os dados reais do Supabase
+      if (!favStations.some(s => s.category === 'Sleep Music')){
+        const sleepFallback = [
+          {title:'SomaFM Drone Zone',    url:'https://ice6.somafm.com/dronezone-128-mp3',    country:'USA'},
+          {title:'SomaFM Deep Space One',url:'https://ice6.somafm.com/deepspaceone-128-mp3', country:'USA'},
+          {title:'SomaFM Lush',          url:'https://ice6.somafm.com/lush-128-mp3',         country:'USA'},
+        ];
+        sleepFallback.forEach(s=>{ if (!favStations.some(f=>f.url===s.url)) favStations=[{...s,category:'Sleep Music'},...favStations]; });
+        if (!categories.includes('Sleep Music')) categories=[...categories,'Sleep Music'];
+        saveFavStations(favStations); saveCategories(categories); syncFavoritosNaNuvem();
+      }
       renderFavStationsList();
     }
   }catch(e){ /* sem internet agora, segue com o que já tinha salvo localmente */ }
@@ -3404,27 +3419,6 @@ const BR_STYLE_SEED = [
 function seedBrazilStyleFavorites(){
   return seedCategoryFavorites(BR_STYLE_SEED, {country: 'Brazil', toastLabel: 'estilos brasileiros'});
 }
-// garante Sleep Music nos favoritos com estações hardcodadas (SomaFM HTTPS)
-(function ensureSleepMusic(){
-  try {
-    if (favStations.some(s => s.category === 'Sleep Music')) return;
-    const stations = [
-      {title:'SomaFM Drone Zone',    url:'https://ice6.somafm.com/dronezone-128-mp3',     country:'USA'},
-      {title:'SomaFM Deep Space One',url:'https://ice6.somafm.com/deepspaceone-128-mp3',  country:'USA'},
-      {title:'SomaFM Lush',          url:'https://ice6.somafm.com/lush-128-mp3',          country:'USA'},
-      {title:'SomaFM Suburbs of Goa',url:'https://ice6.somafm.com/suburbsofgoa-128-mp3',  country:'USA'},
-    ];
-    stations.forEach(s => {
-      if (!favStations.some(f => f.url === s.url))
-        favStations = [{...s, category:'Sleep Music'}, ...favStations];
-    });
-    if (!categories.includes('Sleep Music')) categories = [...categories, 'Sleep Music'];
-    saveFavStations(favStations);
-    saveCategories(categories);
-    renderFavStationsList();
-    syncFavoritosNaNuvem();
-  } catch(e){}
-})();
 seedMoodFavorites();
 seedBrazilStyleFavorites();
 
