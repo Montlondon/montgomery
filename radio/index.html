@@ -147,9 +147,19 @@
     border-bottom:none; color:var(--gold); font-size:0.75rem; letter-spacing:0.04em;
     text-transform:uppercase; padding:14px 2px 4px; opacity:0.85;
     cursor:pointer; transition:opacity .15s, color .15s;
-    display:flex; align-items:center; justify-content:space-between; user-select:none;
+    display:flex; align-items:center; gap:6px; justify-content:space-between; user-select:none;
   }
   #favStationsList .fav-cat-header:hover{opacity:1; color:#e8c87a;}
+  #favStationsList .fav-cat-header.playing-cat{ opacity:1; color:#e8c87a; }
+  #favStationsList .cat-playing-dot{
+    width:7px; height:7px; border-radius:50%; flex:none;
+    background:#e8735a;
+    animation:catDotPulse 1.4s ease-in-out infinite;
+  }
+  @keyframes catDotPulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:.4; transform:scale(.65); }
+  }
   #favStationsList .fav-cat-header .cat-toggle{
     font-size:0.65rem; opacity:0.6; transition:transform .2s ease; display:inline-block;
   }
@@ -2803,13 +2813,15 @@ function renderFavStationsList(){
   if (groups.has('Sem categoria')) order.push('Sem categoria');
 
   let collapsedCats = {}; try { collapsedCats = JSON.parse(localStorage.getItem('favCatsCollapsed') || '{}'); } catch(e){}
+  const activeCat = activeStation ? (favStations.find(s => s.url === activeStation.url) || {}).category : null;
   order.forEach(cat=>{
     const catList = groups.get(cat);
     const isCollapsed = !!collapsedCats[cat];
+    const isPlayingCat = cat === activeCat;
 
     const header = document.createElement('li');
-    header.className = 'fav-cat-header' + (isCollapsed ? ' collapsed' : '');
-    header.innerHTML = '<span>'+cat+'</span><span class="cat-toggle">▼</span>';
+    header.className = 'fav-cat-header' + (isCollapsed ? ' collapsed' : '') + (isPlayingCat ? ' playing-cat' : '');
+    header.innerHTML = (isPlayingCat ? '<span class="cat-playing-dot"></span>' : '') + '<span>'+cat+'</span><span class="cat-toggle">▼</span>';
     header.addEventListener('click', (e)=>{
       // clique no toggle — abre/fecha
       const nowCollapsed = header.classList.toggle('collapsed');
