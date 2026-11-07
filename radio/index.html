@@ -2761,9 +2761,12 @@ async function puxarFavoritosDaNuvem(){
       const remoto = rows[0].dados;
       if (Array.isArray(remoto.favStations)){ favStations = remoto.favStations; saveFavStations(favStations); }
       if (Array.isArray(remoto.categories)){ categories = remoto.categories; saveCategories(categories); }
-      // se veio vazio do Supabase, limpa o controle de semeadura pra re-semear tudo
+      // se veio vazio do Supabase, limpa o controle de semeadura e re-semeia tudo agora
       if (!favStations.length){
         try { localStorage.removeItem(MOOD_SEED_KEY); } catch(e){}
+        // chama as funções de seed que já estão definidas mais abaixo no script
+        if (typeof seedMoodFavorites === 'function') seedMoodFavorites();
+        if (typeof seedBrazilStyleFavorites === 'function') seedBrazilStyleFavorites();
       }
       // garante Sleep Music após carregar os dados reais do Supabase
       if (!favStations.some(s => s.category === 'Sleep Music')){
